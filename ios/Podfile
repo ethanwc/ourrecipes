@@ -81,6 +81,8 @@ target 'ourrecipes' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'ourrecipesTests' do
     inherit! :complete
     # Pods for testing

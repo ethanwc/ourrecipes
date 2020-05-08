@@ -47,7 +47,7 @@ export default function TabNav() {
   return (
     <View style={{flex: 1}}>
       <View style={{flex: 1}}>
-        <Tab.Navigator screenOptions={{}}>
+        <Tab.Navigator>
           <Tab.Screen name="Home" component={HomeScreen} />
           <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
