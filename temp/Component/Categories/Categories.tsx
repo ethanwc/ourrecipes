@@ -1,8 +1,6 @@
 import React from 'react';
-import {View, SafeAreaView, FlatList} from 'react-native';
+import {SafeAreaView, FlatList} from 'react-native';
 import CategoryCard from '../../Container/Category/CategoryCard';
-import {Recipe} from 'app/src/styles/DetailedRecipe';
-import {responsiveWidth} from 'react-native-responsive-dimensions';
 
 const DATA = [
   {

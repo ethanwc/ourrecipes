@@ -83,6 +83,8 @@ target 'ourrecipes' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'react-native-voice', :path => '../node_modules/@react-native-community/voice'
+
   target 'ourrecipesTests' do
     inherit! :complete
     # Pods for testing

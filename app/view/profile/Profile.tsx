@@ -2,18 +2,8 @@ import React, {useRef} from 'react';
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
-import {
-  View,
-  Animated,
-  Easing,
-  TouchableWithoutFeedback,
-  Text,
-  Dimensions,
-} from 'react-native';
-import {Avatar} from 'react-native-elements';
-import GrapesSvg from '../../grapes.svg';
-import {ListItem} from 'react-native-elements';
-import {Button} from 'react-native-elements';
+import {View, Animated, Easing, Text, Dimensions} from 'react-native';
+import {Avatar, Button, ListItem} from 'react-native-elements';
 import {SceneMap, TabView} from 'react-native-tab-view';
 
 const list = [
@@ -185,7 +175,7 @@ const Profile = (navigation: any) => {
       </View> */}
 
       <View style={{flex: 1}}>
-      <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
           <ListItem
             title={'Steve Jobs'}
             titleStyle={{
@@ -276,12 +266,12 @@ const Profile = (navigation: any) => {
           />
         </View>
 
-        <TabView
+        {/* <TabView
           navigationState={{index, routes}}
           renderScene={renderScene}
           onIndexChange={setIndex}
           initialLayout={initialLayout}
-        />
+        /> */}
       </View>
     </DrawerLayout>
   );

@@ -1,9 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, ImageURISource} from 'react-native';
-import {graywhite, lightTheme} from '../../styles/Colors';
+import {lightTheme} from '../../styles/Colors';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
-import {createConfigItem} from '@babel/core';
-import {Typography} from '../../styles/index';
 
 export interface categoryProps {
   title: string;
