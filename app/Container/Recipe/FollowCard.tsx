@@ -32,7 +32,7 @@ const FollowCard = () => {
         />
         <View style={{marginLeft: 15}}>
           <Text style={Typography.Typography.subheader}>Deba Boyd</Text>
-          <Text style={Typography.Typography.body}>20 recipes</Text>
+          <Text style={Typography.Typography.bodyflat}>20 recipes</Text>
         </View>
       </View>
 

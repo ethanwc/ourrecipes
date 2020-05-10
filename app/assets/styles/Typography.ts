@@ -7,6 +7,11 @@ export const Typography = StyleSheet.create({
     fontFamily: 'Lato-Bold',
     fontSize: 26,
   },
+  headerflat: {
+    color: Light.headline,
+    fontFamily: 'Lato-Regular',
+    fontSize: 26,
+  },
   subheader: {
     color: Light.headline,
     fontFamily: 'Lato-Bold',
@@ -23,9 +28,9 @@ export const Typography = StyleSheet.create({
     fontFamily: 'Lato-Bold',
     fontSize: 12,
   },
-  subbody: {
-    color: Light.body,
-    fontFamily: 'Lato-Bold',
+  bodyflat: {
+    color: Light.headline,
+    fontFamily: 'Lato-Regular',
     fontSize: 12,
   },
 });

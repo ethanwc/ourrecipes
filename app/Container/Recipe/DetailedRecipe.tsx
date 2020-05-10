@@ -5,6 +5,7 @@ import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme, Typography} from '../../assets/styles';
 import FollowCard from './FollowCard';
+import Ingredient from './Ingredient';
 
 const DetailedRecipe = () => {
   return (
@@ -53,8 +54,9 @@ const DetailedRecipe = () => {
           <FollowCard />
           {/* Ingredients tab */}
           <View style={detailedRecipeStyle.header}>
-            <Text style={Typography.Typography.header}>Categories</Text>
+            <Text style={Typography.Typography.headerflat}>Ingredients</Text>
           </View>
+          <Ingredient />
           {/* todo: use tab list here... */}
         </View>
       </ScrollView>

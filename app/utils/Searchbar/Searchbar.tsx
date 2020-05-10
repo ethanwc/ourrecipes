@@ -2,6 +2,7 @@ import Voice from '@react-native-community/voice';
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+// import {parse} from 'recipe-ingredient-parser-v2';
 import {Theme} from '../../assets/styles';
 
 const SearchBar = () => {
@@ -36,6 +37,10 @@ const SearchBar = () => {
     />
   ) : null;
 
+  const tempParse = () => {
+    console.log(parse(search));
+  };
+
   return (
     <View style={searchBarStyle.container}>
       <View style={searchBarStyle.innerContainer}>
@@ -50,7 +55,7 @@ const SearchBar = () => {
           name={'search'}
           size={14}
           style={{marginRight: 10}}
-          onPress={() => console.log('submitted: ', search)}
+          onPress={() => tempParse()}
         />
         <TextInput
           placeholder={'Search for a recipe'}
