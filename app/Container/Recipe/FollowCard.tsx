@@ -1,21 +1,11 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Button} from 'react-native-elements';
 import {Theme, Typography} from '../../assets/styles';
 
 const FollowCard = () => {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingHorizontal: 15,
-        paddingVertical: 15,
-        backgroundColor: Theme.Light.shadow,
-        borderBottomWidth: 0.3,
-        borderBottomColor: Theme.Light.body,
-      }}>
+    <View style={followCardStyle.container}>
       <View
         style={{
           flexDirection: 'row',
@@ -51,5 +41,18 @@ const FollowCard = () => {
     </View>
   );
 };
+
+const followCardStyle = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    backgroundColor: Theme.Light.shadow,
+    borderBottomWidth: 0.3,
+    borderBottomColor: Theme.Light.body,
+  },
+});
 
 export default FollowCard;

@@ -1,13 +1,79 @@
 import React from 'react';
-import {View, SafeAreaView, ScrollView, StyleSheet, Text} from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  Dimensions,
+} from 'react-native';
 import {Image, ListItem} from 'react-native-elements';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme, Typography} from '../../assets/styles';
 import FollowCard from './FollowCard';
-import Ingredient from './Ingredient';
+import IngredientCard from './IngredientCard';
+import DirectionCard from './DirectionCard';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+
+const FirstRoute = () => {
+  return (
+    <View>
+      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
+      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
+      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
+    </View>
+  );
+};
+
+//custom tab bar
+const renderTabBar = (props: any) => (
+  <TabBar
+    {...props}
+    indicatorStyle={{backgroundColor: Theme.Light.caption}}
+    style={{backgroundColor: Theme.Light.shadow}}
+    renderLabel={({route, focused, color}) => (
+      <Text
+        style={{
+          ...Typography.Typography.subheader,
+          color: Theme.Light.caption,
+          margin: 8,
+        }}>
+        {route.title}
+      </Text>
+    )}
+  />
+);
+
+const SecondRoute = () => {
+  return (
+    <View>
+      <DirectionCard order={1} direction={'Preheat oven to 350F'} />
+      <DirectionCard
+        order={1}
+        direction={
+          'In a large bowl combine flour, flour, flour and water and form a pasty mixture then roll into a ball, light on fire and throw out the window.'
+        }
+      />
+    </View>
+  );
+};
 
 const DetailedRecipe = () => {
+  //Handle state for tab view
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    {key: 'first', title: 'Ingredients'},
+    {key: 'second', title: 'Directions'},
+  ]);
+
+  const renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+  });
+
+  const initialLayout = {width: Dimensions.get('window').width};
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -52,12 +118,15 @@ const DetailedRecipe = () => {
         <View style={{flex: 1}}>
           {/* Follow user card */}
           <FollowCard />
-          {/* Ingredients tab */}
-          <View style={detailedRecipeStyle.header}>
-            <Text style={Typography.Typography.headerflat}>Ingredients</Text>
-          </View>
-          <Ingredient />
-          {/* todo: use tab list here... */}
+
+          {/* Tab view for ingredients and directions */}
+          <TabView
+            navigationState={{index, routes}}
+            renderScene={renderScene}
+            onIndexChange={setIndex}
+            renderTabBar={renderTabBar}
+            initialLayout={initialLayout}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
