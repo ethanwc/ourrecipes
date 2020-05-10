@@ -18,6 +18,7 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import NutritionCard from './NutritionCard';
 import ReviewCard from './ReviewCard';
+import {TouchableHighlight} from 'react-native-gesture-handler';
 
 const FirstRoute = () => {
   return (
@@ -110,6 +111,12 @@ const DetailedRecipe = ({navigation}: any) => {
           <Image
             source={require('../../assets/images/food.jpg')}
             style={{width: responsiveWidth(100), height: responsiveWidth(100)}}
+          />
+          <Icon
+            name="heart"
+            size={30}
+            color={'red'}
+            style={{position: 'absolute', right: 10, top: 10}}
           />
           {/* Action Icons */}
           {/* <View

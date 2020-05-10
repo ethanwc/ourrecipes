@@ -35,7 +35,7 @@ const RecipeCard = (props: recipeCardProps) => {
   return (
     <TouchableHighlight
       onPress={() =>
-        props.navigation.navigate('ExploreView', {screen: 'Recipe', params: {}, title: 'asdf'})
+        props.navigation.navigate('Explore', {screen: 'Recipe', params: {}})
       }
       underlayColor={'transparent'}>
       <View

@@ -3,17 +3,21 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Feather';
+import ExploreView from './view/explore/ExploreView';
+import Groups from './view/groups/Groups';
+import Create from './view/create/Create';
+import Favorites from './view/favorites/Favorites';
 import Profile from './view/profile/Profile';
-import Explore from './view/explore/Explore';
 import DetailedRecipe from './Container/Recipe/DetailedRecipe';
+import {Theme} from './assets/styles';
 
 //Explore Navigator
 const exploreStack = createStackNavigator();
 
-function ExploreView() {
+function Explore() {
   return (
     <exploreStack.Navigator>
-      <exploreStack.Screen name="Explore" component={Explore} />
+      <exploreStack.Screen name="ExploreView" component={ExploreView} options={{headerShown: false}} />
       <exploreStack.Screen name="Recipe" component={DetailedRecipe} />
     </exploreStack.Navigator>
   );
@@ -28,28 +32,19 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator tabBarOptions={{activeTintColor: Theme.Light.caption}}>
         <Tab.Screen
-          name="ExploreView"
-          component={ExploreView}
+          name="Explore"
+          component={Explore}
           options={{
             tabBarIcon: ({color}) => (
               <Icon name="search" color={color} size={26} />
             ),
           }}
         />
-        {/* <Tab.Screen
-          name="DetailedRecipe"
-          component={DetailedRecipe}
-          options={{
-            tabBarIcon: ({color}) => (
-              <Icon name="users" color={color} size={26} />
-            ),
-          }}
-        /> */}
         <Tab.Screen
           name="Groups"
-          component={Profile}
+          component={Groups}
           options={{
             tabBarIcon: ({color}) => (
               <Icon name="users" color={color} size={26} />
@@ -58,7 +53,7 @@ export default function App() {
         />
         <Tab.Screen
           name="Create"
-          component={Profile}
+          component={Create}
           options={{
             tabBarIcon: ({color}) => (
               <Icon name="plus" color={color} size={26} />
@@ -67,7 +62,7 @@ export default function App() {
         />
         <Tab.Screen
           name="Favorites"
-          component={Profile}
+          component={Favorites}
           options={{
             tabBarIcon: ({color}) => (
               <Icon name="heart" color={color} size={26} />
