@@ -1,10 +1,23 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Feather';
 import Profile from './view/profile/Profile';
 import Explore from './view/explore/Explore';
 import DetailedRecipe from './Container/Recipe/DetailedRecipe';
+
+//Explore Navigator
+const exploreStack = createStackNavigator();
+
+function ExploreView() {
+  return (
+    <exploreStack.Navigator>
+      <exploreStack.Screen name="Explore" component={Explore} />
+      <exploreStack.Screen name="Recipe" component={DetailedRecipe} />
+    </exploreStack.Navigator>
+  );
+}
 
 //app tab navigator
 const Tab = createBottomTabNavigator();
@@ -17,15 +30,15 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
-          name="Explore"
-          component={Explore}
+          name="ExploreView"
+          component={ExploreView}
           options={{
             tabBarIcon: ({color}) => (
               <Icon name="search" color={color} size={26} />
             ),
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="DetailedRecipe"
           component={DetailedRecipe}
           options={{
@@ -33,7 +46,7 @@ export default function App() {
               <Icon name="users" color={color} size={26} />
             ),
           }}
-        />
+        /> */}
         <Tab.Screen
           name="Groups"
           component={Profile}

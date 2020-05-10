@@ -11,6 +11,7 @@ const DATA = [
 
 export interface recipesProps {
   renderAuthor: boolean;
+  navigation: any;
 }
 
 const Recipes = (props: recipesProps) => {
@@ -20,7 +21,7 @@ const Recipes = (props: recipesProps) => {
         horizontal
         data={DATA}
         renderItem={({item, index}) => (
-          <RecipeCard isFirst={index === 0} renderAuthor={props.renderAuthor} />
+          <RecipeCard isFirst={index === 0} renderAuthor={props.renderAuthor} navigation={props.navigation} />
         )}
         keyExtractor={(item) => item.title}
         decelerationRate={0.798}

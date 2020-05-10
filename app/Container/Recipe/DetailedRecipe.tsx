@@ -15,6 +15,9 @@ import FollowCard from './FollowCard';
 import IngredientCard from './IngredientCard';
 import DirectionCard from './DirectionCard';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import {AnimatedCircularProgress} from 'react-native-circular-progress';
+import NutritionCard from './NutritionCard';
+import ReviewCard from './ReviewCard';
 
 const FirstRoute = () => {
   return (
@@ -59,7 +62,32 @@ const SecondRoute = () => {
   );
 };
 
-const DetailedRecipe = () => {
+const HeaderIcons = () => {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginRight: 10,
+      }}>
+      <Icon name={'share'} size={30} color={Theme.Light.headline} />
+      <Icon
+        name={'bookmark'}
+        size={30}
+        color={Theme.Light.headline}
+        style={{paddingLeft: 15}}
+      />
+    </View>
+  );
+};
+
+const DetailedRecipe = ({navigation}: any) => {
+  //Update nav title
+  navigation.setOptions({
+    headerShown: true,
+    headerTitle: 'Chicken Pot Pie',
+    headerRight: () => <HeaderIcons />,
+  });
   //Handle state for tab view
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -83,8 +111,8 @@ const DetailedRecipe = () => {
             source={require('../../assets/images/food.jpg')}
             style={{width: responsiveWidth(100), height: responsiveWidth(100)}}
           />
-
-          <View
+          {/* Action Icons */}
+          {/* <View
             style={{
               position: 'absolute',
               left: 0,
@@ -101,6 +129,7 @@ const DetailedRecipe = () => {
                 name={'arrow-left'}
                 size={30}
                 color={Theme.Light.headline}
+                onPress={() => navigation.goBack()}
               />
               <View style={{flexDirection: 'row'}}>
                 <Icon name={'share'} size={30} color={Theme.Light.headline} />
@@ -112,12 +141,14 @@ const DetailedRecipe = () => {
                 />
               </View>
             </View>
-          </View>
+          </View> */}
         </View>
         {/* Everything else */}
         <View style={{flex: 1}}>
           {/* Follow user card */}
           <FollowCard />
+          {/* Nutrition Card */}
+          <NutritionCard fat={14} sugar={21} protein={45} />
 
           {/* Tab view for ingredients and directions */}
           <TabView
@@ -127,6 +158,16 @@ const DetailedRecipe = () => {
             renderTabBar={renderTabBar}
             initialLayout={initialLayout}
           />
+          {/* Review Card */}
+          <Text
+            style={{
+              ...Typography.Typography.header,
+              paddingHorizontal: 15,
+              marginTop: 15,
+            }}>
+            Reviews
+          </Text>
+          <ReviewCard />
         </View>
       </ScrollView>
     </SafeAreaView>

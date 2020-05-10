@@ -22,7 +22,9 @@ const FollowCard = () => {
         />
         <View style={{marginLeft: 15}}>
           <Text style={Typography.Typography.subheader}>Deba Boyd</Text>
-          <Text style={Typography.Typography.bodyflat}>20 recipes</Text>
+          <Text style={{...Typography.Typography.bodyflat, marginTop: 4}}>
+            20 recipes
+          </Text>
         </View>
       </View>
 
@@ -47,8 +49,7 @@ const followCardStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 15,
-    paddingVertical: 15,
+    padding: 15,
     backgroundColor: Theme.Light.shadow,
     borderBottomWidth: 0.3,
     borderBottomColor: Theme.Light.body,

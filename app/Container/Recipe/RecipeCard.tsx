@@ -1,12 +1,14 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Typography, Theme} from '../../assets/styles';
+import {NavigationProp} from '@react-navigation/native';
 
 export interface recipeCardProps {
   isFirst: boolean;
   renderAuthor: boolean;
+  navigation: any;
 }
 
 const favoriteIconEmpty = (
@@ -23,6 +25,7 @@ const favoriteIconFilled = (
     size={24}
     color={'red'}
     style={{position: 'absolute', right: 10, top: 10}}
+    onPress={() => console.log('icon pressed')}
   />
 );
 
@@ -30,60 +33,66 @@ const favoriteIcon = favoriteIconFilled;
 
 const RecipeCard = (props: recipeCardProps) => {
   return (
-    <View
-      style={
-        props.isFirst
-          ? {...recipeCardStyle.container, ...recipeCardStyle.containerFirst}
-          : recipeCardStyle.container
-      }>
-      <Image
-        style={recipeCardStyle.image}
-        source={require('../../assets/images/food.jpg')}
-      />
-      {favoriteIcon}
-      <View style={recipeCardStyle.textContainer}>
-        {/* Recipe Name */}
-        <Text style={Typography.Typography.subheader}>
-          Crispy Chicken Sandwich
-        </Text>
-        {/* Recipe cook time, category */}
-        <View style={recipeCardStyle.horizontalRow}>
+    <TouchableHighlight
+      onPress={() =>
+        props.navigation.navigate('ExploreView', {screen: 'Recipe', params: {}, title: 'asdf'})
+      }
+      underlayColor={'transparent'}>
+      <View
+        style={
+          props.isFirst
+            ? {...recipeCardStyle.container, ...recipeCardStyle.containerFirst}
+            : recipeCardStyle.container
+        }>
+        <Image
+          style={recipeCardStyle.image}
+          source={require('../../assets/images/food.jpg')}
+        />
+        {favoriteIcon}
+        <View style={recipeCardStyle.textContainer}>
+          {/* Recipe Name */}
+          <Text style={Typography.Typography.subheader}>
+            Crispy Chicken Sandwich
+          </Text>
+          {/* Recipe cook time, category */}
           <View style={recipeCardStyle.horizontalRow}>
-            <Icon
-              name="clock-o"
-              size={20}
-              color={Theme.Light.headline}
-              style={{marginRight: 5}}
-            />
-            <Text style={Typography.Typography.body}>45 min</Text>
+            <View style={recipeCardStyle.horizontalRow}>
+              <Icon
+                name="clock-o"
+                size={20}
+                color={Theme.Light.headline}
+                style={{marginRight: 5}}
+              />
+              <Text style={Typography.Typography.body}>45 min</Text>
+            </View>
+
+            {/* Dot inbetween categories */}
+            <View style={recipeCardStyle.dot} />
+
+            <Text style={Typography.Typography.body}>Korean BBQ</Text>
           </View>
+          {/* Recipe Author, Reviews */}
+          <View
+            style={{
+              ...recipeCardStyle.horizontalRow,
+              justifyContent: 'space-between',
+            }}>
+            {props.renderAuthor ? (
+              <Text style={Typography.Typography.subheadline}>Debra Boydd</Text>
+            ) : null}
+            <View style={recipeCardStyle.horizontalRow}>
+              <Icon
+                name="star"
+                style={{color: 'gold', marginRight: 5}}
+                size={20}
+              />
 
-          {/* Dot inbetween categories */}
-          <View style={recipeCardStyle.dot} />
-
-          <Text style={Typography.Typography.body}>Korean BBQ</Text>
-        </View>
-        {/* Recipe Author, Reviews */}
-        <View
-          style={{
-            ...recipeCardStyle.horizontalRow,
-            justifyContent: 'space-between',
-          }}>
-          {props.renderAuthor ? (
-            <Text style={Typography.Typography.subheadline}>Debra Boydd</Text>
-          ) : null}
-          <View style={recipeCardStyle.horizontalRow}>
-            <Icon
-              name="star"
-              style={{color: 'gold', marginRight: 5}}
-              size={20}
-            />
-
-            <Text style={Typography.Typography.body}>42 reviews</Text>
+              <Text style={Typography.Typography.body}>42 reviews</Text>
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableHighlight>
   );
 };
 

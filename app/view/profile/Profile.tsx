@@ -21,7 +21,7 @@ const list = [
   },
 ];
 
-const settingsTab = () => {
+const settingsTab = (navigation: any) => {
   return (
     <View
       style={{
@@ -87,7 +87,7 @@ const settingsTab = () => {
   );
 };
 
-const Profile = (navigation: any) => {
+const Profile = ({navigation}: any) => {
   const componentRef = useRef<DrawerLayout>(null);
   let opacity = new Animated.Value(0);
   const toggleMenu = () => {
