@@ -7,7 +7,7 @@ import {
   Text,
   Dimensions,
 } from 'react-native';
-import {Image, ListItem} from 'react-native-elements';
+import {Image, ListItem, Button} from 'react-native-elements';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme, Typography} from '../../assets/styles';
@@ -19,6 +19,7 @@ import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import NutritionCard from './NutritionCard';
 import ReviewCard from './ReviewCard';
 import {TouchableHighlight} from 'react-native-gesture-handler';
+import RatingCard from './RatingCard';
 
 const FirstRoute = () => {
   return (
@@ -112,12 +113,12 @@ const DetailedRecipe = ({navigation}: any) => {
             source={require('../../assets/images/food.jpg')}
             style={{width: responsiveWidth(100), height: responsiveWidth(100)}}
           />
-          <Icon
+          {/* <Icon
             name="heart"
             size={30}
             color={'red'}
             style={{position: 'absolute', right: 10, top: 10}}
-          />
+          /> */}
           {/* Action Icons */}
           {/* <View
             style={{
@@ -174,7 +175,19 @@ const DetailedRecipe = ({navigation}: any) => {
             }}>
             Reviews
           </Text>
+          <RatingCard/>
           <ReviewCard />
+          {/* All Comments button */}
+          <Button
+            title="All Comments"
+            type="outline"
+            onPress={() =>
+              console.log('todo: nav to all comments / review page')
+            }
+            titleStyle={{color: Theme.Light.caption}}
+            buttonStyle={{borderColor: Theme.Light.caption}}
+            containerStyle={{margin: 15, borderWidth: 1, borderColor: Theme.Light.caption}}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

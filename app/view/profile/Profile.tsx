@@ -88,12 +88,13 @@ const settingsTab = (navigation: any) => {
 };
 
 const Profile = ({navigation}: any) => {
-  const componentRef = useRef<DrawerLayout>(null);
-  let opacity = new Animated.Value(0);
   const toggleMenu = () => {
     console.log(componentRef.current?.state);
     componentRef.current?.openDrawer();
   };
+
+  const componentRef = useRef<DrawerLayout>(null);
+  let opacity = new Animated.Value(0);
 
   const aniamte = () => {
     opacity.setValue(0);

@@ -3,9 +3,9 @@ import {SafeAreaView, ScrollView, Text, StyleSheet} from 'react-native';
 import {Typography} from '../../assets/styles';
 
 /**
- * Favorites page of app
+ * Create page of app
  */
-const Favorites = ({navigation}: any) => {
+const Create = ({navigation}: any) => {
   return (
     <SafeAreaView>
       <ScrollView>
@@ -15,10 +15,10 @@ const Favorites = ({navigation}: any) => {
   );
 };
 
-const favoritesStyle = StyleSheet.create({
+const createStyle = StyleSheet.create({
   header: {
     margin: 10,
   },
 });
 
-export default Favorites;
+export default Create;
