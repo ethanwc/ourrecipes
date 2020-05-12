@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   Dimensions,
+  Vibration,
 } from 'react-native';
 import {Image, ListItem, Button} from 'react-native-elements';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
@@ -78,6 +79,7 @@ const HeaderIcons = () => {
         size={30}
         color={Theme.Light.headline}
         style={{paddingLeft: 15}}
+        onPress={() => Vibration.vibrate(25)}
       />
     </View>
   );
@@ -113,6 +115,49 @@ const DetailedRecipe = ({navigation}: any) => {
             source={require('../../assets/images/food.jpg')}
             style={{width: responsiveWidth(100), height: responsiveWidth(100)}}
           />
+          <View
+            style={{
+              flexDirection: 'row',
+              position: 'absolute',
+              bottom: 0,
+              backgroundColor: Theme.Light.background,
+              opacity: 0.6,
+            }}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                opacity: 1,
+                marginVertical: 5,
+              }}>
+              <Icon name="clock" size={30} color={Theme.Light.caption} />
+              <Text
+                style={{
+                  ...Typography.Typography.body,
+                  color: Theme.Light.caption,
+                  marginTop: 5,
+                }}>
+                30 mins
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                opacity: 1,
+                marginVertical: 5,
+              }}>
+              <Icon name="info" size={30} color={Theme.Light.caption} />
+              <Text
+                style={{
+                  ...Typography.Typography.body,
+                  color: Theme.Light.caption,
+                  marginTop: 5,
+                }}>
+                514 kcal
+              </Text>
+            </View>
+          </View>
           {/* <Icon
             name="heart"
             size={30}
@@ -156,6 +201,14 @@ const DetailedRecipe = ({navigation}: any) => {
           {/* Follow user card */}
           <FollowCard />
           {/* Nutrition Card */}
+          <Text
+            style={{
+              ...Typography.Typography.header,
+              paddingHorizontal: 15,
+              marginTop: 15,
+            }}>
+            Nutrition
+          </Text>
           <NutritionCard fat={14} sugar={21} protein={45} />
 
           {/* Tab view for ingredients and directions */}
@@ -175,7 +228,7 @@ const DetailedRecipe = ({navigation}: any) => {
             }}>
             Reviews
           </Text>
-          <RatingCard/>
+          <RatingCard />
           <ReviewCard />
           {/* All Comments button */}
           <Button
@@ -186,7 +239,11 @@ const DetailedRecipe = ({navigation}: any) => {
             }
             titleStyle={{color: Theme.Light.caption}}
             buttonStyle={{borderColor: Theme.Light.caption}}
-            containerStyle={{margin: 15, borderWidth: 1, borderColor: Theme.Light.caption}}
+            containerStyle={{
+              margin: 15,
+              borderWidth: 1,
+              borderColor: Theme.Light.caption,
+            }}
           />
         </View>
       </ScrollView>

@@ -49,7 +49,7 @@ const settingsTab = (navigation: any) => {
         <ListItem
           title={'Shopping List'}
           titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'list', type: 'feather', color: 'white'}}
+          leftIcon={{name: 'shopping-bag', type: 'feather', color: 'white'}}
           containerStyle={{
             backgroundColor: 'black',
           }}
