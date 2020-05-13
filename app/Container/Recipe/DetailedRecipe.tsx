@@ -128,7 +128,9 @@ const DetailedRecipe = ({navigation}: any) => {
                 flex: 1,
                 alignItems: 'center',
                 opacity: 1,
-                marginVertical: 5,
+                paddingVertical: 5,
+                borderRightColor: 'gray',
+                borderRightWidth: 1,
               }}>
               <Icon name="clock" size={30} color={Theme.Light.caption} />
               <Text
@@ -145,7 +147,7 @@ const DetailedRecipe = ({navigation}: any) => {
                 flex: 1,
                 alignItems: 'center',
                 opacity: 1,
-                marginVertical: 5,
+                paddingVertical: 5,
               }}>
               <Icon name="info" size={30} color={Theme.Light.caption} />
               <Text

@@ -1,7 +1,12 @@
 import React from 'react';
 import {View, StyleSheet, Text, Dimensions} from 'react-native';
 import {Theme, Typography} from '../../assets/styles';
-import {responsiveWidth} from 'react-native-responsive-dimensions';
+import {
+  responsiveWidth,
+  responsiveScreenWidth,
+  useResponsiveScreenWidth,
+  useResponsiveWidth,
+} from 'react-native-responsive-dimensions';
 import {StackedBarChart, ChartConfig} from 'react-native-chart-kit';
 export interface RatingCardProps {
   review: string;
@@ -10,76 +15,59 @@ export interface RatingCardProps {
   reviewAuthor: string;
 }
 
+export interface RatingBarProps {
+  rating: number;
+  count: number;
+  distribution: number;
+}
+
+const RatingBar = (props: RatingBarProps) => {
+  return (
+    <View style={{flex: 3}}>
+      <View style={ratingCardStyle.ratingRow}>
+        <View style={ratingCardStyle.ratingStar}>
+          <Text>{props.rating} star</Text>
+        </View>
+        <View style={ratingCardStyle.ratingBarWrapper}>
+          <View style={ratingCardStyle.ratingBarBack} />
+          <View
+            style={{
+              ...ratingCardStyle.ratingBarFront,
+              width: `${props.distribution}%`,
+            }}
+          />
+        </View>
+        <View style={ratingCardStyle.ratingCount}>
+          <Text>({props.count})</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+
 const RatingCard = () => {
   return (
     <View style={ratingCardStyle.container}>
       {/* Out of 5 star */}
       <View style={ratingCardStyle.ratingCountWrapper}>
-        <Text style={Typography.Typography.header}>4.5</Text>
-        <Text>Out of 5</Text>
+        <View
+          style={{
+            borderBottomColor: Theme.Light.body,
+            borderBottomWidth: 0.5,
+            marginBottom: 5,
+            paddingBottom: 5,
+          }}>
+          <Text style={Typography.Typography.header}>4.5</Text>
+        </View>
+        <Text style={Typography.Typography.subheader}>5</Text>
       </View>
       {/* Star ratings */}
       <View style={{flex: 3}}>
-        <View style={ratingCardStyle.ratingRow}>
-          <View style={ratingCardStyle.ratingStar}>
-            <Text>5 star</Text>
-          </View>
-          <View style={ratingCardStyle.ratingBarWrapper}>
-            <View style={ratingCardStyle.ratingBarBack} />
-            <View style={ratingCardStyle.ratingBarFront} />
-          </View>
-          <View style={ratingCardStyle.ratingCount}>
-            <Text>(30)</Text>
-          </View>
-        </View>
-        <View style={ratingCardStyle.ratingRow}>
-          <View style={ratingCardStyle.ratingStar}>
-            <Text>4 star</Text>
-          </View>
-          <View style={ratingCardStyle.ratingBarWrapper}>
-            <View style={ratingCardStyle.ratingBarBack} />
-            <View style={ratingCardStyle.ratingBarFront} />
-          </View>
-          <View style={ratingCardStyle.ratingCount}>
-            <Text>(30)</Text>
-          </View>
-        </View>
-        <View style={ratingCardStyle.ratingRow}>
-          <View style={ratingCardStyle.ratingStar}>
-            <Text>3 star</Text>
-          </View>
-          <View style={ratingCardStyle.ratingBarWrapper}>
-            <View style={ratingCardStyle.ratingBarBack} />
-            <View style={ratingCardStyle.ratingBarFront} />
-          </View>
-          <View style={ratingCardStyle.ratingCount}>
-            <Text>(30)</Text>
-          </View>
-        </View>
-        <View style={ratingCardStyle.ratingRow}>
-          <View style={ratingCardStyle.ratingStar}>
-            <Text>2 star</Text>
-          </View>
-          <View style={ratingCardStyle.ratingBarWrapper}>
-            <View style={ratingCardStyle.ratingBarBack} />
-            <View style={ratingCardStyle.ratingBarFront} />
-          </View>
-          <View style={ratingCardStyle.ratingCount}>
-            <Text>(30)</Text>
-          </View>
-        </View>
-        <View style={ratingCardStyle.ratingRow}>
-          <View style={ratingCardStyle.ratingStar}>
-            <Text>1 star</Text>
-          </View>
-          <View style={ratingCardStyle.ratingBarWrapper}>
-            <View style={ratingCardStyle.ratingBarBack} />
-            <View style={ratingCardStyle.ratingBarFront} />
-          </View>
-          <View style={ratingCardStyle.ratingCount}>
-            <Text>(30)</Text>
-          </View>
-        </View>
+        <RatingBar count={15} distribution={40} rating={5} />
+        <RatingBar count={43} distribution={10} rating={4} />
+        <RatingBar count={3} distribution={20} rating={3} />
+        <RatingBar count={22} distribution={13} rating={2} />
+        <RatingBar count={17} distribution={24} rating={1} />
       </View>
     </View>
   );
@@ -98,12 +86,10 @@ const ratingCardStyle = StyleSheet.create({
     borderBottomWidth: 0.3,
     borderBottomColor: Theme.Light.body,
   },
-
   ratingCountWrapper: {
     flex: 1,
     alignItems: 'center',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     marginVertical: 15,
     borderRightColor: Theme.Light.body,
     borderRightWidth: 0.5,
@@ -126,7 +112,6 @@ const ratingCardStyle = StyleSheet.create({
     marginHorizontal: 10,
   },
   ratingBarFront: {
-    width: 100,
     backgroundColor: Theme.Light.caption,
     height: 8,
     borderRadius: 10,
