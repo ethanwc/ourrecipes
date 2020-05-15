@@ -1,44 +1,36 @@
+import 'react-native-gesture-handler'
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import { Theme, Typography } from '../../assets/styles';
 import { Input, Icon } from 'react-native-elements';
+import VoiceWrapper from '../../utils/VoiceWrapper/VoiceWrapper';
+import wordsToNumbers from 'words-to-numbers';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+
+var parser = require('ingredients-parser');
 
 export interface createIngredientCardProps {
-    amount: Number;
-    ingredient: string;
-    unit: string;
+    // amount: Number;
+    // ingredient: string;
+    // unit: string;
 }
 
 const CreateIngredientCard = (props: createIngredientCardProps) => {
     const [input, setInput] = useState('');
-    const [isFocused, setIsFocused] = useState(false);
-    const description = `${
-        props.unit.charAt(0).toUpperCase() + props.unit.slice(1)
-        } of ${props.ingredient.charAt(0).toUpperCase() + props.ingredient.slice(1)}`;
-
-    const clearIcon = isFocused ?
-        <Icon name={'x'} color={Theme.Light.caption} size={26} style={{ marginRight: 15 }} onPress={() => setInput('')} />
-        : null;
+    
+    const clearIcon = input ?
+        <Icon onPress={() => setInput('')} type={'feather'} name={'x'} onPressIn={() => setInput('')} />
+        :
+        <Icon onPress={() => setInput('')} type={'feather'} name={'x'} size={0} onPressIn={() => setInput('')} />
 
     return (
-        <TouchableHighlight>
-            <View style={createIngredientCardStyle.container}>
-                <Input placeholder={'Ingredient'} value={input} onChangeText={(text: string) => setInput(text)} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)}  
-                leftIcon = {
-                    <Icon onPress={() => setInput('')} type={'feather'} name={'mic'} onPressIn={() => setInput('')}/>
 
-                }
-                rightIcon={
-                    <Icon onPress={() => setInput('')} type={'feather'} name={'x'} onPressIn={() => setInput('')}/>
-                } />
+        <View style={createIngredientCardStyle.container}>
+            <Input placeholder={'Ingredient'} value={input} onChangeText={(text: string) => setInput(text)} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)}
+                editable={true}
+                rightIcon={clearIcon} />
+        </View>
 
-                {/* <Text
-                    style={{ ...Typography.Typography.subheader, paddingHorizontal: 15 }}>
-                    {props.amount}
-                </Text> */}
-                {/* <Text style={Typography.Typography.subheader}>{description}</Text> */}
-            </View>
-        </TouchableHighlight>
     );
 };
 

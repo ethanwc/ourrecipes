@@ -1,10 +1,7 @@
-import Voice from '@react-native-community/voice';
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Theme } from '../../assets/styles';
-var parser = require('ingredients-parser');
-
 import VoiceWrapper from '../VoiceWrapper/VoiceWrapper';
 
 const SearchBar = () => {
@@ -28,7 +25,7 @@ const SearchBar = () => {
           name={'search'}
           size={14}
           style={{ marginRight: 10 }}
-          onPress={() => console.log(parser.parse(search))}
+        // onPress={() => console.log(parser.parse(search))}
         />
         <TextInput
           placeholder={'Search for a recipe'}

@@ -1,13 +1,27 @@
 import React from 'react'
 import { View } from 'react-native';
-import VoiceWrapper from '../../../utils/VoiceWrapper/VoiceWrapper';
-
+import CreateIngredientCard from '../../../Container/Create/CreateIngredientCard';
+import Swipe from './Swipe'
 const CreateIngredients = () => {
+
+
+    // const description = `${
+    //     props.unit.charAt(0).toUpperCase() + props.unit.slice(1)
+    //     } of ${props.ingredient.charAt(0).toUpperCase() + props.ingredient.slice(1)}`;
+
+    // const convertInput = (text: string) => {
+    //     try {
+    //         const parsedInput = parser.parse(text);
+    //         setInput(`${wordsToNumbers(parsedInput.amount)} ${parsedInput.unit} ${parsedInput.ingredient}`);
+    //     }
+    //     catch (error) {
+    //         setInput(text);
+    //     }
+    // };
+
     return (
         <View>
-            {/* <CreateIngredientCard amount={1} unit={'cup'} ingredient={'flour'}/> */}
-
-            <VoiceWrapper size={26} onVoiceCompleteResult={(text: string) => console.log(text)} onVoicePartialResult={(text: string) => console.log(text)} />
+            <Swipe />
         </View>
     )
 }
