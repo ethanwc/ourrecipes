@@ -24,8 +24,8 @@ const ImageSelector = (props: imagePickerProps) => {
       height: 400,
       cropping: true,
     }).then((image) => {
-      props.onImageSelected(image);
       setShowOverlay(false);
+      props.onImageSelected(image);
     });
   };
 
@@ -35,8 +35,8 @@ const ImageSelector = (props: imagePickerProps) => {
       height: 400,
       cropping: true,
     }).then((image) => {
-      props.onImageSelected(image);
       setShowOverlay(false);
+      props.onImageSelected(image);
     });
   };
 

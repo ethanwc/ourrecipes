@@ -1,38 +1,21 @@
 import Voice from '@react-native-community/voice';
-import React, {useState} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Theme} from '../../assets/styles';
+import { Theme } from '../../assets/styles';
 var parser = require('ingredients-parser');
+
+import VoiceWrapper from '../VoiceWrapper/VoiceWrapper';
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');
-  const [isRecording, setIsRecording] = useState(false);
-
-  Voice.onSpeechStart = () => setIsRecording(true);
-  Voice.onSpeechEnd = () => setIsRecording(false);
-  Voice.onSpeechResults = () => setIsRecording(false);
-  Voice.onSpeechError = () => setIsRecording(false);
-
-  Voice.onSpeechPartialResults = (res: any) => {
-    if (res.value[0]) setSearch(res.value[0]);
-    console.log(res);
-  };
-
-  Voice.onSpeechResults = (res: any) => {
-    if (res.value[0]) setSearch(res.value[0]);
-  };
-
-  //Make microphone red if recording
-  const microphoneColor = isRecording ? 'red' : 'black';
 
   //Show clear button if there is text
-
   const clearButton = search ? (
     <Icon
       name={'times'}
       size={16}
-      style={{marginHorizontal: 10}}
+      style={{ marginHorizontal: 10 }}
       onPress={() => setSearch('')}
     />
   ) : null;
@@ -40,17 +23,11 @@ const SearchBar = () => {
   return (
     <View style={searchBarStyle.container}>
       <View style={searchBarStyle.innerContainer}>
-        <Icon
-          name={'microphone'}
-          size={16}
-          color={microphoneColor}
-          style={{marginHorizontal: 10}}
-          onPress={() => Voice.start('en-US')}
-        />
+        <VoiceWrapper size={16} onVoicePartialResult={(text: string) => setSearch(text)} onVoiceCompleteResult={(text: string) => setSearch(text)} />
         <Icon
           name={'search'}
           size={14}
-          style={{marginRight: 10}}
+          style={{ marginRight: 10 }}
           onPress={() => console.log(parser.parse(search))}
         />
         <TextInput

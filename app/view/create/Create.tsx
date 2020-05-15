@@ -4,6 +4,8 @@ import { Typography, Theme } from '../../assets/styles';
 import { Input, Image } from 'react-native-elements';
 import ImageSelector from '../../utils/ImageSelector/ImageSelector';
 import InfoBar from '../../Container/Create/InfoBar';
+import CreateIngredientCard from '../../Container/Create/CreateIngredientCard'
+import CreateIngredients from '../../Component/Create/CreateIngredients/CreateIngredients';
 /**
  * Create page of app
  */
@@ -25,8 +27,9 @@ const Create = ({ navigation }: any) => {
             leftIcon={{ type: 'feather', name: 'pen-tool' }}
           />
         </View>
-        <ImageSelector onImageSelected={(uri: string) => console.log(uri)} />
         <InfoBar />
+        <ImageSelector onImageSelected={(uri: string) => console.log(uri)} />
+        <CreateIngredients />
       </ScrollView>
     </SafeAreaView>
   );
