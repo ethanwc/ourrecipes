@@ -7,6 +7,7 @@ import {
   Text,
   Dimensions,
   Vibration,
+  Platform,
 } from 'react-native';
 import {Image, ListItem, Button} from 'react-native-elements';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
@@ -21,7 +22,7 @@ import NutritionCard from './NutritionCard';
 import ReviewCard from './ReviewCard';
 import {TouchableHighlight} from 'react-native-gesture-handler';
 import RatingCard from './RatingCard';
-
+import Share from 'react-native-share';
 const FirstRoute = () => {
   return (
     <View>
@@ -65,6 +66,20 @@ const SecondRoute = () => {
   );
 };
 
+const shareSingleImage = async () => {
+  const shareOptions = {
+    title: 'Share file',
+    url: 'google.com',
+    failOnCancel: false,
+  };
+
+  try {
+    const ShareResponse = await Share.open(shareOptions);
+  } catch (error) {
+    console.log('Error =>', error);
+  }
+};
+
 const HeaderIcons = () => {
   return (
     <View
@@ -73,7 +88,12 @@ const HeaderIcons = () => {
         justifyContent: 'space-between',
         marginRight: 10,
       }}>
-      <Icon name={'share'} size={30} color={Theme.Light.headline} />
+      <Icon
+        name={'share'}
+        size={30}
+        color={Theme.Light.headline}
+        onPress={() => shareSingleImage()}
+      />
       <Icon
         name={'bookmark'}
         size={30}

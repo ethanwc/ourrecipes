@@ -26,7 +26,9 @@ const RatingBar = (props: RatingBarProps) => {
     <View style={{flex: 3}}>
       <View style={ratingCardStyle.ratingRow}>
         <View style={ratingCardStyle.ratingStar}>
-          <Text>{props.rating} star</Text>
+          <Text style={Typography.Typography.bodyflat}>
+            {props.rating} star
+          </Text>
         </View>
         <View style={ratingCardStyle.ratingBarWrapper}>
           <View style={ratingCardStyle.ratingBarBack} />
@@ -38,7 +40,7 @@ const RatingBar = (props: RatingBarProps) => {
           />
         </View>
         <View style={ratingCardStyle.ratingCount}>
-          <Text>({props.count})</Text>
+          <Text style={Typography.Typography.bodyflat}>({props.count})</Text>
         </View>
       </View>
     </View>
@@ -115,13 +117,15 @@ const ratingCardStyle = StyleSheet.create({
     backgroundColor: Theme.Light.caption,
     height: 8,
     borderRadius: 10,
+    alignSelf: 'center',
     position: 'absolute',
   },
   ratingBarBack: {
     flex: 1,
     backgroundColor: Theme.Light.body,
     opacity: 0.4,
-    height: 8,
+    height: 7,
+    alignSelf: 'center',
     borderRadius: 10,
   },
 });

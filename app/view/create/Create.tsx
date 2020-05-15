@@ -1,24 +1,41 @@
-import React from 'react';
-import {SafeAreaView, ScrollView, Text, StyleSheet} from 'react-native';
-import {Typography} from '../../assets/styles';
+import React, {useState} from 'react';
+import {SafeAreaView, ScrollView, Text, StyleSheet, View} from 'react-native';
+import {Typography, Theme} from '../../assets/styles';
+import {Input, Image} from 'react-native-elements';
+import ImageSelector from '../../utils/ImageSelector/ImageSelector';
+import InfoBar from '../../Container/Create/InfoBar';
 
 /**
  * Create page of app
  */
+
+//temp: keyboard types 'default' | 'email-address' | 'numeric' | 'phone-pad' | 'number-pad' | 'decimal-pad';
+
 const Create = ({navigation}: any) => {
+  const [title, setTitle] = useState('');
   return (
-    <SafeAreaView>
+    <SafeAreaView style={createStyle.contaier}>
       <ScrollView>
-        <Text style={Typography.Typography.header}>todo</Text>
+        <View style={createStyle.titleStyle}>
+          <Input
+            value={title}
+            onChangeText={(text: string) => setTitle(text)}
+            placeholder="Title"
+            inputStyle={Typography.Typography.header}
+            leftIcon={{type: 'feather', name: 'pen-tool'}}
+          />
+        </View>
+
+        <ImageSelector onImageSelected={(uri: string) => console.log(uri)} />
+        <InfoBar />
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 const createStyle = StyleSheet.create({
-  header: {
-    margin: 10,
-  },
+  contaier: {},
+  titleStyle: {},
 });
 
 export default Create;
