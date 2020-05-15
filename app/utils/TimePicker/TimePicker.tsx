@@ -1,34 +1,40 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const TimePicker = () => {
-  return <View></View>;
+export interface timePickerInterface {
+  showTimePicker: boolean;
+  setShowTimePicker: Function;
+  onTimePicked: Function;
+}
+
+//wrapper to pick time
+const TimePicker = (props: timePickerInterface) => {
+  const [date, setDate] = useState(new Date(0, 0, 0));
+
+  //handle time actually picked
+  const onTimeSelected = (event: Event, date?: Date) => {
+    props.setShowTimePicker(false)
+    if (date) {
+      props.onTimePicked(date);
+      setDate(date)
+    }
+  }
+
+  //render time picker conditionally
+  const timePicker = props.showTimePicker ? <DateTimePicker
+    timeZoneOffsetInMinutes={0}
+    value={date}
+    mode={'time'}
+    is24Hour={true}
+    display="default"
+    onChange={(event: Event, date?: Date) => onTimeSelected(event, date)}
+  /> : null;
+
+  return (
+    <View>
+      {timePicker}
+    </View>);
 };
 
 export default TimePicker;
-
-
-const prepPicker = showPrepTimePicker ? (
-    <DateTimePicker
-      timeZoneOffsetInMinutes={0}
-      value={date}
-      mode={'time'}
-      is24Hour={true}
-      display="default"
-      onChange={(event: Event, date?: Date) => onPrepChange(event, date)}
-    />
-  ) : null;
-
-
-
-  const [showPrepTimePicker, setShowPrepTimePicker] = useState(false);
-  const [showCookTimePicker, setShowCookTimePicker] = useState(false);
-  const [date, setDate] = useState(new Date(1598051730000));
-  const [show, setShow] = useState(false);
-
-  const onPrepChange = (event: Event, selectedDate?: Date) => {
-    if (selectedDate) {
-      console.log(selectedDate.getHours() + selectedDate.getMinutes());
-    }
-  };
