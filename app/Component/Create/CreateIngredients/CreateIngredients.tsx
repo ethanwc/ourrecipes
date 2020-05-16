@@ -21,7 +21,11 @@ const CreateIngredients = () => {
 
     return (
         <View>
-            <Swipe />
+            {/* <Swipe /> */}
+            <CreateIngredientCard/>
+            <CreateIngredientCard/>
+            <CreateIngredientCard/>
+
         </View>
     )
 }
