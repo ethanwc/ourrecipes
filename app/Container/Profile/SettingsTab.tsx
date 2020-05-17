@@ -9,7 +9,7 @@ const SettingsTab = (navigation: any) => {
       style={settingsTabStyle.container}>
       <View>
         <ListItem
-          title={'Steve Jobs'}
+          title={'steve@apple.com'}
           titleStyle={settingsTabStyle.title}
           containerStyle={settingsTabStyle.wrapper}
         />

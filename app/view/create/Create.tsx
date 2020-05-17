@@ -7,36 +7,32 @@ import InfoBar from '../../Container/Create/InfoBar';
 import CreateIngredients from '../../Component/Create/CreateIngredients/CreateIngredients';
 import CreateDirections from '../../Component/Create/CreateDirections/CreateDirections';
 
-/**
- * Create page of app
- */
-
-//temp: keyboard types 'default' | 'email-address' | 'numeric' | 'phone-pad' | 'number-pad' | 'decimal-pad';
-
 const Create = ({ navigation }: any) => {
   const [title, setTitle] = useState('');
 
   return (
     <SafeAreaView style={createStyle.contaier}>
       <ScrollView>
-        {/* Pick recipe title */}
-        <Input
-          value={title}
-          onChangeText={(text: string) => setTitle(text)}
-          placeholder="Title"
-          inputStyle={Typography.Typography.header}
-          leftIcon={{ type: 'feather', name: 'pen-tool' }}
-        />
-        {/* Pick recipe info */}
-        <InfoBar />
         {/* Pick recipe main image */}
         <ImageSelector onImageSelected={(uri: string) => console.log(uri)} />
+        {/* Pick recipe title */}
+        <View style={{marginHorizontal: 10}}>
+          <Input
+            value={title}
+            onChangeText={(text: string) => setTitle(text)}
+            placeholder="Recipe Name"
+            inputStyle={Typography.Typography.subheader}
+          />
+        </View>
+
+        {/* Pick recipe info */}
+        <InfoBar />
         {/* Create recipe ingredients */}
         <Text style={createStyle.header}>Ingredients</Text>
         <CreateIngredients />
         {/* Pick recipe directions */}
         <Text style={createStyle.header}>Directions</Text>
-        <CreateDirections/> 
+        <CreateDirections />
 
       </ScrollView>
     </SafeAreaView>

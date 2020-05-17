@@ -51,15 +51,15 @@ export default function App() {
             ),
           }}
         />
-        {/* <Tab.Screen
-          name="Create"
+        <Tab.Screen
+          name="Temp-Create"
           component={Create}
           options={{
             tabBarIcon: ({color}) => (
               <Icon name="plus" color={color} size={26} />
             ),
           }}
-        /> */}
+        />
         {/* <Tab.Screen
           name="Bookmarks"
           component={Bookmarks}

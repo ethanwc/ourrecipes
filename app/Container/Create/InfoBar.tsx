@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {Input, Image} from 'react-native-elements';
-import {Theme, Typography} from '../../assets/styles';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Input, Image } from 'react-native-elements';
+import { Theme, Typography } from '../../assets/styles';
 import TimePicker from '../../utils/TimePicker/TimePicker';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const InfoBar = () => {
   const [prepTime, setPrepTime] = useState('');
@@ -18,12 +18,13 @@ const InfoBar = () => {
       {/* Prep Time */}
       <TouchableOpacity
         onPress={() => setPrepTimePicker(true)}
-        style={{flex: 1}}>
+        style={{ flex: 1, alignItems: 'center' }}>
+        <Icon name={'egg'} size={26} color={Theme.Light.caption} />
         <Input
           value={prepTime.toString()}
           placeholder="Prep Time"
           inputStyle={infoBarStyle.input}
-          inputContainerStyle={{borderBottomWidth: 0}}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
           keyboardType={'numeric'}
           editable={false}
         />
@@ -32,27 +33,31 @@ const InfoBar = () => {
       {/* Cook Time */}
       <TouchableOpacity
         onPress={() => setCookTimePicker(true)}
-        style={{flex: 1}}>
+        style={{ flex: 1, alignItems: 'center', }}>
+        <Icon name={'fire'} size={26} color={Theme.Light.caption} />
         <Input
           value={cookTime.toString()}
           placeholder="Cook Time"
           inputStyle={infoBarStyle.input}
-          inputContainerStyle={{borderBottomWidth: 0}}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
           keyboardType={'numeric'}
           editable={false}
         />
       </TouchableOpacity>
 
       {/* Serving Size */}
-      <Input
-        value={servingSize}
-        placeholder="Serving Size"
-        inputStyle={infoBarStyle.input}
-        inputContainerStyle={{borderBottomWidth: 0}}
-        keyboardType={'numeric'}
-        onChangeText={(text: string) => setServingSize(text)}
-        containerStyle={{flex: 1}}
-      />
+      <View style={{ flex: 1, alignItems: 'center' }}>
+        <Icon name={'users'} size={26} color={Theme.Light.caption} />
+        <Input
+          value={servingSize}
+          placeholder="Serving Size"
+          inputStyle={infoBarStyle.input}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+          keyboardType={'numeric'}
+          onChangeText={(text: string) => setServingSize(text)}
+        />
+      </View>
+
 
       {/* Time pickers... default hidden */}
       <TimePicker
@@ -79,11 +84,15 @@ const infoBarStyle = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: Theme.Light.shadow,
     marginVertical: 15,
+    marginHorizontal: 10,
+    borderRadius: 15,
+    paddingTop: 15,
   },
   input: {
     ...Typography.Typography.subheader,
     color: Theme.Light.caption,
     alignSelf: 'center',
+    textAlign: 'center',
   },
 });
 
