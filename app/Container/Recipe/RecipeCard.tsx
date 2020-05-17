@@ -35,7 +35,7 @@ const RecipeCard = (props: recipeCardProps) => {
   return (
     <TouchableHighlight
       onPress={() =>
-        props.navigation.navigate('Explore', {screen: 'Recipe', params: {}})
+        props.navigation.navigate('ExploreView', {screen: 'Recipe', params: {}})
       }
       underlayColor={'transparent'}>
       <View
@@ -52,7 +52,7 @@ const RecipeCard = (props: recipeCardProps) => {
         <View style={recipeCardStyle.textContainer}>
           {/* Recipe Name */}
           <Text style={Typography.Typography.subheader}>
-            Crispy Chicken Sandwich
+            Chicken Pot Pie
           </Text>
           {/* Recipe cook time, category */}
           <View style={recipeCardStyle.horizontalRow}>

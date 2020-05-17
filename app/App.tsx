@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import ExploreView from './view/explore/ExploreView';
 import Groups from './view/groups/Groups';
 import Create from './view/create/Create';
-import Favorites from './view/favorites/Favorites';
+import Bookmarks from './view/bookmarks/Bookmarks';
 import Profile from './view/profile/Profile';
 import DetailedRecipe from './Container/Recipe/DetailedRecipe';
 import {Theme} from './assets/styles';
@@ -34,7 +34,7 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator tabBarOptions={{activeTintColor: Theme.Light.caption}}>
         <Tab.Screen
-          name="Explore"
+          name="Recipes"
           component={Explore}
           options={{
             tabBarIcon: ({color}) => (
@@ -51,7 +51,7 @@ export default function App() {
             ),
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Create"
           component={Create}
           options={{
@@ -59,16 +59,16 @@ export default function App() {
               <Icon name="plus" color={color} size={26} />
             ),
           }}
-        />
-        <Tab.Screen
-          name="Favorites"
-          component={Favorites}
+        /> */}
+        {/* <Tab.Screen
+          name="Bookmarks"
+          component={Bookmarks}
           options={{
             tabBarIcon: ({color}) => (
-              <Icon name="heart" color={color} size={26} />
+              <Icon name="bookmark" color={color} size={26} />
             ),
           }}
-        />
+        /> */}
         <Tab.Screen
           name="Account"
           component={Profile}

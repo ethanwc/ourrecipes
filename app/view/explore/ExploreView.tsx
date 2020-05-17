@@ -6,11 +6,14 @@ import {
   Text,
   StyleSheet,
   Button,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import Searchbar from '../../utils/Searchbar/Searchbar';
 import Categories from '../../Component/Category/Categories';
-import { Typography } from '../../assets/styles';
+import { Typography, Theme } from '../../assets/styles';
 import Recipes from '../../Component/Recipe/Recipes';
+import Icon from 'react-native-vector-icons/Feather';
 
 /**
  * Explore page of app
@@ -22,18 +25,33 @@ const Explore = ({ navigation }: any) => {
         {/* Searchbar */}
         <Searchbar />
         {/* Categories Component */}
-        <Text style={exploreStyle.header}>Categories</Text>
+        <View style={exploreStyle.header}>
+          <Text style={Typography.Typography.header}>Categories</Text>
+        </View>
         <Categories />
         {/* Breakfast */}
-        <Text style={exploreStyle.header}>Breakfast</Text>
+        <View style={exploreStyle.header}>
+          <Text style={Typography.Typography.header}>Breakfast</Text>
+        </View>
         <Recipes renderAuthor={true} navigation={navigation} />
         {/* Lunch */}
-        <Text style={exploreStyle.header}>Lunch</Text>
+        <View style={exploreStyle.header}>
+          <Text style={Typography.Typography.header}>Lunch</Text>
+        </View>
         <Recipes renderAuthor={true} navigation={navigation} />
         {/* Dinner */}
-        <Text style={exploreStyle.header}>Dinner</Text>
+        <View style={exploreStyle.header}>
+          <Text style={Typography.Typography.header}>Dinner</Text>
+        </View>
         <Recipes renderAuthor={true} navigation={navigation} />
+
       </ScrollView>
+      <TouchableOpacity style={exploreStyle.createButton} onPress={() =>
+        navigation.navigate('Create', { params: {} })
+
+      }>
+        <Icon name={'plus'} size={40} color={Theme.Light.caption} />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -41,8 +59,10 @@ const Explore = ({ navigation }: any) => {
 const exploreStyle = StyleSheet.create({
   header: {
     margin: 10,
-    ...Typography.Typography.header,
   },
+  createButton: {
+    borderRadius: 100, backgroundColor: Theme.Light.background, position: 'absolute', bottom: 15, right: 15, padding: 10,
+  }
 });
 
 export default Explore;

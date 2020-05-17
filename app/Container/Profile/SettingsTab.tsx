@@ -1,71 +1,69 @@
 import React from 'react';
-import {View} from 'react-native';
-import {ListItem} from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { ListItem } from 'react-native-elements';
+import { Theme, Typography } from '../../assets/styles';
 
 const SettingsTab = (navigation: any) => {
   return (
     <View
-      style={{
-        flex: 1,
-        backgroundColor: 'black',
-        justifyContent: 'space-between',
-      }}>
+      style={settingsTabStyle.container}>
       <View>
         <ListItem
           title={'Steve Jobs'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
-          bottomDivider
+          titleStyle={settingsTabStyle.title}
+          containerStyle={settingsTabStyle.wrapper}
         />
         <ListItem
-          title={'Saved Recipes'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'bookmark', type: 'feather', color: 'white'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
+          title={'Bookmarks'}
+          titleStyle={settingsTabStyle.title}
+          leftIcon={{ name: 'bookmark', type: 'feather', color: Theme.Light.headline }}
+          containerStyle={settingsTabStyle.wrapper}
         />
         <ListItem
           title={'Shopping List'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'shopping-bag', type: 'feather', color: 'white'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
+          titleStyle={settingsTabStyle.title}
+          leftIcon={{ name: 'shopping-bag', type: 'feather', color: Theme.Light.headline }}
+          containerStyle={settingsTabStyle.wrapper}
         />
         <ListItem
           title={'Meal Planner'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'calendar', type: 'feather', color: 'white'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
+          titleStyle={settingsTabStyle.title}
+          leftIcon={{ name: 'calendar', type: 'feather', color: Theme.Light.headline }}
+          containerStyle={settingsTabStyle.wrapper}
         />
       </View>
 
       <View>
         <ListItem
           title={'Privacy Policy'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'info', type: 'feather', color: 'white'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
+          titleStyle={settingsTabStyle.title}
+          leftIcon={{ name: 'info', type: 'feather', color: Theme.Light.headline }}
+          containerStyle={settingsTabStyle.wrapper}
         />
 
         <ListItem
           title={'Settings'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'settings', type: 'feather', color: 'white'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
+          titleStyle={settingsTabStyle.title}
+          leftIcon={{ name: 'settings', type: 'feather', color: Theme.Light.headline }}
+          containerStyle={settingsTabStyle.wrapper}
         />
       </View>
     </View>
   );
 };
+
+const settingsTabStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Theme.Light.background,
+    justifyContent: 'space-between',
+  },
+  wrapper: {
+    backgroundColor: Theme.Light.background,
+  },
+  title: {
+    ...Typography.Typography.subheader,
+  },
+})
 
 export default SettingsTab;
