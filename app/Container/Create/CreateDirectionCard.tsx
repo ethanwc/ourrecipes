@@ -20,37 +20,50 @@ export interface createDirectionCardProps {
 }
 
 const CreateDirectionCard = (props: createDirectionCardProps) => {
-  const [input, setInput] = useState('asf');
+  const [input, setInput] = useState('');
 
   const clearIcon = input ? (
     <Icon
       type={'feather'}
       name={'x'}
-      onPressIn={() => setInput('')}
+      onPress={() => setInput('')}
       color={Theme.Light.caption}
       style={createDirectionCardStyle.icon}
     />
-  ) : null;
+  ) : (
+    <Icon
+      type={'feather'}
+      name={'x'}
+      size={0}
+      color={Theme.Light.caption}
+      style={createDirectionCardStyle.icon}
+    />
+  );
 
   return (
     <View style={createDirectionCardStyle.container}>
-      <View style={{padding: 0}}>
-        <TextInput
-          style={createDirectionCardStyle.step}
-          placeholder={'Step 1'}
-          editable={false}
-          textAlignVertical={'top'}
-        />
-      </View>
       <View style={{flex: 1}}>
-        <TextInput
-          placeholder={'asdf'}
-          multiline={true}
+        <Input
+          placeholder={'1'}
           textAlignVertical={'top'}
-          style={createDirectionCardStyle.input}
+          editable={false}
+          inputStyle={createDirectionCardStyle.step}
+          inputContainerStyle={{borderBottomWidth: 0}}
         />
       </View>
-      {clearIcon}
+      <View style={{flex: 4}}>
+        <Input
+          placeholder={'Step 1'}
+          textAlignVertical={'top'}
+          multiline={true}
+          inputStyle={createDirectionCardStyle.input}
+          value={input}
+          onChangeText={(text: string) => setInput(text)}
+          inputContainerStyle={{borderBottomWidth: 0}}
+          rightIconContainerStyle={{alignSelf: 'flex-start'}}
+          rightIcon={clearIcon}
+        />
+      </View>
     </View>
   );
 };
@@ -79,8 +92,10 @@ const createDirectionCardStyle = StyleSheet.create({
     color: Theme.Light.caption,
   },
   icon: {
-    flex: 1,
-    marginTop: 8,
+    alignSelf: 'flex-start',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    alignContent: 'flex-start',
   },
 });
 
