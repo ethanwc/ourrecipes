@@ -26,8 +26,8 @@ const createNewCardStyle = StyleSheet.create({
     backgroundColor: Theme.Light.shadow,
     borderRadius: 5,
     marginHorizontal: 10,
-    marginTop: 10,
-    padding: 10,
+    marginVertical: 10,
+    paddingVertical: 10,
     justifyContent: 'center',
   },
 });

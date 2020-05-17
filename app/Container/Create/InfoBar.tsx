@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Input, Image } from 'react-native-elements';
-import { Theme, Typography } from '../../assets/styles';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Input, Image} from 'react-native-elements';
+import {Theme, Typography} from '../../assets/styles';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import TimePicker from '../../utils/TimePicker/TimePicker';
 
 const InfoBar = () => {
@@ -13,17 +13,17 @@ const InfoBar = () => {
   const [prepTimePicker, setPrepTimePicker] = useState(false);
   const [cookTimePicker, setCookTimePicker] = useState(false);
 
-
   return (
     <View style={infoBarStyle.container}>
       {/* Prep Time */}
       <TouchableOpacity
         onPress={() => setPrepTimePicker(true)}
-        style={{ flex: 1 }}>
+        style={{flex: 1}}>
         <Input
           value={prepTime.toString()}
           placeholder="Prep Time"
           inputStyle={infoBarStyle.input}
+          inputContainerStyle={{borderBottomWidth: 0}}
           keyboardType={'numeric'}
           editable={false}
         />
@@ -32,11 +32,12 @@ const InfoBar = () => {
       {/* Cook Time */}
       <TouchableOpacity
         onPress={() => setCookTimePicker(true)}
-        style={{ flex: 1 }}>
+        style={{flex: 1}}>
         <Input
           value={cookTime.toString()}
           placeholder="Cook Time"
           inputStyle={infoBarStyle.input}
+          inputContainerStyle={{borderBottomWidth: 0}}
           keyboardType={'numeric'}
           editable={false}
         />
@@ -47,15 +48,27 @@ const InfoBar = () => {
         value={servingSize}
         placeholder="Serving Size"
         inputStyle={infoBarStyle.input}
+        inputContainerStyle={{borderBottomWidth: 0}}
         keyboardType={'numeric'}
         onChangeText={(text: string) => setServingSize(text)}
-        containerStyle={{ flex: 1 }}
+        containerStyle={{flex: 1}}
       />
 
       {/* Time pickers... default hidden */}
-      <TimePicker onTimePicked={(date: Date) => setPrepTime(date.getHours() + ':' + date.getMinutes())} showTimePicker={prepTimePicker} setShowTimePicker={(state: boolean) => setPrepTimePicker(state)} />
-      <TimePicker onTimePicked={(date: Date) => setCookTime(date.getHours() + ':' + date.getMinutes())} showTimePicker={cookTimePicker} setShowTimePicker={(state: boolean) => setCookTimePicker(state)} />
-
+      <TimePicker
+        onTimePicked={(date: Date) =>
+          setPrepTime(date.getHours() + ':' + date.getMinutes())
+        }
+        showTimePicker={prepTimePicker}
+        setShowTimePicker={(state: boolean) => setPrepTimePicker(state)}
+      />
+      <TimePicker
+        onTimePicked={(date: Date) =>
+          setCookTime(date.getHours() + ':' + date.getMinutes())
+        }
+        showTimePicker={cookTimePicker}
+        setShowTimePicker={(state: boolean) => setCookTimePicker(state)}
+      />
     </View>
   );
 };

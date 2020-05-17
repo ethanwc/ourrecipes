@@ -14,9 +14,7 @@ import {
 var parser = require('ingredients-parser');
 
 export interface createDirectionCardProps {
-  // amount: Number;
-  // ingredient: string;
-  // unit: string;
+  order: Number;
 }
 
 const CreateDirectionCard = (props: createDirectionCardProps) => {
@@ -44,7 +42,7 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
     <View style={createDirectionCardStyle.container}>
       <View style={{flex: 1}}>
         <Input
-          placeholder={'1'}
+          placeholder={props.order.toString()}
           textAlignVertical={'top'}
           editable={false}
           inputStyle={createDirectionCardStyle.step}
@@ -53,7 +51,7 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
       </View>
       <View style={{flex: 4}}>
         <Input
-          placeholder={'Step 1'}
+          placeholder={`Step ${props.order.toString()}`}
           textAlignVertical={'top'}
           multiline={true}
           inputStyle={createDirectionCardStyle.input}

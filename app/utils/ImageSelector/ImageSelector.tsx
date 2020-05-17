@@ -23,10 +23,15 @@ const ImageSelector = (props: imagePickerProps) => {
       width: 400,
       height: 400,
       cropping: true,
-    }).then((image) => {
-      setShowOverlay(false);
-      props.onImageSelected(image);
-    });
+    })
+      .then((image) => {
+        setShowOverlay(false);
+        props.onImageSelected(image);
+      })
+      .catch((error) => {
+        console.log(error);
+        setShowOverlay(false);
+      });
   };
 
   const pickCamera = () => {
@@ -34,10 +39,15 @@ const ImageSelector = (props: imagePickerProps) => {
       width: 400,
       height: 400,
       cropping: true,
-    }).then((image) => {
-      setShowOverlay(false);
-      props.onImageSelected(image);
-    });
+    })
+      .then((image) => {
+        setShowOverlay(false);
+        props.onImageSelected(image);
+      })
+      .catch((error) => {
+        console.log(error);
+        setShowOverlay(false);
+      });
   };
 
   return (

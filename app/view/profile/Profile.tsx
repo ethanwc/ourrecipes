@@ -5,87 +5,8 @@ import Icon from 'react-native-vector-icons/Feather';
 import {View, Animated, Easing, Text, Dimensions} from 'react-native';
 import {Avatar, Button, ListItem} from 'react-native-elements';
 import {SceneMap, TabView} from 'react-native-tab-view';
-
-const list = [
-  {
-    name: 'Amy Farha',
-    avatar_url:
-      'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: 'Vice President',
-  },
-  {
-    name: 'Chris Jackson',
-    avatar_url:
-      'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    subtitle: 'Vice Chairman',
-  },
-];
-
-const settingsTab = (navigation: any) => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: 'black',
-        justifyContent: 'space-between',
-      }}>
-      <View>
-        <ListItem
-          title={'Steve Jobs'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
-          bottomDivider
-        />
-        <ListItem
-          title={'Saved Recipes'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'bookmark', type: 'feather', color: 'white'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
-        />
-        <ListItem
-          title={'Shopping List'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'shopping-bag', type: 'feather', color: 'white'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
-        />
-        <ListItem
-          title={'Meal Planner'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'calendar', type: 'feather', color: 'white'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
-        />
-      </View>
-
-      <View>
-        <ListItem
-          title={'Privacy Policy'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'info', type: 'feather', color: 'white'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
-        />
-
-        <ListItem
-          title={'Settings'}
-          titleStyle={{color: '#F8F8F8', fontFamily: 'Lato-Regular'}}
-          leftIcon={{name: 'settings', type: 'feather', color: 'white'}}
-          containerStyle={{
-            backgroundColor: 'black',
-          }}
-        />
-      </View>
-    </View>
-  );
-};
+import CountsBar from '../../Container/Profile/CountsBar';
+import SettingsTab from '../../Container/Profile/SettingsTab';
 
 const Profile = ({navigation}: any) => {
   const toggleMenu = () => {
@@ -158,11 +79,11 @@ const Profile = ({navigation}: any) => {
       drawerPosition={'right'}
       drawerType={'slide'}
       contentContainerStyle={{
-        backgroundColor: '#1A1A1A',
+        backgroundColor: 'white',
       }}
       overlayColor={'#00000000'}
       edgeWidth={responsiveWidth(20)}
-      renderNavigationView={settingsTab}>
+      renderNavigationView={SettingsTab}>
       {/* <TouchableWithoutFeedback onPress={() => aniamte()} style={{flex: 1}}>
         <View>
           <Animated.View style={animatedStyles} />
@@ -198,48 +119,8 @@ const Profile = ({navigation}: any) => {
               }}
               showAccessory
             />
-            <View
-              style={{
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                flex: 1,
-                marginLeft: 20,
-                marginRight: 10,
-              }}>
-              <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <Text
-                  style={{
-                    color: '#F8F8F8',
-                    fontFamily: 'Lato-Bold',
-                    fontSize: 20,
-                  }}>
-                  11
-                </Text>
-                <Text style={{color: '#F8F8F8'}}>Recipes</Text>
-              </View>
-              <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <Text
-                  style={{
-                    color: '#F8F8F8',
-                    fontFamily: 'Lato-Bold',
-                    fontSize: 20,
-                  }}>
-                  11
-                </Text>
-                <Text style={{color: '#F8F8F8'}}>Recipes</Text>
-              </View>
-              <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <Text
-                  style={{
-                    color: '#F8F8F8',
-                    fontFamily: 'Lato-Bold',
-                    fontSize: 20,
-                  }}>
-                  11
-                </Text>
-                <Text style={{color: '#F8F8F8'}}>Recipes</Text>
-              </View>
-            </View>
+            {/* Recipes and followers information */}
+            <CountsBar />
           </View>
 
           {/* Description Area */}
