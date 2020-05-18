@@ -9,7 +9,7 @@ const Groups = ({navigation}: any) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <Text style={Typography.Typography.header}>todo</Text>
+        <Text style={Typography.Typography.header}>My Groups...</Text>
       </ScrollView>
     </SafeAreaView>
   );

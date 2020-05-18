@@ -10,19 +10,37 @@ import Bookmarks from './view/bookmarks/Bookmarks';
 import Profile from './view/profile/Profile';
 import DetailedRecipe from './Container/Recipe/DetailedRecipe';
 import {Theme} from './assets/styles';
-
-//Explore Navigator
+import Calendar from './view/calendar/Calendar';
 const exploreStack = createStackNavigator();
 
+//Explore Navigator
 function Explore() {
   return (
     <exploreStack.Navigator>
-      <exploreStack.Screen name="ExploreView" component={ExploreView} options={{headerShown: false}} />
+      <exploreStack.Screen
+        name="ExploreView"
+        component={ExploreView}
+        options={{headerShown: false}}
+      />
       <exploreStack.Screen name="Recipe" component={DetailedRecipe} />
+      <exploreStack.Screen name="CreateRecipe" component={Create} />
     </exploreStack.Navigator>
   );
 }
 
+//Account Navigator
+function Account() {
+  return (
+    <exploreStack.Navigator>
+      <exploreStack.Screen
+        name="AccountView"
+        component={Profile}
+        options={{headerShown: false}}
+      />
+      <exploreStack.Screen name="Meal Planner" component={Calendar} />
+    </exploreStack.Navigator>
+  );
+}
 //app tab navigator
 const Tab = createBottomTabNavigator();
 
@@ -51,7 +69,7 @@ export default function App() {
             ),
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Temp-Create"
           component={Create}
           options={{
@@ -59,7 +77,7 @@ export default function App() {
               <Icon name="plus" color={color} size={26} />
             ),
           }}
-        />
+        /> */}
         {/* <Tab.Screen
           name="Bookmarks"
           component={Bookmarks}
@@ -71,7 +89,7 @@ export default function App() {
         /> */}
         <Tab.Screen
           name="Account"
-          component={Profile}
+          component={Account}
           options={{
             tabBarIcon: ({color}) => (
               <Icon name="user" color={color} size={26} />

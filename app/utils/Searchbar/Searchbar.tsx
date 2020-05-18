@@ -47,6 +47,7 @@ const searchBarStyle = StyleSheet.create({
     backgroundColor: Theme.Light.shadow,
     borderRadius: 15,
     marginHorizontal: 5,
+    marginVertical: 5,
   },
   innerContainer: {
     opacity: 0.8,

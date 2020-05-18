@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ListItem } from 'react-native-elements';
-import { Theme, Typography } from '../../assets/styles';
+import {View, StyleSheet} from 'react-native';
+import {ListItem} from 'react-native-elements';
+import {Theme, Typography} from '../../assets/styles';
 
-const SettingsTab = (navigation: any) => {
+const SettingsTab = (props: any) => {
   return (
-    <View
-      style={settingsTabStyle.container}>
+    <View style={settingsTabStyle.container}>
       <View>
         <ListItem
           title={'steve@apple.com'}
@@ -16,19 +15,37 @@ const SettingsTab = (navigation: any) => {
         <ListItem
           title={'Bookmarks'}
           titleStyle={settingsTabStyle.title}
-          leftIcon={{ name: 'bookmark', type: 'feather', color: Theme.Light.headline }}
-          containerStyle={settingsTabStyle.wrapper}
-        />
-        <ListItem
-          title={'Shopping List'}
-          titleStyle={settingsTabStyle.title}
-          leftIcon={{ name: 'shopping-bag', type: 'feather', color: Theme.Light.headline }}
+          leftIcon={{
+            name: 'bookmark',
+            type: 'feather',
+            color: Theme.Light.headline,
+          }}
           containerStyle={settingsTabStyle.wrapper}
         />
         <ListItem
           title={'Meal Planner'}
           titleStyle={settingsTabStyle.title}
-          leftIcon={{ name: 'calendar', type: 'feather', color: Theme.Light.headline }}
+          leftIcon={{
+            name: 'calendar',
+            type: 'feather',
+            color: Theme.Light.headline,
+          }}
+          containerStyle={settingsTabStyle.wrapper}
+          onPress={() =>
+            props.navigation.navigate('Account', {
+              screen: 'Meal Planner',
+              params: {},
+            })
+          }
+        />
+        <ListItem
+          title={'Shopping List'}
+          titleStyle={settingsTabStyle.title}
+          leftIcon={{
+            name: 'shopping-bag',
+            type: 'feather',
+            color: Theme.Light.headline,
+          }}
           containerStyle={settingsTabStyle.wrapper}
         />
       </View>
@@ -37,14 +54,22 @@ const SettingsTab = (navigation: any) => {
         <ListItem
           title={'Privacy Policy'}
           titleStyle={settingsTabStyle.title}
-          leftIcon={{ name: 'info', type: 'feather', color: Theme.Light.headline }}
+          leftIcon={{
+            name: 'info',
+            type: 'feather',
+            color: Theme.Light.headline,
+          }}
           containerStyle={settingsTabStyle.wrapper}
         />
 
         <ListItem
           title={'Settings'}
           titleStyle={settingsTabStyle.title}
-          leftIcon={{ name: 'settings', type: 'feather', color: Theme.Light.headline }}
+          leftIcon={{
+            name: 'settings',
+            type: 'feather',
+            color: Theme.Light.headline,
+          }}
           containerStyle={settingsTabStyle.wrapper}
         />
       </View>
@@ -64,6 +89,6 @@ const settingsTabStyle = StyleSheet.create({
   title: {
     ...Typography.Typography.subheader,
   },
-})
+});
 
 export default SettingsTab;

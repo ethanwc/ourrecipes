@@ -1,20 +1,24 @@
-import React, { useRef } from 'react';
+import React, {useRef} from 'react';
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
-import { View, Text, StyleSheet } from 'react-native';
-import { Avatar, Button, ListItem } from 'react-native-elements';
+import {View, Text, StyleSheet} from 'react-native';
+import {Avatar, Button, ListItem} from 'react-native-elements';
 import CountsBar from '../../Container/Profile/CountsBar';
 import SettingsTab from '../../Container/Profile/SettingsTab';
-import { Theme } from '../../assets/styles';
+import {Theme} from '../../assets/styles';
 import Description from '../../Container/Profile/Description';
 
-const Profile = ({ navigation }: any) => {
+const Profile = (props: any) => {
   const componentRef = useRef<DrawerLayout>(null);
 
   const toggleMenu = () => {
     console.log(componentRef.current?.state);
     componentRef.current?.openDrawer();
+  };
+
+  const SettingsTabWrapper = () => {
+    return <SettingsTab navigation={props.navigation} />;
   };
 
   return (
@@ -28,10 +32,9 @@ const Profile = ({ navigation }: any) => {
       }}
       overlayColor={'#00000000'}
       edgeWidth={responsiveWidth(30)}
-      renderNavigationView={SettingsTab}>
-
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
+      renderNavigationView={SettingsTabWrapper}>
+      <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
           <ListItem
             title={'Steve Jobs'}
             titleStyle={{
@@ -44,7 +47,7 @@ const Profile = ({ navigation }: any) => {
             }}
           />
           {/* Header bar */}
-          <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
+          <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
             <Avatar
               rounded
               size={'large'}
@@ -67,7 +70,7 @@ const Profile = ({ navigation }: any) => {
             size={30}
             color={Theme.Light.headline}
             onPress={() => toggleMenu()}
-            style={{ position: 'absolute', top: 10, right: 10 }}
+            style={{position: 'absolute', top: 10, right: 10}}
           />
         </View>
       </View>
@@ -76,9 +79,7 @@ const Profile = ({ navigation }: any) => {
 };
 
 const profileStyle = StyleSheet.create({
-  container: {
-
-  }
-})
+  container: {},
+});
 
 export default Profile;

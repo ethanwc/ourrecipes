@@ -3,7 +3,6 @@ import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Typography, Theme} from '../../assets/styles';
-import {NavigationProp} from '@react-navigation/native';
 
 export interface recipeCardProps {
   isFirst: boolean;
@@ -35,7 +34,7 @@ const RecipeCard = (props: recipeCardProps) => {
   return (
     <TouchableHighlight
       onPress={() =>
-        props.navigation.navigate('ExploreView', {screen: 'Recipe', params: {}})
+        props.navigation.navigate('Recipes', {screen: 'Recipe', params: {}})
       }
       underlayColor={'transparent'}>
       <View
