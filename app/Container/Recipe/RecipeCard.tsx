@@ -8,6 +8,7 @@ export interface recipeCardProps {
   isFirst: boolean;
   renderAuthor: boolean;
   navigation: any;
+  size: string;
 }
 
 const favoriteIconEmpty = (
@@ -38,13 +39,17 @@ const RecipeCard = (props: recipeCardProps) => {
       }
       underlayColor={'transparent'}>
       <View
+        // style={
+        //   props.isFirst
+        //     ? {...recipeCardStyle.containerLarge, ...recipeCardStyle.containerFirst}
+        //     : recipeCardStyle.containerLarge
+        // }
         style={
-          props.isFirst
-            ? {...recipeCardStyle.container, ...recipeCardStyle.containerFirst}
-            : recipeCardStyle.container
-        }>
+          props.size === 'small' ? recipeCardStyle.containerSmall : recipeCardStyle.containerLarge
+        }
+        >
         <Image
-          style={recipeCardStyle.image}
+          style={props.size === 'small' ? recipeCardStyle.imageSmall : recipeCardStyle.imageLarge}
           source={require('../../assets/images/food.jpg')}
         />
         {favoriteIcon}
@@ -99,8 +104,13 @@ const recipeCardStyle = StyleSheet.create({
   containerFirst: {
     marginLeft: 10,
   },
-  container: {
+  containerSmall: {
     width: responsiveWidth(75),
+    marginRight: 10,
+    backgroundColor: Theme.Light.shadow,
+  },
+  containerLarge: {
+    width: responsiveWidth(100),
     marginRight: 10,
     backgroundColor: Theme.Light.shadow,
   },
@@ -111,9 +121,15 @@ const recipeCardStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  image: {
+  imageSmall: {
     width: responsiveWidth(75),
     height: responsiveWidth(45),
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+  },
+  imageLarge: {
+    width: responsiveWidth(100),
+    height: responsiveWidth(65),
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
   },

@@ -21,7 +21,7 @@ const Recipes = (props: recipesProps) => {
         horizontal
         data={DATA}
         renderItem={({item, index}) => (
-          <RecipeCard isFirst={index === 0} renderAuthor={props.renderAuthor} navigation={props.navigation} />
+          <RecipeCard isFirst={index === 0} renderAuthor={props.renderAuthor} navigation={props.navigation} size={'small'}/>
         )}
         keyExtractor={(item) => item.title}
         decelerationRate={0.798}
