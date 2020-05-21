@@ -1,15 +1,16 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, Text, StyleSheet} from 'react-native';
+import ShoppingList from '../../Component/ShoppingList/ShoppingList';
 import {Typography} from '../../assets/styles';
 
 /**
  * Shoppinglist page of app
  */
-const ShoppingList = ({navigation}: any) => {
+const ShoppingListView = ({navigation}: any) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <Text style={Typography.Typography.header}>shoppinglist todo</Text>
+        <ShoppingList/>
       </ScrollView>
     </SafeAreaView>
   );
@@ -21,4 +22,4 @@ const shoppingListStyle = StyleSheet.create({
   },
 });
 
-export default ShoppingList;
+export default ShoppingListView;

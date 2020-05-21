@@ -5,11 +5,11 @@ import {Typography} from '../../assets/styles';
 /**
  * Bookmarks page of app
  */
-const Bookmarks = ({navigation}: any) => {
+const BookmarkView = ({navigation}: any) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <Text style={Typography.Typography.header}>bookmarks todo</Text>
+        <Text>bookmark todo</Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -21,4 +21,4 @@ const bookmarksStyle = StyleSheet.create({
   },
 });
 
-export default Bookmarks;
+export default BookmarkView;

@@ -33,6 +33,7 @@
     "react-native-image-crop-picker": "^0.31.1",
     "react-native-image-picker": "^2.3.1",
     "react-native-material-textfield": "^0.16.1",
+    "react-native-popup-menu": "^0.15.7",
     "react-native-reanimated": "^1.8.0",
     "react-native-responsive-dimensions": "^3.1.1",
     "react-native-safe-area-context": "^0.7.3",

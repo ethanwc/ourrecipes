@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListItem } from 'react-native-elements'
+import { ListItem, Icon } from 'react-native-elements'
 import { Theme, Typography } from '../../assets/styles';
 
 export interface groupCardProps {
@@ -8,7 +8,9 @@ export interface groupCardProps {
     navigation: any;
 }
 
+
 const GroupCard = (props: groupCardProps) => {
+    const settingsIcon = <Icon type={'feather'} color={Theme.Light.caption} name={'more-vertical'} onPress={() => console.log('set p ')} />;
     return (
         <ListItem
             onPress={() => props.navigation.navigate('Group', { screen: 'Group', params: {} })}
@@ -17,11 +19,7 @@ const GroupCard = (props: groupCardProps) => {
             subtitle={'10 members'}
             subtitleStyle={Typography.Typography.bodyflat}
             bottomDivider
-            rightIcon={{
-                name: 'more-vertical',
-                type: 'feather',
-                color: Theme.Light.caption,
-            }}
+            rightIcon={settingsIcon}
         />
     )
 }

@@ -11,8 +11,8 @@ import Create from './view/create/Create';
 import Profile from './view/profile/Profile';
 import DetailedRecipe from './Container/Recipe/DetailedRecipe';
 import Calendar from './view/calendar/Calendar';
-import ShoppingList from './view/shoppinglist/ShoppingList';
-import Bookmarks from './view/bookmarks/Bookmarks';
+import ShoppingListView from './view/shoppinglist/ShoppingListView';
+import BookmarkView from './view/Bookmark/BookmarkView';
 
 const exploreStack = createStackNavigator();
 
@@ -54,9 +54,9 @@ function Account() {
         component={Profile}
         options={{ headerShown: false }}
       />
-      <exploreStack.Screen name="Bookmarks" component={Bookmarks} />
+      <exploreStack.Screen name="Bookmarks" component={BookmarkView} />
       <exploreStack.Screen name="Meal Planner" component={Calendar} />
-      <exploreStack.Screen name="Shopping List" component={ShoppingList} />
+      <exploreStack.Screen name="Shopping List" component={ShoppingListView} />
     </exploreStack.Navigator>
   );
 }

@@ -19,7 +19,6 @@ const Groups = ({ navigation }: any) => {
     <SafeAreaView>
       <ScrollView>
         {/* Call react naitve popup menu */}
-
         {/* Navbar with back button, group name, members button, options button  */}
         <View style={groupsStyle.container}>
           <GroupCards navigation={navigation} />
