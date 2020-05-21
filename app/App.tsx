@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Theme } from './assets/styles';
 import Icon from 'react-native-vector-icons/Feather';
 import ExploreView from './view/explore/ExploreView';
 import GroupView from './view/groups/GroupView';
@@ -9,8 +10,10 @@ import Group from './Component/Group/Group';
 import Create from './view/create/Create';
 import Profile from './view/profile/Profile';
 import DetailedRecipe from './Container/Recipe/DetailedRecipe';
-import { Theme } from './assets/styles';
 import Calendar from './view/calendar/Calendar';
+import ShoppingList from './view/shoppinglist/ShoppingList';
+import Bookmarks from './view/bookmarks/Bookmarks';
+
 const exploreStack = createStackNavigator();
 
 //Explore Navigator
@@ -28,20 +31,6 @@ function Explore() {
   );
 }
 
-//Account Navigator
-function Account() {
-  return (
-    <exploreStack.Navigator>
-      <exploreStack.Screen
-        name="AccountView"
-        component={Profile}
-        options={{ headerShown: false }}
-      />
-      <exploreStack.Screen name="Meal Planner" component={Calendar} />
-    </exploreStack.Navigator>
-  );
-}
-
 //Groups Navigator
 function Groups() {
   return (
@@ -52,6 +41,22 @@ function Groups() {
         options={{ headerShown: false }}
       />
       <exploreStack.Screen name="Group" component={Group} />
+    </exploreStack.Navigator>
+  );
+}
+
+//Account Navigator
+function Account() {
+  return (
+    <exploreStack.Navigator>
+      <exploreStack.Screen
+        name="AccountView"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
+      <exploreStack.Screen name="Bookmarks" component={Bookmarks} />
+      <exploreStack.Screen name="Meal Planner" component={Calendar} />
+      <exploreStack.Screen name="Shopping List" component={ShoppingList} />
     </exploreStack.Navigator>
   );
 }

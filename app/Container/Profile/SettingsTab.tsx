@@ -21,6 +21,12 @@ const SettingsTab = (props: any) => {
             color: Theme.Light.headline,
           }}
           containerStyle={settingsTabStyle.wrapper}
+          onPress={() =>
+            props.navigation.navigate('Account', {
+              screen: 'Bookmarks',
+              params: {},
+            })
+          }
         />
         <ListItem
           title={'Meal Planner'}
@@ -47,6 +53,12 @@ const SettingsTab = (props: any) => {
             color: Theme.Light.headline,
           }}
           containerStyle={settingsTabStyle.wrapper}
+          onPress={() =>
+            props.navigation.navigate('Account', {
+              screen: 'Shopping List',
+              params: {},
+            })
+          }
         />
       </View>
 
