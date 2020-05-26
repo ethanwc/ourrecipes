@@ -2,13 +2,15 @@ import React, {useRef} from 'react';
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {Avatar, Button, ListItem} from 'react-native-elements';
 import CountsBar from '../../Container/Profile/CountsBar';
 import SettingsTab from '../../Container/Profile/SettingsTab';
-import {Theme} from '../../assets/styles';
-import Description from '../../Container/Profile/Description';
+import {Theme, Typography} from '../../assets/styles';
+import ProfileInfo from '../../Container/Profile/ProfileInfo';
+import ProfileBrowser from '../../Component/Profile/ProfileBrowser';
 
+//Profile view of the app
 const Profile = (props: any) => {
   const componentRef = useRef<DrawerLayout>(null);
 
@@ -31,53 +33,36 @@ const Profile = (props: any) => {
         backgroundColor: Theme.Light.shadow,
       }}
       overlayColor={'#00000000'}
-      edgeWidth={responsiveWidth(30)}
+      edgeWidth={responsiveWidth(15)}
       renderNavigationView={SettingsTabWrapper}>
       <View style={{flex: 1}}>
         <View style={{flex: 1}}>
           <ListItem
-            title={'Steve Jobs'}
-            titleStyle={{
-              color: Theme.Light.headline,
-              fontFamily: 'Lato-Black',
-              fontSize: 20,
-            }}
             containerStyle={{
               backgroundColor: Theme.Light.background,
             }}
           />
           {/* Header bar */}
-          <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
-            <Avatar
-              rounded
-              size={'large'}
-              source={{
-                uri:
-                  'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-              }}
-              showAccessory
-            />
-            {/* Recipes and followers information */}
-            <CountsBar />
-          </View>
-
-          {/* Description Area */}
-          <Description />
-
-          {/* Render menu icon button last */}
-          <Icon
-            name={'menu'}
-            size={30}
-            color={Theme.Light.headline}
-            onPress={() => toggleMenu()}
-            style={{position: 'absolute', top: 10, right: 10}}
-          />
+          <ProfileInfo />
+          {/* Recipes and followers information */}
+          <CountsBar />
         </View>
+        <View style={{flex: 2}}>
+          {/* Tab view for recipes, photos, and reviews */}
+          <ProfileBrowser />
+        </View>
+        {/* Render menu icon button last */}
+        <Icon
+          name={'menu'}
+          size={30}
+          color={Theme.Light.headline}
+          onPress={() => toggleMenu()}
+          style={{position: 'absolute', top: 10, right: 10}}
+        />
       </View>
     </DrawerLayout>
   );
 };
-
 const profileStyle = StyleSheet.create({
   container: {},
 });

@@ -7,7 +7,6 @@ import {
   Text,
   Dimensions,
   Vibration,
-  Platform,
 } from 'react-native';
 import {Image, ListItem, Button} from 'react-native-elements';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
@@ -17,22 +16,11 @@ import FollowCard from './FollowCard';
 import IngredientCard from './IngredientCard';
 import DirectionCard from './DirectionCard';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import NutritionCard from './NutritionCard';
 import ReviewCard from './ReviewCard';
-import {TouchableHighlight} from 'react-native-gesture-handler';
 import RatingCard from './RatingCard';
 import Share from 'react-native-share';
 import CreateReview from '../../Component/Review/CreateReview';
-const FirstRoute = () => {
-  return (
-    <View>
-      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
-      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
-      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
-    </View>
-  );
-};
 
 //custom tab bar
 const renderTabBar = (props: any) => (
@@ -52,6 +40,16 @@ const renderTabBar = (props: any) => (
     )}
   />
 );
+
+const FirstRoute = () => {
+  return (
+    <View>
+      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
+      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
+      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
+    </View>
+  );
+};
 
 const SecondRoute = () => {
   return (
@@ -268,7 +266,7 @@ const DetailedRecipe = ({navigation}: any) => {
               borderColor: Theme.Light.caption,
             }}
           />
-          <CreateReview/>
+          <CreateReview />
         </View>
       </ScrollView>
     </SafeAreaView>

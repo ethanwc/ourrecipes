@@ -17,7 +17,11 @@ export const Typography = StyleSheet.create({
     fontFamily: 'Lato-Bold',
     fontSize: 16,
   },
-  headline: {},
+  headline: {
+    color: Light.headline,
+    fontFamily: 'Lato-Regular',
+    fontSize: 16,
+  },
   subheadline: {
     color: Light.caption,
     fontFamily: 'Lato-Bold',

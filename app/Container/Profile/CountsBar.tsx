@@ -23,7 +23,7 @@ const CountsBar = () => {
 
 const countsBarStyle = StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     flexDirection: 'row',
     flex: 1,
     marginLeft: 20,
@@ -32,13 +32,15 @@ const countsBarStyle = StyleSheet.create({
   wrapper: {
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   count: {
-    ...Typography.Typography.header,
+    ...Typography.Typography.headerflat,
     color: Theme.Light.caption,
+    marginRight: 5,
   },
   description: {
-    ...Typography.Typography.subheader,
+    ...Typography.Typography.body,
     color: Theme.Light.headline,
   },
 });
