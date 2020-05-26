@@ -23,6 +23,7 @@ import ReviewCard from './ReviewCard';
 import {TouchableHighlight} from 'react-native-gesture-handler';
 import RatingCard from './RatingCard';
 import Share from 'react-native-share';
+import CreateReview from '../../Component/Review/CreateReview';
 const FirstRoute = () => {
   return (
     <View>
@@ -267,6 +268,7 @@ const DetailedRecipe = ({navigation}: any) => {
               borderColor: Theme.Light.caption,
             }}
           />
+          <CreateReview/>
         </View>
       </ScrollView>
     </SafeAreaView>
