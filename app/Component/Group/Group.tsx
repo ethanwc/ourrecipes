@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-import RecipeCard from '../../Container/Recipe/RecipeCard'
+import LargeRecipeCard from '../../Container/Recipe/LargeRecipeCard'
 
 const DATA = [
     { title: 'steve' },
@@ -20,7 +20,7 @@ const Group = (props: groupProps) => {
             <FlatList
                 data={DATA}
                 renderItem={({ item, index }) => (
-                    <RecipeCard isFirst={index === 0} renderAuthor={true} navigation={props.navigation} size={'large'} />
+                    <LargeRecipeCard isFirst={index === 0} renderAuthor={true} navigation={props.navigation} size={'large'} />
                 )}
                 keyExtractor={(item) => item.title}
                 decelerationRate={0.798}

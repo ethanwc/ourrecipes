@@ -65,10 +65,7 @@ const RecipeCard = (props: recipeCardProps) => {
 
           {/* Dot inbetween categories */}
           <View style={recipeCardStyle.dot} />
-
-          <Text style={Typography.lightThemeText.bodyUnimportantText}>
-            Korean BBQ
-          </Text>
+          <Text style={Typography.lightThemeText.bodyUnimportantText}>Korean BBQ</Text>
         </View>
         {/* Recipe Author, Reviews */}
         <View

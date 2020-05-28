@@ -21,7 +21,7 @@ const MiniRecipeCard = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-          <Text style={Typography.Typography.bodyflat}>4.4k Reviews</Text>
+        <Text style={Typography.Typography.bodyflat}>4.4k Reviews</Text>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Text style={Typography.Typography.bodyflat}>4.9</Text>
           <Icon name="star" style={{color: 'gold', marginLeft: 5}} size={20} />
@@ -45,4 +45,4 @@ const miniRecipeCardStyle = StyleSheet.create({
     borderRadius: 5,
   },
 });
-export default MiniRecipeCard; 
+export default MiniRecipeCard;

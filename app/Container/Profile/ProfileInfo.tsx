@@ -32,6 +32,7 @@ const profileInfoStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
     paddingHorizontal: 15,
+    marginTop: 15,
   },
   wrapper: {
     marginTop: 5,

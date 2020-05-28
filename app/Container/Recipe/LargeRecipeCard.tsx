@@ -4,8 +4,7 @@ import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Typography, Theme} from '../../assets/styles';
 
-export interface recipeCardProps {
-  isFirst: boolean;
+export interface largeRecipeCardProps {
   renderAuthor: boolean;
   navigation: any;
   size: string;
@@ -31,7 +30,7 @@ const favoriteIconFilled = (
 
 const favoriteIcon = favoriteIconFilled;
 
-const RecipeCard = (props: recipeCardProps) => {
+const LargeRecipeCard = (props: largeRecipeCardProps) => {
   return (
     <TouchableHighlight
       onPress={() =>
@@ -39,26 +38,24 @@ const RecipeCard = (props: recipeCardProps) => {
       }
       underlayColor={'transparent'}>
       <View
-        style={
-          props.isFirst
-            ? {...recipeCardStyle.container, ...recipeCardStyle.containerFirst}
-            : recipeCardStyle.container
-        }>
+        style={largeRecipeCardStyle.container}
+        // style={
+        //   props.size === 'small'
+        //     ? recipeCardStyle.containerSmall
+        //     : recipeCardStyle.containerLarge
+        // }
+      >
         <Image
-          style={
-            props.size === 'small'
-              ? recipeCardStyle.images
-              : recipeCardStyle.images
-          }
+          style={largeRecipeCardStyle.image}
           source={require('../../assets/images/food.jpg')}
         />
         {favoriteIcon}
-        <View style={recipeCardStyle.textContainer}>
+        <View style={largeRecipeCardStyle.textContainer}>
           {/* Recipe Name */}
           <Text style={Typography.Typography.subheader}>Chicken Pot Pie</Text>
           {/* Recipe cook time, category */}
-          <View style={recipeCardStyle.horizontalRow}>
-            <View style={recipeCardStyle.horizontalRow}>
+          <View style={largeRecipeCardStyle.horizontalRow}>
+            <View style={largeRecipeCardStyle.horizontalRow}>
               <Icon
                 name="clock-o"
                 size={20}
@@ -69,20 +66,20 @@ const RecipeCard = (props: recipeCardProps) => {
             </View>
 
             {/* Dot inbetween categories */}
-            <View style={recipeCardStyle.dot} />
+            <View style={largeRecipeCardStyle.dot} />
 
             <Text style={Typography.Typography.body}>Korean BBQ</Text>
           </View>
           {/* Recipe Author, Reviews */}
           <View
             style={{
-              ...recipeCardStyle.horizontalRow,
+              ...largeRecipeCardStyle.horizontalRow,
               justifyContent: 'space-between',
             }}>
             {props.renderAuthor ? (
               <Text style={Typography.Typography.subheadline}>Debra Boydd</Text>
             ) : null}
-            <View style={recipeCardStyle.horizontalRow}>
+            <View style={largeRecipeCardStyle.horizontalRow}>
               <Icon
                 name="star"
                 style={{color: 'gold', marginRight: 5}}
@@ -97,12 +94,12 @@ const RecipeCard = (props: recipeCardProps) => {
   );
 };
 
-const recipeCardStyle = StyleSheet.create({
+const largeRecipeCardStyle = StyleSheet.create({
   containerFirst: {
     marginLeft: 10,
   },
   container: {
-    width: responsiveWidth(75),
+    width: responsiveWidth(100),
     marginRight: 10,
     backgroundColor: Theme.Light.shadow,
   },
@@ -113,9 +110,9 @@ const recipeCardStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  images: {
-    width: responsiveWidth(75),
-    height: responsiveWidth(45),
+  image: {
+    width: responsiveWidth(100),
+    height: responsiveWidth(65),
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
   },
@@ -128,4 +125,4 @@ const recipeCardStyle = StyleSheet.create({
   },
 });
 
-export default RecipeCard;
+export default LargeRecipeCard;
