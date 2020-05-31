@@ -3,9 +3,15 @@ import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Button} from 'react-native-elements';
 import {Theme, Typography} from '../../assets/styles';
 
-const FollowCard = () => {
+export interface followerCardProps {
+  // followerName: string;
+  // followerImage: string;
+  isFollowing: boolean;
+}
+
+const FollowerCard = (props: followerCardProps) => {
   return (
-    <View style={followCardStyle.container}>
+    <View style={follerCardStyleStyle.container}>
       <View
         style={{
           flexDirection: 'row',
@@ -14,7 +20,7 @@ const FollowCard = () => {
         }}>
         <Avatar
           rounded
-          size={'large'}
+          size={'medium'}
           source={{
             uri:
               'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
@@ -29,14 +35,14 @@ const FollowCard = () => {
       </View>
 
       <Button
-        title="Follow"
+        title={props.isFollowing ? 'Following' : 'Follow'}
         titleStyle={{
           ...Typography.Typography.subheader,
           color: Theme.Light.shadow,
         }}
         buttonStyle={{
           backgroundColor: 'orange',
-          paddingHorizontal: 25,
+          paddingHorizontal: 15,
           borderRadius: 5,
         }}
       />
@@ -44,16 +50,16 @@ const FollowCard = () => {
   );
 };
 
-const followCardStyle = StyleSheet.create({
+const follerCardStyleStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 15,
+    padding: 10,
     backgroundColor: Theme.Light.shadow,
     borderBottomWidth: 0.3,
     borderBottomColor: Theme.Light.body,
   },
 });
 
-export default FollowCard;
+export default FollowerCard;

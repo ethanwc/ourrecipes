@@ -13,6 +13,7 @@ import DetailedRecipe from './Container/Recipe/DetailedRecipe';
 import Calendar from './view/calendar/Calendar';
 import ShoppingListView from './view/shoppinglist/ShoppingListView';
 import BookmarkView from './view/Bookmark/BookmarkView';
+import Followers from './Component/Profile/Followers';
 
 const exploreStack = createStackNavigator();
 
@@ -57,6 +58,7 @@ function Account() {
       <exploreStack.Screen name="Bookmarks" component={BookmarkView} />
       <exploreStack.Screen name="Meal Planner" component={Calendar} />
       <exploreStack.Screen name="Shopping List" component={ShoppingListView} />
+      <exploreStack.Screen name="Followers" component={Followers} />
     </exploreStack.Navigator>
   );
 }

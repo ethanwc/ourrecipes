@@ -1,18 +1,27 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {Theme, Typography} from '../../assets/styles';
 
-const CountsBar = () => {
+const CountsBar = (props: any) => {
   return (
     <View style={countsBarStyle.container}>
       <View style={countsBarStyle.wrapper}>
         <Text style={countsBarStyle.count}>11</Text>
         <Text style={countsBarStyle.description}>Recipes</Text>
       </View>
-      <View style={countsBarStyle.wrapper}>
-        <Text style={countsBarStyle.count}>23</Text>
-        <Text style={countsBarStyle.description}>Followers</Text>
-      </View>
+      <TouchableWithoutFeedback
+        onPress={() =>
+          props.navigation.navigate('Account', {
+            screen: 'Followers',
+            params: {},
+          })
+        }>
+        <View style={countsBarStyle.wrapper}>
+          <Text style={countsBarStyle.count}>23</Text>
+          <Text style={countsBarStyle.description}>Followers</Text>
+        </View>
+      </TouchableWithoutFeedback>
+
       <View style={countsBarStyle.wrapper}>
         <Text style={countsBarStyle.count}>33</Text>
         <Text style={countsBarStyle.description}>Following</Text>

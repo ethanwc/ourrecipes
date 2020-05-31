@@ -12,7 +12,7 @@ import {Image, ListItem, Button} from 'react-native-elements';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme, Typography} from '../../assets/styles';
-import FollowCard from './FollowCard';
+import FollowCard from '../Profile/FollowerCard';
 import IngredientCard from './IngredientCard';
 import DirectionCard from './DirectionCard';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';

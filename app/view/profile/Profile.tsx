@@ -45,7 +45,7 @@ const Profile = (props: any) => {
           {/* Header bar */}
           <ProfileInfo />
           {/* Recipes and followers information */}
-          <CountsBar />
+          <CountsBar navigation={props.navigation}/>
         </View>
         <View style={{flex: 2}}>
           {/* Tab view for recipes, photos, and reviews */}
