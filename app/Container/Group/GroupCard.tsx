@@ -1,7 +1,13 @@
 import React from 'react'
-import { ListItem, Icon } from 'react-native-elements'
+import { ListItem, Icon, Text } from 'react-native-elements'
 import { Theme, Typography } from '../../assets/styles';
-
+import {
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+} from 'react-native-popup-menu';
+import { View } from 'react-native';
 export interface groupCardProps {
     // groupName: string;
     // membersCount: number;
@@ -10,7 +16,19 @@ export interface groupCardProps {
 
 
 const GroupCard = (props: groupCardProps) => {
-    const settingsIcon = <Icon type={'feather'} color={Theme.Light.caption} name={'more-vertical'} onPress={() => console.log('set p ')} />;
+    const settingsIcon =
+        <View>
+            <Menu>
+                <MenuTrigger><Icon name={'more-vertical'} type={'feather'} color={Theme.Light.caption} /></MenuTrigger>
+                <MenuOptions>
+                    <MenuOption onSelect={() => console.log(`Save`)} text='Save' />
+                    <MenuOption onSelect={() => console.log(`Delete`)} >
+                        <Text style={{ color: 'red' }}>Delete</Text>
+                    </MenuOption>
+                    <MenuOption onSelect={() => console.log(`Not called`)} disabled={true} text='Disabled' />
+                </MenuOptions>
+            </Menu>
+        </View>;
     return (
         <ListItem
             onPress={() => props.navigation.navigate('Group', { screen: 'Group', params: {} })}

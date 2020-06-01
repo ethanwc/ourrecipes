@@ -2,6 +2,8 @@ import React from 'react'
 import { View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import LargeRecipeCard from '../../Container/Recipe/LargeRecipeCard'
+import Icon from 'react-native-vector-icons/Feather';
+import { Theme } from '../../assets/styles';
 
 const DATA = [
     { title: 'steve' },
@@ -15,12 +17,23 @@ export interface groupProps {
 }
 
 const Group = (props: groupProps) => {
+    props.navigation.setOptions({
+        headerShown: true,
+        headerTitle: 'Rielhouse',
+        headerRight: () => <Icon
+            name={'user'}
+            size={30}
+            color={Theme.Light.headline}
+            style={{ marginRight: 10 }}
+            onPress={() => console.log('group users...')}
+        />,
+    });
     return (
         <View>
             <FlatList
                 data={DATA}
                 renderItem={({ item, index }) => (
-                    <LargeRecipeCard isFirst={index === 0} renderAuthor={true} navigation={props.navigation} size={'large'} />
+                    <LargeRecipeCard renderAuthor={true} navigation={props.navigation} size={'large'} />
                 )}
                 keyExtractor={(item) => item.title}
                 decelerationRate={0.798}

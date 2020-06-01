@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View, Text } from 'react-native';
 import GroupCards from '../../Component/Group/GroupCards';
 
 
@@ -14,6 +14,8 @@ const Groups = ({ navigation }: any) => {
     { title: 'is' },
     { title: 'dead' },
   ];
+
+
 
   return (
     <SafeAreaView>

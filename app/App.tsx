@@ -2,6 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MenuProvider } from 'react-native-popup-menu';
+
 import { Theme } from './assets/styles';
 import Icon from 'react-native-vector-icons/Feather';
 import ExploreView from './view/explore/ExploreView';
@@ -71,27 +73,28 @@ const Tab = createBottomTabNavigator();
  */
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator tabBarOptions={{ activeTintColor: Theme.Light.caption }}>
-        <Tab.Screen
-          name="Recipes"
-          component={Explore}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Icon name="search" color={color} size={26} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Groups"
-          component={Groups}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Icon name="users" color={color} size={26} />
-            ),
-          }}
-        />
-        {/* <Tab.Screen
+    <MenuProvider>
+      <NavigationContainer>
+        <Tab.Navigator tabBarOptions={{ activeTintColor: Theme.Light.caption }}>
+          <Tab.Screen
+            name="Recipes"
+            component={Explore}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Icon name="search" color={color} size={26} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Groups"
+            component={Groups}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Icon name="users" color={color} size={26} />
+              ),
+            }}
+          />
+          {/* <Tab.Screen
           name="Temp-Create"
           component={Create}
           options={{
@@ -100,7 +103,7 @@ export default function App() {
             ),
           }}
         /> */}
-        {/* <Tab.Screen
+          {/* <Tab.Screen
           name="Bookmarks"
           component={Bookmarks}
           options={{
@@ -109,16 +112,17 @@ export default function App() {
             ),
           }}
         /> */}
-        <Tab.Screen
-          name="Account"
-          component={Account}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Icon name="user" color={color} size={26} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+          <Tab.Screen
+            name="Account"
+            component={Account}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Icon name="user" color={color} size={26} />
+              ),
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </MenuProvider>
   );
 }
