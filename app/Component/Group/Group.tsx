@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import LargeRecipeCard from '../../Container/Recipe/LargeRecipeCard'
 import Icon from 'react-native-vector-icons/Feather';
 import { Theme } from '../../assets/styles';
+import GroupMembers from '../../Container/Group/GroupMembers';
 
 const DATA = [
     { title: 'steve' },
@@ -17,6 +18,8 @@ export interface groupProps {
 }
 
 const Group = (props: groupProps) => {
+    const [isDisplayed, setIsDisplayed] = useState(false);
+    
     props.navigation.setOptions({
         headerShown: true,
         headerTitle: 'Rielhouse',
@@ -25,11 +28,12 @@ const Group = (props: groupProps) => {
             size={30}
             color={Theme.Light.headline}
             style={{ marginRight: 10 }}
-            onPress={() => console.log('group users...')}
+            onPress={() => setIsDisplayed(!isDisplayed)}
         />,
     });
     return (
         <View>
+            <GroupMembers isDisplayed={isDisplayed} toggleOverlay={() => setIsDisplayed(!isDisplayed)}/>
             <FlatList
                 data={DATA}
                 renderItem={({ item, index }) => (
