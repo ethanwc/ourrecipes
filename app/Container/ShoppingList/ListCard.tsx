@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { ListItem, Icon } from 'react-native-elements'
 import { Theme, Typography } from '../../assets/styles';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { Menu, MenuTrigger, MenuOptions, MenuOption } from 'react-native-popup-menu';
 
 export interface listCardProps {
     // ingredient: string;
@@ -12,8 +13,21 @@ export interface listCardProps {
 //todo: edit, sort
 //swipe to delete
 const ListCard = (props: listCardProps) => {
+
+    const verticalIcon =
+        <View>
+            <Menu>
+                <MenuTrigger><Icon name={'more-vertical'} type={'feather'} color={Theme.Light.caption} /></MenuTrigger>
+                <MenuOptions optionsContainerStyle={{ width: 'auto' }}>
+                    <MenuOption onSelect={() => console.log(`Delete`)} >
+                        <Text style={Typography.Typography.subheader}>Delete Item</Text>
+                    </MenuOption>
+                </MenuOptions>
+            </Menu>
+        </View>;
+
+
     const [isChecked, setIsChecked] = useState(props.checked)
-    const settingsIcon = <Icon type={'feather'} color={Theme.Light.caption} name={'more-vertical'} onPress={() => console.log('set p ')} />;
     const checkbox = <Icon type={'feather'} color={Theme.Light.caption} name={isChecked ? 'check-square' : 'square'} onPress={() => setIsChecked(!isChecked)} />
     return <ListItem
         title={'Eggs'}
@@ -22,7 +36,7 @@ const ListCard = (props: listCardProps) => {
         titleStyle={isChecked ? listCardStyle.checkedtext : listCardStyle.uncheckedtext}
         bottomDivider
         leftIcon={checkbox}
-        rightIcon={settingsIcon}
+        rightIcon={verticalIcon}
     />
 }
 

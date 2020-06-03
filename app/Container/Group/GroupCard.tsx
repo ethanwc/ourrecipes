@@ -1,31 +1,32 @@
 import React from 'react'
+import { View } from 'react-native';
 import { ListItem, Icon, Text } from 'react-native-elements'
-import { Theme, Typography } from '../../assets/styles';
 import {
     Menu,
     MenuOptions,
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import { View } from 'react-native';
+import { Theme, Typography } from '../../assets/styles';
+
 export interface groupCardProps {
     // groupName: string;
     // membersCount: number;
     navigation: any;
 }
 
-
 const GroupCard = (props: groupCardProps) => {
-    const settingsIcon =
+    const verticalIcon =
         <View>
             <Menu>
                 <MenuTrigger><Icon name={'more-vertical'} type={'feather'} color={Theme.Light.caption} /></MenuTrigger>
                 <MenuOptions>
-                    <MenuOption onSelect={() => console.log(`Save`)} text='Save' />
                     <MenuOption onSelect={() => console.log(`Delete`)} >
-                        <Text style={{ color: 'red' }}>Delete</Text>
+                        <Text style={Typography.Typography.subheader}>Invite Members</Text>
                     </MenuOption>
-                    <MenuOption onSelect={() => console.log(`Not called`)} disabled={true} text='Disabled' />
+                    <MenuOption onSelect={() => console.log(`Delete`)} >
+                        <Text style={Typography.Typography.subheader}>Leave Group</Text>
+                    </MenuOption>
                 </MenuOptions>
             </Menu>
         </View>;
@@ -37,7 +38,7 @@ const GroupCard = (props: groupCardProps) => {
             subtitle={'10 members'}
             subtitleStyle={Typography.Typography.bodyflat}
             bottomDivider
-            rightIcon={settingsIcon}
+            rightIcon={verticalIcon}
         />
     )
 }

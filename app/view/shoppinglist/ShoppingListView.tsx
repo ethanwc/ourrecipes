@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, Text, StyleSheet} from 'react-native';
+import {SafeAreaView, ScrollView, Text, StyleSheet, View} from 'react-native';
 import ShoppingList from '../../Component/ShoppingList/ShoppingList';
 import {Typography} from '../../assets/styles';
 
@@ -8,11 +8,7 @@ import {Typography} from '../../assets/styles';
  */
 const ShoppingListView = ({navigation}: any) => {
   return (
-    <SafeAreaView>
-      <ScrollView>
         <ShoppingList/>
-      </ScrollView>
-    </SafeAreaView>
   );
 };
 
