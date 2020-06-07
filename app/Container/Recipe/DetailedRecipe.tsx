@@ -41,7 +41,7 @@ const renderTabBar = (props: any) => (
   />
 );
 
-const FirstRoute = () => {
+const Ingredients = () => {
   return (
     <View>
       <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
@@ -51,7 +51,7 @@ const FirstRoute = () => {
   );
 };
 
-const SecondRoute = () => {
+const Directions = () => {
   return (
     <View>
       <DirectionCard order={1} direction={'Preheat oven to 350F'} />
@@ -119,8 +119,8 @@ const DetailedRecipe = ({navigation}: any) => {
   ]);
 
   const renderScene = SceneMap({
-    first: FirstRoute,
-    second: SecondRoute,
+    first: Ingredients,
+    second: Directions,
   });
 
   const initialLayout = {width: Dimensions.get('window').width};
@@ -137,18 +137,19 @@ const DetailedRecipe = ({navigation}: any) => {
           <View
             style={{
               flexDirection: 'row',
+              justifyContent: 'space-between',
               position: 'absolute',
+              left: 0,
+              right: 0,
               bottom: 0,
-              backgroundColor: Theme.Light.background,
-              opacity: 0.6,
             }}>
             <View
               style={{
                 flex: 1,
+                zIndex: 1,
                 alignItems: 'center',
-                opacity: 1,
-                paddingVertical: 5,
-                borderRightColor: 'gray',
+                opacity: 2,
+                borderRightColor: Theme.Light.caption,
                 borderRightWidth: 1,
               }}>
               <Icon name="clock" size={30} color={Theme.Light.caption} />
@@ -164,9 +165,28 @@ const DetailedRecipe = ({navigation}: any) => {
             <View
               style={{
                 flex: 1,
+                zIndex: 1,
+                alignItems: 'center',
+                opacity: 2,
+                borderRightColor: Theme.Light.caption,
+                borderRightWidth: 1,
+              }}>
+              <Icon name="users" size={30} color={Theme.Light.caption} />
+              <Text
+                style={{
+                  ...Typography.Typography.body,
+                  color: Theme.Light.caption,
+                  marginTop: 5,
+                }}>
+                Serves 4
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
                 alignItems: 'center',
                 opacity: 1,
-                paddingVertical: 5,
+                zIndex: 1,
               }}>
               <Icon name="info" size={30} color={Theme.Light.caption} />
               <Text
@@ -178,49 +198,24 @@ const DetailedRecipe = ({navigation}: any) => {
                 514 kcal
               </Text>
             </View>
-          </View>
-          {/* <Icon
-            name="heart"
-            size={30}
-            color={'red'}
-            style={{position: 'absolute', right: 10, top: 10}}
-          /> */}
-          {/* Action Icons */}
-          {/* <View
-            style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              justifyContent: 'center',
-              padding: 15,
-            }}>
+
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}>
-              <Icon
-                name={'arrow-left'}
-                size={30}
-                color={Theme.Light.headline}
-                onPress={() => navigation.goBack()}
-              />
-              <View style={{flexDirection: 'row'}}>
-                <Icon name={'share'} size={30} color={Theme.Light.headline} />
-                <Icon
-                  name={'bookmark'}
-                  size={30}
-                  color={Theme.Light.headline}
-                  style={{paddingLeft: 15}}
-                />
-              </View>
-            </View>
-          </View> */}
+                zIndex: 0,
+                backgroundColor: Theme.Light.shadow,
+                opacity: 0.65,
+                flex: 1,
+                position: 'absolute',
+                height: '100%',
+                width: '100%',
+              }}
+            />
+          </View>
         </View>
         {/* Everything else */}
         <View style={{flex: 1}}>
           {/* Follow user card */}
-          <FollowCard />
+          <FollowCard isFollowing={true} key={0} />
           {/* Nutrition Card */}
           <Text
             style={{
@@ -253,7 +248,7 @@ const DetailedRecipe = ({navigation}: any) => {
           <ReviewCard />
           {/* All Comments button */}
           <Button
-            title="All Comments"
+            title="All Reviews"
             type="outline"
             onPress={() =>
               console.log('todo: nav to all comments / review page')

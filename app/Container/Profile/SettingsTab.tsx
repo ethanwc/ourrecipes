@@ -28,7 +28,7 @@ const SettingsTab = (props: any) => {
             })
           }
         />
-        <ListItem
+        {/* <ListItem
           title={'Meal Planner'}
           titleStyle={settingsTabStyle.title}
           leftIcon={{
@@ -43,7 +43,7 @@ const SettingsTab = (props: any) => {
               params: {},
             })
           }
-        />
+        /> */}
         <ListItem
           title={'Shopping List'}
           titleStyle={settingsTabStyle.title}

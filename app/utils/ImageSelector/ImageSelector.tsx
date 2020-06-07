@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import {TouchableHighlight} from 'react-native-gesture-handler';
-import {Overlay} from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
 import {Theme} from '../../assets/styles';
 import {View, StyleSheet} from 'react-native';
@@ -11,9 +10,10 @@ export interface imagePickerProps {
   onImageSelected: Function;
 }
 
+//Currently set to only lead to image gallery
 const ImageSelector = (props: imagePickerProps) => {
   //show layout
-  const [showOverlay, setShowOverlay] = useState(false);
+  // const [showOverlay, setShowOverlay] = useState(false);
 
   //icon sizes
   const iconSize = responsiveWidth(100) / 3;
@@ -25,12 +25,12 @@ const ImageSelector = (props: imagePickerProps) => {
       cropping: true,
     })
       .then((image) => {
-        setShowOverlay(false);
+        // setShowOverlay(false);
         props.onImageSelected(image);
       })
       .catch((error) => {
         console.log(error);
-        setShowOverlay(false);
+        // setShowOverlay(false);
       });
   };
 
@@ -41,12 +41,12 @@ const ImageSelector = (props: imagePickerProps) => {
       cropping: true,
     })
       .then((image) => {
-        setShowOverlay(false);
+        // setShowOverlay(false);
         props.onImageSelected(image);
       })
       .catch((error) => {
         console.log(error);
-        setShowOverlay(false);
+        // setShowOverlay(false);
       });
   };
 
@@ -54,49 +54,24 @@ const ImageSelector = (props: imagePickerProps) => {
     <TouchableHighlight
       style={imageSelectorStyle.container}
       underlayColor={'transparent'}
-      onPress={() => setShowOverlay(true)}>
-      <View>
-        <Icon name={'image'} size={iconSize} color={Theme.Light.headline} />
-        <Overlay
-          isVisible={showOverlay}
-          overlayStyle={{backgroundColor: Theme.Light.shadow}}
-          onBackdropPress={() => setShowOverlay(false)}>
-          <View style={imageSelectorStyle.overlay}>
-            <Icon
-              name={'camera'}
-              size={iconSize}
-              color={Theme.Light.headline}
-              onPress={() => pickCamera()}
-            />
-            <Icon
-              name={'image'}
-              size={iconSize}
-              color={Theme.Light.headline}
-              style={{marginLeft: 5}}
-              onPress={() => pickGallery()}
-            />
-          </View>
-        </Overlay>
-      </View>
+      onPress={() => pickGallery()}>
+      <Icon
+        name={'image'}
+        size={40}
+        color={Theme.Light.headline}
+      />
     </TouchableHighlight>
   );
 };
 
 const imageSelectorStyle = StyleSheet.create({
   container: {
-    width: responsiveWidth(100),
-    height: responsiveWidth(100),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Theme.Light.shadow,
     borderRadius: 15,
-  },
-  overlay: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderRadius: 15,
-    paddingLeft: 5,
-    backgroundColor: Theme.Light.shadow,
+    padding: 5,
+    margin: 5,
   },
 });
 

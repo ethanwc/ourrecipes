@@ -10,6 +10,7 @@ import {
   FilledTextField,
   OutlinedTextField,
 } from 'react-native-material-textfield';
+import ImageSelector from '../../utils/ImageSelector/ImageSelector';
 
 var parser = require('ingredients-parser');
 
@@ -62,6 +63,8 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
           rightIcon={clearIcon}
         />
       </View>
+      <ImageSelector onImageSelected={(uri: string) => console.log(uri)}/>
+  
     </View>
   );
 };

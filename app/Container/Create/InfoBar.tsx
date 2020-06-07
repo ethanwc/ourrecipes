@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Input, Image } from 'react-native-elements';
-import { Theme, Typography } from '../../assets/styles';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Input, Image} from 'react-native-elements';
+import {Theme, Typography} from '../../assets/styles';
 import TimePicker from '../../utils/TimePicker/TimePicker';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -18,13 +18,12 @@ const InfoBar = () => {
       {/* Prep Time */}
       <TouchableOpacity
         onPress={() => setPrepTimePicker(true)}
-        style={{ flex: 1, alignItems: 'center' }}>
+        style={{flex: 1, alignItems: 'center'}}>
         <Icon name={'egg'} size={26} color={Theme.Light.caption} />
         <Input
           value={prepTime.toString()}
           placeholder="Prep Time"
           inputStyle={infoBarStyle.input}
-          inputContainerStyle={{ borderBottomWidth: 0 }}
           keyboardType={'numeric'}
           editable={false}
         />
@@ -33,31 +32,28 @@ const InfoBar = () => {
       {/* Cook Time */}
       <TouchableOpacity
         onPress={() => setCookTimePicker(true)}
-        style={{ flex: 1, alignItems: 'center', }}>
+        style={{flex: 1, alignItems: 'center'}}>
         <Icon name={'fire'} size={26} color={Theme.Light.caption} />
         <Input
           value={cookTime.toString()}
           placeholder="Cook Time"
           inputStyle={infoBarStyle.input}
-          inputContainerStyle={{ borderBottomWidth: 0 }}
           keyboardType={'numeric'}
           editable={false}
         />
       </TouchableOpacity>
 
       {/* Serving Size */}
-      <View style={{ flex: 1, alignItems: 'center' }}>
+      <View style={{flex: 1, alignItems: 'center'}}>
         <Icon name={'users'} size={26} color={Theme.Light.caption} />
         <Input
           value={servingSize}
           placeholder="Serving Size"
           inputStyle={infoBarStyle.input}
-          inputContainerStyle={{ borderBottomWidth: 0 }}
           keyboardType={'numeric'}
           onChangeText={(text: string) => setServingSize(text)}
         />
       </View>
-
 
       {/* Time pickers... default hidden */}
       <TimePicker
@@ -81,7 +77,7 @@ const InfoBar = () => {
 const infoBarStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     backgroundColor: Theme.Light.shadow,
     marginVertical: 15,
     marginHorizontal: 10,

@@ -19,6 +19,8 @@ import Followers from './Component/Profile/Followers';
 
 const exploreStack = createStackNavigator();
 
+console.disableYellowBox = true;
+
 //Explore Navigator
 function Explore() {
   return (

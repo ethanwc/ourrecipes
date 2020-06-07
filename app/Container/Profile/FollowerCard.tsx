@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Button} from 'react-native-elements';
 import {Theme, Typography} from '../../assets/styles';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 export interface followerCardProps {
   // followerName: string;

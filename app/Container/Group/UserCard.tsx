@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Button} from 'react-native-elements';
 import {Theme, Typography} from '../../assets/styles';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 export interface userCardProps {
   // followerName: string;
@@ -45,6 +46,7 @@ const userCardProps = StyleSheet.create({
     backgroundColor: Theme.Light.shadow,
     borderBottomWidth: 0.3,
     borderBottomColor: Theme.Light.body,
+    width: responsiveWidth(75),
   },
 });
 
