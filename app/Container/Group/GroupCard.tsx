@@ -20,12 +20,12 @@ const GroupCard = (props: groupCardProps) => {
         <View>
             <Menu>
                 <MenuTrigger><Icon name={'more-vertical'} type={'feather'} color={Theme.Light.caption} /></MenuTrigger>
-                <MenuOptions>
+                <MenuOptions optionsContainerStyle={{ width: 'auto' }}>
                     <MenuOption onSelect={() => console.log(`Delete`)} >
-                        <Text style={Typography.Typography.subheader}>Invite Members</Text>
+                        <Text style={{...Typography.Typography.subheader, padding: 5}}>Invite Members</Text>
                     </MenuOption>
                     <MenuOption onSelect={() => console.log(`Delete`)} >
-                        <Text style={Typography.Typography.subheader}>Leave Group</Text>
+                        <Text style={{...Typography.Typography.subheader, padding: 5}}>Leave Group</Text>
                     </MenuOption>
                 </MenuOptions>
             </Menu>
