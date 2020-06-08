@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native';
 import GroupCards from '../../Component/Group/GroupCards';
 import Icon from 'react-native-vector-icons/Feather';
 import { Theme } from '../../assets/styles';
+import CreateGroup from '../../Container/Group/CreateGroup';
 
 
 /**
  * Groups page of app
  */
 const Groups = ({ navigation }: any) => {
+
+  const asdf = () => {}
+
+  const [showModal, setShowModal] = useState(false);
 
   const DATA = [
     { title: 'steve' },
@@ -28,12 +33,14 @@ const Groups = ({ navigation }: any) => {
       </ScrollView>
       <TouchableOpacity
         style={groupsStyle.createButton}
+        onPress={() => setShowModal(!showModal)}
         // onPress={() =>
           // navigation.navigate('Recipes', { screen: 'CreateRecipe', params: {} })
         // }
         >
         <Icon name={'plus'} size={40} color={Theme.Light.caption} />
       </TouchableOpacity>
+      <CreateGroup isVisible={showModal} setVisible={() => setShowModal(!showModal)}/>
     </SafeAreaView>
   );
 };
