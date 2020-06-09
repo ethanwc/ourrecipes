@@ -25,7 +25,7 @@ const BarRecipeCard = () => {
             width: responsiveWidth(20),
             height: responsiveWidth(20),
             alignSelf: 'flex-start',
-            borderRadius: 5,
+            // borderRadius: 5,
           }}
           source={require('../../assets/images/food.jpg')}
         />
@@ -36,25 +36,34 @@ const BarRecipeCard = () => {
             flexDirection: 'row',
           }}>
           <View
-            style={{marginLeft: 10, justifyContent: 'space-evenly', flex: 1}}>
+            style={{
+              marginLeft: 10,
+              justifyContent: 'space-evenly',
+              flex: 1,
+            }}>
             <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <Text style={Typography.Typography.subheader}>
+              <Text style={Typography.Typography.subheadline}>
                 Chicken Pot Pie
               </Text>
-
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={Typography.Typography.body}>4.9</Text>
+                <Text style={Typography.Typography.subheader}>4.9</Text>
                 <Icon
                   name="star"
                   style={{color: 'gold', marginHorizontal: 5}}
-                  size={16}
+                  size={26}
                 />
               </View>
+            </View>
+
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={Typography.Typography.body}>Korean BBQ</Text>
+              <View style={barRecipeCardProps.dot} />
+              <Text style={Typography.Typography.body}>Dinner</Text>
             </View>
 
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -65,8 +74,6 @@ const BarRecipeCard = () => {
                 style={{marginRight: 5}}
               />
               <Text style={Typography.Typography.body}>45 min</Text>
-              <View style={barRecipeCardProps.dot} />
-              <Text style={Typography.Typography.body}>Korean BBQ</Text>
             </View>
           </View>
         </View>
@@ -81,7 +88,7 @@ const barRecipeCardProps = StyleSheet.create({
     justifyContent: 'space-between',
     margin: 5,
     marginBottom: 2.5,
-    padding: 5,
+    // padding: 5,
     backgroundColor: Theme.Light.shadow,
     borderBottomColor: Theme.Light.body,
     borderBottomWidth: 0.3,
