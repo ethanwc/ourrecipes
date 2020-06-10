@@ -148,11 +148,11 @@ const DetailedRecipe = ({navigation}: any) => {
                 flex: 1,
                 zIndex: 1,
                 alignItems: 'center',
-                opacity: 2,
+                opacity: .7,
                 borderRightColor: Theme.Light.caption,
                 borderRightWidth: 1,
               }}>
-              <Icon name="clock" size={30} color={Theme.Light.caption} />
+              <Icon name="clock" size={30} color={Theme.Light.caption}/>
               <Text
                 style={{
                   ...Typography.Typography.body,
@@ -167,7 +167,7 @@ const DetailedRecipe = ({navigation}: any) => {
                 flex: 1,
                 zIndex: 1,
                 alignItems: 'center',
-                opacity: 2,
+                opacity: .7,
                 borderRightColor: Theme.Light.caption,
                 borderRightWidth: 1,
               }}>
@@ -185,7 +185,7 @@ const DetailedRecipe = ({navigation}: any) => {
               style={{
                 flex: 1,
                 alignItems: 'center',
-                opacity: 1,
+                opacity: .7,
                 zIndex: 1,
               }}>
               <Icon name="info" size={30} color={Theme.Light.caption} />
@@ -194,6 +194,7 @@ const DetailedRecipe = ({navigation}: any) => {
                   ...Typography.Typography.body,
                   color: Theme.Light.caption,
                   marginTop: 5,
+                  opacity: .7,
                 }}>
                 514 kcal
               </Text>
@@ -217,15 +218,15 @@ const DetailedRecipe = ({navigation}: any) => {
           {/* Follow user card */}
           <FollowCard isFollowing={true} key={0} />
           {/* Nutrition Card */}
-          <Text
+          {/* <Text
             style={{
               ...Typography.Typography.header,
               paddingHorizontal: 15,
               marginTop: 15,
             }}>
             Nutrition
-          </Text>
-          <NutritionCard fat={14} sugar={21} protein={45} />
+          </Text> */}
+          {/* <NutritionCard fat={14} sugar={21} protein={45} /> */}
 
           {/* Tab view for ingredients and directions */}
           <TabView

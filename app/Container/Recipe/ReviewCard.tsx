@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Button, AirbnbRating} from 'react-native-elements';
 import {Theme, Typography} from '../../assets/styles';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 export interface ReviewCardProps {
   review: string;
@@ -68,9 +69,10 @@ const reviewCardStyle = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'space-between',
-    margin: 10,
-    borderRadius: 5,
-    padding: 15,
+    // margin: 10,
+    // borderRadius: 5,
+    // padding: 15,
+    padding: responsiveWidth(2.5),
     backgroundColor: Theme.Light.shadow,
     borderBottomWidth: 0.3,
     borderBottomColor: Theme.Light.body,

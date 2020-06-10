@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { Overlay, Button, Input } from 'react-native-elements';
 import { Theme, Typography } from '../../assets/styles';
-import { responsiveScreenWidth } from 'react-native-responsive-dimensions';
+import { responsiveScreenWidth, responsiveWidth } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 
 export interface createGroupProps {
@@ -38,6 +38,7 @@ const CreateGroup = (props: createGroupProps) => {
                 <Input
                     placeholder={"Group Name"}
                     textAlignVertical={'top'}
+                    containerStyle={{paddingHorizontal: 0}}
                     value={groupName}
                     onChangeText={(name: string) => setGroupName(name)}
                 />
@@ -50,7 +51,6 @@ const CreateGroup = (props: createGroupProps) => {
                     containerStyle={{
                         borderWidth: 1,
                         borderColor: Theme.Light.caption,
-                        marginBottom: 10,
                     }}
                 />
             </View>
@@ -61,6 +61,7 @@ const CreateGroup = (props: createGroupProps) => {
 const createGroupStyle = StyleSheet.create({
     container: {
         width: responsiveScreenWidth(75),
+        padding: responsiveWidth(2.5),
     },
 });
 

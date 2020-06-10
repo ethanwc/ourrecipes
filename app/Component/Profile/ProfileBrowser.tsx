@@ -37,7 +37,7 @@ const ProfileBrowser = () => {
             style={{
               width: responsiveWidth(95),
               margin: responsiveWidth(2.5),
-              marginTop: 0,
+              marginTop: responsiveWidth(2.5),
               height: responsiveWidth(95),
             }}
             source={require('../../assets/images/food.jpg')}

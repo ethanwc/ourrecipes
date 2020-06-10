@@ -22,7 +22,7 @@ const Group = () => {
         setVisible={() => setShowMembers(false)}
       />
       <ScrollView>
-        <RecipeCardLarge renderAuthor={true} isFirst={false} />
+        <RecipeCardLarge renderAuthor={true} isFirst={false} />z
         <RecipeCardLarge renderAuthor={true} isFirst={false} />
         <RecipeCardLarge renderAuthor={true} isFirst={false} />
         <RecipeCardLarge renderAuthor={true} isFirst={false} />

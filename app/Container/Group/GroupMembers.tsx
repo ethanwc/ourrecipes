@@ -20,11 +20,12 @@ const GroupMembers = (props: groupMembersProps) => {
     const DATA = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
     return (
         <SafeAreaView>
-            <Overlay isVisible={props.isDisplayed} onBackdropPress={() => props.toggleOverlay()}>
+            <Overlay isVisible={props.isDisplayed} onBackdropPress={() => props.toggleOverlay()} backdropStyle={{margin: 0, padding: 0}}
+            overlayStyle={{margin: 0, padding: 0, width: responsiveWidth(90), height: responsiveHeight(90)}}>
                 <FlatList
                     data={DATA}
                     renderItem={({ item, index }) => (
-                        <UserCard />
+                        <FollowerCard isFollowing={true} />
                     )}
                     decelerationRate={0.798}
                     showsHorizontalScrollIndicator={false}

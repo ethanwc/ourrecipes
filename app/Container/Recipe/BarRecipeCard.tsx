@@ -86,9 +86,10 @@ const barRecipeCardProps = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'space-between',
-    margin: 5,
-    marginBottom: 2.5,
+    // margin: 5,
+    // marginBottom: 2.5,
     // padding: 5,
+    padding: responsiveWidth(1.25),
     backgroundColor: Theme.Light.shadow,
     borderBottomColor: Theme.Light.body,
     borderBottomWidth: 0.3,
