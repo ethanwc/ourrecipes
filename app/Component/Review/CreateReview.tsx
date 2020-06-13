@@ -6,10 +6,10 @@ import {Typography, Theme} from '../../assets/styles';
 const CreateReview = () => {
   return (
     <View style={createReviewStyle.container}>
-      <AirbnbRating size={24} showRating={false} defaultRating={3} />
       <Text style={createReviewStyle.text}>
         Let other users know what you think of this recipe!
       </Text>
+      <AirbnbRating size={24} showRating={false} defaultRating={3} />
       <Input
         multiline={true}
         numberOfLines={5}

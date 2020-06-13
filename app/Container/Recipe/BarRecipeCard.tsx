@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, Vibration} from 'react-native';
-import {AirbnbRating} from 'react-native-elements';
-import {Theme, Typography} from '../../assets/styles';
-import {responsiveWidth} from 'react-native-responsive-dimensions';
+import { View, Text, StyleSheet, Image, Vibration } from 'react-native';
+import { AirbnbRating } from 'react-native-elements';
+import { Theme, Typography } from '../../assets/styles';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 
 export interface BarRecipeCardProps {
@@ -37,7 +37,7 @@ const BarRecipeCard = () => {
           }}>
           <View
             style={{
-              marginLeft: 10,
+              marginLeft: responsiveWidth(1.25),
               justifyContent: 'space-evenly',
               flex: 1,
             }}>
@@ -50,30 +50,36 @@ const BarRecipeCard = () => {
               <Text style={Typography.Typography.subheadline}>
                 Chicken Pot Pie
               </Text>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={Typography.Typography.subheader}>4.9</Text>
                 <Icon
                   name="star"
-                  style={{color: 'gold', marginHorizontal: 5}}
+                  style={{ color: 'gold', marginHorizontal: 5 }}
                   size={26}
                 />
               </View>
             </View>
 
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text style={Typography.Typography.body}>Korean BBQ</Text>
               <View style={barRecipeCardProps.dot} />
               <Text style={Typography.Typography.body}>Dinner</Text>
             </View>
-
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon
+                  name="clock"
+                  size={16}
+                  color={Theme.Light.headline}
+                  style={{ marginRight: 5 }}
+                />
+                <Text style={Typography.Typography.body}>45 min</Text>
+              </View>
               <Icon
-                name="clock"
-                size={16}
-                color={Theme.Light.headline}
-                style={{marginRight: 5}}
+                name="bookmark"
+                style={{ color: 'gold', marginHorizontal: 5 }}
+                size={26}
               />
-              <Text style={Typography.Typography.body}>45 min</Text>
             </View>
           </View>
         </View>
@@ -89,7 +95,7 @@ const barRecipeCardProps = StyleSheet.create({
     // margin: 5,
     // marginBottom: 2.5,
     // padding: 5,
-    padding: responsiveWidth(1.25),
+    // padding: responsiveWidth(1.25),
     backgroundColor: Theme.Light.shadow,
     borderBottomColor: Theme.Light.body,
     borderBottomWidth: 0.3,

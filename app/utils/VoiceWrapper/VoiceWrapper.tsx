@@ -48,8 +48,8 @@ const VoiceWrapper = (props: voiceWrapperInterface) => {
                 name={'mic'}
                 size={props.size}
                 color={microphoneColor}
-                style={{ marginHorizontal: 10 }}
                 onPress={() => Voice.start('en-US')}
+                style={{marginRight: 5}}
             />
         </View>
     )
