@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Vibration } from 'react-native';
-import { AirbnbRating } from 'react-native-elements';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { Theme, Typography } from '../../assets/styles';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
@@ -25,7 +24,6 @@ const BarRecipeCard = () => {
             width: responsiveWidth(20),
             height: responsiveWidth(20),
             alignSelf: 'flex-start',
-            // borderRadius: 5,
           }}
           source={require('../../assets/images/food.jpg')}
         />
@@ -59,7 +57,6 @@ const BarRecipeCard = () => {
                 />
               </View>
             </View>
-
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text style={Typography.Typography.body}>Korean BBQ</Text>
               <View style={barRecipeCardProps.dot} />
@@ -77,7 +74,7 @@ const BarRecipeCard = () => {
               </View>
               <Icon
                 name="bookmark"
-                style={{ color: 'gold', marginHorizontal: 5 }}
+                style={{ color: Theme.Light.body, marginHorizontal: 5 }}
                 size={26}
               />
             </View>
@@ -90,16 +87,12 @@ const BarRecipeCard = () => {
 
 const barRecipeCardProps = StyleSheet.create({
   container: {
-    alignItems: 'center',
     justifyContent: 'space-between',
-    // margin: 5,
-    // marginBottom: 2.5,
-    // padding: 5,
-    // padding: responsiveWidth(1.25),
+    alignItems: 'center',
+    borderRadius: 5,
     backgroundColor: Theme.Light.shadow,
     borderBottomColor: Theme.Light.body,
     borderBottomWidth: 0.3,
-    borderRadius: 5,
   },
   dot: {
     backgroundColor: Theme.Light.headline,
