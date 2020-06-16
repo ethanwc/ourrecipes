@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
-import {responsiveWidth} from 'react-native-responsive-dimensions';
+import { View, StyleSheet, Text, Image, TouchableHighlight } from 'react-native';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Typography, Theme} from '../../assets/styles';
+import { Typography, Theme } from '../../assets/styles';
 
 export interface recipeCardProps {
   isFirst: boolean;
@@ -13,18 +13,19 @@ export interface recipeCardProps {
 
 const favoriteIconEmpty = (
   <Icon
-    name="heart-o"
+    name="bookmark"
+    color={Theme.Light.shadow}
     size={24}
-    style={{position: 'absolute', right: 10, top: 10}}
+    style={{ position: 'absolute', right: 10, top: 10 }}
   />
 );
 
 const favoriteIconFilled = (
   <Icon
-    name="heart"
+    name="bookmark"
     size={24}
-    color={'red'}
-    style={{position: 'absolute', right: 10, top: 10}}
+    color={Theme.Light.caption}
+    style={{ position: 'absolute', right: 10, top: 10 }}
     onPress={() => console.log('icon pressed')}
   />
 );
@@ -35,13 +36,13 @@ const RecipeCard = (props: recipeCardProps) => {
   return (
     <TouchableHighlight
       onPress={() =>
-        props.navigation.navigate('Recipes', {screen: 'Recipe', params: {}})
+        props.navigation.navigate('Recipes', { screen: 'Recipe', params: {} })
       }
       underlayColor={'transparent'}>
       <View
         style={
           props.isFirst
-            ? {...recipeCardStyle.container, ...recipeCardStyle.containerFirst}
+            ? { ...recipeCardStyle.container, ...recipeCardStyle.containerFirst }
             : recipeCardStyle.container
         }>
         <Image
@@ -57,22 +58,32 @@ const RecipeCard = (props: recipeCardProps) => {
           {/* Recipe Name */}
           <Text style={Typography.Typography.subheader}>Chicken Pot Pie</Text>
           {/* Recipe cook time, category */}
-          <View style={recipeCardStyle.horizontalRow}>
+          <View style={{ ...recipeCardStyle.horizontalRow, justifyContent: 'space-between' }}>
+            <View style={recipeCardStyle.horizontalRow}>
+              <View style={recipeCardStyle.horizontalRow}>
+                <Icon
+                  name="clock-o"
+                  size={20}
+                  color={Theme.Light.headline}
+                  style={{ marginRight: 5 }}
+                />
+                <Text style={Typography.Typography.body}>45 min</Text>
+              </View>
+
+              {/* Dot inbetween categories */}
+              <View style={recipeCardStyle.dot} />
+              <Text style={Typography.Typography.body}>Korean BBQ</Text>
+            </View>
             <View style={recipeCardStyle.horizontalRow}>
               <Icon
-                name="clock-o"
+                name="star"
+                style={{ color: 'gold', marginRight: 5 }}
                 size={20}
-                color={Theme.Light.headline}
-                style={{marginRight: 5}}
               />
-              <Text style={Typography.Typography.body}>45 min</Text>
+              <Text style={Typography.Typography.body}>4.4</Text>
             </View>
-
-            {/* Dot inbetween categories */}
-            <View style={recipeCardStyle.dot} />
-
-            <Text style={Typography.Typography.body}>Korean BBQ</Text>
           </View>
+
           {/* Recipe Author, Reviews */}
           <View
             style={{
@@ -82,14 +93,7 @@ const RecipeCard = (props: recipeCardProps) => {
             {props.renderAuthor ? (
               <Text style={Typography.Typography.subheadline}>Debra Boydd</Text>
             ) : null}
-            <View style={recipeCardStyle.horizontalRow}>
-              <Icon
-                name="star"
-                style={{color: 'gold', marginRight: 5}}
-                size={20}
-              />
-              <Text style={Typography.Typography.body}>42 reviews</Text>
-            </View>
+            <Text style={Typography.Typography.body}>42 reviews</Text>
           </View>
         </View>
       </View>

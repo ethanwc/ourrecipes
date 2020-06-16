@@ -27,7 +27,7 @@ const TimePicker = (props: timePickerInterface) => {
     value={date}
     mode={'time'}
     is24Hour={true}
-    display="default"
+    display="spinner"
     onChange={(event: Event, date?: Date) => onTimeSelected(event, date)}
   /> : null;
 

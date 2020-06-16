@@ -20,7 +20,7 @@ const ListCard = (props: listCardProps) => {
                 <MenuTrigger><Icon name={'more-vertical'} type={'feather'} color={Theme.Light.caption} /></MenuTrigger>
                 <MenuOptions optionsContainerStyle={{ width: 'auto' }}>
                     <MenuOption onSelect={() => console.log(`Delete`)} >
-                        <Text style={{...Typography.Typography.subheader, padding: 5}}>Delete Item</Text>
+                        <Text style={{ ...Typography.Typography.subheader, padding: 5 }}>Delete Item</Text>
                     </MenuOption>
                 </MenuOptions>
             </Menu>

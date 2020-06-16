@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {Input, Image} from 'react-native-elements';
-import {Theme, Typography} from '../../assets/styles';
+import React, { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Input } from 'react-native-elements';
+import { Theme, Typography } from '../../assets/styles';
 import TimePicker from '../../utils/TimePicker/TimePicker';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -18,7 +18,7 @@ const InfoBar = () => {
       {/* Prep Time */}
       <TouchableOpacity
         onPress={() => setPrepTimePicker(true)}
-        style={{flex: 1, alignItems: 'center'}}>
+        style={{ flex: 1, alignItems: 'center' }}>
         <Icon name={'egg'} size={26} color={Theme.Light.caption} />
         <Input
           value={prepTime.toString()}
@@ -32,7 +32,7 @@ const InfoBar = () => {
       {/* Cook Time */}
       <TouchableOpacity
         onPress={() => setCookTimePicker(true)}
-        style={{flex: 1, alignItems: 'center'}}>
+        style={{ flex: 1, alignItems: 'center' }}>
         <Icon name={'fire'} size={26} color={Theme.Light.caption} />
         <Input
           value={cookTime.toString()}
@@ -44,7 +44,7 @@ const InfoBar = () => {
       </TouchableOpacity>
 
       {/* Serving Size */}
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={{ flex: 1, alignItems: 'center' }}>
         <Icon name={'users'} size={26} color={Theme.Light.caption} />
         <Input
           value={servingSize}
@@ -57,15 +57,21 @@ const InfoBar = () => {
 
       {/* Time pickers... default hidden */}
       <TimePicker
-        onTimePicked={(date: Date) =>
-          setPrepTime(date.getHours() + ':' + date.getMinutes())
+        onTimePicked={(date: Date) => {
+          const hours = date.getHours() >= 10 ? date.getHours() : '0' + date.getHours();
+          const minutes = date.getMinutes() >= 10 ? date.getMinutes() : '0' + date.getMinutes();
+          setPrepTime(`${hours}:${minutes}`);
+        }
         }
         showTimePicker={prepTimePicker}
         setShowTimePicker={(state: boolean) => setPrepTimePicker(state)}
       />
       <TimePicker
-        onTimePicked={(date: Date) =>
-          setCookTime(date.getHours() + ':' + date.getMinutes())
+        onTimePicked={(date: Date) => {
+          const hours = date.getHours() >= 10 ? date.getHours() : '0' + date.getHours();
+          const minutes = date.getMinutes() >= 10 ? date.getMinutes() : '0' + date.getMinutes();
+          setCookTime(`${hours}:${minutes}`);
+        }
         }
         showTimePicker={cookTimePicker}
         setShowTimePicker={(state: boolean) => setCookTimePicker(state)}
