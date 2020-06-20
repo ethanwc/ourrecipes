@@ -46,6 +46,8 @@
     "react-native-svg-uri": "^1.2.3",
     "react-native-tab-view": "^2.14.0",
     "react-native-vector-icons": "^6.6.0",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
     "words-to-numbers": "^1.5.1"
   },
   "devDependencies": {
