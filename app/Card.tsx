@@ -1,8 +1,9 @@
 import React from 'react';
 import {Text, Button, View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {INCREASE_VOTE as increaseVote} from './redux/actions/actions';
-import {INCREMENT as increment} from './redux/actions/actions';
+import {increase as increment} from './redux/actions/actions';
+import {decrease as decrement} from './redux/actions/actions';
+
 
 const Card = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,8 @@ const Card = () => {
   return (
     <View>
       <Text>{count}</Text>
-      <Button onPress={() => dispatch(increaseVote())} title={'increase'} />
+      <Button onPress={() => dispatch(increment())} title={'increase'} />
+      <Button onPress={() => dispatch(decrement())} title={'decrease'} />
     </View>
   );
 };

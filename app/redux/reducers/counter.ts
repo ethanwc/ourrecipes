@@ -1,14 +1,16 @@
-export interface asdf {
-  count: number;
+import { Counter, INCREASE_COUNT, DECREASE_COUNT } from "../types/types";
+
+const initialState: Counter = {
+  count: 0
 }
 
-const counter = (state: asdf = {count: 0}, action: any) => {
+const counter = (state = initialState, action: any) => {
   switch (action.type) {
-    case 'INCREASE_VOTE':
+    case INCREASE_COUNT:
       return {
         count: state.count + 1,
       };
-    case 'DECREASE_VOTE':
+    case DECREASE_COUNT:
       return {
         count: state.count - 1,
       };

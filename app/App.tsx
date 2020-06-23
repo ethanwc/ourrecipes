@@ -1,24 +1,26 @@
 import React from 'react';
-import {createStore, combineReducers} from 'redux';
-import {Provider} from 'react-redux';
-import counter, {asdf} from './redux/reducers/counter';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import counter from './redux/reducers/counter';
 import Card from './Card';
+import { Counter } from './redux/types/types';
 
 const rootReducer = combineReducers({
   // todos,
   counter,
 });
 
-const wtf: asdf = {
-  count: 0,
+const initialCounter: Counter = {
+  count: 10,
 };
 
 const initialState = {
   // todos: ['any'],
-  counter: wtf,
+  counter: initialCounter,
 };
 
-const store = createStore(rootReducer, initialState);
+// Passing initial state here overrides state specified in component
+const store = createStore(rootReducer);
 
 export default function App() {
   return (

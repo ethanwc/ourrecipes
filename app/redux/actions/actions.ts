@@ -1,17 +1,13 @@
-export const INCREASE_VOTE = () => {
+import { INCREASE_COUNT, DECREASE_COUNT, CountActionTypes } from '../types/types';
+
+export const increase = (): CountActionTypes => {
   return {
-    type: 'INCREASE_VOTE',
+    type: INCREASE_COUNT,
   };
 };
 
-export const decreaseVote = () => {
+export const decrease = (): CountActionTypes => {
   return {
-    type: 'DECREASE_VOTE',
-  };
-};
-
-export const INCREMENT = () => {
-  return {
-    type: 'INCREMENT',
+    type: DECREASE_COUNT,
   };
 };
