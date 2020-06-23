@@ -1,4 +1,4 @@
-import { Counter, INCREASE_COUNT, DECREASE_COUNT } from "../types/types";
+import { Counter, INCREASE_COUNT, DECREASE_COUNT } from "../types/counter";
 
 const initialState: Counter = {
   count: 0

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Text, Button, View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {increase as increment} from './redux/actions/actions';
-import {decrease as decrement} from './redux/actions/actions';
+import {increase as increment} from './redux/actions/counter';
+import {decrease as decrement} from './redux/actions/counter';
 
 
 const Card = () => {

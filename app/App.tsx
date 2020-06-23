@@ -3,7 +3,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import counter from './redux/reducers/counter';
 import Card from './Card';
-import { Counter } from './redux/types/types';
+import { Counter } from './redux/types/counter';
 
 const rootReducer = combineReducers({
   // todos,

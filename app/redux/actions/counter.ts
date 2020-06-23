@@ -1,4 +1,4 @@
-import { INCREASE_COUNT, DECREASE_COUNT, CountActionTypes } from '../types/types';
+import { INCREASE_COUNT, DECREASE_COUNT, CountActionTypes } from '../types/counter';
 
 export const increase = (): CountActionTypes => {
   return {
