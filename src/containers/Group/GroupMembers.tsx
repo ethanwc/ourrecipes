@@ -1,14 +1,14 @@
 import React, { useState, FunctionComponentElement } from 'react'
 import { View, Text } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-import LargeRecipeCard from '../../Container/Recipe/LargeRecipeCard'
+import LargeRecipeCard from '../Recipe/LargeRecipeCard'
 import Icon from 'react-native-vector-icons/Feather';
 import { Theme } from '../../assets/styles';
-import UserCard from '../../Container/Group/UserCard';
+import UserCard from './UserCard';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Overlay } from 'react-native-elements';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
-import FollowerCard from '../../Container/Profile/FollowerCard';
+import FollowerCard from '../Profile/FollowerCard';
 
 export interface groupMembersProps {
     toggleOverlay: Function;

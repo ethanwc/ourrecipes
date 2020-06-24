@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Image, TouchableHighlight } from 'react-native'
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Typography, Theme } from '../../assets/styles';
-import ReviewCard from '../Recipe/ReviewCard';
+import ReviewCard from './ReviewCard';
 
 export interface largeRecipeCardProps {
   renderAuthor: boolean;
