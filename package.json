@@ -21,6 +21,7 @@
     "@types/react-native-material-textfield": "^0.16.3",
     "@types/react-native-share": "^3.1.0",
     "@types/react-native-vector-icons": "^6.4.5",
+    "@types/react-redux": "^7.1.9",
     "ingredients-parser": "^1.4.0",
     "react": "16.11.0",
     "react-native": "0.62.2",
@@ -31,6 +32,7 @@
     "react-native-dropdown-autocomplete": "^1.0.18",
     "react-native-elements": "^2.0.0",
     "react-native-gesture-handler": "^1.6.1",
+    "react-native-get-random-values": "^1.4.0",
     "react-native-image-crop-picker": "^0.31.1",
     "react-native-image-picker": "^2.3.1",
     "react-native-material-textfield": "^0.16.1",
@@ -48,6 +50,7 @@
     "react-native-vector-icons": "^6.6.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
+    "uuid": "^8.2.0",
     "words-to-numbers": "^1.5.1"
   },
   "devDependencies": {
@@ -59,6 +62,7 @@
     "@types/react-native-autocomplete-input": "^4.0.1",
     "@types/react-native-svg-charts": "^5.0.3",
     "@types/react-test-renderer": "16.9.2",
+    "@types/uuid": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "babel-jest": "^24.9.0",

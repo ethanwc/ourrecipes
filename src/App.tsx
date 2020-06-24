@@ -1,26 +1,30 @@
-// import React from 'react';
-// import { createStore, combineReducers } from 'redux';
-// import { Provider } from 'react-redux';
-// import counter from './redux/reducers/counter';
-// import Card from './Card';
-// import { Counter } from './redux/types/counter';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import { counter } from './redux/reducers/counter';
+import { Counter } from './redux/types/counter';
+import { ShoppingList } from './redux/shoppinglist/reducers';
 
-// const rootReducer = combineReducers({
-//   // todos,
-//   counter,
-// });
+const initialShoppingList: ShoppinglistState = {
+  items: [{id: 'wtf', name: 'test1234', checked: false, creationDate: new Date() }]
+}
 
-// const initialCounter: Counter = {
-//   count: 10,
-// };
+const rootReducer = combineReducers({
+  ShoppingList
+});
 
-// const initialState = {
-//   // todos: ['any'],
-//   counter: initialCounter,
-// };
+// Root application state types
+export interface RootState {
+  ShoppingList: ShoppinglistState
+}
 
-// // Passing initial state here overrides state specified in component
+const initialState: RootState = {
+  ShoppingList: initialShoppingList
+};
+
+// Passing initial state here overrides state specified in component
+const store = createStore(rootReducer, initialState);
 // const store = createStore(rootReducer);
+
 
 // export default function App() {
 //   return (
@@ -49,6 +53,7 @@ import Calendar from './view/calendar/Calendar';
 import ShoppingListView from './view/shoppinglist/ShoppingListView';
 import BookmarkView from './view/Bookmark/BookmarkView';
 import Followers from './components/Profile/Followers';
+import { ShoppinglistState } from './redux/shoppinglist/types';
 
 const exploreStack = createStackNavigator();
 
@@ -108,28 +113,30 @@ const Tab = createBottomTabNavigator();
  */
 export default function App() {
   return (
-    <MenuProvider>
-      <NavigationContainer>
-        <Tab.Navigator tabBarOptions={{ activeTintColor: Theme.Light.caption }}>
-          <Tab.Screen
-            name="Recipes"
-            component={Explore}
-            options={{
-              tabBarIcon: ({ color }) => (
-                <Icon name="search" color={color} size={26} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Groups"
-            component={Groups}
-            options={{
-              tabBarIcon: ({ color }) => (
-                <Icon name="users" color={color} size={26} />
-              ),
-            }}
-          />
-          {/* <Tab.Screen
+    <Provider store={store}>
+
+      <MenuProvider>
+        <NavigationContainer>
+          <Tab.Navigator tabBarOptions={{ activeTintColor: Theme.Light.caption }}>
+            <Tab.Screen
+              name="Recipes"
+              component={Explore}
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <Icon name="search" color={color} size={26} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Groups"
+              component={Groups}
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <Icon name="users" color={color} size={26} />
+                ),
+              }}
+            />
+            {/* <Tab.Screen
           name="Temp-Create"
           component={Create}
           options={{
@@ -138,7 +145,7 @@ export default function App() {
             ),
           }}
         /> */}
-          {/* <Tab.Screen
+            {/* <Tab.Screen
           name="Bookmarks"
           component={Bookmarks}
           options={{
@@ -147,17 +154,18 @@ export default function App() {
             ),
           }}
         /> */}
-          <Tab.Screen
-            name="Account"
-            component={Account}
-            options={{
-              tabBarIcon: ({ color }) => (
-                <Icon name="user" color={color} size={26} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </MenuProvider>
+            <Tab.Screen
+              name="Account"
+              component={Account}
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <Icon name="user" color={color} size={26} />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </MenuProvider>
+    </Provider>
   );
 }

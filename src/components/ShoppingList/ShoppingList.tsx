@@ -2,37 +2,28 @@ import React, { useState, useEffect } from 'react'
 import ListCard from '../../containers/ShoppingList/ListCard';
 import ListCardCreate from '../../containers/ShoppingList/ListCardCreate';
 
-import { View, FlatList, SafeAreaView, ScrollView } from 'react-native';
-
-export interface bookmarkItem {
-
-}
+import { View, FlatList, SafeAreaView, ScrollView, Text } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { ShoppinglistState, ShoppingListItem } from '../../redux/shoppinglist/types';
+import { RootState } from '../../App';
 
 const Bookmarks = () => {
-    const [shoppingItems, setShoppingItems] = useState(Array<String>());
-
-    const addShoppingCard = () => setShoppingItems([...shoppingItems, 'z']);
-
-    useEffect(() => {
-        setShoppingItems(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']);
-    }, []);
-
+    const items: ShoppingListItem[] = useSelector((state: RootState) => state.ShoppingList.items);
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{  flexGrow: 1 }}>
+            <ScrollView style={{ flexGrow: 1 }}>
                 <FlatList
-                    data={shoppingItems}
-                    renderItem={({ item }) => (
-                        <ListCard checked={true} />
+                    data={items}
+                    renderItem={({ item }: { item: ShoppingListItem }) => (
+                        <ListCard id={item.id} name={item.name} checked={item.checked} creationDate={item.creationDate} />
                     )}
-                    keyExtractor={(item) => '1'}
+                    keyExtractor={(item: ShoppingListItem) => item.id}
                     decelerationRate={0.798}
                     showsHorizontalScrollIndicator={false}
                 />
             </ScrollView>
-                <ListCardCreate onPress={() => addShoppingCard()} />
+            <ListCardCreate />
         </SafeAreaView>
-
     )
 }
 

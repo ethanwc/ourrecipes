@@ -1,20 +1,6 @@
-import { ShoppingListItem, ADD_ITEM, EDIT_ITEM, REMOVE_ITEM, ShoppingItemActionTypes } from "./types";
+import { ADD_ITEM, EDIT_ITEM, REMOVE_ITEM, ShoppingItemActionTypes, ShoppinglistState, ShoppingListItem } from "./types";
 
-export interface ShoppinglistState {
-    items: ShoppingListItem[]
-}
-
-const initialState: ShoppinglistState = {
-    items: [
-        {
-            name: 'Pizza Sauce',
-            checked: true,
-            creationDate: new Date()
-        }
-    ]
-}
-
-const ShoppingList = (state = initialState, action: ShoppingItemActionTypes) => {
+export const ShoppingList = (state: ShoppinglistState = { items: [] }, action: ShoppingItemActionTypes) => {
     switch (action.type) {
         case ADD_ITEM:
             return {
@@ -26,11 +12,9 @@ const ShoppingList = (state = initialState, action: ShoppingItemActionTypes) => 
             };
         case REMOVE_ITEM:
             return {
-                items: [...state.items.splice(0)]
+                items: [...state.items.filter((item: ShoppingListItem) => item.id !== action.itemid)]
             }
         default:
             return state;
     }
 };
-
-export default ShoppingList;

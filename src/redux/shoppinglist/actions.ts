@@ -15,10 +15,10 @@ export const edit = (newItem: ShoppingListItem): ShoppingItemActionTypes => {
   };
 };
 
-export const remove = (targetid: string): ShoppingItemActionTypes => {
+export const remove = (id: string): ShoppingItemActionTypes => {
     return {
       type: REMOVE_ITEM,
-      itemid: targetid
+      itemid: id
     };
   };
   

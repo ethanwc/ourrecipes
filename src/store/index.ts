@@ -4,9 +4,13 @@
 import { systemReducer } from './system/reducers'
 import { chatReducer } from './chat/reducers'
 
-const rootReducer = combineReducers({
-  system: systemReducer,
-  chat: chatReducer
-})
+// export interface RootState {
+//   ShoppingList: ShoppinglistState
+// }
 
-export type RootState = ReturnType<typeof rootReducer>
+// const rootReducer = combineReducers({
+//   system: systemReducer,
+//   chat: chatReducer
+// })
+
+// export type RootState = ReturnType<typeof rootReducer>
