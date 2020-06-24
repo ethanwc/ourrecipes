@@ -1,8 +1,8 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, Text, StyleSheet} from 'react-native';
 import {Typography} from '../../assets/styles';
-import LargeRecipeCard from '../../Container/Recipe/LargeRecipeCard';
-import BarRecipeCard from '../../Container/Recipe/BarRecipeCard';
+import LargeRecipeCard from '../../containers/Recipe/LargeRecipeCard';
+import BarRecipeCard from '../../containers/Recipe/BarRecipeCard';
 
 /**
  * Bookmarks page of app

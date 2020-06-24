@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native';
-import GroupCards from '../../Component/Group/GroupCards';
+import GroupCards from '../../components/Group/GroupCards';
 import Icon from 'react-native-vector-icons/Feather';
 import { Theme } from '../../assets/styles';
-import CreateGroup from '../../Container/Group/CreateGroup';
+import CreateGroup from '../../containers/Group/CreateGroup';
 
 
 /**

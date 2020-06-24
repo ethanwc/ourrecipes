@@ -11,9 +11,9 @@ import {
 import { Typography, Theme } from '../../assets/styles';
 import { Input, Image } from 'react-native-elements';
 import ImageSelector from '../../utils/ImageSelector/ImageSelector';
-import InfoBar from '../../Container/Create/InfoBar';
-import CreateIngredients from '../../Component/Create/CreateIngredients/CreateIngredients';
-import CreateDirections from '../../Component/Create/CreateDirections/CreateDirections';
+import InfoBar from '../../containers/Create/InfoBar';
+import CreateIngredients from '../../components/Create/CreateIngredients/CreateIngredients';
+import CreateDirections from '../../components/Create/CreateDirections/CreateDirections';
 import Icon from 'react-native-vector-icons/Feather';
 
 const Create = ({ navigation }: any) => {

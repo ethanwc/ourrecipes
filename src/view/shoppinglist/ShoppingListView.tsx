@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, Text, StyleSheet, View} from 'react-native';
-import ShoppingList from '../../Component/ShoppingList/ShoppingList';
+import ShoppingList from '../../components/ShoppingList/ShoppingList';
 import {Typography} from '../../assets/styles';
 
 /**

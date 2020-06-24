@@ -10,9 +10,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Searchbar from '../../utils/Searchbar/Searchbar';
-import Categories from '../../Component/Category/Categories';
+import Categories from '../../components/Category/Categories';
 import {Typography, Theme} from '../../assets/styles';
-import Recipes from '../../Component/Recipe/Recipes';
+import Recipes from '../../components/Recipe/Recipes';
 import Icon from 'react-native-vector-icons/Feather';
 
 /**

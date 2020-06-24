@@ -4,11 +4,11 @@ import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {Avatar, Button, ListItem} from 'react-native-elements';
-import CountsBar from '../../Container/Profile/CountsBar';
-import SettingsTab from '../../Container/Profile/SettingsTab';
+import CountsBar from '../../containers/Profile/CountsBar';
+import SettingsTab from '../../containers/Profile/SettingsTab';
 import {Theme, Typography} from '../../assets/styles';
-import ProfileInfo from '../../Container/Profile/ProfileInfo';
-import ProfileBrowser from '../../Component/Profile/ProfileBrowser';
+import ProfileInfo from '../../containers/Profile/ProfileInfo';
+import ProfileBrowser from '../../components/Profile/ProfileBrowser';
 
 //Profile view of the app
 const Profile = (props: any) => {

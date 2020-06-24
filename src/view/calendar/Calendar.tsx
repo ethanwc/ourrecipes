@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import {Calendar as ReactCalendar} from 'react-native-calendars';
 import {Theme, Typography} from '../../assets/styles';
-import RecipeCard from '../../Container/Recipe/RecipeCard';
+import RecipeCard from '../../containers/Recipe/RecipeCard';
 
 const DATA = [
   {title: 'steve'},
