@@ -7,11 +7,10 @@ export const add = (newItem: ShoppingListItem): ShoppingItemActionTypes => {
   };
 };
 
-export const edit = (newItem: ShoppingListItem): ShoppingItemActionTypes => {
+export const edit = (updatedItem: ShoppingListItem): ShoppingItemActionTypes => {
   return {
     type: EDIT_ITEM,
-    payload: newItem,
-    targetid: 'ASDF'
+    payload: updatedItem,
   };
 };
 

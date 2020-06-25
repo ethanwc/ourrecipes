@@ -8,7 +8,7 @@ export const ShoppingList = (state: ShoppinglistState = { items: [] }, action: S
             };
         case EDIT_ITEM:
             return {
-                items: [...state.items.splice(1)]
+                items: state.items.map((item: ShoppingListItem) => item.id === action.payload.id ? action.payload : item)
             };
         case REMOVE_ITEM:
             return {

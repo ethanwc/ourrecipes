@@ -21,7 +21,6 @@ interface AddItemAction {
 interface EditItemAction {
     type: typeof EDIT_ITEM
     payload: ShoppingListItem
-    targetid: string
 }
 
 interface RemoveItemAction {

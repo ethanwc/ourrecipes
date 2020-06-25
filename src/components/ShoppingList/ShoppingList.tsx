@@ -1,30 +1,52 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react';
+import {FlatList, SafeAreaView, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../App';
 import ListCard from '../../containers/ShoppingList/ListCard';
 import ListCardCreate from '../../containers/ShoppingList/ListCardCreate';
+import {ShoppingListItem} from '../../redux/shoppinglist/types';
+import CreateListItem from './CreateListItem';
+import EditListItem from './EditListItem';
 
-import { View, FlatList, SafeAreaView, ScrollView, Text } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { ShoppinglistState, ShoppingListItem } from '../../redux/shoppinglist/types';
-import { RootState } from '../../App';
+const ShoppingList = () => {
+  const items: ShoppingListItem[] = useSelector(
+    (state: RootState) => state.ShoppingList.items,
+  );
+  const [addItemModal, setAddItemModal] = useState(false);
+  const [editItemModal, setEditItemModal] = useState(false);
+  const [editItem, setEditItem] = useState<ShoppingListItem | any>(undefined);
 
-const Bookmarks = () => {
-    const items: ShoppingListItem[] = useSelector((state: RootState) => state.ShoppingList.items);
-    return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{ flexGrow: 1 }}>
-                <FlatList
-                    data={items}
-                    renderItem={({ item }: { item: ShoppingListItem }) => (
-                        <ListCard id={item.id} name={item.name} checked={item.checked} creationDate={item.creationDate} />
-                    )}
-                    keyExtractor={(item: ShoppingListItem) => item.id}
-                    decelerationRate={0.798}
-                    showsHorizontalScrollIndicator={false}
-                />
-            </ScrollView>
-            <ListCardCreate />
-        </SafeAreaView>
-    )
-}
+  // Pass item to edit to modal
+  const setupEditItem = (item: ShoppingListItem) => {
+      if (item && item !== undefined) {
+          setEditItemModal(true);
+        setEditItem(item);
+      }
+  }
 
-export default Bookmarks;
+  const editRender = editItemModal ? <EditListItem isVisible={editItemModal} setVisible={() => setEditItemModal(!editItemModal)} oldItem={editItem} />  : null;
+
+  return (
+    <SafeAreaView style={{flex: 1}}>
+      <ScrollView style={{flexGrow: 1}}>
+        <FlatList
+          data={items}
+          renderItem={({item}: {item: ShoppingListItem}) => (
+            <ListCard
+              item={item}
+              editItem={(item: ShoppingListItem) => setupEditItem(item)}
+            />
+          )}
+          keyExtractor={(item: ShoppingListItem) => item.id}
+          decelerationRate={0.798}
+          showsHorizontalScrollIndicator={false}
+        />
+      </ScrollView>
+      <CreateListItem isVisible={addItemModal} setVisible={() => setAddItemModal(!addItemModal)} />
+      {editRender} 
+      <ListCardCreate onPress={() => setAddItemModal(!addItemModal)}/>
+    </SafeAreaView>
+  );
+};
+
+export default ShoppingList;
