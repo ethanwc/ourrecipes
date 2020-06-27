@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {FlatList, SafeAreaView, ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../App';
+import {RootState} from '../../redux';
 import ListCard from '../../containers/ShoppingList/ListCard';
 import ListCardCreate from '../../containers/ShoppingList/ListCardCreate';
 import {ShoppingListItem} from '../../redux/shoppinglist/types';
@@ -18,13 +18,19 @@ const ShoppingList = () => {
 
   // Pass item to edit to modal
   const setupEditItem = (item: ShoppingListItem) => {
-      if (item && item !== undefined) {
-          setEditItemModal(true);
-        setEditItem(item);
-      }
-  }
+    if (item && item !== undefined) {
+      setEditItemModal(true);
+      setEditItem(item);
+    }
+  };
 
-  const editRender = editItemModal ? <EditListItem isVisible={editItemModal} setVisible={() => setEditItemModal(!editItemModal)} oldItem={editItem} />  : null;
+  const editRender = editItemModal ? (
+    <EditListItem
+      isVisible={editItemModal}
+      setVisible={() => setEditItemModal(!editItemModal)}
+      oldItem={editItem}
+    />
+  ) : null;
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -42,9 +48,12 @@ const ShoppingList = () => {
           showsHorizontalScrollIndicator={false}
         />
       </ScrollView>
-      <CreateListItem isVisible={addItemModal} setVisible={() => setAddItemModal(!addItemModal)} />
-      {editRender} 
-      <ListCardCreate onPress={() => setAddItemModal(!addItemModal)}/>
+      <CreateListItem
+        isVisible={addItemModal}
+        setVisible={() => setAddItemModal(!addItemModal)}
+      />
+      {editRender}
+      <ListCardCreate onPress={() => setAddItemModal(!addItemModal)} />
     </SafeAreaView>
   );
 };

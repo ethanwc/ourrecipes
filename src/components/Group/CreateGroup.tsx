@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {useDispatch} from 'react-redux';
 import {Overlay, Button, Input} from 'react-native-elements';
 import {Theme, Typography} from '../../assets/styles';
 import {
@@ -8,30 +7,32 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
+import {useDispatch} from 'react-redux';
+import {add} from '../../redux/group/actions';
+import {Group} from '../../redux/group/types';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
-import {ShoppingListItem} from 'src/redux/shoppinglist/types';
-import {add} from '../../redux/shoppinglist/actions';
 
-export interface CreateListItemProps {
+export interface createGroupProps {
   isVisible: boolean;
   setVisible: Function;
 }
 
-const CreateListItem = (props: CreateListItemProps) => {
-  const [itemName, setItemName] = useState('');
+const CreateGroup = (props: createGroupProps) => {
+  const [groupName, setGroupName] = useState('');
   const dispatch = useDispatch();
 
-  // Add item to list
-  const createItem = () => {
-    if (itemName) {
-      const payload: ShoppingListItem = {
+  const createGroup = () => {
+    if (groupName) {
+      const payload: Group = {
         id: uuidv4(),
-        name: itemName,
-        checked: false,
+        name: groupName,
         creationDate: new Date(),
+        creatorid: 'asdf',
+        membercount: 11,
+        memberids: ['asdf', 'aabb'],
       };
-      setItemName('');
+      setGroupName('');
       dispatch(add(payload));
       props.setVisible(false);
     }
@@ -41,36 +42,36 @@ const CreateListItem = (props: CreateListItemProps) => {
     <Overlay
       isVisible={props.isVisible}
       onBackdropPress={() => props.setVisible()}>
-      <View style={CreateListItemStyle.container}>
+      <View style={createGroupStyle.container}>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <Text style={Typography.Typography.header}>Add Item</Text>
+          <Text style={Typography.Typography.header}>Create Group</Text>
           <Icon
             name="x"
             size={30}
             color={Theme.Light.headline}
             onPress={() => {
-              setItemName('');
+              setGroupName('');
               props.setVisible();
             }}
           />
         </View>
         <Input
-          placeholder={'Item Name'}
+          placeholder={'Group Name'}
           textAlignVertical={'top'}
-          containerStyle={{paddingHorizontal: 0}}
           autoFocus={true}
-          value={itemName}
-          onChangeText={(name: string) => setItemName(name)}
+          containerStyle={{paddingHorizontal: 0}}
+          value={groupName}
+          onChangeText={(name: string) => setGroupName(name)}
         />
         <Button
           title="Create"
           type="outline"
-          onPress={() => createItem()}
+          onPress={() => createGroup()}
           titleStyle={{color: Theme.Light.caption}}
           buttonStyle={{borderColor: Theme.Light.caption}}
           containerStyle={{
@@ -83,11 +84,11 @@ const CreateListItem = (props: CreateListItemProps) => {
   );
 };
 
-const CreateListItemStyle = StyleSheet.create({
+const createGroupStyle = StyleSheet.create({
   container: {
     width: responsiveScreenWidth(75),
     padding: responsiveWidth(2.5),
   },
 });
 
-export default CreateListItem;
+export default CreateGroup;
