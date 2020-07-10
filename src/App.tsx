@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
-import {Provider} from 'react-redux';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {MenuProvider} from 'react-native-popup-menu';
-import {Theme} from './assets/styles';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MenuProvider } from 'react-native-popup-menu';
+import { Theme } from './assets/styles';
 import Icon from 'react-native-vector-icons/Feather';
 import ExploreView from './view/explore/ExploreView';
 import GroupView from './view/groups/GroupView';
@@ -17,8 +16,9 @@ import ShoppingListView from './view/shoppinglist/ShoppingListView';
 import BookmarkView from './view/Bookmark/BookmarkView';
 import Followers from './components/Profile/Followers';
 import Auth from '@aws-amplify/auth';
-
-import {store} from './redux';
+import { set } from './redux/user/actions';
+import { User } from './redux/user/types';
+import { useDispatch } from 'react-redux';
 
 const exploreStack = createStackNavigator();
 
@@ -31,7 +31,7 @@ function Explore() {
       <exploreStack.Screen
         name="ExploreView"
         component={ExploreView}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <exploreStack.Screen name="Recipe" component={DetailedRecipe} />
       <exploreStack.Screen name="CreateRecipe" component={Create} />
@@ -46,7 +46,7 @@ function Groups() {
       <exploreStack.Screen
         name="Groups"
         component={GroupView}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <exploreStack.Screen name="Group" component={Group} />
     </exploreStack.Navigator>
@@ -60,7 +60,7 @@ function Account() {
       <exploreStack.Screen
         name="AccountView"
         component={Profile}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <exploreStack.Screen name="Bookmarks" component={BookmarkView} />
       <exploreStack.Screen name="Meal Planner" component={Calendar} />
@@ -77,41 +77,47 @@ const Tab = createBottomTabNavigator();
  * Container base navigation, app main
  */
 export default function App() {
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     // Create an scoped async function in the hook
     async function anyNameFunction() {
-      await console.log(
-        await (await Auth.currentSession()).getIdToken().payload.name,
-      );
+      const awsPayload = await (await Auth.currentSession()).getIdToken().payload;
+      const payload: User = {
+        email: awsPayload.email,
+        name: awsPayload.name,
+        phoneNumber: 'asdf'
+      }
+      dispatch(set(payload));
     }
     // Execute the created function directly
     anyNameFunction();
   }, []);
 
   return (
-    <Provider store={store}>
-      <MenuProvider>
-        <NavigationContainer>
-          <Tab.Navigator tabBarOptions={{activeTintColor: Theme.Light.caption}}>
-            <Tab.Screen
-              name="Recipes"
-              component={Explore}
-              options={{
-                tabBarIcon: ({color}) => (
-                  <Icon name="search" color={color} size={26} />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Groups"
-              component={Groups}
-              options={{
-                tabBarIcon: ({color}) => (
-                  <Icon name="users" color={color} size={26} />
-                ),
-              }}
-            />
-            {/* <Tab.Screen
+    <MenuProvider>
+      <NavigationContainer>
+        <Tab.Navigator tabBarOptions={{ activeTintColor: Theme.Light.caption }}>
+          <Tab.Screen
+            name="Recipes"
+            component={Explore}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Icon name="search" color={color} size={26} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Groups"
+            component={Groups}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Icon name="users" color={color} size={26} />
+              ),
+            }}
+          />
+          {/* <Tab.Screen
           name="Temp-Create"
           component={Create}
           options={{
@@ -120,7 +126,7 @@ export default function App() {
             ),
           }}
         /> */}
-            {/* <Tab.Screen
+          {/* <Tab.Screen
           name="Bookmarks"
           component={Bookmarks}
           options={{
@@ -129,18 +135,17 @@ export default function App() {
             ),
           }}
         /> */}
-            <Tab.Screen
-              name="Account"
-              component={Account}
-              options={{
-                tabBarIcon: ({color}) => (
-                  <Icon name="user" color={color} size={26} />
-                ),
-              }}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </MenuProvider>
-    </Provider>
+          <Tab.Screen
+            name="Account"
+            component={Account}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Icon name="user" color={color} size={26} />
+              ),
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </MenuProvider>
   );
 }

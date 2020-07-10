@@ -1,15 +1,21 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {ListItem} from 'react-native-elements';
-import {Theme, Typography} from '../../assets/styles';
+import { View, StyleSheet } from 'react-native';
+import { ListItem } from 'react-native-elements';
+import { Theme, Typography } from '../../assets/styles';
 import Auth from '@aws-amplify/auth';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/redux';
+import { User } from 'src/redux/user/types';
 
 const SettingsTab = (props: any) => {
+  const userState: User = useSelector(
+    (state: RootState) => state.UserReducer.user,
+  );
   return (
     <View style={settingsTabStyle.container}>
       <View>
         <ListItem
-          title={'steve@apple.com'}
+          title={userState.email}
           titleStyle={settingsTabStyle.title}
           containerStyle={settingsTabStyle.wrapper}
         />

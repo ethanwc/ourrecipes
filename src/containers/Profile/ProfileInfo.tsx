@@ -2,6 +2,9 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import {Typography} from '../../assets/styles';
+import { User } from 'src/redux/user/types';
+import { RootState } from 'src/redux';
+import { useSelector } from 'react-redux';
 
 export interface prifleInfoProps {
   name: string;
@@ -9,6 +12,9 @@ export interface prifleInfoProps {
 }
 
 const ProfileInfo = () => {
+  const userState: User = useSelector(
+    (state: RootState) => state.UserReducer.user,
+  );
   return (
     <View style={profileInfoStyle.container}>
       <Avatar
@@ -21,7 +27,7 @@ const ProfileInfo = () => {
         showAccessory
       />
       <View style={profileInfoStyle.wrapper}>
-        <Text style={profileInfoStyle.name}>Steve Jobs</Text>
+      <Text style={profileInfoStyle.name}>{userState.name}</Text>
         <Text style={profileInfoStyle.location}>Seattle, WA</Text>
       </View>
     </View>
