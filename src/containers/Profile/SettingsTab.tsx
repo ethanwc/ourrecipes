@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {Theme, Typography} from '../../assets/styles';
+import Auth from '@aws-amplify/auth';
 
 const SettingsTab = (props: any) => {
   return (
@@ -82,6 +83,17 @@ const SettingsTab = (props: any) => {
             type: 'feather',
             color: Theme.Light.headline,
           }}
+          containerStyle={settingsTabStyle.wrapper}
+        />
+        <ListItem
+          title={'Sign out'}
+          titleStyle={settingsTabStyle.title}
+          leftIcon={{
+            name: 'log-out',
+            type: 'feather',
+            color: Theme.Light.headline,
+          }}
+          onPress={() => Auth.signOut()}
           containerStyle={settingsTabStyle.wrapper}
         />
       </View>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -16,6 +16,7 @@ import Calendar from './view/calendar/Calendar';
 import ShoppingListView from './view/shoppinglist/ShoppingListView';
 import BookmarkView from './view/Bookmark/BookmarkView';
 import Followers from './components/Profile/Followers';
+import Auth from '@aws-amplify/auth';
 
 import {store} from './redux';
 
@@ -76,6 +77,17 @@ const Tab = createBottomTabNavigator();
  * Container base navigation, app main
  */
 export default function App() {
+  useEffect(() => {
+    // Create an scoped async function in the hook
+    async function anyNameFunction() {
+      await console.log(
+        await (await Auth.currentSession()).getIdToken().payload.name,
+      );
+    }
+    // Execute the created function directly
+    anyNameFunction();
+  }, []);
+
   return (
     <Provider store={store}>
       <MenuProvider>
