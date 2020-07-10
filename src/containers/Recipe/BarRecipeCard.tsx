@@ -41,7 +41,7 @@ const BarRecipeCard = () => {
             <Text style={Typography.Typography.subheadline}>Chicken Pot Pie</Text>
             <Icon
               name="bookmark"
-              style={{ color: Theme.Light.body }}
+              style={{ color: Theme.Light.caption }}
               size={30} />
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
