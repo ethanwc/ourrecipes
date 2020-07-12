@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import {
-name as appName
-} from './app.json';
-import { Button, Linking, Text, View } from 'react-native';
-import Amplify, { Auth, Hub } from 'aws-amplify';
+import React, {useEffect, useState} from 'react';
+import {name as appName} from './app.json';
+import {Button, Linking, Text, View} from 'react-native';
+import Amplify, {Auth, Hub} from 'aws-amplify';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
 
 async function urlOpener(url, redirectUrl) {
   console.log(url);
   await InAppBrowser.isAvailable();
-  const { type, url: newUrl } = await InAppBrowser.openAuth(url, redirectUrl, {
+  const {type, url: newUrl} = await InAppBrowser.openAuth(url, redirectUrl, {
     showTitle: false,
     enableUrlBarHiding: true,
     enableDefaultShare: false,
     ephemeralWebSession: false,
   });
-
+  if (type === 'success') {
+    Linking.openURL(newUrl);
+  }
   // if (type === 'success') {
-    // Linking.openURL();
+  // Linking.openURL();
   // }
 }
 /*
@@ -28,26 +28,18 @@ response_type=code
 &identity_provider=Facebook */
 
 const awsconfig = {
-  Auth: {
-    identityPoolId: 'us-west-2:fd59ad3e-1f97-47df-a6b9-0c4c26af498f',
-    region: 'us-west-2',
-    userPoolId: 'us-west-2_IRN96ZG45',
-    userPoolWebClientId: '1q564cnieahdmg9smqf4n3tnor',
+  identityPoolId: 'us-west-2:0141a225-6e64-49ae-b7f7-1adb6e0124ee',
+  region: 'us-west-2',
+  userPoolId: 'us-west-2_VX9XLFINz',
+  userPoolWebClientId: '3oqq3dqj3geropiv80570bo3ql',
+  oauth: {
+    domain: 'ourrecipesapp2.auth.us-west-2.amazoncognito.com',
+    scope: ['email', 'openid', 'profile', 'profile', 'aws.cognito.signin.user.admin'],
+    redirectSignIn: 'ourrecipes://',
+    redirectSignOut: 'ourrecipes://',
+    responseType: 'token',
   },
-  oauth : {
-    domain : 'ourrecipesapp.auth.us-west-2.amazoncognito.com',
-    scope: [
-      "phone",
-      "email",
-      "openid",
-      "profile",
-      "aws.cognito.signin.user.admin"
-  ],    
-    // redirectSignIn : 'https://www.example.com',
-    redirectSignIn : 'ourreipes://',
-    responseType: 'code'
-  },
-  // federationTarget: "COGNITO_USER_POOLS"
+  federationTarget: 'COGNITO_USER_POOLS',
 };
 
 Amplify.configure({
@@ -55,18 +47,18 @@ Amplify.configure({
   oauth: {
     ...awsconfig.oauth,
     urlOpener,
-    },
+  },
 });
 
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    Hub.listen('auth', ({ payload: { event, data } }) => {
+    Hub.listen('auth', ({payload: {event, data}}) => {
       switch (event) {
         case 'signIn':
         case 'cognitoHostedUI':
-          getUser().then(userData => setUser(userData));
+          getUser().then((userData) => setUser(userData));
           break;
         case 'signOut':
           setUser(null);
@@ -78,12 +70,12 @@ function App() {
       }
     });
 
-    getUser().then(userData => setUser(userData));
+    getUser().then((userData) => setUser(userData));
   }, []);
 
   function getUser() {
     return Auth.currentAuthenticatedUser()
-      .then(userData => userData)
+      .then((userData) => userData)
       .catch(() => console.log('Not signed in'));
   }
 
@@ -93,20 +85,20 @@ function App() {
       {user ? (
         <Button title="Sign Out" onPress={() => Auth.signOut()} />
       ) : (
-        <Button title="Federated Sign In" onPress={() => Auth.federatedSignIn()} />
+        <Button
+          title="Federated Sign In"
+          onPress={() => Auth.federatedSignIn()}
+        />
       )}
-        <Button title="Facebook Sign In" onPress={() => Auth.federatedSignIn({provider: 'Facebook'})} />
+
     </View>
   );
 }
 
-
 AppRegistry.registerComponent(appName, () => App);
 
 // import React from 'react';
-import {
-  AppRegistry
-} from 'react-native';
+import {AppRegistry} from 'react-native';
 // import App from './src/App';
 // import {
 //   withAuthenticator
@@ -117,11 +109,9 @@ import {
 //   Provider
 // } from 'react-redux';
 
-
 // import {
 //   store
 // } from './src/redux';
-
 
 // const awsConfig = {
 //   identityPoolId: 'us-west-2:fd59ad3e-1f97-47df-a6b9-0c4c26af498f',
