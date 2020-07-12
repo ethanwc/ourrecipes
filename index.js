@@ -30,11 +30,17 @@ response_type=code
 const awsconfig = {
   identityPoolId: 'us-west-2:0141a225-6e64-49ae-b7f7-1adb6e0124ee',
   region: 'us-west-2',
-  userPoolId: 'us-west-2_VX9XLFINz',
-  userPoolWebClientId: '3oqq3dqj3geropiv80570bo3ql',
+  userPoolId: 'us-west-2_JIyd7gfYd',
+  userPoolWebClientId: '76pmarb1rb17n3tctrdmsqv60e',
   oauth: {
-    domain: 'ourrecipesapp2.auth.us-west-2.amazoncognito.com',
-    scope: ['email', 'openid', 'profile', 'profile', 'aws.cognito.signin.user.admin'],
+    domain: 'dawadwwadwadwadwad.auth.us-west-2.amazoncognito.com',
+    scope: [
+      'email',
+      'openid',
+      'profile',
+      'profile',
+      'aws.cognito.signin.user.admin',
+    ],
     redirectSignIn: 'ourrecipes://',
     redirectSignOut: 'ourrecipes://',
     responseType: 'token',
@@ -85,12 +91,17 @@ function App() {
       {user ? (
         <Button title="Sign Out" onPress={() => Auth.signOut()} />
       ) : (
-        <Button
-          title="Federated Sign In"
-          onPress={() => Auth.federatedSignIn()}
-        />
+        <View>
+          <Button
+            title="Google Sign In"
+            onPress={() => Auth.federatedSignIn({provider: 'Google'})}
+          />
+          <Button
+            title="Facebook Sign In"
+            onPress={() => Auth.federatedSignIn()}
+          />
+        </View>
       )}
-
     </View>
   );
 }
@@ -126,12 +137,13 @@ import {AppRegistry} from 'react-native';
 //   },
 // });
 
-// const AppWrapper = () => {
-//   return ( <Provider store = {store}>
-//     <App/>
-//     </Provider>
-//   )
-// }
+const AppWrapper = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
 
 // AppRegistry.registerComponent(appName, () =>
 //   withAuthenticator(AppWrapper, {
