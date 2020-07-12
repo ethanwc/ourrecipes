@@ -76,7 +76,7 @@ const Tab = createBottomTabNavigator();
 /**
  * Container base navigation, app main
  */
-export default function App() {
+export default function CoreApp() {
 
   const dispatch = useDispatch();
 
@@ -92,7 +92,8 @@ export default function App() {
       dispatch(set(payload));
     }
     // Execute the created function directly
-    anyNameFunction();
+    // anyNameFunction();
+    console.log('wtf');
   }, []);
 
   return (

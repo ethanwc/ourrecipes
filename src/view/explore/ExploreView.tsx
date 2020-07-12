@@ -20,7 +20,7 @@ import Icon from 'react-native-vector-icons/Feather';
  */
 const Explore = ({navigation}: any) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
       <ScrollView>
         {/* Searchbar */}
         <Searchbar />

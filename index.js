@@ -3,6 +3,16 @@ import {name as appName} from './app.json';
 import {Button, Linking, Text, View} from 'react-native';
 import Amplify, {Auth, Hub} from 'aws-amplify';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
+import {AppRegistry} from 'react-native';
+import CoreApp from './src/App';
+
+import {
+  Provider
+} from 'react-redux';
+import {
+  store
+} from './src/redux';
+
 
 async function urlOpener(url, redirectUrl) {
   console.log(url);
@@ -16,16 +26,7 @@ async function urlOpener(url, redirectUrl) {
   if (type === 'success') {
     Linking.openURL(newUrl);
   }
-  // if (type === 'success') {
-  // Linking.openURL();
-  // }
 }
-/*
-https://ourrecipesapp.auth.us-west-2.amazoncognito.com/login?
-response_type=code
-&client_id=1q564cnieahdmg9smqf4n3tnor
-&redirect_uri=https://www.example.com
-&identity_provider=Facebook */
 
 const awsconfig = {
   identityPoolId: 'us-west-2:0141a225-6e64-49ae-b7f7-1adb6e0124ee',
@@ -65,6 +66,7 @@ function App() {
         case 'signIn':
         case 'cognitoHostedUI':
           getUser().then((userData) => setUser(userData));
+          console.log('thing')
           break;
         case 'signOut':
           setUser(null);
@@ -85,76 +87,30 @@ function App() {
       .catch(() => console.log('Not signed in'));
   }
 
-  return (
-    <View>
-      <Text>User: {user ? JSON.stringify(user.attributes) : 'None'}</Text>
-      {user ? (
-        <Button title="Sign Out" onPress={() => Auth.signOut()} />
-      ) : (
-        <View>
-          <Button
-            title="Google Sign In"
-            onPress={() => Auth.federatedSignIn({provider: 'Google'})}
-          />
-          <Button
-            title="Facebook Sign In"
-            onPress={() => Auth.federatedSignIn()}
-          />
-        </View>
-      )}
+  const root = user ? <CoreAppState/> : <View><Button
+    style={{ width: 192, height: 48 }} title={'sign in'}
+    onPress={() => Auth.federatedSignIn()}
+    />
     </View>
+    ;
+
+    if (user) console.log(JSON.stringify(user.attributes.name))
+
+  return (
+    <Provider store={store}>
+      {root}
+    </Provider>
+
   );
 }
 
 AppRegistry.registerComponent(appName, () => App);
 
-// import React from 'react';
-import {AppRegistry} from 'react-native';
-// import App from './src/App';
-// import {
-//   withAuthenticator
-// } from 'aws-amplify-react-native';
-// import Amplify from '@aws-amplify/core';
 
-// import {
-//   Provider
-// } from 'react-redux';
-
-// import {
-//   store
-// } from './src/redux';
-
-// const awsConfig = {
-//   identityPoolId: 'us-west-2:fd59ad3e-1f97-47df-a6b9-0c4c26af498f',
-//   region: 'us-west-2',
-//   userPoolId: 'us-west-2_hZYGwuQqX',
-//   userPoolWebClientId: '34feialh5mvr5tnb15v26vt3l0',
-// };
-
-// Amplify.configure(awsConfig, {
-//   Analytics: {
-//     disabled: true,
-//   },
-// });
-
-const AppWrapper = () => {
+const CoreAppState = () => {
   return (
-    <Provider store={store}>
-      <App />
-    </Provider>
+      <CoreApp />
   );
 };
 
-// AppRegistry.registerComponent(appName, () =>
-//   withAuthenticator(AppWrapper, {
-//     signUpConfig: {
-//       //   hiddenDefaults: ['phone_number'],
-//       signUpFields: [{
-//         label: 'Name',
-//         key: 'name',
-//         required: true,
-//         type: 'string'
-//       }, ],
-//     },
-//   }),
-// );
+//todo: wrap entire app in provider, use redux to handle user logged state, create: awsconfig - fix domains, login nav flow, fix 'corestate' 
