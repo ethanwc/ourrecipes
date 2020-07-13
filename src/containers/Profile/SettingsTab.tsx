@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ListItem } from 'react-native-elements';
-import { Theme, Typography } from '../../assets/styles';
+import {View, StyleSheet} from 'react-native';
+import {ListItem} from 'react-native-elements';
+import {Theme, Typography} from '../../assets/styles';
 import Auth from '@aws-amplify/auth';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/redux';
-import { User } from 'src/redux/user/types';
+import {useSelector} from 'react-redux';
+import {RootState} from 'src/redux';
+import {User} from 'src/redux/user/types';
 
 const SettingsTab = (props: any) => {
   const userState: User = useSelector(

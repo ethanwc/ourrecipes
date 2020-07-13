@@ -6,13 +6,8 @@ import InAppBrowser from 'react-native-inappbrowser-reborn';
 import {AppRegistry} from 'react-native';
 import CoreApp from './src/App';
 
-import {
-  Provider
-} from 'react-redux';
-import {
-  store
-} from './src/redux';
-
+import {Provider} from 'react-redux';
+import {store} from './src/redux';
 
 async function urlOpener(url, redirectUrl) {
   console.log(url);
@@ -34,7 +29,7 @@ const awsconfig = {
   userPoolId: 'us-west-2_JIyd7gfYd',
   userPoolWebClientId: '76pmarb1rb17n3tctrdmsqv60e',
   oauth: {
-    domain: 'dawadwwadwadwadwad.auth.us-west-2.amazoncognito.com',
+    domain: 'ourrecipes.auth.us-west-2.amazoncognito.com',
     scope: [
       'email',
       'openid',
@@ -66,7 +61,7 @@ function App() {
         case 'signIn':
         case 'cognitoHostedUI':
           getUser().then((userData) => setUser(userData));
-          console.log('thing')
+          console.log('thing');
           break;
         case 'signOut':
           setUser(null);
@@ -87,30 +82,27 @@ function App() {
       .catch(() => console.log('Not signed in'));
   }
 
-  const root = user ? <CoreAppState/> : <View><Button
-    style={{ width: 192, height: 48 }} title={'sign in'}
-    onPress={() => Auth.federatedSignIn()}
-    />
+  const root = user ? (
+    <CoreAppState />
+  ) : (
+    <View>
+      <Button
+        style={{width: 192, height: 48}}
+        title={'sign in'}
+        onPress={() => Auth.federatedSignIn()}
+      />
     </View>
-    ;
-
-    if (user) console.log(JSON.stringify(user.attributes.name))
-
-  return (
-    <Provider store={store}>
-      {root}
-    </Provider>
-
   );
+  
+  if (user) console.log(JSON.stringify(user.attributes));
+
+  return <Provider store={store}>{root}</Provider>;
 }
 
 AppRegistry.registerComponent(appName, () => App);
 
-
 const CoreAppState = () => {
-  return (
-      <CoreApp />
-  );
+  return <CoreApp />;
 };
 
-//todo: wrap entire app in provider, use redux to handle user logged state, create: awsconfig - fix domains, login nav flow, fix 'corestate' 
+//todo: wrap entire app in provider, use redux to handle user logged state, create: awsconfig - fix domains, login nav flow, fix 'corestate'
