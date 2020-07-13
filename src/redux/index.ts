@@ -21,12 +21,12 @@ const initialShoppingList: ShoppinglistState = {
 const initialGroupsState: GroupsState = {
   groups: [
     {
-      id: 'lol',
-      name: 'super grouper',
+      id: '123123',
+      name: 'Failed to load groups',
       creatorid: '123',
       creationDate: new Date(),
-      membercount: 10,
-      memberids: ['123', '456'],
+      membercount: 0,
+      memberids: [],
     },
   ],
 };
