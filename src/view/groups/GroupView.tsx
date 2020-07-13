@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -9,12 +9,17 @@ import GroupCards from '../../components/Group/GroupCards';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme} from '../../assets/styles';
 import CreateGroup from '../../components/Group/CreateGroup';
+import {getGroups} from '../../redux/group/actions';
 
 /**
  * Groups page of app
  */
 const Groups = ({navigation}: any) => {
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    getGroups();
+  }, []);
 
   return (
     <SafeAreaView style={{flex: 1}}>

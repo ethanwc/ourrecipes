@@ -1,10 +1,10 @@
-import { ShoppinglistState } from './shoppinglist/types';
-import { GroupsState } from './group/types';
-import { ShoppingList } from './shoppinglist/reducers';
-import { Groups } from './group/reducers';
-import { createStore, combineReducers } from 'redux';
-import { UserState, User } from './user/types';
-import { UserReducer } from './user/reducers';
+import {ShoppinglistState} from './shoppinglist/types';
+import {GroupsState} from './group/types';
+import {ShoppingList} from './shoppinglist/reducers';
+import {Groups} from './group/reducers';
+import {createStore, combineReducers} from 'redux';
+import {UserState, User} from './user/types';
+import {UserReducer} from './user/reducers';
 // Root application state types
 export interface RootState {
   ShoppingList: ShoppinglistState;
@@ -14,7 +14,7 @@ export interface RootState {
 
 const initialShoppingList: ShoppinglistState = {
   items: [
-    { id: 'wtf', name: 'test1234', checked: false, creationDate: new Date() },
+    {id: 'wtf', name: 'test1234', checked: false, creationDate: new Date()},
   ],
 };
 
@@ -33,23 +33,22 @@ const initialGroupsState: GroupsState = {
 
 const initialUserState: UserState = {
   user: {
-    email: '',
-    name: '',
-    phoneNumber: ''
-
-  }
-}
+    email: 'failedtoload@ourrecipes.app',
+    name: 'Failed to load',
+    phoneNumber: '',
+  },
+};
 
 const rootReducer = combineReducers({
   ShoppingList,
   Groups,
-  UserReducer
+  UserReducer,
 });
 
 const initialState: RootState = {
   ShoppingList: initialShoppingList,
   Groups: initialGroupsState,
-  UserReducer: initialUserState
+  UserReducer: initialUserState,
 };
 
 export const store = createStore(rootReducer, initialState);

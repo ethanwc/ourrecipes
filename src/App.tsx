@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {set} from './redux/user/actions';
 import {useDispatch} from 'react-redux';
 import {Navigator} from './navigation/Navigator';
-import {awsconfig} from './awsconfig';
+import {awsconfig} from './assets/constants/awsconfig';
 import Amplify, {Auth, Hub} from 'aws-amplify';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
 import {Button, View} from 'react-native';
+import {getGroups} from './redux/group/actions';
 
 console.disableYellowBox = true;
 
@@ -68,7 +69,7 @@ export default function App() {
   }, []);
 
   // Set user state upon auth
-  if (user) console.log(user.attributes);
+  // if (user) console.log(user);
   if (user) dispatch(set(user.attributes));
 
   const root = user ? (

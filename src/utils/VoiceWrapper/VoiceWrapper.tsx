@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather';
 import Voice from '@react-native-community/voice';

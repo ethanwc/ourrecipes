@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {ListItem} from 'react-native-elements';
-import {Theme, Typography} from '../../assets/styles';
-import Auth from '@aws-amplify/auth';
 import {useSelector} from 'react-redux';
+import Auth from '@aws-amplify/auth';
 import {RootState} from 'src/redux';
 import {User} from 'src/redux/user/types';
+import {Theme, Typography} from '../../assets/styles';
 
 const SettingsTab = (props: any) => {
   const userState: User = useSelector(
@@ -35,6 +35,7 @@ const SettingsTab = (props: any) => {
             })
           }
         />
+        {/* Add a meal planner one day??? */}
         {/* <ListItem
           title={'Meal Planner'}
           titleStyle={settingsTabStyle.title}
@@ -68,24 +69,22 @@ const SettingsTab = (props: any) => {
           }
         />
       </View>
-
       <View>
-        <ListItem
-          title={'Privacy Policy'}
-          titleStyle={settingsTabStyle.title}
-          leftIcon={{
-            name: 'info',
-            type: 'feather',
-            color: Theme.Light.headline,
-          }}
-          containerStyle={settingsTabStyle.wrapper}
-        />
-
         <ListItem
           title={'Settings'}
           titleStyle={settingsTabStyle.title}
           leftIcon={{
             name: 'settings',
+            type: 'feather',
+            color: Theme.Light.headline,
+          }}
+          containerStyle={settingsTabStyle.wrapper}
+        />
+        <ListItem
+          title={'Privacy Policy'}
+          titleStyle={settingsTabStyle.title}
+          leftIcon={{
+            name: 'info',
             type: 'feather',
             color: Theme.Light.headline,
           }}
