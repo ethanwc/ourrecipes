@@ -5,7 +5,7 @@ import {Navigator} from './navigation/Navigator';
 import {awsconfig} from './assets/constants/awsconfig';
 import Amplify, {Auth, Hub} from 'aws-amplify';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
-import {Button, View} from 'react-native';
+import {Button, View, Linking} from 'react-native';
 import {getGroups} from './redux/group/actions';
 
 console.disableYellowBox = true;
@@ -13,7 +13,7 @@ console.disableYellowBox = true;
 async function urlOpener(url: any, redirectUrl: any) {
   console.log(url);
   await InAppBrowser.isAvailable();
-  await InAppBrowser.openAuth(url, redirectUrl, {
+  const {type, url: newUrl} = await InAppBrowser.openAuth(url, redirectUrl, {
     showTitle: false,
     enableUrlBarHiding: true,
     enableDefaultShare: false,
@@ -21,10 +21,9 @@ async function urlOpener(url: any, redirectUrl: any) {
   });
 
   // Is this needed?
-  // const {type, url: newUrl} =
-  // if (type === 'success') {
-  //   Linking.openURL(newUrl);
-  // }
+  if (type === 'success') {
+    Linking.openURL(newUrl);
+  }
 }
 
 // Configure aws auth
@@ -71,6 +70,10 @@ export default function App() {
   // Set user state upon auth
   // if (user) console.log(user);
   if (user) dispatch(set(user.attributes));
+
+  if (user) console.log(user.signInUserSession.accessToken.jwtToken);
+  if (user) console.log(user.signInUserSession.idToken.jwtToken);
+
 
   const root = user ? (
     <Navigator />
