@@ -41,13 +41,12 @@ const BarRecipeCard = () => {
             <Text style={Typography.Typography.subheadline}>Chicken Pot Pie</Text>
             <Icon
               name="bookmark"
-              style={{ color: Theme.Light.body }}
-              size={30} />
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={Typography.Typography.body}>Korean BBQ</Text>
-            <View style={barRecipeCardProps.dot} />
-            <Text style={Typography.Typography.body}>Dinner</Text>
+              size={24}
+              color={Theme.Light.caption}
+              style={{ position: 'absolute', right: 10, top: 10 }}
+              onPress={() => console.log('icon pressed')}
+            />
+
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Icon
@@ -72,10 +71,10 @@ const barRecipeCardProps = StyleSheet.create({
   container: {
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: Theme.Light.shadow,
     borderBottomColor: Theme.Light.body,
-    borderBottomWidth: 0.3,
+    marginVertical: 5,
   },
   dot: {
     backgroundColor: Theme.Light.headline,

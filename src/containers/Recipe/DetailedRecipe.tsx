@@ -242,6 +242,7 @@ const DetailedRecipe = ({navigation}: any) => {
               ...Typography.Typography.header,
               paddingHorizontal: 15,
               marginTop: 15,
+              marginBottom: 15,
             }}>
             Reviews
           </Text>

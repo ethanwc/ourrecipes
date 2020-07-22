@@ -19,7 +19,7 @@ const favoriteIconEmpty = (
   />
 );
 
-const favoriteIconFilled = (
+const bookmarkIcon = (
   <Icon
     name="bookmark"
     size={24}
@@ -29,7 +29,7 @@ const favoriteIconFilled = (
   />
 );
 
-const favoriteIcon = favoriteIconFilled;
+const favoriteIcon = bookmarkIcon;
 
 const LargeRecipeCard = (props: largeRecipeCardProps) => {
   return (

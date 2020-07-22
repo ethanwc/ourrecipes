@@ -1,12 +1,12 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableHighlight} from 'react-native';
-import {Theme, Typography} from '../../assets/styles';
-import {Input, Icon} from 'react-native-elements';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import { Theme, Typography } from '../../assets/styles';
+import { Input, Icon } from 'react-native-elements';
 import VoiceWrapper from '../../utils/VoiceWrapper/VoiceWrapper';
 import wordsToNumbers from 'words-to-numbers';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import {TextInput} from 'react-native-gesture-handler';
+import { TextInput } from 'react-native-gesture-handler';
 
 var parser = require('ingredients-parser');
 

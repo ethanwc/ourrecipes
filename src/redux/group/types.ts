@@ -7,12 +7,12 @@ export interface GroupsState {
 }
 
 export interface Group {
-    id: string
-    name: string
+    id: string;
+    name: string;
     creatorid: string;
     memberids: string[];
-    membercount:  number;
-    creationDate: Date
+    membercount: number;
+    creationDate: Date;
 }
 
 interface AddGroupAction {
