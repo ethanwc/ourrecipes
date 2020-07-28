@@ -23,9 +23,7 @@ const Groups = ({navigation}: any) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <ScrollView>
         <GroupCards navigation={navigation} />
-      </ScrollView>
       <TouchableOpacity
         style={groupsStyle.createButton}
         onPress={() => setShowModal(!showModal)}>

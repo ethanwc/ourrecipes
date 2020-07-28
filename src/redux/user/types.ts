@@ -7,7 +7,19 @@ export interface UserState {
 export interface User {
     name: string;
     email: string;
-    phoneNumber: string;
+    photo?: string;
+    location?: string;
+    bio?: string;
+    creationDate: Date;
+    /** String arrays represent mongodb direct ids */
+    recipes: string[];
+    groups: string[];
+    bookmarks: string[];
+    shoppinglist: string[];
+    followers: string[];
+    following: string[];
+    reviews: string[];
+    pictures: string[];
 }
 
 interface SetUserAction {

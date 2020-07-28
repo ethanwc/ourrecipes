@@ -29,6 +29,7 @@ const GroupMembers = (props: groupMembersProps) => {
                     )}
                     decelerationRate={0.798}
                     showsHorizontalScrollIndicator={false}
+                    keyExtractor={(item, index) => index.toString()}
                 />
             </Overlay>
         </SafeAreaView>

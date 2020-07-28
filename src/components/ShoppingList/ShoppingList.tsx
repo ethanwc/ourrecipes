@@ -34,7 +34,6 @@ const ShoppingList = () => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <ScrollView style={{flexGrow: 1}}>
         <FlatList
           data={items}
           renderItem={({item}: {item: ShoppingListItem}) => (
@@ -47,7 +46,6 @@ const ShoppingList = () => {
           decelerationRate={0.798}
           showsHorizontalScrollIndicator={false}
         />
-      </ScrollView>
       <CreateListItem
         isVisible={addItemModal}
         setVisible={() => setAddItemModal(!addItemModal)}

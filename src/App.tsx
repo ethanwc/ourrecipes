@@ -13,17 +13,18 @@ console.disableYellowBox = true;
 async function urlOpener(url: any, redirectUrl: any) {
   console.log(url);
   await InAppBrowser.isAvailable();
-  const {type, url: newUrl} = await InAppBrowser.openAuth(url, redirectUrl, {
+  // const {type, url: newUrl} = 
+  await InAppBrowser.openAuth(url, redirectUrl, {
     showTitle: false,
     enableUrlBarHiding: true,
     enableDefaultShare: false,
     ephemeralWebSession: false,
   });
 
-  // Is this needed?
-  if (type === 'success') {
-    Linking.openURL(newUrl);
-  }
+  // // Is this needed?
+  // if (type === 'success') {
+  //   Linking.openURL(newUrl);
+  // }
 }
 
 // Configure aws auth
@@ -73,7 +74,6 @@ export default function App() {
 
   if (user) console.log(user.signInUserSession.accessToken.jwtToken);
   if (user) console.log(user.signInUserSession.idToken.jwtToken);
-
 
   const root = user ? (
     <Navigator />
