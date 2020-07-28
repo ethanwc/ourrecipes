@@ -63,8 +63,9 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
           rightIcon={clearIcon}
         />
       </View>
-      <ImageSelector onImageSelected={(uri: string) => console.log(uri)}/>
-  
+      <View style={{flex: 2}}>
+        <ImageSelector size={'small'} />
+      </View>
     </View>
   );
 };

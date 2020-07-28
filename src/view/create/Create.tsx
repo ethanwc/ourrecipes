@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,23 +8,26 @@ import {
   Vibration,
   Picker,
 } from 'react-native';
-import { Typography, Theme } from '../../assets/styles';
-import { Input, Image } from 'react-native-elements';
+import {Typography, Theme} from '../../assets/styles';
+import {Input, Image} from 'react-native-elements';
 import ImageSelector from '../../utils/ImageSelector/ImageSelector';
 import InfoBar from '../../containers/Create/InfoBar';
 import CreateIngredients from '../../components/Create/CreateIngredients/CreateIngredients';
 import CreateDirections from '../../components/Create/CreateDirections/CreateDirections';
 import Icon from 'react-native-vector-icons/Feather';
-import { responsiveScreenWidth, responsiveScreenHeight } from 'react-native-responsive-dimensions';
-import { Ingredient, Direction} from '../../redux/recipe/types';
+import {
+  responsiveScreenWidth,
+  responsiveScreenHeight,
+} from 'react-native-responsive-dimensions';
+import {Ingredient, Direction} from '../../redux/recipe/types';
+import Axios from 'axios';
 
-const Create = ({ navigation }: any) => {
-  const [title, setTitle] = useState('');
+const Create = ({navigation}: any) => {
   const [category, setCategory] = useState('');
-
-
   const [ingredients, setIngredients] = useState(Array<Ingredient>());
   const [directions, setDirections] = useState(Array<Direction>());
+  const [title, setTitle] = useState('');
+  const [selectedValue, setSelectedValue] = useState('');
 
   //update nav title
   navigation.setOptions({
@@ -35,7 +38,7 @@ const Create = ({ navigation }: any) => {
         name={'check'}
         size={30}
         color={Theme.Light.headline}
-        style={{ marginRight: 10 }}
+        style={{marginRight: 10}}
         onPress={() => console.log('save recipe...')}
       />
     ),
@@ -44,7 +47,7 @@ const Create = ({ navigation }: any) => {
     <SafeAreaView style={createStyle.contaier}>
       <ScrollView>
         {/* Pick recipe title */}
-        <View style={{ marginHorizontal: 10 }}>
+        <View style={{marginHorizontal: 10}}>
           <Input
             value={title}
             onChangeText={(text: string) => setTitle(text)}
@@ -54,11 +57,11 @@ const Create = ({ navigation }: any) => {
         </View>
         {/* Pick recipe main image */}
         <View style={createStyle.imageWrapper}>
-          <ImageSelector onImageSelected={(uri: string) => console.log(uri)} />
+          <ImageSelector size={"large"} />
         </View>
 
         {/* Recipe description */}
-        <View style={{ marginHorizontal: 10 }}>
+        <View style={{marginHorizontal: 10}}>
           <Input
             value={title}
             onChangeText={(text: string) => setTitle(text)}
