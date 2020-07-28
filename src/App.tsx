@@ -21,7 +21,7 @@ import {store} from './redux';
 
 const exploreStack = createStackNavigator();
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 //Explore Navigator
 function Explore() {

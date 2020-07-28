@@ -38,7 +38,7 @@ const Create = ({ navigation }: any) => {
     <SafeAreaView style={createStyle.contaier}>
       <ScrollView>
         {/* Pick recipe main image */}
-        <ImageSelector  />
+        <ImageSelector size={'large'}/>
         {/* When set to true, the image file content will be available as a base64-encoded string in the data property. Hint: To use this string as an image source, use it like:  */}
 
         {/* <Image source={{uri: `data:${image.mime};base64,${image.data}`}} width={100} height={100} />  */}
