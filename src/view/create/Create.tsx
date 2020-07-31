@@ -57,7 +57,7 @@ const Create = ({navigation}: any) => {
         </View>
         {/* Pick recipe main image */}
         <View style={createStyle.imageWrapper}>
-          <ImageSelector size={"large"} />
+          <ImageSelector size={'large'} />
         </View>
 
         {/* Recipe description */}

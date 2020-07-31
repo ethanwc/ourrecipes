@@ -21,10 +21,11 @@ const CreateIngredients = () => {
 
   return (
     <View>
-      {/* <Swipe /> */}
+      <Swipe />
+      {/* <CreateIngredientCard />
       <CreateIngredientCard />
       <CreateIngredientCard />
-      <CreateIngredientCard />
+      <CreateNewCard onPress={() => console.log('add new card')} /> */}
       <CreateNewCard onPress={() => console.log('add new card')} />
     </View>
   );
