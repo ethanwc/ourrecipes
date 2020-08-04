@@ -27,16 +27,9 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
       name={'x'}
       onPress={() => setInput('')}
       color={Theme.Light.caption}
-      style={createDirectionCardStyle.icon}
     />
   ) : (
-    <Icon
-      type={'feather'}
-      name={'x'}
-      size={0}
-      color={Theme.Light.caption}
-      style={createDirectionCardStyle.icon}
-    />
+    <Icon type={'feather'} name={'x'} size={0} color={Theme.Light.caption} />
   );
 
   return (
@@ -59,8 +52,6 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
           value={input}
           onChangeText={(text: string) => setInput(text)}
           inputContainerStyle={{borderBottomWidth: 0}}
-          rightIconContainerStyle={{alignSelf: 'flex-start'}}
-          rightIcon={clearIcon}
         />
       </View>
       <View style={{flex: 2}}>
@@ -77,27 +68,16 @@ const createDirectionCardStyle = StyleSheet.create({
     backgroundColor: Theme.Light.shadow,
     borderRadius: 5,
     marginHorizontal: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
-    alignContent: 'flex-end',
+    paddingTop: 10,
     marginTop: 10,
   },
   step: {
     ...Typography.Typography.subheader,
     color: Theme.Light.headline,
-    marginRight: 10,
   },
   input: {
     ...Typography.Typography.subheader,
     color: Theme.Light.caption,
-  },
-  icon: {
-    alignSelf: 'flex-start',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    alignContent: 'flex-start',
   },
 });
 

@@ -11,7 +11,7 @@ const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 export default class GmailRow extends Component {
   renderLeftActions = (progress: any, dragX: any) => {
     const scale = dragX.interpolate({
-      inputRange: [0, 80],
+      inputRange: [0, 100],
       outputRange: [0, 1],
       extrapolate: 'clamp',
     });
@@ -21,6 +21,7 @@ export default class GmailRow extends Component {
           name="archive"
           size={30}
           color="#fff"
+          onPress={() => console.log('archive pressed')}
           style={[styles.actionIcon, {transform: [{scale}]}]}
         />
       </RectButton>
@@ -28,7 +29,7 @@ export default class GmailRow extends Component {
   };
   renderRightActions = (progress: any, dragX: any) => {
     const scale = dragX.interpolate({
-      inputRange: [-80, 0],
+      inputRange: [-100, 0],
       outputRange: [1, 0],
       extrapolate: 'clamp',
     });
@@ -38,6 +39,7 @@ export default class GmailRow extends Component {
           name="delete-forever"
           size={30}
           color="#fff"
+          onPress={() => console.log('delete pressed')}
           style={[styles.actionIcon, {transform: [{scale}]}]}
         />
       </RectButton>
@@ -55,8 +57,8 @@ export default class GmailRow extends Component {
       <Swipeable
         ref={this.updateRef}
         friction={2}
-        leftThreshold={80}
-        rightThreshold={40}
+        leftThreshold={60}
+        rightThreshold={80}
         renderLeftActions={this.renderLeftActions}
         renderRightActions={this.renderRightActions}>
         {children}
@@ -68,10 +70,12 @@ export default class GmailRow extends Component {
 const styles = StyleSheet.create({
   leftAction: {
     flex: 1,
-    backgroundColor: '#388e3c',
+    backgroundColor: 'orange',
     justifyContent: 'flex-end',
     alignItems: 'center',
     flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
+    margin: 0,
+    
   },
   actionIcon: {
     width: 30,
@@ -80,8 +84,9 @@ const styles = StyleSheet.create({
   rightAction: {
     alignItems: 'center',
     flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
-    backgroundColor: '#dd2c00',
+    backgroundColor: 'red',
     flex: 1,
     justifyContent: 'flex-end',
+    margin: 0,
   },
 });

@@ -41,18 +41,25 @@ const CreateIngredientCard = (props: createIngredientCardProps) => {
 
   console.log(input, focused);
 
-  if (!input) {
+  if (focused && !input) {
+    console.log('a');
     textRender = (
       <TextInput
         placeholder={'Ingredient'}
         value={input}
         onChangeText={(text: string) => setInput(text)}
-        style={createIngredientCardStyle.container}
-        autoFocus={true}
+        // autoFocus={true}
+        style={{
+          ...createIngredientCardStyle.container,
+          ...createIngredientCardStyle.input,
+        }}
+        editable={focused}
         onSubmitEditing={() => console.log('submitted')}
       />
     );
-  } else if (focused && input) {
+  } else if (focused) {
+    console.log('b');
+
     textRender = (
       <TextInput
         placeholder={'Ingredient'}
@@ -67,22 +74,22 @@ const CreateIngredientCard = (props: createIngredientCardProps) => {
         onSubmitEditing={() => console.log('submitted')}
       />
     );
-  } else if (focused && !input) {
+  } else if (!input) {
+    console.log('c');
+
     textRender = (
-      <TextInput
-        placeholder={'Ingredient'}
-        value={input}
-        autoFocus={true}
-        onChangeText={(text: string) => setInput(text)}
+      <Text
         style={{
           ...createIngredientCardStyle.container,
-          ...createIngredientCardStyle.input,
-        }}
-        editable={focused}
-        onSubmitEditing={() => console.log('submitted')}
-      />
+          ...createIngredientCardStyle.text,
+          ...createIngredientCardStyle.inputPlaceholder,
+        }}>
+        Ingredient
+      </Text>
     );
-  } else if (!focused && input) {
+  } else {
+    console.log('d');
+
     textRender = (
       <Text
         style={{
@@ -93,20 +100,18 @@ const CreateIngredientCard = (props: createIngredientCardProps) => {
         {input}
       </Text>
     );
-  } else {
-    textRender = <Text>wtf</Text>;
   }
 
   return (
     <TouchableWithoutFeedback
       onPress={() => {
-        console.log('focus harder idiot!');
+        console.log('focus idiot!');
         setFocused(true);
       }}
-      onFocus={() => {
-        console.log('focus harder idiot!');
-        setFocused(true);
-      }}
+      // onFocus={() => {
+      //   console.log('focus harder idiot!');
+      //   setFocused(true);
+      // }}
       onBlur={() => {
         setFocused(false);
         console.log('defocus!');
@@ -122,11 +127,12 @@ const createIngredientCardStyle = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: Theme.Light.shadow,
     borderRadius: 5,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     paddingHorizontal: 20,
     paddingVertical: 20,
-    marginTop: 10,
+    // marginVertical: 5,
     alignItems: 'center',
+    flex: 1,
   },
   text: {
     paddingVertical: 25,
@@ -135,6 +141,11 @@ const createIngredientCardStyle = StyleSheet.create({
     width: '100%',
     ...Typography.Typography.subheader,
     color: Theme.Light.caption,
+  },
+  inputPlaceholder: {
+    width: '100%',
+    ...Typography.Typography.subheader,
+    color: Theme.Light.body,
   },
 });
 

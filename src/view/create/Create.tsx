@@ -86,8 +86,8 @@ const Create = ({navigation}: any) => {
         {/* Create recipe ingredients */}
         <Text style={createStyle.header}>Ingredients</Text>
 
-        <CreateIngredients />
         {/* Pick recipe directions */}
+        <CreateIngredients />
         {/* <Text style={createStyle.header}>Directions</Text> */}
         <CreateDirections />
       </ScrollView>

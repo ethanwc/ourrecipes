@@ -3,50 +3,53 @@ export const EDIT_RECIPE = 'EDIT_RECIPE';
 export const REMOVE_RECIPE = 'REMOVE_RECIPE';
 
 export interface RecipeState {
-    recipes: Recipe[]
-}
-
-/** Ingredient type */
+  recipes: Recipe[];
+} /** Ingredient type */
 export interface Ingredient {
-    name: string;
-    amount: number;
-    unit: string;
+  id: string;
+  name: string;
+  amount: number;
+  unit: string;
 }
 
 /** Direction type, image is optional */
 export interface Direction {
-    instruction: string;
-    step: number;
-    imageUrl: string | undefined;
+  id: string;
+  instruction: string;
+  step: number;
+  imageUrl: string | undefined;
 }
 
 /** Recipe type */
 export interface Recipe {
-    id: string;
-    name: string;
-    creatorid: string;
-    creationDate: string;
-    prepTime: string;
-    cookTime: string;
-    servingSize: number;
-    category: string;
-    ingredients: Ingredient[];
-    directions: Direction[];
+  id: string;
+  name: string;
+  creatorid: string;
+  creationDate: string;
+  prepTime: string;
+  cookTime: string;
+  servingSize: number;
+  category: string;
+  ingredients: Ingredient[];
+  directions: Direction[];
 }
 
 interface CreateRecipeAction {
-    type: typeof CREATE_RECIPE
-    payload: Recipe
+  type: typeof CREATE_RECIPE;
+  payload: Recipe;
 }
 
 interface EditReicpeAction {
-    type: typeof EDIT_RECIPE
-    payload: Recipe
+  type: typeof EDIT_RECIPE;
+  payload: Recipe;
 }
 
 interface RemoveRecipeAction {
-    type: typeof REMOVE_RECIPE
-    recipeid: string;
+  type: typeof REMOVE_RECIPE;
+  recipeid: string;
 }
 
-export type RecipeActionTypes = CreateRecipeAction | EditReicpeAction | RemoveRecipeAction;
+export type RecipeActionTypes =
+  | CreateRecipeAction
+  | EditReicpeAction
+  | RemoveRecipeAction;

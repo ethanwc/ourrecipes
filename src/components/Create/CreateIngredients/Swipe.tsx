@@ -30,7 +30,7 @@ export default class Swipe extends Component {
 
 const styles = StyleSheet.create({
   separator: {
-    backgroundColor: 'rgb(200, 199, 204)',
+    backgroundColor: 'blue',
     height: StyleSheet.hairlineWidth,
   },
   fromText: {
