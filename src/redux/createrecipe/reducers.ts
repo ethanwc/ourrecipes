@@ -8,7 +8,7 @@ import {
   CreateRecipeState,
   CreateRecipeActionTypes,
 } from './types';
-import {Ingredient} from '../recipe/types';
+import {Ingredient, Direction, RecipeState} from '../recipe/types';
 
 export const CreateRecipeReducer = (
   state: CreateRecipeState = {ingredients: [], directions: []},
@@ -17,13 +17,16 @@ export const CreateRecipeReducer = (
   switch (action.type) {
     case ADD_INGREDIENT:
       return {
-        ingredients: [...state.ingredients, action.payload],
+        ingredients: state.ingredients,
+        directions: state.directions,
       };
+
     case EDIT_INGREDIENT:
       return {
         ingredients: state.ingredients.map((ingredient: Ingredient) =>
           ingredient.id === action.payload.id ? action.payload : ingredient,
         ),
+        directions: state.directions,
       };
     case REMOVE_INGREDIENT:
       return {
@@ -32,19 +35,29 @@ export const CreateRecipeReducer = (
             (ingredient: Ingredient) => ingredient.id !== action.payload.id,
           ),
         ],
+        directions: state.directions,
       };
 
     case ADD_DIRECTION:
       return {
+        ingredients: state.ingredients,
         directions: [...state.directions, action.payload],
       };
     case EDIT_DIRECTION:
       return {
-        directions: [...state.directions, action.payload],
+        ingredients: state.ingredients,
+        directions: state.directions.map((direction: Direction) =>
+          direction.id === action.payload.id ? action.payload : direction,
+        ),
       };
     case REMOVE_DIRECTION:
       return {
-        directions: [...state.directions, action.payload],
+        ingredients: state.ingredients,
+        directions: [
+          ...state.directions.filter(
+            (direction: Direction) => direction.id !== action.payload.id,
+          ),
+        ],
       };
     default:
       return state;

@@ -4,7 +4,9 @@ export const REMOVE_RECIPE = 'REMOVE_RECIPE';
 
 export interface RecipeState {
   recipes: Recipe[];
-} /** Ingredient type */
+}
+
+/** Ingredient type */
 export interface Ingredient {
   id: string;
   name: string;
@@ -17,7 +19,7 @@ export interface Direction {
   id: string;
   instruction: string;
   step: number;
-  imageUrl: string | undefined;
+  imageUrl?: string;
 }
 
 /** Recipe type */
