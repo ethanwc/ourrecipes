@@ -21,12 +21,13 @@ import {
 } from 'react-native-responsive-dimensions';
 import {Ingredient, Direction} from '../../redux/recipe/types';
 import Axios from 'axios';
+import Categories from '../../components/Category/Categories';
 
 const Create = ({navigation}: any) => {
-  const [category, setCategory] = useState('');
-  const [ingredients, setIngredients] = useState(Array<Ingredient>());
-  const [directions, setDirections] = useState(Array<Direction>());
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const [category, setCategory] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
 
   //update nav title
@@ -63,8 +64,8 @@ const Create = ({navigation}: any) => {
         {/* Recipe description */}
         <View style={{marginHorizontal: 10}}>
           <Input
-            value={title}
-            onChangeText={(text: string) => setTitle(text)}
+            value={description}
+            onChangeText={(text: string) => setDescription(text)}
             placeholder="Description"
             inputStyle={Typography.Typography.subheader}
           />
@@ -75,14 +76,8 @@ const Create = ({navigation}: any) => {
 
         {/* Category */}
         <Text style={createStyle.header}>Category</Text>
-        <Picker
-          category={category}
-          onValueChange={(itemValue, itemIndex) => setCategory(itemValue)}>
-          <Picker.Item label="Breakfast" value="b" />
-          <Picker.Item label="Lunch" value="l" />
-          <Picker.Item label="Dinner" value="d" />
-        </Picker>
 
+        <Categories />
         {/* Create recipe ingredients */}
         <Text style={createStyle.header}>Ingredients</Text>
 
