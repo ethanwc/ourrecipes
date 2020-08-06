@@ -14,6 +14,7 @@ import Axios from 'axios';
 
 export interface ImagePickerProps {
   size: string;
+  onImageSelected: Function;
 }
 
 //Currently set to only lead to image gallery
@@ -57,6 +58,7 @@ const ImageSelector = (props: ImagePickerProps) => {
             console.log(res.data.url);
             setLoading(false);
             setImage(res.data.url);
+            props.onImageSelected(res.data.url);
           })
           .catch((error: any) => {
             console.log('cloudinary error', error.message);

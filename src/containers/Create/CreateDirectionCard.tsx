@@ -55,7 +55,10 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
         />
       </View>
       <View style={{flex: 2}}>
-        <ImageSelector size={'small'} />
+        <ImageSelector
+          size={'small'}
+          onImageSelected={(url: string) => console.log(url)}
+        />
       </View>
     </View>
   );

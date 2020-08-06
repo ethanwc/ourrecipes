@@ -8,7 +8,22 @@ export const ADD_DIRECTION = 'ADD_DIRECTION';
 export const EDIT_DIRECTION = 'EDIT_DIRECTION';
 export const REMOVE_DIRECTION = 'REMOVE_DIRECTION';
 
+export const SET_PREPTIME = 'SET_PREPTIME';
+export const SET_COOKTIME = 'SET_COOKTIME';
+export const SET_SERVINGS = 'SET_SERVINGS';
+export const SET_NAME = 'SET_NAME';
+export const SET_IMAGE = 'SET_IMAGE';
+export const SET_DESCRIPTION = 'SET_DESCRIPTION';
+export const SET_CATEGORY = 'SET_CATEGORY';
+
 export interface CreateRecipeState {
+  name: string;
+  description: string;
+  image: string;
+  category: string;
+  prepTime: string;
+  cookTime: string;
+  servingSize: string;
   ingredients: Ingredient[];
   directions: Direction[];
 }
@@ -43,10 +58,51 @@ interface RemoveDirectionAction {
   payload: Direction;
 }
 
+interface SetPrepTimeAction {
+  type: typeof SET_PREPTIME;
+  payload: string;
+}
+
+interface SetCookTimeAction {
+  type: typeof SET_COOKTIME;
+  payload: string;
+}
+
+interface SetServingsAction {
+  type: typeof SET_SERVINGS;
+  payload: string;
+}
+
+interface SetNameAction {
+  type: typeof SET_NAME;
+  payload: string;
+}
+
+interface SetDescriptionAction {
+  type: typeof SET_DESCRIPTION;
+  payload: string;
+}
+
+interface SetImageAction {
+  type: typeof SET_IMAGE;
+  payload: string;
+}
+
+interface SetCategoryAction {
+  type: typeof SET_CATEGORY;
+  payload: string;
+}
 export type CreateRecipeActionTypes =
   | AddIngredientAction
   | EditIngredientAction
   | RemoveIngredientAction
   | AddDirectionAction
   | EditDirectionAction
-  | RemoveDirectionAction;
+  | RemoveDirectionAction
+  | SetPrepTimeAction
+  | SetCookTimeAction
+  | SetServingsAction
+  | SetNameAction
+  | SetDescriptionAction
+  | SetImageAction
+  | SetCategoryAction;

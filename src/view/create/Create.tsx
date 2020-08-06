@@ -22,13 +22,19 @@ import {
 import {Ingredient, Direction} from '../../redux/recipe/types';
 import Axios from 'axios';
 import Categories from '../../components/Category/Categories';
+import {useDispatch, useSelector} from 'react-redux';
+import {CreateRecipeState} from 'src/redux/createrecipe/types';
+import {RootState} from 'src/redux';
+import {setDescription, setName} from '../../redux/createrecipe/actions';
 
 const Create = ({navigation}: any) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const dispatch = useDispatch();
 
-  const [category, setCategory] = useState('');
-  const [selectedValue, setSelectedValue] = useState('');
+  const createRecipe: CreateRecipeState = useSelector(
+    (state: RootState) => state.CreateRecipeReducer,
+  );
+
+  console.log(createRecipe);
 
   //update nav title
   navigation.setOptions({
@@ -50,22 +56,25 @@ const Create = ({navigation}: any) => {
         {/* Pick recipe title */}
         <View style={{marginHorizontal: 10}}>
           <Input
-            value={title}
-            onChangeText={(text: string) => setTitle(text)}
+            value={createRecipe.name}
+            onChangeText={(text: string) => dispatch(setName(text))}
             placeholder="Recipe Name"
             inputStyle={Typography.Typography.subheader}
           />
         </View>
         {/* Pick recipe main image */}
         <View style={createStyle.imageWrapper}>
-          <ImageSelector size={'large'} />
+          <ImageSelector
+            size={'large'}
+            onImageSelected={(url: string) => console.log(url)}
+          />
         </View>
 
         {/* Recipe description */}
         <View style={{marginHorizontal: 10}}>
           <Input
-            value={description}
-            onChangeText={(text: string) => setDescription(text)}
+            value={createRecipe.description}
+            onChangeText={(text: string) => dispatch(setDescription(text))}
             placeholder="Description"
             inputStyle={Typography.Typography.subheader}
           />

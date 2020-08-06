@@ -1,14 +1,24 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {Input} from 'react-native-elements';
 import {Theme, Typography} from '../../assets/styles';
 import TimePicker from '../../utils/TimePicker/TimePicker';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {
+  setServings,
+  setPrepTime,
+  setCookTime,
+} from '../../redux/createrecipe/actions';
+import {CreateRecipeState} from 'src/redux/createrecipe/types';
+import {RootState} from 'src/redux';
 
 const InfoBar = () => {
-  const [prepTime, setPrepTime] = useState('');
-  const [cookTime, setCookTime] = useState('');
-  const [servingSize, setServingSize] = useState('');
+  const dispatch = useDispatch();
+
+  const createRecipe: CreateRecipeState = useSelector(
+    (state: RootState) => state.CreateRecipeReducer,
+  );
 
   const [prepTimePicker, setPrepTimePicker] = useState(false);
   const [cookTimePicker, setCookTimePicker] = useState(false);
@@ -21,7 +31,7 @@ const InfoBar = () => {
         style={{flex: 1, alignItems: 'center'}}>
         <Icon name={'egg'} size={26} color={Theme.Light.caption} />
         <Input
-          value={prepTime.toString()}
+          value={createRecipe.prepTime}
           placeholder="Prep Time"
           inputStyle={infoBarStyle.input}
           keyboardType={'numeric'}
@@ -35,7 +45,7 @@ const InfoBar = () => {
         style={{flex: 1, alignItems: 'center'}}>
         <Icon name={'fire'} size={26} color={Theme.Light.caption} />
         <Input
-          value={cookTime.toString()}
+          value={createRecipe.cookTime}
           placeholder="Cook Time"
           inputStyle={infoBarStyle.input}
           keyboardType={'numeric'}
@@ -47,11 +57,11 @@ const InfoBar = () => {
       <View style={{flex: 1, alignItems: 'center'}}>
         <Icon name={'users'} size={26} color={Theme.Light.caption} />
         <Input
-          value={servingSize}
+          value={createRecipe.servingSize.toString()}
           placeholder="Serving Size"
           inputStyle={infoBarStyle.input}
           keyboardType={'numeric'}
-          onChangeText={(text: string) => setServingSize(text)}
+          onChangeText={(text: string) => dispatch(setServings(text))}
         />
       </View>
 
@@ -64,7 +74,7 @@ const InfoBar = () => {
             date.getMinutes() >= 10
               ? date.getMinutes()
               : '0' + date.getMinutes();
-          setPrepTime(`${hours}:${minutes}`);
+          dispatch(setPrepTime(`${hours}:${minutes}`));
         }}
         showTimePicker={prepTimePicker}
         setShowTimePicker={(state: boolean) => setPrepTimePicker(state)}
@@ -77,7 +87,7 @@ const InfoBar = () => {
             date.getMinutes() >= 10
               ? date.getMinutes()
               : '0' + date.getMinutes();
-          setCookTime(`${hours}:${minutes}`);
+          dispatch(setCookTime(`${hours}:${minutes}`));
         }}
         showTimePicker={cookTimePicker}
         setShowTimePicker={(state: boolean) => setCookTimePicker(state)}

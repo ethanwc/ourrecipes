@@ -6,6 +6,12 @@ import {
   EDIT_DIRECTION,
   REMOVE_DIRECTION,
   CreateRecipeActionTypes,
+  SET_SERVINGS,
+  SET_NAME,
+  SET_DESCRIPTION,
+  SET_IMAGE,
+  SET_PREPTIME,
+  SET_COOKTIME,
 } from './types';
 import {Ingredient, Direction} from '../recipe/types';
 
@@ -62,5 +68,49 @@ export const removeDirection = (
   return {
     type: REMOVE_DIRECTION,
     payload: newDirection,
+  };
+};
+
+export const setPrepTime = (newTime: string): CreateRecipeActionTypes => {
+  return {
+    type: SET_PREPTIME,
+    payload: newTime,
+  };
+};
+
+export const setCookTime = (newTime: string): CreateRecipeActionTypes => {
+  return {
+    type: SET_COOKTIME,
+    payload: newTime,
+  };
+};
+
+export const setServings = (newServings: string): CreateRecipeActionTypes => {
+  return {
+    type: SET_SERVINGS,
+    payload: newServings,
+  };
+};
+
+export const setName = (newName: string): CreateRecipeActionTypes => {
+  return {
+    type: SET_NAME,
+    payload: newName,
+  };
+};
+
+export const setDescription = (
+  newDescription: string,
+): CreateRecipeActionTypes => {
+  return {
+    type: SET_DESCRIPTION,
+    payload: newDescription,
+  };
+};
+
+export const setImage = (newImage: string): CreateRecipeActionTypes => {
+  return {
+    type: SET_IMAGE,
+    payload: newImage,
   };
 };

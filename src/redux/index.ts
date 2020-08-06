@@ -77,6 +77,13 @@ const initialRecipeState: RecipeState = {
 };
 
 const initialCreateRecipeState: CreateRecipeState = {
+  category: '',
+  cookTime: '',
+  name: 'initialname',
+  description: 'initialdescription',
+  image: '',
+  prepTime: '',
+  servingSize: '4',
   directions: [
     {
       id: 'uuidasdf',
