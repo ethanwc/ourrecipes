@@ -86,7 +86,9 @@ const Create = ({navigation}: any) => {
         {/* Category */}
         <Text style={createStyle.header}>Category</Text>
 
-        <Categories />
+        <Categories
+          onCategoryPressed={(category: string) => console.log(category)}
+        />
         {/* Create recipe ingredients */}
         <Text style={createStyle.header}>Ingredients</Text>
 

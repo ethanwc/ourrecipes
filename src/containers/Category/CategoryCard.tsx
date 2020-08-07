@@ -1,19 +1,32 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, ImageURISource} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  ImageURISource,
+  TouchableHighlight,
+} from 'react-native';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import {Theme, Typography} from '../../assets/styles';
 
-export interface categoryProps {
+export interface CategoryProps {
+  id: string;
   title: string;
   uri: ImageURISource;
+  onCategoryPressed: Function;
 }
 
-const CategoryCard = (props: categoryProps) => {
+const CategoryCard = (props: CategoryProps) => {
   return (
-    <View style={categoryStyle.container}>
-      <Image style={categoryStyle.icon} source={props.uri} />
-      <Text style={Typography.Typography.body}>{props.title}</Text>
-    </View>
+    <TouchableHighlight
+      onPress={() => props.onCategoryPressed(props.title)}
+      style={categoryStyle.container}>
+      <View style={categoryStyle.container}>
+        <Image style={categoryStyle.icon} source={props.uri} />
+        <Text style={Typography.Typography.body}>{props.title}</Text>
+      </View>
+    </TouchableHighlight>
   );
 };
 

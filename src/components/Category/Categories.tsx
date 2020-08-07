@@ -4,39 +4,56 @@ import CategoryCard from '../../containers/Category/CategoryCard';
 
 const DATA = [
   {
+    id: '1',
     title: 'Dessert',
     uri: require(`../../assets/icons/category/bread-1.png`),
   },
   {
+    id: '2',
     title: 'Bread',
     uri: require(`../../assets/icons/category/bread-1.png`),
   },
   {
+    id: '3',
     title: 'Pizza',
     uri: require(`../../assets/icons/category/pizza-2.png`),
   },
   {
+    id: '4',
     title: 'Sandwich',
     uri: require(`../../assets/icons/category/sandwich-1.png`),
   },
   {
+    id: '5',
     title: 'Seafood',
     uri: require(`../../assets/icons/category/sushi-1.png`),
   },
   {
+    id: '6',
     title: 'Breakfast',
     uri: require(`../../assets/icons/category/pancakes-1.png`),
   },
 ];
 
-const Categories = () => {
+export interface CategoriesProps {
+  onCategoryPressed: Function;
+}
+
+const Categories = (props: CategoriesProps) => {
   return (
     <SafeAreaView>
       <FlatList
         horizontal
         data={DATA}
         renderItem={({item}) => (
-          <CategoryCard title={item.title} uri={item.uri} />
+          <CategoryCard
+            id={item.id}
+            title={item.title}
+            uri={item.uri}
+            onCategoryPressed={(category: string) =>
+              props.onCategoryPressed(category)
+            }
+          />
         )}
         keyExtractor={(item) => item.title}
         decelerationRate={0.798}

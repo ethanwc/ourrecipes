@@ -1,9 +1,16 @@
 import React from 'react';
 import {View} from 'react-native';
-import CreateIngredientCard from '../../../containers/Create/CreateIngredientCard';
 import CreateNewCard from '../../../containers/Create/CreateNewCard';
 
-import Swipe from './Swipe';
+import {useDispatch, useSelector} from 'react-redux';
+import {CreateRecipeState} from 'src/redux/createrecipe/types';
+import {RootState} from 'src/redux';
+import {addIngredient} from '../../../redux/createrecipe/actions';
+import 'react-native-get-random-values';
+import {v4 as uuidv4} from 'uuid';
+import {SwipeableRow} from '../../../utils/Swipeable/SwipeableRow';
+import CreateIngredientCard from '../../../containers/Create/CreateIngredientCard';
+
 const CreateIngredients = () => {
   // const description = `${
   //     props.unit.charAt(0).toUpperCase() + props.unit.slice(1)
@@ -19,15 +26,28 @@ const CreateIngredients = () => {
   //     }
   // };
 
+  const dispatch = useDispatch();
+
+  const createRecipe: CreateRecipeState = useSelector(
+    (state: RootState) => state.CreateRecipeReducer,
+  );
+
   return (
     <View>
       <View
         style={{
           marginHorizontal: 10,
         }}>
-        <Swipe />
+        <SwipeableRow
+          child={<CreateIngredientCard />}
+          onLeftButtonPressed={() => console.log('left pressed')}
+        />
       </View>
-      <CreateNewCard onPress={() => console.log('add new card')} />
+      <CreateNewCard
+        onPress={() =>
+          dispatch(addIngredient({amount: 1, id: uuidv4(), name: '', unit: ''}))
+        }
+      />
     </View>
   );
 };
