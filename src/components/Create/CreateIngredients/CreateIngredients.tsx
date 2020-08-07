@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, FlatList} from 'react-native';
 import CreateNewCard from '../../../containers/Create/CreateNewCard';
 
 import {useDispatch, useSelector} from 'react-redux';
@@ -38,9 +38,17 @@ const CreateIngredients = () => {
         style={{
           marginHorizontal: 10,
         }}>
-        <SwipeableRow
-          child={<CreateIngredientCard />}
-          onLeftButtonPressed={() => console.log('left pressed')}
+        <FlatList
+          data={createRecipe.ingredients}
+          renderItem={({item, index}) => (
+            <SwipeableRow
+              child={<CreateIngredientCard />}
+              onLeftButtonPressed={() => console.log('left pressed')}
+            />
+          )}
+          keyExtractor={(item) => 'putactualuuidhere'}
+          decelerationRate={0.798}
+          showsHorizontalScrollIndicator={false}
         />
       </View>
       <CreateNewCard

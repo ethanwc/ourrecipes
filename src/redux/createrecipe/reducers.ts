@@ -41,7 +41,7 @@ export const CreateRecipeReducer = (
         cookTime: state.cookTime,
         prepTime: state.prepTime,
         servingSize: state.servingSize,
-        ingredients: state.ingredients,
+        ingredients: [...state.ingredients, action.payload],
         directions: state.directions,
       };
 
