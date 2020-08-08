@@ -101,8 +101,9 @@ const imageSelectorStyle = StyleSheet.create({
     borderRadius: 15,
   },
   small: {
-    width: '100%',
-    height: '100%',
+    // width: '100%',
+    width: responsiveScreenWidth(20),
+    height: responsiveScreenWidth(20),
     resizeMode: 'stretch',
   },
   large: {

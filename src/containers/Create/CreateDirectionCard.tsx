@@ -1,9 +1,13 @@
 import 'react-native-gesture-handler';
 import React, {useState} from 'react';
-import {StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableWithoutFeedback,
+  TextInput,
+} from 'react-native';
 import {Theme, Typography} from '../../assets/styles';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import {TextInput} from 'react-native-gesture-handler';
 import {Text, Input, Icon} from 'react-native-elements';
 import {
   TextField,
@@ -28,10 +32,11 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
     <TextInput
       placeholder={'Ingredient'}
       value={input}
+      autoFocus={true}
       onChangeText={(text: string) => setInput(text)}
-      // autoFocus={true}
       style={{
         // ...createIngredientCardStyle.container,
+
         ...createDirectionCardStyle.input,
       }}
       editable={true}
@@ -39,7 +44,9 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
     />
   ) : (
     <Text
+      // numberOfLines={1}
       style={{
+        ...createDirectionCardStyle.input,
         color: input ? Theme.Light.caption : Theme.Light.body,
       }}>
       {input ? input : 'Ingredient'}
@@ -48,11 +55,11 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
 
   return (
     <View style={createDirectionCardStyle.container}>
-      <View style={{flex: 0}}>
+      <View style={{flex: 1}}>
         <Text style={createDirectionCardStyle.step}>1</Text>
       </View>
 
-      <View style={{flexGrow: 1, flex: 1}}>
+      <View style={{flexGrow: 4, flex: 1, marginRight: 20}}>
         <TouchableWithoutFeedback
           onPress={() => {
             console.log('focus idiot!');
@@ -66,7 +73,7 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
         </TouchableWithoutFeedback>
       </View>
 
-      <View style={{flex: 0}}>
+      <View style={{flexGrow: 0}}>
         <ImageSelector
           size={'small'}
           onImageSelected={(url: string) => console.log(url)}
@@ -79,13 +86,11 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
 const createDirectionCardStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    flex: 1,
     backgroundColor: Theme.Light.shadow,
     borderRadius: 5,
-    marginHorizontal: 10,
-    marginBottom: 5,
-    paddingTop: 10,
     paddingHorizontal: 20,
+    marginBottom: 5,
+    marginHorizontal: 10,
     paddingVertical: 20,
     alignItems: 'center',
   },

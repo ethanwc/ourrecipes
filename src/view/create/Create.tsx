@@ -15,7 +15,9 @@ import InfoBar from '../../containers/Create/InfoBar';
 import CreateIngredients from '../../components/Create/CreateIngredients/CreateIngredients';
 import CreateDirections from '../../components/Create/CreateDirections/CreateDirections';
 import Icon from 'react-native-vector-icons/Feather';
-import {responsiveScreenWidth} from 'react-native-responsive-dimensions';
+import {
+  responsiveScreenWidth,
+} from 'react-native-responsive-dimensions';
 import Axios from 'axios';
 import Categories from '../../components/Category/Categories';
 import {useDispatch, useSelector} from 'react-redux';

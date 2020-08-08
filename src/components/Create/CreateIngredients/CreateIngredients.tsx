@@ -36,7 +36,6 @@ const CreateIngredients = () => {
     <View>
       <View
         style={{
-          marginHorizontal: 10,
         }}>
         <FlatList
           data={createRecipe.ingredients}

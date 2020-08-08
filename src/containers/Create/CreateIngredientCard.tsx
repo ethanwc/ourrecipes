@@ -52,6 +52,7 @@ const CreateIngredientCard = (props: createIngredientCardProps) => {
     />
   ) : (
     <Text
+      numberOfLines={1}
       style={{
         ...createIngredientCardStyle.container,
         ...createIngredientCardStyle.text,
@@ -84,6 +85,7 @@ const createIngredientCardStyle = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 20,
     marginBottom: 5,
+    marginHorizontal: 10,
     paddingVertical: 20,
     alignItems: 'center',
     flex: 1,
