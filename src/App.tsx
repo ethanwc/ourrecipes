@@ -8,7 +8,7 @@ import InAppBrowser from 'react-native-inappbrowser-reborn';
 import {Button, View, Linking} from 'react-native';
 import {getGroups} from './redux/group/actions';
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 async function urlOpener(url: any, redirectUrl: any) {
   console.log(url);

@@ -48,28 +48,34 @@ const initialUserState: UserState = {
 const initialRecipeState: RecipeState = {
   recipes: [
     {
-      id: '123-dad-2-d',
+      id: 'asdf',
       category: 'Dinner',
-      creatorid: '11djd-d2d',
-      name: 'Chicken Pot Pie',
-      prepTime: '30',
-      cookTime: '1:00',
-      creationDate: new Date().toLocaleDateString().toString(),
-      servingSize: 4,
+      name: 'Breaded Porkchops',
+      servingSize: 2,
+      cookTime: '00:30',
+      prepTime: '00:05',
+      creationDate: new Date().toLocaleDateString(),
+      creatorid: 'asdf',
+      reviewCount: 44,
+      reviewRating: 4.4,
+      imageUrl:
+        'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
+
       directions: [
         {
-          id: 'uuidasdf',
+          id: 'asdasdf',
+          instruction: 'Heat a fryer to 400 degrees',
           step: 1,
-          instruction: 'Cut up some chicken',
-          imageUrl: 'https://google.com/chicken',
+          imageUrl:
+            'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
         },
       ],
       ingredients: [
         {
-          id: 'uuidasdf',
-          name: 'flour',
-          amount: 1,
-          unit: 'cup',
+          amount: 2,
+          id: 'fsfe',
+          name: 'Porkchops',
+          unit: 'pieces',
         },
       ],
     },
@@ -79,27 +85,13 @@ const initialRecipeState: RecipeState = {
 const initialCreateRecipeState: CreateRecipeState = {
   category: '',
   cookTime: '',
-  name: 'initialname',
-  description: 'initialdescription',
+  name: '',
+  description: '',
   image: '',
   prepTime: '',
-  servingSize: '4',
-  directions: [
-    {
-      id: 'uuidasdf',
-      step: 1,
-      instruction: 'Cut up some chicken',
-      imageUrl: 'https://google.com/chicken',
-    },
-  ],
-  ingredients: [
-    {
-      id: 'uuidasdf',
-      name: 'flour',
-      amount: 1,
-      unit: 'cup',
-    },
-  ],
+  servingSize: '',
+  directions: [],
+  ingredients: [],
 };
 
 // Root application state types

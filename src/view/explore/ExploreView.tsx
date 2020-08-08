@@ -9,16 +9,25 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
-import Searchbar from '../../utils/Searchbar/Searchbar';
+import Searchbar from '../../utils/Searchbar/SearchBar';
 import Categories from '../../components/Category/Categories';
 import {Typography, Theme} from '../../assets/styles';
 import Recipes from '../../components/Recipe/Recipes';
 import Icon from 'react-native-vector-icons/Feather';
+import {RecipeState} from 'src/redux/recipe/types';
+import {useSelector} from 'react-redux';
+import {RootState} from 'src/redux';
 
 /**
  * Explore page of app
  */
 const Explore = ({navigation}: any) => {
+  const recipeState: RecipeState = useSelector(
+    (state: RootState) => state.RecipeReducer,
+  );
+
+  console.log(recipeState);
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
@@ -33,17 +42,19 @@ const Explore = ({navigation}: any) => {
         <View style={exploreStyle.header}>
           <Text style={Typography.Typography.header}>Breakfast</Text>
         </View>
-        <Recipes renderAuthor={true} navigation={navigation} />
+
+        <Recipes recipes={recipeState.recipes} navigation={navigation} />
+
         {/* Lunch */}
         <View style={exploreStyle.header}>
           <Text style={Typography.Typography.header}>Lunch</Text>
         </View>
-        <Recipes renderAuthor={true} navigation={navigation} />
+        <Recipes navigation={navigation} />
         {/* Dinner */}
         <View style={exploreStyle.header}>
           <Text style={Typography.Typography.header}>Dinner</Text>
         </View>
-        <Recipes renderAuthor={true} navigation={navigation} />
+        <Recipes navigation={navigation} />
       </ScrollView>
       <TouchableOpacity
         style={exploreStyle.createButton}

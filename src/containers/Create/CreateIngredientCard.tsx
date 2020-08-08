@@ -14,16 +14,11 @@ import wordsToNumbers from 'words-to-numbers';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {TextInput} from 'react-native-gesture-handler';
 import {edit} from 'src/redux/group/actions';
+import {Ingredient} from 'src/redux/recipe/types';
 
 var parser = require('ingredients-parser');
 
-export interface createIngredientCardProps {
-  // amount: Number;
-  // ingredient: string;
-  // unit: string;
-}
-
-const CreateIngredientCard = (props: createIngredientCardProps) => {
+const CreateIngredientCard = () => {
   const [input, setInput] = useState('');
   const [focused, setFocused] = useState(false);
 
@@ -84,7 +79,7 @@ const createIngredientCardStyle = StyleSheet.create({
     backgroundColor: Theme.Light.shadow,
     borderRadius: 5,
     paddingHorizontal: 20,
-    marginBottom: 5,
+    marginVertical: 2.5,
     marginHorizontal: 10,
     paddingVertical: 20,
     alignItems: 'center',

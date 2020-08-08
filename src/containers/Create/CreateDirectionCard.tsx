@@ -7,13 +7,7 @@ import {
   TextInput,
 } from 'react-native';
 import {Theme, Typography} from '../../assets/styles';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {Text, Input, Icon} from 'react-native-elements';
-import {
-  TextField,
-  FilledTextField,
-  OutlinedTextField,
-} from 'react-native-material-textfield';
 import ImageSelector from '../../utils/ImageSelector/ImageSelector';
 
 var parser = require('ingredients-parser');
@@ -23,14 +17,12 @@ export interface createDirectionCardProps {
 }
 
 const CreateDirectionCard = (props: createDirectionCardProps) => {
-  const [input, setInput] = useState(
-    'Lorem ips daw kljadwlkjawkl djalkwj dkl;awlk djklajl wdknawmlk; dja lwkjdd awlkjjl;ka dw',
-  );
+  const [input, setInput] = useState('');
   const [focused, setFocused] = useState(false);
 
   const textRender = focused ? (
     <TextInput
-      placeholder={'Ingredient'}
+      placeholder={`Step ${props.order}`}
       value={input}
       autoFocus={true}
       onChangeText={(text: string) => setInput(text)}
@@ -49,14 +41,14 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
         ...createDirectionCardStyle.input,
         color: input ? Theme.Light.caption : Theme.Light.body,
       }}>
-      {input ? input : 'Ingredient'}
+      {input ? input : `Step ${props.order}`}
     </Text>
   );
 
   return (
     <View style={createDirectionCardStyle.container}>
       <View style={{flex: 1}}>
-        <Text style={createDirectionCardStyle.step}>1</Text>
+        <Text style={createDirectionCardStyle.step}>{props.order}</Text>
       </View>
 
       <View style={{flexGrow: 4, flex: 1, marginRight: 20}}>
@@ -89,7 +81,7 @@ const createDirectionCardStyle = StyleSheet.create({
     backgroundColor: Theme.Light.shadow,
     borderRadius: 5,
     paddingHorizontal: 20,
-    marginBottom: 5,
+    marginVertical: 2.5,
     marginHorizontal: 10,
     paddingVertical: 20,
     alignItems: 'center',

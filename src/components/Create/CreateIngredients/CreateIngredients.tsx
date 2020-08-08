@@ -5,7 +5,7 @@ import CreateNewCard from '../../../containers/Create/CreateNewCard';
 import {useDispatch, useSelector} from 'react-redux';
 import {CreateRecipeState} from 'src/redux/createrecipe/types';
 import {RootState} from 'src/redux';
-import {addIngredient} from '../../../redux/createrecipe/actions';
+import {addIngredient, removeIngredient} from '../../../redux/createrecipe/actions';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import {SwipeableRow} from '../../../utils/Swipeable/SwipeableRow';
@@ -42,7 +42,8 @@ const CreateIngredients = () => {
           renderItem={({item, index}) => (
             <SwipeableRow
               child={<CreateIngredientCard />}
-              onLeftButtonPressed={() => console.log('left pressed')}
+              onLeftButtonPress={() => console.log('left pressed')}
+              onRightButtonPress={() => dispatch(removeIngredient(item))}
             />
           )}
           keyExtractor={(item) => 'putactualuuidhere'}

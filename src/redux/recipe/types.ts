@@ -26,6 +26,9 @@ export interface Direction {
 export interface Recipe {
   id: string;
   name: string;
+  imageUrl?: string;
+  reviewCount: number;
+  reviewRating: number;
   creatorid: string;
   creationDate: string;
   prepTime: string;

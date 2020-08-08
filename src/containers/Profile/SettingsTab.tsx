@@ -35,23 +35,7 @@ const SettingsTab = (props: any) => {
             })
           }
         />
-        {/* Add a meal planner one day??? */}
-        {/* <ListItem
-          title={'Meal Planner'}
-          titleStyle={settingsTabStyle.title}
-          leftIcon={{
-            name: 'calendar',
-            type: 'feather',
-            color: Theme.Light.headline,
-          }}
-          containerStyle={settingsTabStyle.wrapper}
-          onPress={() =>
-            props.navigation.navigate('Account', {
-              screen: 'Meal Planner',
-              params: {},
-            })
-          }
-        /> */}
+
         <ListItem
           title={'Shopping List'}
           titleStyle={settingsTabStyle.title}

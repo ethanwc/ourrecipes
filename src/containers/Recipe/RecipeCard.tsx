@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image, TouchableHighlight } from 'react-native';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Typography, Theme } from '../../assets/styles';
+import {Typography, Theme} from '../../assets/styles';
+import {Recipe} from 'src/redux/recipe/types';
 
 export interface recipeCardProps {
   isFirst: boolean;
-  renderAuthor: boolean;
   navigation: any;
-  size: string;
+  recipe: Recipe;
 }
 
 const favoriteIconEmpty = (
@@ -16,7 +16,7 @@ const favoriteIconEmpty = (
     name="bookmark"
     color={Theme.Light.shadow}
     size={24}
-    style={{ position: 'absolute', right: 10, top: 10 }}
+    style={{position: 'absolute', right: 10, top: 10}}
   />
 );
 
@@ -25,7 +25,7 @@ const favoriteIconFilled = (
     name="bookmark"
     size={24}
     color={Theme.Light.caption}
-    style={{ position: 'absolute', right: 10, top: 10 }}
+    style={{position: 'absolute', right: 10, top: 10}}
     onPress={() => console.log('icon pressed')}
   />
 );
@@ -33,39 +33,42 @@ const favoriteIconFilled = (
 const favoriteIcon = favoriteIconFilled;
 
 const RecipeCard = (props: recipeCardProps) => {
+  console.log(props.recipe.imageUrl);
   return (
     <TouchableHighlight
       onPress={() =>
-        props.navigation.navigate('Recipes', { screen: 'Recipe', params: {} })
+        props.navigation.navigate('Recipes', {screen: 'Recipe', params: {}})
       }
       underlayColor={'transparent'}>
       <View
         style={
           props.isFirst
-            ? { ...recipeCardStyle.container, ...recipeCardStyle.containerFirst }
+            ? {...recipeCardStyle.container, ...recipeCardStyle.containerFirst}
             : recipeCardStyle.container
         }>
         <Image
-          style={
-            props.size === 'small'
-              ? recipeCardStyle.images
-              : recipeCardStyle.images
-          }
-          source={require('../../assets/images/food.jpg')}
+          style={recipeCardStyle.images}
+          source={{uri: props.recipe.imageUrl}}
         />
         {favoriteIcon}
         <View style={recipeCardStyle.textContainer}>
           {/* Recipe Name */}
-          <Text style={Typography.Typography.subheader}>Chicken Pot Pie</Text>
+          <Text style={Typography.Typography.subheader}>
+            {props.recipe.name}
+          </Text>
           {/* Recipe cook time, category */}
-          <View style={{ ...recipeCardStyle.horizontalRow, justifyContent: 'space-between' }}>
+          <View
+            style={{
+              ...recipeCardStyle.horizontalRow,
+              justifyContent: 'space-between',
+            }}>
             <View style={recipeCardStyle.horizontalRow}>
               <View style={recipeCardStyle.horizontalRow}>
                 <Icon
                   name="clock-o"
                   size={20}
                   color={Theme.Light.headline}
-                  style={{ marginRight: 5 }}
+                  style={{marginRight: 5}}
                 />
                 <Text style={Typography.Typography.body}>45 min</Text>
               </View>
@@ -77,7 +80,7 @@ const RecipeCard = (props: recipeCardProps) => {
             <View style={recipeCardStyle.horizontalRow}>
               <Icon
                 name="star"
-                style={{ color: 'gold', marginRight: 5 }}
+                style={{color: 'gold', marginRight: 5}}
                 size={20}
               />
               <Text style={Typography.Typography.body}>4.4</Text>
@@ -90,9 +93,8 @@ const RecipeCard = (props: recipeCardProps) => {
               ...recipeCardStyle.horizontalRow,
               justifyContent: 'space-between',
             }}>
-            {props.renderAuthor ? (
-              <Text style={Typography.Typography.subheadline}>Debra Boydd</Text>
-            ) : null}
+            <Text style={Typography.Typography.subheadline}>Debra Boydd</Text>
+
             <Text style={Typography.Typography.body}>42 reviews</Text>
           </View>
         </View>

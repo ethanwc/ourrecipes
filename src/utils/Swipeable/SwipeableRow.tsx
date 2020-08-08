@@ -6,9 +6,13 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
-export interface SwipeableRowProps {}
+export interface SwipeableRowProps {
+  child: Element;
+  onLeftButtonPress: Function;
+  onRightButtonPress: Function;
+}
 
-export const SwipeableRow = (props: any) => {
+export const SwipeableRow = (props: SwipeableRowProps) => {
   const swipeableRef = useRef<Swipeable>(null);
 
   const renderLeftActions = (progress: any, dragX: any) => {
@@ -23,7 +27,7 @@ export const SwipeableRow = (props: any) => {
           name="archive"
           size={30}
           color="#fff"
-          onPress={() => console.log('archive pressed')}
+          onPress={() => props.onLeftButtonPress()}
           style={[styles.actionIcon, {transform: [{scale}]}]}
         />
       </RectButton>
@@ -41,7 +45,7 @@ export const SwipeableRow = (props: any) => {
           name="delete-forever"
           size={30}
           color="#fff"
-          onPress={() => console.log('delete pressed')}
+          onPress={() => props.onRightButtonPress()}
           style={[styles.actionIcon, {transform: [{scale}]}]}
         />
       </RectButton>

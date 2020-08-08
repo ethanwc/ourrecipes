@@ -27,6 +27,7 @@ const createNewCardStyle = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginHorizontal: 10,
+    marginTop: 2.5,
     // marginVertical: 10,
     // margin: 10,
     // paddingVertical: 10,

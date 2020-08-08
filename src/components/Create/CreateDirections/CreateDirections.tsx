@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import CreateDirectionCard from '../../../containers/Create/CreateDirectionCard';
 import CreateNewCard from '../../../containers/Create/CreateNewCard';
 import {SwipeableRow} from '../../../utils/Swipeable/SwipeableRow';
-import {addIngredient, addDirection} from '../../../redux/createrecipe/actions';
+import {addIngredient, addDirection, removeDirection} from '../../../redux/createrecipe/actions';
 import {CreateRecipeState} from '../../../redux/createrecipe/types';
 import {RootState} from '../../../redux';
 import 'react-native-get-random-values';
@@ -23,10 +23,11 @@ const CreateDirections = () => {
       <View style={{}}>
         <FlatList
           data={createRecipe.directions}
-          renderItem={(direction: Direction, index: number) => (
+          renderItem={({item, index}) => (
             <SwipeableRow
-              child={<CreateDirectionCard order={1} />}
-              onLeftButtonPressed={() => console.log('left pressed')}
+              child={<CreateDirectionCard order={item.step} />}
+              onLeftButtonPress={() => console.log('left pressed')}
+              onRightButtonPress={() => dispatch(removeDirection(item))}
             />
           )}
           keyExtractor={(item) => 'putactualuuidhere'}
@@ -40,7 +41,7 @@ const CreateDirections = () => {
             addDirection({
               id: uuidv4(),
               instruction: 'Take a cup of potato juice and whisk it',
-              step: createRecipe.description.length + 1,
+              step: createRecipe.directions.length + 1,
               imageUrl: 'https:google.com/image',
             }),
           )
