@@ -15,17 +15,18 @@ import InfoBar from '../../containers/Create/InfoBar';
 import CreateIngredients from '../../components/Create/CreateIngredients/CreateIngredients';
 import CreateDirections from '../../components/Create/CreateDirections/CreateDirections';
 import Icon from 'react-native-vector-icons/Feather';
-import {
-  responsiveScreenWidth,
-  responsiveScreenHeight,
-} from 'react-native-responsive-dimensions';
-import {Ingredient, Direction} from '../../redux/recipe/types';
+import {responsiveScreenWidth} from 'react-native-responsive-dimensions';
 import Axios from 'axios';
 import Categories from '../../components/Category/Categories';
 import {useDispatch, useSelector} from 'react-redux';
 import {CreateRecipeState} from 'src/redux/createrecipe/types';
 import {RootState} from 'src/redux';
-import {setDescription, setName} from '../../redux/createrecipe/actions';
+import {
+  setDescription,
+  setName,
+  setCategory,
+  setImage,
+} from '../../redux/createrecipe/actions';
 
 const Create = ({navigation}: any) => {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ const Create = ({navigation}: any) => {
     ),
   });
   return (
-    <SafeAreaView style={createStyle.contaier}>
+    <SafeAreaView>
       <ScrollView>
         {/* Pick recipe title */}
         <View style={{marginHorizontal: 10}}>
@@ -59,14 +60,14 @@ const Create = ({navigation}: any) => {
             value={createRecipe.name}
             onChangeText={(text: string) => dispatch(setName(text))}
             placeholder="Recipe Name"
-            inputStyle={Typography.Typography.subheader}
+            inputStyle={createStyle.inputText}
           />
         </View>
         {/* Pick recipe main image */}
         <View style={createStyle.imageWrapper}>
           <ImageSelector
             size={'large'}
-            onImageSelected={(url: string) => console.log(url)}
+            onImageSelected={(url: string) => dispatch(setImage(url))}
           />
         </View>
 
@@ -76,7 +77,7 @@ const Create = ({navigation}: any) => {
             value={createRecipe.description}
             onChangeText={(text: string) => dispatch(setDescription(text))}
             placeholder="Description"
-            inputStyle={Typography.Typography.subheader}
+            inputStyle={createStyle.inputText}
           />
         </View>
 
@@ -87,14 +88,17 @@ const Create = ({navigation}: any) => {
         <Text style={createStyle.header}>Category</Text>
 
         <Categories
-          onCategoryPressed={(category: string) => console.log(category)}
+          activeCategory={createRecipe.category}
+          onCategoryPressed={(category: string) =>
+            dispatch(setCategory(category))
+          }
         />
         {/* Create recipe ingredients */}
         <Text style={createStyle.header}>Ingredients</Text>
 
         {/* Pick recipe directions */}
         <CreateIngredients />
-        {/* <Text style={createStyle.header}>Directions</Text> */}
+        <Text style={createStyle.header}>Directions</Text>
         <CreateDirections />
       </ScrollView>
     </SafeAreaView>
@@ -102,7 +106,6 @@ const Create = ({navigation}: any) => {
 };
 
 const createStyle = StyleSheet.create({
-  contaier: {},
   imageWrapper: {
     width: responsiveScreenWidth(90),
     height: responsiveScreenWidth(90),
@@ -110,11 +113,11 @@ const createStyle = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: Theme.Light.shadow,
   },
-  titleStyle: {},
   header: {
     margin: 10,
     ...Typography.Typography.header,
   },
+  inputText: {...Typography.Typography.subheader, color: Theme.Light.caption},
 });
 
 export default Create;

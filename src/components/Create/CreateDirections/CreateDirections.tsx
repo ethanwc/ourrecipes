@@ -20,10 +20,7 @@ const CreateDirections = () => {
   );
   return (
     <View>
-      <View
-        style={{
-          marginHorizontal: 10,
-        }}>
+      <View style={{}}>
         <FlatList
           data={createRecipe.directions}
           renderItem={(direction: Direction, index: number) => (

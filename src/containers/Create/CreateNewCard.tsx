@@ -25,9 +25,11 @@ const createNewCardStyle = StyleSheet.create({
   container: {
     backgroundColor: Theme.Light.shadow,
     borderRadius: 5,
+    padding: 10,
     marginHorizontal: 10,
-    marginVertical: 10,
-    paddingVertical: 10,
+    // marginVertical: 10,
+    // margin: 10,
+    // paddingVertical: 10,
     justifyContent: 'center',
   },
 });

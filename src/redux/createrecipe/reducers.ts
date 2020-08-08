@@ -5,8 +5,6 @@ import {
   ADD_DIRECTION,
   EDIT_DIRECTION,
   REMOVE_DIRECTION,
-  CreateRecipeState,
-  CreateRecipeActionTypes,
   SET_PREPTIME,
   SET_COOKTIME,
   SET_SERVINGS,
@@ -14,8 +12,10 @@ import {
   SET_IMAGE,
   SET_DESCRIPTION,
   SET_NAME,
+  CreateRecipeState,
+  CreateRecipeActionTypes,
 } from './types';
-import {Ingredient, Direction, RecipeState} from '../recipe/types';
+import {Ingredient, Direction} from '../recipe/types';
 
 export const CreateRecipeReducer = (
   state: CreateRecipeState = {

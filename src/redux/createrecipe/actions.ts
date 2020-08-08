@@ -12,6 +12,7 @@ import {
   SET_IMAGE,
   SET_PREPTIME,
   SET_COOKTIME,
+  SET_CATEGORY,
 } from './types';
 import {Ingredient, Direction} from '../recipe/types';
 
@@ -105,6 +106,15 @@ export const setDescription = (
   return {
     type: SET_DESCRIPTION,
     payload: newDescription,
+  };
+};
+
+export const setCategory = (
+  newCategory: string,
+): CreateRecipeActionTypes => {
+  return {
+    type: SET_CATEGORY,
+    payload: newCategory,
   };
 };
 

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
 import {Theme, Typography} from '../../assets/styles';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {TextInput} from 'react-native-gesture-handler';
@@ -19,42 +19,54 @@ export interface createDirectionCardProps {
 }
 
 const CreateDirectionCard = (props: createDirectionCardProps) => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(
+    'Lorem ips daw kljadwlkjawkl djalkwj dkl;awlk djklajl wdknawmlk; dja lwkjdd awlkjjl;ka dw',
+  );
+  const [focused, setFocused] = useState(false);
 
-  const clearIcon = input ? (
-    <Icon
-      type={'feather'}
-      name={'x'}
-      onPress={() => setInput('')}
-      color={Theme.Light.caption}
+  const textRender = focused ? (
+    <TextInput
+      placeholder={'Ingredient'}
+      value={input}
+      onChangeText={(text: string) => setInput(text)}
+      // autoFocus={true}
+      style={{
+        // ...createIngredientCardStyle.container,
+        ...createDirectionCardStyle.input,
+      }}
+      editable={true}
+      onSubmitEditing={() => console.log('submitted')}
     />
   ) : (
-    <Icon type={'feather'} name={'x'} size={0} color={Theme.Light.caption} />
+    <Text
+      style={{
+        color: input ? Theme.Light.caption : Theme.Light.body,
+      }}>
+      {input ? input : 'Ingredient'}
+    </Text>
   );
 
   return (
     <View style={createDirectionCardStyle.container}>
-      <View style={{flex: 1}}>
-        <Input
-          placeholder={props.order.toString()}
-          textAlignVertical={'top'}
-          editable={false}
-          inputStyle={createDirectionCardStyle.step}
-          inputContainerStyle={{borderBottomWidth: 0}}
-        />
+      <View style={{flex: 0}}>
+        <Text style={createDirectionCardStyle.step}>1</Text>
       </View>
-      <View style={{flex: 4}}>
-        <Input
-          placeholder={`Step ${props.order.toString()}`}
-          textAlignVertical={'top'}
-          multiline={true}
-          inputStyle={createDirectionCardStyle.input}
-          value={input}
-          onChangeText={(text: string) => setInput(text)}
-          inputContainerStyle={{borderBottomWidth: 0}}
-        />
+
+      <View style={{flexGrow: 1, flex: 1}}>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            console.log('focus idiot!');
+            setFocused(true);
+          }}
+          onBlur={() => {
+            setFocused(false);
+            console.log('defocus!');
+          }}>
+          {textRender}
+        </TouchableWithoutFeedback>
       </View>
-      <View style={{flex: 2}}>
+
+      <View style={{flex: 0}}>
         <ImageSelector
           size={'small'}
           onImageSelected={(url: string) => console.log(url)}
@@ -71,14 +83,21 @@ const createDirectionCardStyle = StyleSheet.create({
     backgroundColor: Theme.Light.shadow,
     borderRadius: 5,
     marginHorizontal: 10,
+    marginBottom: 5,
     paddingTop: 10,
-    marginTop: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    alignItems: 'center',
   },
   step: {
     ...Typography.Typography.subheader,
     color: Theme.Light.headline,
   },
+  text: {
+    paddingVertical: 25,
+  },
   input: {
+    width: '100%',
     ...Typography.Typography.subheader,
     color: Theme.Light.caption,
   },

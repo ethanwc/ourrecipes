@@ -15,6 +15,7 @@ export interface CategoryProps {
   title: string;
   uri: ImageURISource;
   onCategoryPressed: Function;
+  active: boolean;
 }
 
 const CategoryCard = (props: CategoryProps) => {
@@ -22,7 +23,13 @@ const CategoryCard = (props: CategoryProps) => {
     <TouchableHighlight
       onPress={() => props.onCategoryPressed(props.title)}
       style={categoryStyle.container}>
-      <View style={categoryStyle.container}>
+      <View
+        style={{
+          ...categoryStyle.container,
+          backgroundColor: props.active
+            ? Theme.Light.caption
+            : Theme.Light.background,
+        }}>
         <Image style={categoryStyle.icon} source={props.uri} />
         <Text style={Typography.Typography.body}>{props.title}</Text>
       </View>

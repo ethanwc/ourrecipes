@@ -25,7 +25,7 @@ export interface createIngredientCardProps {
 
 const CreateIngredientCard = (props: createIngredientCardProps) => {
   const [input, setInput] = useState('');
-  const [focused, setFocused] = useState(true);
+  const [focused, setFocused] = useState(false);
 
   const clearIcon = input ? (
     <Icon
@@ -37,70 +37,30 @@ const CreateIngredientCard = (props: createIngredientCardProps) => {
     />
   ) : null;
 
-  let textRender;
-
-  console.log(input, focused);
-
-  if (focused && !input) {
-    console.log('a');
-    textRender = (
-      <TextInput
-        placeholder={'Ingredient'}
-        value={input}
-        onChangeText={(text: string) => setInput(text)}
-        // autoFocus={true}
-        style={{
-          ...createIngredientCardStyle.container,
-          ...createIngredientCardStyle.input,
-        }}
-        editable={focused}
-        onSubmitEditing={() => console.log('submitted')}
-      />
-    );
-  } else if (focused) {
-    console.log('b');
-
-    textRender = (
-      <TextInput
-        placeholder={'Ingredient'}
-        value={input}
-        onChangeText={(text: string) => setInput(text)}
-        autoFocus={true}
-        style={{
-          ...createIngredientCardStyle.container,
-          ...createIngredientCardStyle.input,
-        }}
-        editable={focused}
-        onSubmitEditing={() => console.log('submitted')}
-      />
-    );
-  } else if (!input) {
-    console.log('c');
-
-    textRender = (
-      <Text
-        style={{
-          ...createIngredientCardStyle.container,
-          ...createIngredientCardStyle.text,
-          ...createIngredientCardStyle.inputPlaceholder,
-        }}>
-        Ingredient
-      </Text>
-    );
-  } else {
-    console.log('d');
-
-    textRender = (
-      <Text
-        style={{
-          ...createIngredientCardStyle.container,
-          ...createIngredientCardStyle.text,
-          ...createIngredientCardStyle.input,
-        }}>
-        {input}
-      </Text>
-    );
-  }
+  const textRender = focused ? (
+    <TextInput
+      placeholder={'Ingredient'}
+      value={input}
+      onChangeText={(text: string) => setInput(text)}
+      autoFocus={true}
+      style={{
+        ...createIngredientCardStyle.container,
+        ...createIngredientCardStyle.input,
+      }}
+      editable={focused}
+      onSubmitEditing={() => console.log('submitted')}
+    />
+  ) : (
+    <Text
+      style={{
+        ...createIngredientCardStyle.container,
+        ...createIngredientCardStyle.text,
+        ...createIngredientCardStyle.input,
+        color: input ? Theme.Light.caption : Theme.Light.body,
+      }}>
+      {input ? input : 'Ingredient'}
+    </Text>
+  );
 
   return (
     <TouchableWithoutFeedback
@@ -108,16 +68,11 @@ const CreateIngredientCard = (props: createIngredientCardProps) => {
         console.log('focus idiot!');
         setFocused(true);
       }}
-      // onFocus={() => {
-      //   console.log('focus harder idiot!');
-      //   setFocused(true);
-      // }}
       onBlur={() => {
         setFocused(false);
         console.log('defocus!');
       }}>
       {textRender}
-      {/* {clearIcon} */}
     </TouchableWithoutFeedback>
   );
 };
@@ -127,10 +82,9 @@ const createIngredientCardStyle = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: Theme.Light.shadow,
     borderRadius: 5,
-    // marginHorizontal: 10,
     paddingHorizontal: 20,
+    marginBottom: 5,
     paddingVertical: 20,
-    // marginVertical: 5,
     alignItems: 'center',
     flex: 1,
   },
@@ -141,11 +95,6 @@ const createIngredientCardStyle = StyleSheet.create({
     width: '100%',
     ...Typography.Typography.subheader,
     color: Theme.Light.caption,
-  },
-  inputPlaceholder: {
-    width: '100%',
-    ...Typography.Typography.subheader,
-    color: Theme.Light.body,
   },
 });
 

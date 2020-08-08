@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
-import CategoryCard from '../../containers/Category/CategoryCard';
+import CategoryCard, { CategoryProps } from '../../containers/Category/CategoryCard';
 
 const DATA = [
   {
@@ -37,6 +37,7 @@ const DATA = [
 
 export interface CategoriesProps {
   onCategoryPressed: Function;
+  activeCategory: string;
 }
 
 const Categories = (props: CategoriesProps) => {
@@ -50,6 +51,7 @@ const Categories = (props: CategoriesProps) => {
             id={item.id}
             title={item.title}
             uri={item.uri}
+            active={props.activeCategory === item.title}
             onCategoryPressed={(category: string) =>
               props.onCategoryPressed(category)
             }
