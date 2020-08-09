@@ -1,12 +1,20 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {Theme, Typography} from '../../assets/styles';
+import {User} from 'src/redux/user/types';
 
-const CountsBar = (props: any) => {
+export interface CountsBarProps {
+  navigation: any;
+  followers: number;
+  following: number;
+  recipes: number;
+}
+/** Container to show basic user stats */
+const CountsBar = (props: CountsBarProps) => {
   return (
     <View style={countsBarStyle.container}>
       <View style={countsBarStyle.wrapper}>
-        <Text style={countsBarStyle.count}>11</Text>
+        <Text style={countsBarStyle.count}>{props.recipes}</Text>
         <Text style={countsBarStyle.description}>Recipes</Text>
       </View>
       <TouchableWithoutFeedback
@@ -17,13 +25,13 @@ const CountsBar = (props: any) => {
           })
         }>
         <View style={countsBarStyle.wrapper}>
-          <Text style={countsBarStyle.count}>23</Text>
+          <Text style={countsBarStyle.count}>{props.following}</Text>
           <Text style={countsBarStyle.description}>Followers</Text>
         </View>
       </TouchableWithoutFeedback>
 
       <View style={countsBarStyle.wrapper}>
-        <Text style={countsBarStyle.count}>33</Text>
+        <Text style={countsBarStyle.count}>{props.following}</Text>
         <Text style={countsBarStyle.description}>Following</Text>
       </View>
     </View>

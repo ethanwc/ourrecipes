@@ -1,7 +1,8 @@
-import {SET_USER, User, UserState, UserActionTypes} from './types';
+import {SET_SESSION, User, UserState, UserActionTypes, SET_USER} from './types';
 
 export const UserReducer = (
   state: UserState = {
+    session: null,
     user: {
       name: 'Loading Name',
       email: 'loadingemail@ourrecipes.app',
@@ -22,6 +23,12 @@ export const UserReducer = (
     case SET_USER:
       return {
         user: action.payload,
+        session: state.session,
+      };
+    case SET_SESSION:
+      return {
+        user: state.user,
+        session: action.payload,
       };
     default:
       return state;

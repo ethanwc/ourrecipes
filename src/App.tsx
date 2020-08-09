@@ -1,19 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {set} from './redux/user/actions';
-import {useDispatch} from 'react-redux';
-import {Navigator} from './navigation/Navigator';
-import {awsconfig} from './assets/constants/awsconfig';
+import {Button, View} from 'react-native';
 import Amplify, {Auth, Hub} from 'aws-amplify';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
-import {Button, View, Linking} from 'react-native';
-import {getGroups} from './redux/group/actions';
+import {awsconfig} from './assets/constants/awsconfig';
+import {setSession, setUser as SetUserData} from './redux/user/actions';
+import {useDispatch} from 'react-redux';
+import {Navigator} from './navigation/Navigator';
 
 console.disableYellowBox = true;
 
 async function urlOpener(url: any, redirectUrl: any) {
   console.log(url);
   await InAppBrowser.isAvailable();
-  // const {type, url: newUrl} = 
+  // const {type, url: newUrl} =
   await InAppBrowser.openAuth(url, redirectUrl, {
     showTitle: false,
     enableUrlBarHiding: true,
@@ -69,17 +68,16 @@ export default function App() {
   }, []);
 
   // Set user state upon auth
-  // if (user) console.log(user);
-  if (user) dispatch(set(user.attributes));
+  if (user) dispatch(setSession(user.attributes));
 
-  if (user) console.log(user.signInUserSession.accessToken.jwtToken);
-  if (user) console.log(user.signInUserSession.idToken.jwtToken);
+  if (user) console.log(user.signInUserSession);
+  // if (user) console.log(user.signInUserSession.idToken.jwtToken);
 
   const root = user ? (
     <Navigator />
   ) : (
     <View>
-      <Button title={'sign in'} onPress={() => Auth.federatedSignIn()} />
+      <Button title={'Sign in'} onPress={() => Auth.federatedSignIn()} />
     </View>
   );
 

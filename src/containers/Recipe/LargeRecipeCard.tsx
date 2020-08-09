@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image, TouchableHighlight } from 'react-native';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Typography, Theme } from '../../assets/styles';
+import {Typography, Theme} from '../../assets/styles';
 import ReviewCard from './ReviewCard';
 
 export interface largeRecipeCardProps {
@@ -15,7 +15,7 @@ const favoriteIconEmpty = (
   <Icon
     name="heart-o"
     size={24}
-    style={{ position: 'absolute', right: 10, top: 10 }}
+    style={{position: 'absolute', right: 10, top: 10}}
   />
 );
 
@@ -24,7 +24,7 @@ const bookmarkIcon = (
     name="bookmark"
     size={24}
     color={Theme.Light.body}
-    style={{ position: 'absolute', right: 10, top: 10 }}
+    style={{position: 'absolute', right: 10, top: 10}}
     onPress={() => console.log('icon pressed')}
   />
 );
@@ -35,13 +35,16 @@ const LargeRecipeCard = (props: largeRecipeCardProps) => {
   return (
     <TouchableHighlight
       onPress={() =>
-        props.navigation.navigate('Recipes', { screen: 'Recipe', params: {} })
+        props.navigation.navigate('Recipes', {
+          screen: 'Recipe',
+          params: {
+            asdf: '1234',
+          },
+        })
       }
       underlayColor={'transparent'}>
-      <View
-        style={largeRecipeCardStyle.container}>
+      <View style={largeRecipeCardStyle.container}>
         <View>
-
           {/* // style={
         //   props.size === 'small'
         //     ? recipeCardStyle.containerSmall
@@ -56,14 +59,18 @@ const LargeRecipeCard = (props: largeRecipeCardProps) => {
             {/* Recipe Name */}
             <Text style={Typography.Typography.subheader}>Chicken Pot Pie</Text>
             {/* Recipe cook time, category */}
-            <View style={{ ...largeRecipeCardStyle.horizontalRow, justifyContent: 'space-between' }}>
+            <View
+              style={{
+                ...largeRecipeCardStyle.horizontalRow,
+                justifyContent: 'space-between',
+              }}>
               <View style={largeRecipeCardStyle.horizontalRow}>
                 <View style={largeRecipeCardStyle.horizontalRow}>
                   <Icon
                     name="clock-o"
                     size={20}
                     color={Theme.Light.headline}
-                    style={{ marginRight: 5 }}
+                    style={{marginRight: 5}}
                   />
                   <Text style={Typography.Typography.body}>45 min</Text>
                 </View>
@@ -72,10 +79,10 @@ const LargeRecipeCard = (props: largeRecipeCardProps) => {
                 <Text style={Typography.Typography.body}>Korean BBQ</Text>
               </View>
               <View style={largeRecipeCardStyle.horizontalRow}>
-              <Text style={Typography.Typography.subheader}>4.9</Text>
-              <Icon
+                <Text style={Typography.Typography.subheader}>4.9</Text>
+                <Icon
                   name="star"
-                  style={{ color: 'gold', marginLeft: 5 }}
+                  style={{color: 'gold', marginLeft: 5}}
                   size={20}
                 />
               </View>
@@ -88,11 +95,12 @@ const LargeRecipeCard = (props: largeRecipeCardProps) => {
                 justifyContent: 'space-between',
               }}>
               {props.renderAuthor ? (
-                <Text style={Typography.Typography.subheadline}>Debra Boydd</Text>
+                <Text style={Typography.Typography.subheadline}>
+                  Debra Boydd
+                </Text>
               ) : null}
 
               <View style={largeRecipeCardStyle.horizontalRow}>
-           
                 <Text style={Typography.Typography.body}>42 reviews</Text>
               </View>
             </View>
@@ -124,8 +132,6 @@ const largeRecipeCardStyle = StyleSheet.create({
     // paddingBottom: 5,
     // borderBottomWidth: .3,
     borderBottomColor: Theme.Light.body,
-
-
   },
   horizontalRow: {
     flexDirection: 'row',

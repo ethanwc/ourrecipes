@@ -30,6 +30,7 @@ export interface Recipe {
   reviewCount: number;
   reviewRating: number;
   creatorid: string;
+  creatorName: string;
   creationDate: string;
   prepTime: string;
   cookTime: string;

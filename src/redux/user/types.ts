@@ -1,30 +1,37 @@
 export const SET_USER = 'SET_USER';
+export const SET_SESSION = 'SET_SESSION';
 
 export interface UserState {
-    user: User;
+  user: User;
+  session: any;
 }
 
 export interface User {
-    name: string;
-    email: string;
-    photo?: string;
-    location?: string;
-    bio?: string;
-    creationDate: Date;
-    /** String arrays represent mongodb direct ids */
-    recipes: string[];
-    groups: string[];
-    bookmarks: string[];
-    shoppinglist: string[];
-    followers: string[];
-    following: string[];
-    reviews: string[];
-    pictures: string[];
+  name: string;
+  email: string;
+  photo?: string;
+  location?: string;
+  bio?: string;
+  creationDate: Date;
+  /** String arrays represent mongodb direct ids */
+  recipes: string[];
+  groups: string[];
+  bookmarks: string[];
+  shoppinglist: string[];
+  followers: string[];
+  following: [];
+  reviews: string[];
+  pictures: string[];
 }
 
 interface SetUserAction {
-    type: typeof SET_USER;
-    payload: User;
+  type: typeof SET_USER;
+  payload: User;
 }
 
-export type UserActionTypes = SetUserAction;
+interface SetSessionAction {
+  type: typeof SET_SESSION;
+  payload: User;
+}
+
+export type UserActionTypes = SetUserAction | SetSessionAction;

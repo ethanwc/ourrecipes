@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   SafeAreaView,
@@ -7,12 +7,13 @@ import {
   Text,
   Dimensions,
   Vibration,
+  FlatList,
 } from 'react-native';
 import {Image, ListItem, Button} from 'react-native-elements';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme, Typography} from '../../assets/styles';
-import FollowCard from '../Profile/FollowerCard';
+import FollowerCard from '../Profile/FollowerCard';
 import IngredientCard from './IngredientCard';
 import DirectionCard from './DirectionCard';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
@@ -21,6 +22,11 @@ import ReviewCard from './ReviewCard';
 import RatingCard from './RatingCard';
 import Share from 'react-native-share';
 import CreateReview from '../../components/Review/CreateReview';
+import {nav} from 'aws-amplify';
+import {Recipe, Ingredient, Direction} from '../../redux/recipe/types';
+import {User} from 'src/redux/user/types';
+import {useSelector} from 'react-redux';
+import {RootState} from 'src/redux';
 
 //custom tab bar
 const renderTabBar = (props: any) => (
@@ -40,30 +46,6 @@ const renderTabBar = (props: any) => (
     )}
   />
 );
-
-const Ingredients = () => {
-  return (
-    <View>
-      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
-      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
-      <IngredientCard amount={1} ingredient={'flour'} unit={'cup'} />
-    </View>
-  );
-};
-
-const Directions = () => {
-  return (
-    <View>
-      <DirectionCard order={1} direction={'Preheat oven to 350F'} />
-      <DirectionCard
-        order={1}
-        direction={
-          'In a large bowl combine flour, flour, flour and water and form a pasty mixture then roll into a ball, light on fire and throw out the window.'
-        }
-      />
-    </View>
-  );
-};
 
 const shareSingleImage = async () => {
   const shareOptions = {
@@ -85,7 +67,6 @@ const HeaderIcons = () => {
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginRight: 10,
       }}>
       <Icon
         name={'share'}
@@ -97,20 +78,69 @@ const HeaderIcons = () => {
         name={'bookmark'}
         size={30}
         color={Theme.Light.headline}
-        style={{paddingLeft: 15}}
+        style={{marginHorizontal: 5}}
         onPress={() => Vibration.vibrate(25)}
       />
     </View>
   );
 };
 
-const DetailedRecipe = ({navigation}: any) => {
+const DetailedRecipe = ({navigation, route}: any) => {
+  const recipeState: Recipe = route.params.recipe;
+  const userState: User = useSelector(
+    (state: RootState) => state.UserReducer.user,
+  );
+
+  useEffect(() => {
+    // Get author info here. Use with follow card
+    // Get reviews info here. Use with a lot of things!
+  }, []);
+
+  console.log(userState);
+  console.log('asdf');
+
+  //Fetch reviews from the recipe id
   //Update nav title
   navigation.setOptions({
     headerShown: true,
-    headerTitle: 'Chicken Pot Pie',
+    headerTitle: 'awkl jdwlkakawdjlkd jalkwjd lkajklwd wakl;jd ',
     headerRight: () => <HeaderIcons />,
   });
+
+  console.log(recipeState.ingredients);
+
+  const Ingredients = () => {
+    return (
+      <View>
+        <FlatList
+          data={recipeState.ingredients}
+          renderItem={({item}: {item: Ingredient}) => (
+            <IngredientCard ingredient={item} />
+          )}
+          keyExtractor={(item: Ingredient) => item.id}
+          decelerationRate={0.798}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+    );
+  };
+
+  const Directions = () => {
+    return (
+      <View>
+        <FlatList
+          data={recipeState.directions}
+          renderItem={({item}: {item: Direction}) => (
+            <DirectionCard direction={item} />
+          )}
+          keyExtractor={(item: Direction) => item.id}
+          decelerationRate={0.798}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+    );
+  };
+
   //Handle state for tab view
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -131,7 +161,7 @@ const DetailedRecipe = ({navigation}: any) => {
         {/* Recipe Image */}
         <View style={{flex: 1}}>
           <Image
-            source={require('../../assets/images/food.jpg')}
+            source={{uri: recipeState.imageUrl}}
             style={{width: responsiveWidth(100), height: responsiveWidth(100)}}
           />
           <View
@@ -148,11 +178,11 @@ const DetailedRecipe = ({navigation}: any) => {
                 flex: 1,
                 zIndex: 1,
                 alignItems: 'center',
-                opacity: .7,
+                opacity: 0.7,
                 borderRightColor: Theme.Light.caption,
                 borderRightWidth: 1,
               }}>
-              <Icon name="clock" size={30} color={Theme.Light.caption}/>
+              <Icon name="clock" size={30} color={Theme.Light.caption} />
               <Text
                 style={{
                   ...Typography.Typography.body,
@@ -167,7 +197,7 @@ const DetailedRecipe = ({navigation}: any) => {
                 flex: 1,
                 zIndex: 1,
                 alignItems: 'center',
-                opacity: .7,
+                opacity: 0.7,
                 borderRightColor: Theme.Light.caption,
                 borderRightWidth: 1,
               }}>
@@ -178,14 +208,14 @@ const DetailedRecipe = ({navigation}: any) => {
                   color: Theme.Light.caption,
                   marginTop: 5,
                 }}>
-                Serves 4
+                {`Serves ${recipeState.servingSize}`}
               </Text>
             </View>
             <View
               style={{
                 flex: 1,
                 alignItems: 'center',
-                opacity: .7,
+                opacity: 0.7,
                 zIndex: 1,
               }}>
               <Icon name="info" size={30} color={Theme.Light.caption} />
@@ -194,7 +224,7 @@ const DetailedRecipe = ({navigation}: any) => {
                   ...Typography.Typography.body,
                   color: Theme.Light.caption,
                   marginTop: 5,
-                  opacity: .7,
+                  opacity: 0.7,
                 }}>
                 514 kcal
               </Text>
@@ -204,7 +234,7 @@ const DetailedRecipe = ({navigation}: any) => {
               style={{
                 zIndex: 0,
                 backgroundColor: Theme.Light.shadow,
-                opacity: 0.65,
+                opacity: 0.35,
                 flex: 1,
                 position: 'absolute',
                 height: '100%',
@@ -216,7 +246,9 @@ const DetailedRecipe = ({navigation}: any) => {
         {/* Everything else */}
         <View style={{flex: 1}}>
           {/* Follow user card */}
-          <FollowCard isFollowing={true} key={0} />
+          <FollowerCard
+            isFollowing={userState.following.includes(recipeState.creatorid)}
+          />
           {/* Nutrition Card */}
           {/* <Text
             style={{
@@ -246,7 +278,10 @@ const DetailedRecipe = ({navigation}: any) => {
             }}>
             Reviews
           </Text>
-          <RatingCard />
+          <RatingCard
+            reviewRating={recipeState.reviewRating}
+            reviewCount={recipeState.reviewCount}
+          />
           <ReviewCard />
           {/* All Comments button */}
           <Button
@@ -269,11 +304,5 @@ const DetailedRecipe = ({navigation}: any) => {
     </SafeAreaView>
   );
 };
-
-const detailedRecipeStyle = StyleSheet.create({
-  header: {
-    margin: 10,
-  },
-});
 
 export default DetailedRecipe;

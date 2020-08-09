@@ -9,10 +9,17 @@ import SettingsTab from '../../containers/Profile/SettingsTab';
 import {Theme, Typography} from '../../assets/styles';
 import ProfileInfo from '../../containers/Profile/ProfileInfo';
 import ProfileBrowser from '../../components/Profile/ProfileBrowser';
+import {User} from 'src/redux/user/types';
+import {useSelector} from 'react-redux';
+import {RootState} from 'src/redux';
 
 //Profile view of the app
 const Profile = (props: any) => {
   const componentRef = useRef<DrawerLayout>(null);
+
+  const userInfo: User = useSelector(
+    (state: RootState) => state.UserReducer.user,
+  );
 
   const toggleMenu = () => {
     console.log(componentRef.current?.state);
@@ -45,7 +52,12 @@ const Profile = (props: any) => {
           {/* Header bar */}
           <ProfileInfo />
           {/* Recipes and followers information */}
-          <CountsBar navigation={props.navigation}/>
+          <CountsBar
+            navigation={props.navigation}
+            followers={userInfo.followers.length}
+            following={userInfo.following.length}
+            recipes={userInfo.recipes.length}
+          />
         </View>
         <View style={{flex: 2}}>
           {/* Tab view for recipes, photos, and reviews */}

@@ -33,11 +33,17 @@ const favoriteIconFilled = (
 const favoriteIcon = favoriteIconFilled;
 
 const RecipeCard = (props: recipeCardProps) => {
-  console.log(props.recipe.imageUrl);
+  // console.log(props.recipe);
   return (
     <TouchableHighlight
       onPress={() =>
-        props.navigation.navigate('Recipes', {screen: 'Recipe', params: {}})
+        //todo: nav to recipe with recipe id
+        props.navigation.navigate('Recipes', {
+          screen: 'Recipe',
+          params: {
+            recipe: props.recipe,
+          },
+        })
       }
       underlayColor={'transparent'}>
       <View
@@ -70,12 +76,17 @@ const RecipeCard = (props: recipeCardProps) => {
                   color={Theme.Light.headline}
                   style={{marginRight: 5}}
                 />
-                <Text style={Typography.Typography.body}>45 min</Text>
+                <Text
+                  style={
+                    Typography.Typography.body
+                  }>{`${props.recipe.cookTime} min`}</Text>
               </View>
 
               {/* Dot inbetween categories */}
               <View style={recipeCardStyle.dot} />
-              <Text style={Typography.Typography.body}>Korean BBQ</Text>
+              <Text style={Typography.Typography.body}>
+                {props.recipe.category}
+              </Text>
             </View>
             <View style={recipeCardStyle.horizontalRow}>
               <Icon
@@ -83,7 +94,9 @@ const RecipeCard = (props: recipeCardProps) => {
                 style={{color: 'gold', marginRight: 5}}
                 size={20}
               />
-              <Text style={Typography.Typography.body}>4.4</Text>
+              <Text style={Typography.Typography.body}>
+                {props.recipe.reviewRating}
+              </Text>
             </View>
           </View>
 
@@ -93,9 +106,14 @@ const RecipeCard = (props: recipeCardProps) => {
               ...recipeCardStyle.horizontalRow,
               justifyContent: 'space-between',
             }}>
-            <Text style={Typography.Typography.subheadline}>Debra Boydd</Text>
+            <Text style={Typography.Typography.subheadline}>
+              {props.recipe.creatorName}
+            </Text>
 
-            <Text style={Typography.Typography.body}>42 reviews</Text>
+            <Text
+              style={
+                Typography.Typography.body
+              }>{`${props.recipe.reviewCount} reviews`}</Text>
           </View>
         </View>
       </View>

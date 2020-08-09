@@ -26,7 +26,7 @@ const Explore = ({navigation}: any) => {
     (state: RootState) => state.RecipeReducer,
   );
 
-  console.log(recipeState);
+  // console.log(recipeState);
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -37,7 +37,9 @@ const Explore = ({navigation}: any) => {
         <View style={exploreStyle.header}>
           <Text style={Typography.Typography.header}>Categories</Text>
         </View>
-        <Categories />
+        <Categories
+          onCategoryPressed={(category: string) => console.log(category)}
+        />
         {/* Breakfast */}
         <View style={exploreStyle.header}>
           <Text style={Typography.Typography.header}>Breakfast</Text>

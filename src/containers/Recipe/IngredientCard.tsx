@@ -2,19 +2,22 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme, Typography} from '../../assets/styles';
+import {Ingredient} from 'src/redux/recipe/types';
 
 export interface ingredientCardProps {
-  amount: Number;
-  ingredient: string;
-  unit: string;
+  ingredient: Ingredient;
 }
 
 const IngredientCard = (props: ingredientCardProps) => {
   const [isChecked, setIsChecked] = useState(false);
   const checkStatus = isChecked ? 'check-circle' : 'circle';
   const description = `${
-    props.unit.charAt(0).toUpperCase() + props.unit.slice(1)
-  } of ${props.ingredient.charAt(0).toUpperCase() + props.ingredient.slice(1)}`;
+    props.ingredient.unit.charAt(0).toUpperCase() +
+    props.ingredient.unit.slice(1)
+  } of ${
+    props.ingredient.name.charAt(0).toUpperCase() +
+    props.ingredient.name.slice(1)
+  }`;
 
   return (
     <TouchableHighlight onPress={() => setIsChecked(!isChecked)}>
@@ -22,7 +25,7 @@ const IngredientCard = (props: ingredientCardProps) => {
         <Icon name={checkStatus} size={30} color={Theme.Light.caption} />
         <Text
           style={{...Typography.Typography.subheader, paddingHorizontal: 15}}>
-          {props.amount}
+          {props.ingredient.amount}
         </Text>
         <Text style={Typography.Typography.subheader}>{description}</Text>
       </View>

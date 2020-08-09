@@ -1,10 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text } from 'react-native';
-import {
-  responsiveWidth,
-  responsiveScreenWidth,
-} from 'react-native-responsive-dimensions';
-import { Theme, Typography } from '../../assets/styles';
+import {StyleSheet, View, Image, Text} from 'react-native';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
+import {Theme, Typography} from '../../assets/styles';
 import Icon from 'react-native-vector-icons/Feather';
 
 const MiniRecipeCard = () => {
@@ -22,9 +19,9 @@ const MiniRecipeCard = () => {
           justifyContent: 'space-between',
         }}>
         <Text style={Typography.Typography.bodyflat}>4.4k Reviews</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Text style={Typography.Typography.bodyflat}>4.9</Text>
-          <Icon name="star" style={{ color: 'gold', marginLeft: 5 }} size={20} />
+          <Icon name="star" style={{color: 'gold', marginLeft: 5}} size={20} />
         </View>
       </View>
     </View>
@@ -33,14 +30,14 @@ const MiniRecipeCard = () => {
 
 const miniRecipeCardStyle = StyleSheet.create({
   container: {
-    width: responsiveWidth(47),
+    width: responsiveWidth(48),
     backgroundColor: Theme.Light.shadow,
     marginHorizontal: responsiveWidth(1),
     marginBottom: responsiveWidth(5),
-    color: Theme.Light.shadow
+    color: Theme.Light.shadow,
   },
   image: {
-    width: responsiveWidth(47),
+    width: responsiveWidth(48),
     height: responsiveWidth(40),
     marginBottom: 5,
     borderRadius: 5,

@@ -12,9 +12,11 @@ export interface prifleInfoProps {
 }
 
 const ProfileInfo = () => {
-  const userState: User = useSelector(
-    (state: RootState) => state.UserReducer.user,
+
+  const userSession: User = useSelector(
+    (state: RootState) => state.UserReducer.session,
   );
+
   return (
     <View style={profileInfoStyle.container}>
       <Avatar
@@ -27,7 +29,7 @@ const ProfileInfo = () => {
         showAccessory
       />
       <View style={profileInfoStyle.wrapper}>
-      <Text style={profileInfoStyle.name}>{userState.name}</Text>
+      <Text style={profileInfoStyle.name}>{userSession.name}</Text>
         <Text style={profileInfoStyle.location}>Seattle, WA</Text>
       </View>
     </View>

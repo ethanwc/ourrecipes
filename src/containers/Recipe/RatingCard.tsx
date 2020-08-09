@@ -1,18 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, Text, Dimensions} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
 import {Theme, Typography} from '../../assets/styles';
-import {
-  responsiveWidth,
-  responsiveScreenWidth,
-  useResponsiveScreenWidth,
-  useResponsiveWidth,
-} from 'react-native-responsive-dimensions';
-import {StackedBarChart, ChartConfig} from 'react-native-chart-kit';
+
 export interface RatingCardProps {
-  review: string;
-  rating: number;
-  reviewTime: Date;
-  reviewAuthor: string;
+  reviewCount: number;
+  reviewRating: number;
 }
 
 export interface RatingBarProps {
@@ -47,7 +40,7 @@ const RatingBar = (props: RatingBarProps) => {
   );
 };
 
-const RatingCard = () => {
+const RatingCard = (props: RatingCardProps) => {
   return (
     <View style={ratingCardStyle.container}>
       {/* Out of 5 star */}
@@ -59,7 +52,7 @@ const RatingCard = () => {
             marginBottom: 5,
             paddingBottom: 5,
           }}>
-          <Text style={Typography.Typography.header}>4.5</Text>
+          <Text style={Typography.Typography.header}>{props.reviewRating}</Text>
         </View>
         <Text style={Typography.Typography.subheader}>5</Text>
       </View>
@@ -81,12 +74,10 @@ const ratingCardStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // margin: 10,
     padding: responsiveWidth(2.5),
     borderRadius: 5,
-    // padding: 15,
-    backgroundColor: Theme.Light.shadow,
     borderBottomWidth: 0.3,
+    backgroundColor: Theme.Light.shadow,
     borderBottomColor: Theme.Light.body,
   },
   ratingCountWrapper: {

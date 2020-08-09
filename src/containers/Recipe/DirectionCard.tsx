@@ -3,17 +3,15 @@ import {StyleSheet, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme, Typography} from '../../assets/styles';
 import {TouchableHighlight} from 'react-native-gesture-handler';
+import {Direction} from 'src/redux/recipe/types';
 
 export interface directionCardProps {
-  order: Number;
-  direction: string;
+  direction: Direction;
 }
 
 const DirectionCard = (props: directionCardProps) => {
   const [isChecked, setIsChecked] = useState(false);
-
   const checkStatus = isChecked ? 'check-circle' : 'circle';
-
   return (
     <TouchableHighlight onPress={() => setIsChecked(!isChecked)}>
       <View style={directionCardStyle.container}>
@@ -25,7 +23,7 @@ const DirectionCard = (props: directionCardProps) => {
         />
         <Text
           style={{...Typography.Typography.subheader, paddingHorizontal: 15}}>
-          {props.direction}
+          {`${props.direction.step}. ${props.direction.instruction}`}
         </Text>
       </View>
     </TouchableHighlight>
