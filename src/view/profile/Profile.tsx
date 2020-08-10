@@ -61,7 +61,7 @@ const Profile = (props: any) => {
         </View>
         <View style={{flex: 2}}>
           {/* Tab view for recipes, photos, and reviews */}
-          <ProfileBrowser />
+          <ProfileBrowser navigation={props.navigation} />
         </View>
         {/* Render menu icon button last */}
         <Icon

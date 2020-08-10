@@ -61,30 +61,6 @@ const shareSingleImage = async () => {
   }
 };
 
-const HeaderIcons = () => {
-  return (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-      }}>
-      <Icon
-        name={'share'}
-        size={30}
-        color={Theme.Light.headline}
-        onPress={() => shareSingleImage()}
-      />
-      <Icon
-        name={'bookmark'}
-        size={30}
-        color={Theme.Light.headline}
-        style={{marginHorizontal: 5}}
-        onPress={() => Vibration.vibrate(25)}
-      />
-    </View>
-  );
-};
-
 const DetailedRecipe = ({navigation, route}: any) => {
   const recipeState: Recipe = route.params.recipe;
   const userState: User = useSelector(
@@ -98,6 +74,34 @@ const DetailedRecipe = ({navigation, route}: any) => {
 
   console.log(userState);
   console.log('asdf');
+
+  const HeaderIcons = () => {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
+        <Icon
+          name={'share'}
+          size={30}
+          color={Theme.Light.headline}
+          onPress={() => shareSingleImage()}
+        />
+        <Icon
+          name={'bookmark'}
+          size={30}
+          color={
+            userState.bookmarks.includes(recipeState.id)
+              ? Theme.Light.caption
+              : Theme.Light.headline
+          }
+          style={{marginHorizontal: 5}}
+          onPress={() => Vibration.vibrate(25)}
+        />
+      </View>
+    );
+  };
 
   //Fetch reviews from the recipe id
   //Update nav title
@@ -282,7 +286,12 @@ const DetailedRecipe = ({navigation, route}: any) => {
             reviewRating={recipeState.reviewRating}
             reviewCount={recipeState.reviewCount}
           />
-          <ReviewCard />
+          <ReviewCard
+            id={'1'}
+            creatorid={'1'}
+            review={'Wow what an awful recipe.'}
+            rating={1}
+          />
           {/* All Comments button */}
           <Button
             title="All Reviews"

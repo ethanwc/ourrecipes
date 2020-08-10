@@ -22,6 +22,14 @@ export interface Direction {
   imageUrl?: string;
 }
 
+/** Review type */
+export interface Review {
+  id: string;
+  creatorid: string;
+  review: string;
+  rating: number;
+}
+
 /** Recipe type */
 export interface Recipe {
   id: string;
@@ -38,6 +46,7 @@ export interface Recipe {
   category: string;
   ingredients: Ingredient[];
   directions: Direction[];
+  reviews: Review[];
 }
 
 interface CreateRecipeAction {

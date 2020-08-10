@@ -1,17 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { Theme, Typography } from '../../assets/styles';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import {Theme, Typography} from '../../assets/styles';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
+import {Recipe} from 'src/redux/recipe/types';
 
 export interface BarRecipeCardProps {
-  review: string;
-  rating: number;
-  reviewTime: Date;
-  image: string;
+  recipe: Recipe;
+  isBookmarked: boolean;
 }
 
-const BarRecipeCard = () => {
+const BarRecipeCard = (props: BarRecipeCardProps) => {
   return (
     <View style={barRecipeCardProps.container}>
       <View
@@ -38,28 +37,36 @@ const BarRecipeCard = () => {
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}>
-            <Text style={Typography.Typography.subheadline}>Chicken Pot Pie</Text>
+            <Text style={Typography.Typography.subheadline}>
+              {props.recipe.name}
+            </Text>
             <Icon
               name="bookmark"
               size={24}
               color={Theme.Light.caption}
-              style={{ position: 'absolute', right: 10, top: 10 }}
+              style={{position: 'absolute', right: 10, top: 10}}
               onPress={() => console.log('icon pressed')}
             />
-
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Icon
               name="clock"
               size={16}
               color={Theme.Light.headline}
-              style={{ marginRight: 5 }} />
-            <Text style={Typography.Typography.body}>45 min</Text>
+              style={{marginRight: 5}}
+            />
+            <Text
+              style={
+                Typography.Typography.body
+              }>{`${props.recipe.cookTime} min`}</Text>
             <Icon
               name="star"
-              style={{ color: 'gold', marginLeft: 5 }}
-              size={16} />
-            <Text style={{ ...Typography.Typography.body, marginLeft: 5 }}>4.9</Text>
+              style={{color: 'gold', marginLeft: 5}}
+              size={16}
+            />
+            <Text style={{...Typography.Typography.body, marginLeft: 5}}>
+              4.9
+            </Text>
           </View>
         </View>
       </View>

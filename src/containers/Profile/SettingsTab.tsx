@@ -8,14 +8,14 @@ import {User} from 'src/redux/user/types';
 import {Theme, Typography} from '../../assets/styles';
 
 const SettingsTab = (props: any) => {
-  const userState: User = useSelector(
-    (state: RootState) => state.UserReducer.user,
+  const userSession: User = useSelector(
+    (state: RootState) => state.UserReducer.session,
   );
   return (
     <View style={settingsTabStyle.container}>
       <View>
         <ListItem
-          title={userState.email}
+          title={userSession.email}
           titleStyle={settingsTabStyle.title}
           containerStyle={settingsTabStyle.wrapper}
         />

@@ -5,10 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {Typography, Theme} from '../../assets/styles';
 import ReviewCard from './ReviewCard';
 
-export interface largeRecipeCardProps {
-  renderAuthor: boolean;
+export interface LargeRecipeCardProps {
   navigation: any;
-  size: string;
 }
 
 const favoriteIconEmpty = (
@@ -31,7 +29,7 @@ const bookmarkIcon = (
 
 const favoriteIcon = bookmarkIcon;
 
-const LargeRecipeCard = (props: largeRecipeCardProps) => {
+const LargeRecipeCard = (props: LargeRecipeCardProps) => {
   return (
     <TouchableHighlight
       onPress={() =>
@@ -45,11 +43,6 @@ const LargeRecipeCard = (props: largeRecipeCardProps) => {
       underlayColor={'transparent'}>
       <View style={largeRecipeCardStyle.container}>
         <View>
-          {/* // style={
-        //   props.size === 'small'
-        //     ? recipeCardStyle.containerSmall
-        //     : recipeCardStyle.containerLarge
-        // } */}
           <Image
             style={largeRecipeCardStyle.image}
             source={require('../../assets/images/food.jpg')}
@@ -94,11 +87,7 @@ const LargeRecipeCard = (props: largeRecipeCardProps) => {
                 ...largeRecipeCardStyle.horizontalRow,
                 justifyContent: 'space-between',
               }}>
-              {props.renderAuthor ? (
-                <Text style={Typography.Typography.subheadline}>
-                  Debra Boydd
-                </Text>
-              ) : null}
+              <Text style={Typography.Typography.subheadline}>Debra Boydd</Text>
 
               <View style={largeRecipeCardStyle.horizontalRow}>
                 <Text style={Typography.Typography.body}>42 reviews</Text>
@@ -106,8 +95,18 @@ const LargeRecipeCard = (props: largeRecipeCardProps) => {
             </View>
           </View>
         </View>
-        <ReviewCard />
-        <ReviewCard />
+        <ReviewCard
+          id={'asdf'}
+          creatorid={'sadf'}
+          review={'Wow this tastes garbo'}
+          rating={2}
+        />
+        <ReviewCard
+          id={'asdf'}
+          creatorid={'sadf'}
+          review={'Wow this tastes garbo'}
+          rating={2}
+        />
       </View>
     </TouchableHighlight>
   );

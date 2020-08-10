@@ -2,7 +2,8 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Button, AirbnbRating} from 'react-native-elements';
 import {Theme, Typography} from '../../assets/styles';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
+import {Review} from 'src/redux/recipe/types';
 
 export interface ReviewCardProps {
   review: string;
@@ -11,7 +12,7 @@ export interface ReviewCardProps {
   reviewAuthor: string;
 }
 
-const ReviewCard = () => {
+const ReviewCard = (props: Review) => {
   return (
     <View style={reviewCardStyle.container}>
       <View
@@ -50,13 +51,12 @@ const ReviewCard = () => {
                   size={16}
                   showRating={false}
                   isDisabled={true}
-                  defaultRating={1}
+                  defaultRating={props.rating}
                 />
               </View>
             </View>
             <Text style={{...Typography.Typography.body, marginTop: 15}}>
-              Wow so for this recipe I actually am very disappointed there are
-              no vegan options listed - 1 star.
+              {props.review}
             </Text>
           </View>
         </View>

@@ -1,38 +1,37 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { AirbnbRating } from 'react-native-elements';
-import { Theme, Typography } from '../../assets/styles';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import {View, Text, StyleSheet} from 'react-native';
+import {AirbnbRating} from 'react-native-elements';
+import {Theme, Typography} from '../../assets/styles';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
+import {Review} from 'src/redux/recipe/types';
 
-export interface ReviewCardProps {
-  review: string;
-  rating: number;
-  reviewTime: Date;
-  reviewAuthor: string;
-}
-
-const ReviewCard = () => {
+const ReviewCard = (props: Review) => {
   return (
     <View style={reviewCardStyle.container}>
       <View>
         <View
-          style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
           <View>
             <Text style={Typography.Typography.subheader}>Deba Boyd</Text>
-            <Text style={{ ...Typography.Typography.bodyflat, marginTop: 4 }}>2 hours ago</Text>
+            <Text style={{...Typography.Typography.bodyflat, marginTop: 4}}>
+              2 hours ago
+            </Text>
           </View>
-          <View style={{ alignSelf: 'flex-start' }}>
+          <View style={{alignSelf: 'flex-start'}}>
             <AirbnbRating
               size={16}
               showRating={false}
               isDisabled={true}
-              defaultRating={1}
+              defaultRating={props.rating}
             />
           </View>
         </View>
-        <Text style={{ ...Typography.Typography.body, marginTop: 15 }}>
-          Wow so for this recipe I actually am very disappointed there are
-          no vegan options listed - 1 star.</Text>
+        <Text style={{...Typography.Typography.body, marginTop: 15}}>
+          {props.review}
+        </Text>
       </View>
     </View>
   );
@@ -41,7 +40,6 @@ const ReviewCard = () => {
 const reviewCardStyle = StyleSheet.create({
   container: {
     padding: responsiveWidth(2.5),
-    alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: Theme.Light.shadow,
     borderBottomColor: Theme.Light.body,

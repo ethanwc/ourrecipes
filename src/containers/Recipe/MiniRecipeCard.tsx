@@ -1,30 +1,48 @@
 import React from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
-import {Theme, Typography} from '../../assets/styles';
 import Icon from 'react-native-vector-icons/Feather';
+import {Theme, Typography} from '../../assets/styles';
+import {Recipe} from 'src/redux/recipe/types';
+import {TouchableHighlight} from 'react-native-gesture-handler';
 
-const MiniRecipeCard = () => {
+export interface MiniRecipeCardProps {
+  navigation: any;
+  recipe: Recipe;
+}
+
+const MiniRecipeCard = (props: MiniRecipeCardProps) => {
   return (
-    <View style={miniRecipeCardStyle.container}>
-      <Image
-        style={miniRecipeCardStyle.image}
-        source={require('../../assets/images/food.jpg')}
-      />
-      <Text style={Typography.Typography.subheader}>Chicken Pot Pie</Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <Text style={Typography.Typography.bodyflat}>4.4k Reviews</Text>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Text style={Typography.Typography.bodyflat}>4.9</Text>
-          <Icon name="star" style={{color: 'gold', marginLeft: 5}} size={20} />
+    <TouchableHighlight onPress={() => console.log("nav to recipe")}>
+      <View style={miniRecipeCardStyle.container}>
+        <Image
+          style={miniRecipeCardStyle.image}
+          source={{uri: props.recipe.imageUrl}}
+        />
+        <Text style={Typography.Typography.subheader}>{props.recipe.name}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <Text
+            style={
+              Typography.Typography.bodyflat
+            }>{`${props.recipe.reviewCount} reviews`}</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text style={Typography.Typography.bodyflat}>
+              {props.recipe.reviewRating}
+            </Text>
+            <Icon
+              name="star"
+              style={{color: 'gold', marginLeft: 5}}
+              size={20}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableHighlight>
   );
 };
 

@@ -42,11 +42,7 @@ const Group = (props: groupProps) => {
       <FlatList
         data={DATA}
         renderItem={({item, index}) => (
-          <LargeRecipeCard
-            renderAuthor={true}
-            navigation={props.navigation}
-            size={'large'}
-          />
+          <LargeRecipeCard navigation={props.navigation} />
         )}
         keyExtractor={(item) => item.title}
         decelerationRate={0.798}

@@ -13,16 +13,25 @@ import {Theme, Typography} from '../../assets/styles';
 import MiniRecipeCard from '../../containers/Recipe/MiniRecipeCard';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import ReviewCard from '../../containers/Review/ReviewCard';
+import {Recipe} from 'src/redux/recipe/types';
 
-const ProfileBrowser = () => {
+export interface ProfileBrowserProps {
+  navigation: any;
+}
+
+// same useEffect approach as reviews here
+
+const ProfileBrowser = (props: ProfileBrowserProps) => {
   const RecipeBrowser = () => {
     return (
-          <FlatList
-            data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-            renderItem={MiniRecipeCard}
-            keyExtractor={(item, index) => index.toString()}
-            numColumns={2}
-          />
+      <FlatList
+        data={[]}
+        renderItem={({item}: {item: Recipe}) => (
+          <MiniRecipeCard recipe={item} navigation={props.navigation} />
+        )}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2}
+      />
     );
   };
 
@@ -102,12 +111,30 @@ const ProfileBrowser = () => {
     return (
       <SafeAreaView>
         <ScrollView>
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
+          <ReviewCard
+            id={'asdf'}
+            creatorid={'sadf'}
+            review={'Wow this tastes garbo'}
+            rating={2}
+          />
+          <ReviewCard
+            id={'asdf'}
+            creatorid={'sadf'}
+            review={'Wow this tastes garbo'}
+            rating={2}
+          />
+          <ReviewCard
+            id={'asdf'}
+            creatorid={'sadf'}
+            review={'Wow this tastes garbo'}
+            rating={2}
+          />
+          <ReviewCard
+            id={'asdf'}
+            creatorid={'sadf'}
+            review={'Wow this tastes garbo'}
+            rating={2}
+          />
         </ScrollView>
       </SafeAreaView>
     );
