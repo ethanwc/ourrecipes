@@ -1,4 +1,11 @@
-import {SET_SESSION, User, UserState, UserActionTypes, SET_USER} from './types';
+import {
+  SET_SESSION,
+  User,
+  UserState,
+  UserActionTypes,
+  SET_USER,
+  SET_BOOKMARK,
+} from './types';
 
 export const UserReducer = (
   state: UserState = {
@@ -30,6 +37,9 @@ export const UserReducer = (
         user: state.user,
         session: action.payload,
       };
+    case SET_BOOKMARK: {
+      return state;
+    }
     default:
       return state;
   }

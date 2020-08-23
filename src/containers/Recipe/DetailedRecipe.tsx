@@ -285,16 +285,11 @@ const DetailedRecipe = ({navigation, route}: any) => {
           <RatingCard
             reviewRating={recipeState.reviewRating}
             reviewCount={recipeState.reviewCount}
-          />
-          <ReviewCard
-            id={'1'}
-            creatorid={'1'}
-            review={'Wow what an awful recipe.'}
-            rating={1}
+            reviewDistribution={recipeState.reviewDistribution}
           />
           {/* All Comments button */}
           <Button
-            title="All Reviews"
+            title="See Reviews"
             type="outline"
             onPress={() =>
               console.log('todo: nav to all comments / review page')

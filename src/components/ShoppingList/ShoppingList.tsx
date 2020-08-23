@@ -34,18 +34,18 @@ const ShoppingList = () => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-        <FlatList
-          data={items}
-          renderItem={({item}: {item: ShoppingListItem}) => (
-            <ListCard
-              item={item}
-              editItem={(item: ShoppingListItem) => setupEditItem(item)}
-            />
-          )}
-          keyExtractor={(item: ShoppingListItem) => item.id}
-          decelerationRate={0.798}
-          showsHorizontalScrollIndicator={false}
-        />
+      <FlatList
+        data={items}
+        renderItem={({item}: {item: ShoppingListItem}) => (
+          <ListCard
+            item={item}
+            editItem={(item: ShoppingListItem) => setupEditItem(item)}
+          />
+        )}
+        keyExtractor={(item: ShoppingListItem) => item.id}
+        decelerationRate={0.798}
+        showsHorizontalScrollIndicator={false}
+      />
       <CreateListItem
         isVisible={addItemModal}
         setVisible={() => setAddItemModal(!addItemModal)}
