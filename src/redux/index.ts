@@ -1,4 +1,4 @@
-import {createStore, combineReducers} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {ShoppingList} from './shoppinglist/reducers';
 import {ShoppinglistState} from './shoppinglist/types';
 import {Groups} from './group/reducers';
@@ -9,6 +9,7 @@ import {RecipeReducer} from './recipe/reducers';
 import {RecipeState} from './recipe/types';
 import {CreateRecipeReducer} from './createrecipe/reducers';
 import {CreateRecipeState} from './createrecipe/types';
+import thunk from 'redux-thunk';
 
 const initialShoppingListState: ShoppinglistState = {
   items: [
@@ -127,4 +128,4 @@ const initialState: RootState = {
   CreateRecipeReducer: initialCreateRecipeState,
 };
 
-export const store = createStore(rootReducer, initialState);
+export const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
