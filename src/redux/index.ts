@@ -13,7 +13,7 @@ import thunk from 'redux-thunk';
 
 const initialShoppingListState: ShoppinglistState = {
   items: [
-    {id: 'wtf', name: 'test1234', checked: false, creationDate: new Date()},
+    {id: 'wtf', name: 'Pizza Dough', checked: true, creationDate: new Date()},
   ],
 };
 
@@ -24,7 +24,6 @@ const initialGroupsState: GroupsState = {
       name: 'Failed to load groups',
       creatorid: '123',
       creationDate: new Date(),
-      membercount: 0,
       memberids: [],
     },
   ],
@@ -59,8 +58,15 @@ const initialRecipeState: RecipeState = {
       creationDate: new Date().toLocaleDateString(),
       creatorid: 'asdf',
       creatorName: 'Steve Jobs',
-      reviewCount: 44,
+      reviewCount: 23,
       reviewRating: 4.4,
+      reviewDistribution: new Map<number, number>([
+        [1, 2],
+        [2, 3],
+        [3, 2],
+        [4, 4],
+        [5, 12],
+      ]),
       imageUrl:
         'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
       reviews: [
@@ -71,6 +77,7 @@ const initialRecipeState: RecipeState = {
           review: 'Wow this recipe sucks',
         },
       ],
+      bookmarks: [],
       directions: [
         {
           id: 'asdasdf',

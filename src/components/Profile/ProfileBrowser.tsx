@@ -34,80 +34,34 @@ const ProfileBrowser = (props: ProfileBrowserProps) => {
       />
     );
   };
-
   const PhotoBrowser = () => {
     return (
       <SafeAreaView>
-        <ScrollView>
-          <Image
-            style={{
-              width: responsiveWidth(95),
-              margin: responsiveWidth(2.5),
-              marginTop: responsiveWidth(2.5),
-              height: responsiveWidth(95),
-            }}
-            source={require('../../assets/images/food.jpg')}
-          />
-          <Image
-            style={{
-              width: responsiveWidth(95),
-              margin: responsiveWidth(2.5),
-              marginTop: 0,
-              height: responsiveWidth(95),
-            }}
-            source={require('../../assets/images/food.jpg')}
-          />
-          <Image
-            style={{
-              width: responsiveWidth(95),
-              margin: responsiveWidth(2.5),
-              marginTop: 0,
-              height: responsiveWidth(95),
-            }}
-            source={require('../../assets/images/food.jpg')}
-          />
-          <Image
-            style={{
-              width: responsiveWidth(95),
-              margin: responsiveWidth(2.5),
-              marginTop: 0,
-              height: responsiveWidth(95),
-            }}
-            source={require('../../assets/images/food.jpg')}
-          />
-          <Image
-            style={{
-              width: responsiveWidth(95),
-              margin: responsiveWidth(2.5),
-              marginTop: 0,
-              height: responsiveWidth(95),
-            }}
-            source={require('../../assets/images/food.jpg')}
-          />
-          <Image
-            style={{
-              width: responsiveWidth(95),
-              margin: responsiveWidth(2.5),
-              marginTop: 0,
-              height: responsiveWidth(95),
-            }}
-            source={require('../../assets/images/food.jpg')}
-          />
-          <Image
-            style={{
-              width: responsiveWidth(95),
-              margin: responsiveWidth(2.5),
-              marginTop: 0,
-              height: responsiveWidth(95),
-            }}
-            source={require('../../assets/images/food.jpg')}
-          />
-        </ScrollView>
+        <FlatList
+          data={[1, 2, 3, 4, 5]}
+          renderItem={({item}: {item: any}) => (
+            <Image
+              style={{
+                width: responsiveWidth(95),
+                margin: responsiveWidth(2.5),
+                marginTop: responsiveWidth(2.5),
+                height: responsiveWidth(95),
+              }}
+              source={{
+                uri:
+                  'https://res.cloudinary.com/dk4gnl6ww/image/upload/v1597131689/js8wcvmo3bsktrfwvkkh.jpg',
+              }}
+            />
+          )}
+          keyExtractor={(group: any) => 'asdf'}
+          decelerationRate={0.798}
+          showsHorizontalScrollIndicator={false}
+        />
       </SafeAreaView>
     );
   };
 
-  const ThirdRoute = () => {
+  const Reviews = () => {
     return (
       <SafeAreaView>
         <ScrollView>
@@ -151,7 +105,7 @@ const ProfileBrowser = (props: ProfileBrowserProps) => {
   const renderScene = SceneMap({
     first: RecipeBrowser,
     second: PhotoBrowser,
-    third: ThirdRoute,
+    third: Reviews,
   });
 
   const initialLayout = {width: Dimensions.get('window').width};

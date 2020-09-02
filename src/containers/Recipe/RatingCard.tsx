@@ -6,6 +6,7 @@ import {Theme, Typography} from '../../assets/styles';
 export interface RatingCardProps {
   reviewCount: number;
   reviewRating: number;
+  reviewDistribution: Map<number, number>;
 }
 
 export interface RatingBarProps {
@@ -28,7 +29,7 @@ const RatingBar = (props: RatingBarProps) => {
           <View
             style={{
               ...ratingCardStyle.ratingBarFront,
-              width: `${props.distribution}%`,
+              width: `${props.distribution * 100}%`,
             }}
           />
         </View>
@@ -41,6 +42,20 @@ const RatingBar = (props: RatingBarProps) => {
 };
 
 const RatingCard = (props: RatingCardProps) => {
+  const asdf = [...props.reviewDistribution.entries()]
+    .sort()
+    .reverse()
+    .map((value) => {
+      console.log(value, value[1] / props.reviewCount);
+
+      return (
+        <RatingBar
+          count={value[1]}
+          distribution={value[1] / props.reviewCount}
+          rating={value[0]}
+        />
+      );
+    });
   return (
     <View style={ratingCardStyle.container}>
       {/* Out of 5 star */}
@@ -57,13 +72,7 @@ const RatingCard = (props: RatingCardProps) => {
         <Text style={Typography.Typography.subheader}>5</Text>
       </View>
       {/* Star ratings */}
-      <View style={{flex: 3}}>
-        <RatingBar count={15} distribution={40} rating={5} />
-        <RatingBar count={43} distribution={10} rating={4} />
-        <RatingBar count={3} distribution={20} rating={3} />
-        <RatingBar count={22} distribution={13} rating={2} />
-        <RatingBar count={17} distribution={24} rating={1} />
-      </View>
+      <View style={{flex: 3}}>{asdf}</View>
     </View>
   );
 };

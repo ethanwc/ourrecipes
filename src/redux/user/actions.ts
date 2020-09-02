@@ -1,6 +1,14 @@
-import {SET_SESSION, UserActionTypes, User, SET_USER} from './types';
 import Axios from 'axios';
 import {addDirection} from '../createrecipe/actions';
+import {
+  SET_SESSION,
+  UserActionTypes,
+  User,
+  SET_USER,
+  SET_BOOKMARK,
+  REMOVE_BOOKMARK,
+} from './types';
+import {Bookmark} from '../recipe/types';
 
 export const setSession = (session: any): UserActionTypes => {
   return {
@@ -13,6 +21,20 @@ export const setUser = (user: User): UserActionTypes => {
   return {
     type: SET_USER,
     payload: user,
+  };
+};
+
+export const addBookmark = (bookmark: Bookmark): UserActionTypes => {
+  return {
+    type: SET_BOOKMARK,
+    payload: bookmark,
+  };
+};
+
+export const removeBookmark = (bookmark: Bookmark): UserActionTypes => {
+  return {
+    type: REMOVE_BOOKMARK,
+    payload: bookmark,
   };
 };
 

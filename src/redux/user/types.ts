@@ -1,5 +1,9 @@
+import {Bookmark} from '../recipe/types';
+
 export const SET_USER = 'SET_USER';
 export const SET_SESSION = 'SET_SESSION';
+export const SET_BOOKMARK = 'SET_BOOKMARK';
+export const REMOVE_BOOKMARK = 'REMOVE_BOOKMARK';
 
 export interface UserState {
   user: User;
@@ -34,4 +38,18 @@ interface SetSessionAction {
   payload: User;
 }
 
-export type UserActionTypes = SetUserAction | SetSessionAction;
+interface SetBookmarkAction {
+  type: typeof SET_BOOKMARK;
+  payload: Bookmark;
+}
+
+interface RemoveBookmarkAction {
+  type: typeof REMOVE_BOOKMARK;
+  payload: Bookmark;
+}
+
+export type UserActionTypes =
+  | SetUserAction
+  | SetSessionAction
+  | SetBookmarkAction
+  | RemoveBookmarkAction;

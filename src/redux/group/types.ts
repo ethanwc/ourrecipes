@@ -11,7 +11,6 @@ export interface Group {
     name: string;
     creatorid: string;
     memberids: string[];
-    membercount: number;
     creationDate: Date;
 }
 
