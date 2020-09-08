@@ -53,7 +53,7 @@ const GroupCard = (props: GroupCardProps) => {
       }
       title={props.group.name}
       titleStyle={Typography.Typography.header}
-      subtitle={`${props.group.membercount} members`}
+      subtitle={`${props.group.memberids.length} members`}
       subtitleStyle={Typography.Typography.bodyflat}
       bottomDivider
       rightIcon={verticalIcon}

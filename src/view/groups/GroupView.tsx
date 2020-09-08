@@ -9,7 +9,6 @@ import GroupCards from '../../components/Group/GroupCards';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme} from '../../assets/styles';
 import CreateGroup from '../../components/Group/CreateGroup';
-import {getGroups} from '../../redux/group/actions';
 
 /**
  * Groups page of app
@@ -18,7 +17,7 @@ const Groups = ({navigation}: any) => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    getGroups();
+    // getGroups();
   }, []);
 
   return (

@@ -4,7 +4,7 @@ import {
   UserState,
   UserActionTypes,
   SET_USER,
-  SET_BOOKMARK,
+  ADD_BOOKMARK,
 } from './types';
 
 export const UserReducer = (
@@ -37,8 +37,14 @@ export const UserReducer = (
         user: state.user,
         session: action.payload,
       };
-    case SET_BOOKMARK: {
-      return state;
+    case ADD_BOOKMARK: {
+      let updated_user = state.user;
+      updated_user.bookmarks.push('asdf');
+
+      return {
+        user: updated_user,
+        session: state.session,
+      };
     }
     default:
       return state;
