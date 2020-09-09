@@ -15,14 +15,15 @@ import {
   CreateRecipeState,
   CreateRecipeActionTypes,
 } from './types';
-import {Ingredient, Direction} from '../recipe/types';
+import {Ingredient, Direction, Recipe} from '../recipe/types';
+import Axios from 'axios';
 
 export const CreateRecipeReducer = (
   state: CreateRecipeState = {
     category: '',
     name: 'asdf',
     description: 'asdf',
-    image: '',
+    imageUrl: '',
     cookTime: '11:22',
     prepTime: '03:24',
     servingSize: '4',
@@ -36,7 +37,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -49,7 +50,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -63,7 +64,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -80,7 +81,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -92,7 +93,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -106,7 +107,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -122,7 +123,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: action.payload,
@@ -134,7 +135,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: action.payload,
         prepTime: state.prepTime,
@@ -146,7 +147,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -158,7 +159,7 @@ export const CreateRecipeReducer = (
       return {
         name: action.payload,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -170,7 +171,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: action.payload,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -182,7 +183,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: action.payload,
+        imageUrl: action.payload,
         category: state.category,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -194,7 +195,7 @@ export const CreateRecipeReducer = (
       return {
         name: state.name,
         description: state.description,
-        image: state.image,
+        imageUrl: state.imageUrl,
         category: action.payload,
         cookTime: state.cookTime,
         prepTime: state.prepTime,
@@ -206,4 +207,54 @@ export const CreateRecipeReducer = (
     default:
       return state;
   }
+};
+
+export const createNewRecipe = (newRecipe: CreateRecipeState) => {
+  return (dispatch: any) => {
+    // Make a request to create a recipe
+    console.log(newRecipe.name);
+
+    Axios.post(
+      'https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/graphql',
+      {
+        query: `mutation {
+          createRecipe(userId: "google_105903723515146180187", recipe: {
+          category: "${newRecipe.category}",
+          cookTime: "",
+          name: "${newRecipe.name}",
+          description: "",
+          imageUrl: "",
+          prepTime: "",
+          servingSize: "",
+          directions: [],
+          ingredients: [],
+          creationDate: "Tue Sep  8 21:33:49 2020"
+        }) {
+            id
+            name
+            ingredients {
+              id
+              name
+              amount
+            }
+          }
+        }
+        
+        `,
+      },
+    )
+      // Axios.get('https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/')
+      .then(function (response: any) {
+        // handle success
+        console.log('asdf');
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error: any) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        //todo stop animation
+      });
+  };
 };

@@ -19,7 +19,7 @@ export const SET_CATEGORY = 'SET_CATEGORY';
 export interface CreateRecipeState {
   name: string;
   description: string;
-  image: string;
+  imageUrl: string;
   category: string;
   prepTime: string;
   cookTime: string;

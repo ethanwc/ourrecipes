@@ -104,7 +104,7 @@ const initialCreateRecipeState: CreateRecipeState = {
   cookTime: '',
   name: '',
   description: '',
-  image: '',
+  imageUrl: '',
   prepTime: '',
   servingSize: '',
   directions: [],

@@ -27,6 +27,7 @@ import {
   setCategory,
   setImage,
 } from '../../redux/createrecipe/actions';
+import {createNewRecipe} from '../../redux/createrecipe/reducers';
 
 const Create = ({navigation}: any) => {
   const dispatch = useDispatch();
@@ -39,23 +40,36 @@ const Create = ({navigation}: any) => {
    * Checks the recipe input matches requirements
    */
   const handleCreateRecipe = () => {
-    if (
-      !createRecipe.name ||
-      !createRecipe.description ||
-      !createRecipe.category ||
-      !createRecipe.prepTime ||
-      !createRecipe.cookTime ||
-      !createRecipe.servingSize
-    ) {
-      console.log('Please fill out all fields');
-    } else if (createRecipe.ingredients.length < 2) {
-      console.log('Recipe must have atleast two ingredients');
-    } else if (createRecipe.directions.length < 1) {
-      console.log('Recipe must have atleast one direction');
-      console.log(createRecipe.directions)
-    } else {
-      console.log(createRecipe);
-    }
+    dispatch(
+      createNewRecipe({
+        ...createRecipe,
+        ...{creationDate: new Date().toLocaleString()},
+      }),
+    );
+    // if (
+    //   !createRecipe.name ||
+    //   !createRecipe.description ||
+    //   !createRecipe.category ||
+    //   !createRecipe.prepTime ||
+    //   !createRecipe.cookTime ||
+    //   !createRecipe.servingSize
+    // ) {
+    //   console.log('Please fill out all fields');
+    // } else if (createRecipe.ingredients.length < 2) {
+    //   console.log('Recipe must have atleast two ingredients');
+    // } else if (createRecipe.directions.length < 1) {
+    //   console.log('Recipe must have atleast one direction');
+    //   console.log(createRecipe.directions);
+    // } else {
+    //   // console.log({...createRecipe, ...{"creationDate": new Date().toLocaleString()}});
+
+    //   dispatch(
+    //     createNewRecipe({
+    //       ...createRecipe,
+    //       ...{creationDate: new Date().toLocaleString()},
+    //     }),
+    //   );
+    // }
   };
 
   //update nav title

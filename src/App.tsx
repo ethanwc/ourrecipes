@@ -68,11 +68,13 @@ export default function App() {
   }, []);
 
   // Set user state upon auth
-  if (user) dispatch(setSession(user.attributes));
+  if (user)
+    dispatch(setSession({...user.attributes, ...{username: user.username}}));
 
-  
-  if (user) console.log(user.signInUserSession.accessToken.jwtToken);
-  if (user) console.log(user.signInUserSession.idToken.jwtToken);
+  if (user) console.log({...user.attributes, ...{username: user.username}});
+
+  // if (user) console.log(user.signInUserSession.accessToken.jwtToken);
+  // if (user) console.log(user.signInUserSession.idToken.jwtToken);
   // if (user) console.log(user.signInUserSession);
   // if (user) console.log(user.signInUserSession);
   // if (user) console.log(user.signInUserSession.idToken.jwtToken);
