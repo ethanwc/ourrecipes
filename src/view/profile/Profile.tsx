@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
@@ -20,6 +20,12 @@ const Profile = (props: any) => {
   const userInfo: User = useSelector(
     (state: RootState) => state.UserReducer.user,
   );
+
+  useEffect(() => {
+    
+    
+    
+  }, [])
 
   const toggleMenu = () => {
     console.log(componentRef.current?.state);

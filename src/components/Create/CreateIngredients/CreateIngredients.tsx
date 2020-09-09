@@ -41,7 +41,7 @@ const CreateIngredients = () => {
           data={createRecipe.ingredients}
           renderItem={({item, index}) => (
             <SwipeableRow
-              child={<CreateIngredientCard />}
+              child={<CreateIngredientCard ingredient={item}/>}
               onLeftButtonPress={() => console.log('left pressed')}
               onRightButtonPress={() => dispatch(removeIngredient(item))}
             />

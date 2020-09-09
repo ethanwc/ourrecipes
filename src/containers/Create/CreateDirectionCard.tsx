@@ -9,26 +9,36 @@ import {
 import {Theme, Typography} from '../../assets/styles';
 import {Text, Input, Icon} from 'react-native-elements';
 import ImageSelector from '../../utils/ImageSelector/ImageSelector';
+import {Direction} from '../../redux/recipe/types';
+import {editDirection} from '../../redux/createrecipe/actions';
+import {useDispatch} from 'react-redux';
 
 var parser = require('ingredients-parser');
 
-export interface createDirectionCardProps {
-  order: Number;
+export interface CreateDirectionCardProps {
+  direction: Direction;
 }
 
-const CreateDirectionCard = (props: createDirectionCardProps) => {
-  const [input, setInput] = useState('');
+const CreateDirectionCard = (props: CreateDirectionCardProps) => {
   const [focused, setFocused] = useState(false);
+  const dispatch = useDispatch();
 
   const textRender = focused ? (
     <TextInput
-      placeholder={`Step ${props.order}`}
-      value={input}
+      placeholder={`Step ${props.direction.step}`}
+      value={props.direction.instruction}
       autoFocus={true}
-      onChangeText={(text: string) => setInput(text)}
+      onChangeText={(text: string) => {
+        dispatch(
+          editDirection({
+            id: props.direction.id,
+            step: props.direction.step,
+            instruction: text,
+            imageUrl: props.direction.imageUrl,
+          }),
+        );
+      }}
       style={{
-        // ...createIngredientCardStyle.container,
-
         ...createDirectionCardStyle.input,
       }}
       editable={true}
@@ -36,19 +46,24 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
     />
   ) : (
     <Text
-      // numberOfLines={1}
       style={{
         ...createDirectionCardStyle.input,
-        color: input ? Theme.Light.caption : Theme.Light.body,
+        color: props.direction.instruction
+          ? Theme.Light.caption
+          : Theme.Light.body,
       }}>
-      {input ? input : `Step ${props.order}`}
+      {props.direction.instruction
+        ? props.direction.instruction
+        : `Step ${props.direction.step}`}
     </Text>
   );
 
   return (
     <View style={createDirectionCardStyle.container}>
       <View style={{flex: 1}}>
-        <Text style={createDirectionCardStyle.step}>{props.order}</Text>
+        <Text style={createDirectionCardStyle.step}>
+          {props.direction.step}
+        </Text>
       </View>
 
       <View style={{flexGrow: 4, flex: 1, marginRight: 20}}>
@@ -68,7 +83,16 @@ const CreateDirectionCard = (props: createDirectionCardProps) => {
       <View style={{flexGrow: 0}}>
         <ImageSelector
           size={'small'}
-          onImageSelected={(url: string) => console.log(url)}
+          onImageSelected={(url: string) =>
+            dispatch(
+              editDirection({
+                id: props.direction.id,
+                step: props.direction.step,
+                instruction: props.direction.instruction,
+                imageUrl: url,
+              }),
+            )
+          }
         />
       </View>
     </View>

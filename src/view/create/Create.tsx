@@ -35,7 +35,28 @@ const Create = ({navigation}: any) => {
     (state: RootState) => state.CreateRecipeReducer,
   );
 
-  console.log(createRecipe);
+  /**
+   * Checks the recipe input matches requirements
+   */
+  const handleCreateRecipe = () => {
+    if (
+      !createRecipe.name ||
+      !createRecipe.description ||
+      !createRecipe.category ||
+      !createRecipe.prepTime ||
+      !createRecipe.cookTime ||
+      !createRecipe.servingSize
+    ) {
+      console.log('Please fill out all fields');
+    } else if (createRecipe.ingredients.length < 2) {
+      console.log('Recipe must have atleast two ingredients');
+    } else if (createRecipe.directions.length < 1) {
+      console.log('Recipe must have atleast one direction');
+      console.log(createRecipe.directions)
+    } else {
+      console.log(createRecipe);
+    }
+  };
 
   //update nav title
   navigation.setOptions({
@@ -47,7 +68,7 @@ const Create = ({navigation}: any) => {
         size={30}
         color={Theme.Light.headline}
         style={{marginRight: 10}}
-        onPress={() => console.log('save recipe...')}
+        onPress={() => handleCreateRecipe()}
       />
     ),
   });

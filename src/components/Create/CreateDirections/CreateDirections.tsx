@@ -20,17 +20,17 @@ const CreateDirections = () => {
   );
   return (
     <View>
-      <View style={{}}>
+      <View>
         <FlatList
           data={createRecipe.directions}
           renderItem={({item, index}) => (
             <SwipeableRow
-              child={<CreateDirectionCard order={item.step} />}
+              child={<CreateDirectionCard direction={item} />}
               onLeftButtonPress={() => console.log('left pressed')}
               onRightButtonPress={() => dispatch(removeDirection(item))}
             />
           )}
-          keyExtractor={(item) => 'putactualuuidhere'}
+          keyExtractor={(item) => item.id}
           decelerationRate={0.798}
           showsHorizontalScrollIndicator={false}
         />
@@ -40,9 +40,9 @@ const CreateDirections = () => {
           dispatch(
             addDirection({
               id: uuidv4(),
-              instruction: 'Take a cup of potato juice and whisk it',
+              instruction: '',
               step: createRecipe.directions.length + 1,
-              imageUrl: 'https:google.com/image',
+              imageUrl: '',
             }),
           )
         }

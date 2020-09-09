@@ -14,20 +14,36 @@ import wordsToNumbers from 'words-to-numbers';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {TextInput} from 'react-native-gesture-handler';
 import {edit} from 'src/redux/group/actions';
-import {Ingredient} from 'src/redux/recipe/types';
+import {Ingredient, Direction} from '../../redux/recipe/types';
+import {editIngredient} from '../../redux/createrecipe/actions';
+import {useDispatch} from 'react-redux';
 
 var parser = require('ingredients-parser');
 
-const CreateIngredientCard = () => {
-  const [input, setInput] = useState('');
-  const [focused, setFocused] = useState(false);
+export interface CreateIngredientnCardProps {
+  ingredient: Ingredient;
+}
 
-  const clearIcon = input ? (
+const CreateIngredientCard = (props: CreateIngredientnCardProps) => {
+  const [focused, setFocused] = useState(false);
+  const dispatch = useDispatch();
+  const updateIngredient = (text: string) => {
+    dispatch(
+      editIngredient({
+        id: props.ingredient.id,
+        name: text,
+        unit: props.ingredient.unit,
+        amount: props.ingredient.amount,
+      }),
+    );
+  };
+
+  const clearIcon = props.ingredient.name ? (
     <Icon
-      onPress={() => setInput('')}
+      onPress={() => updateIngredient('')}
       type={'feather'}
       name={'x'}
-      onPressIn={() => setInput('')}
+      // onPressIn={() => setInput('')}
       color={Theme.Light.caption}
     />
   ) : null;
@@ -35,8 +51,8 @@ const CreateIngredientCard = () => {
   const textRender = focused ? (
     <TextInput
       placeholder={'Ingredient'}
-      value={input}
-      onChangeText={(text: string) => setInput(text)}
+      value={props.ingredient.name}
+      onChangeText={(text: string) => updateIngredient(text)}
       autoFocus={true}
       style={{
         ...createIngredientCardStyle.container,
@@ -52,9 +68,9 @@ const CreateIngredientCard = () => {
         ...createIngredientCardStyle.container,
         ...createIngredientCardStyle.text,
         ...createIngredientCardStyle.input,
-        color: input ? Theme.Light.caption : Theme.Light.body,
+        color: props.ingredient.name ? Theme.Light.caption : Theme.Light.body,
       }}>
-      {input ? input : 'Ingredient'}
+      {props.ingredient.name ? props.ingredient.name : 'Ingredient'}
     </Text>
   );
 
