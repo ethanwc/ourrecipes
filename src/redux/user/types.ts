@@ -1,9 +1,11 @@
-import {Bookmark} from '../recipe/types';
+import {Bookmark, Recipe} from '../recipe/types';
+import {MiniRecipe} from 'src/containers/Recipe/MiniRecipeCard';
 
 export const SET_USER = 'SET_USER';
 export const SET_SESSION = 'SET_SESSION';
 export const ADD_BOOKMARK = 'ADD_BOOKMARK';
 export const REMOVE_BOOKMARK = 'REMOVE_BOOKMARK';
+export const SET_RECIPES = 'SET_RECIPES';
 
 export interface UserState {
   user: User;
@@ -18,12 +20,12 @@ export interface User {
   bio?: string;
   creationDate: Date;
   /** String arrays represent mongodb direct ids */
-  recipes: string[];
   groups: string[];
   bookmarks: string[];
   shoppinglist: string[];
   followers: string[];
   following: [];
+  recipes: MiniRecipe[];
   reviews: string[];
   pictures: string[];
 }
@@ -48,8 +50,14 @@ interface RemoveBookmarkAction {
   payload: Bookmark;
 }
 
+interface SetRecipesAction {
+  type: typeof SET_RECIPES;
+  payload: MiniRecipe[];
+}
+
 export type UserActionTypes =
   | SetUserAction
   | SetSessionAction
   | SetBookmarkAction
-  | RemoveBookmarkAction;
+  | RemoveBookmarkAction
+  | SetRecipesAction;

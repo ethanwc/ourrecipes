@@ -18,7 +18,7 @@ export interface Ingredient {
 export interface Direction {
   id: string;
   instruction: string;
-  step: number;
+  step: string;
   imageUrl?: string;
 }
 

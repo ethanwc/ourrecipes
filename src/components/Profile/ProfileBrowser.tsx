@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Text,
   View,
@@ -10,10 +10,17 @@ import {
 } from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {Theme, Typography} from '../../assets/styles';
-import MiniRecipeCard from '../../containers/Recipe/MiniRecipeCard';
+import MiniRecipeCard, {
+  MiniRecipeCardProps,
+  MiniRecipe,
+} from '../../containers/Recipe/MiniRecipeCard';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import ReviewCard from '../../containers/Review/ReviewCard';
 import {Recipe} from 'src/redux/recipe/types';
+import {getUserInfo} from '../../redux/user/actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {User} from 'src/redux/user/types';
+import {RootState} from 'src/redux';
 
 export interface ProfileBrowserProps {
   navigation: any;
@@ -22,12 +29,22 @@ export interface ProfileBrowserProps {
 // same useEffect approach as reviews here
 
 const ProfileBrowser = (props: ProfileBrowserProps) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUserInfo('google_105903723515146180187'));
+  }, []);
+
+  const userInfo: User = useSelector(
+    (state: RootState) => state.UserReducer.user,
+  );
+
+  console.log('asdf', userInfo);
   const RecipeBrowser = () => {
     return (
       <FlatList
-        data={[]}
-        renderItem={({item}: {item: Recipe}) => (
-          <MiniRecipeCard recipe={item} navigation={props.navigation} />
+        data={userInfo.recipes}
+        renderItem={({item}: {item: MiniRecipe}) => (
+          <MiniRecipeCard miniRecipe={item} navigation={props.navigation} />
         )}
         keyExtractor={(item, index) => index.toString()}
         numColumns={2}

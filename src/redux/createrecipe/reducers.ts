@@ -212,31 +212,53 @@ export const CreateRecipeReducer = (
 export const createNewRecipe = (newRecipe: CreateRecipeState) => {
   return (dispatch: any) => {
     // Make a request to create a recipe
-    console.log(newRecipe.name);
+    console.log(newRecipe);
+    console.log(newRecipe.directions);
+    console.log(JSON.stringify(newRecipe.directions[0]));
+    console.log(JSON.parse(JSON.stringify(newRecipe.directions[0])));
 
+    let asdf = {
+      id: 'd1ebd2d4-5814-4381-ae26-b022b3b4b13b',
+      imageUrl: '',
+      instruction: 'H',
+      step: '1',
+    };
+
+    console.log(
+      ` ${[
+        `{
+        id: ${newRecipe.directions[0].id},
+        instruction: ${newRecipe.directions[0].instruction},
+        imageUrl: ${newRecipe.directions[0].imageUrl},
+        step: ${newRecipe.directions[0].step},
+      }`,
+      ]}`,
+    );
     Axios.post(
       'https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/graphql',
       {
         query: `mutation {
           createRecipe(userId: "google_105903723515146180187", recipe: {
           category: "${newRecipe.category}",
-          cookTime: "",
+          cookTime: "${newRecipe.cookTime}",
           name: "${newRecipe.name}",
-          description: "",
-          imageUrl: "",
-          prepTime: "",
-          servingSize: "",
-          directions: [],
+          description: "${newRecipe.description}",  
+          imageUrl: "${newRecipe.imageUrl}",
+          prepTime: "${newRecipe.prepTime}",
+          servingSize: "${newRecipe.servingSize}",
+          directions: ${[
+            `{
+              id: "${newRecipe.directions[0].id}",
+              instruction: "${newRecipe.directions[0].instruction}",
+              imageUrl: "${newRecipe.directions[0].imageUrl}",
+              step: "${newRecipe.directions[0].step}",
+            }`,
+          ]},
           ingredients: [],
-          creationDate: "Tue Sep  8 21:33:49 2020"
+          creationDate: "${new Date().toLocaleDateString()}"
         }) {
             id
-            name
-            ingredients {
-              id
-              name
-              amount
-            }
+            name          
           }
         }
         

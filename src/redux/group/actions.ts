@@ -40,7 +40,7 @@ export const createGroupAsync = () => {
           query: `{
           user (ids: ["google_105903723515146180187"]) {
               name
-              id
+              id 
               email
               bookmarks
           }

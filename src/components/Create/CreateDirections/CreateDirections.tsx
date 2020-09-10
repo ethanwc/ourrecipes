@@ -4,7 +4,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import CreateDirectionCard from '../../../containers/Create/CreateDirectionCard';
 import CreateNewCard from '../../../containers/Create/CreateNewCard';
 import {SwipeableRow} from '../../../utils/Swipeable/SwipeableRow';
-import {addIngredient, addDirection, removeDirection} from '../../../redux/createrecipe/actions';
+import {
+  addIngredient,
+  addDirection,
+  removeDirection,
+} from '../../../redux/createrecipe/actions';
 import {CreateRecipeState} from '../../../redux/createrecipe/types';
 import {RootState} from '../../../redux';
 import 'react-native-get-random-values';
@@ -41,7 +45,7 @@ const CreateDirections = () => {
             addDirection({
               id: uuidv4(),
               instruction: '',
-              step: createRecipe.directions.length + 1,
+              step: (createRecipe.directions.length + 1).toString(),
               imageUrl: '',
             }),
           )

@@ -5,6 +5,7 @@ import {
   UserActionTypes,
   SET_USER,
   ADD_BOOKMARK,
+  SET_RECIPES,
 } from './types';
 
 export const UserReducer = (
@@ -30,6 +31,26 @@ export const UserReducer = (
     case SET_USER:
       return {
         user: action.payload,
+        session: state.session,
+      };
+    case SET_RECIPES:
+      let updated_user = state.user;
+      updated_user.recipes = [...action.payload];
+      console.log('update:', updated_user.recipes);
+      return {
+        user: {
+          name: state.user.name,
+          email: state.user.email,
+          creationDate: state.user.creationDate,
+          recipes: [...action.payload],
+          groups: state.user.groups,
+          bookmarks: state.user.bookmarks,
+          shoppinglist: state.user.shoppinglist,
+          followers: state.user.followers,
+          following: state.user.following,
+          reviews: state.user.reviews,
+          pictures: state.user.pictures,
+        },
         session: state.session,
       };
     case SET_SESSION:

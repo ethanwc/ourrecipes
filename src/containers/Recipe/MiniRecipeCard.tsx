@@ -3,23 +3,28 @@ import {StyleSheet, View, Image, Text} from 'react-native';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme, Typography} from '../../assets/styles';
-import {Recipe} from 'src/redux/recipe/types';
 import {TouchableHighlight} from 'react-native-gesture-handler';
 
+export interface MiniRecipe {
+  name: string;
+  imageUrl: string;
+  reviewCount: string;
+  reviewRating: string;
+}
 export interface MiniRecipeCardProps {
   navigation: any;
-  recipe: Recipe;
+  miniRecipe: MiniRecipe;
 }
 
 const MiniRecipeCard = (props: MiniRecipeCardProps) => {
   return (
-    <TouchableHighlight onPress={() => console.log("nav to recipe")}>
+    <TouchableHighlight onPress={() => console.log('nav to recipe')}>
       <View style={miniRecipeCardStyle.container}>
         <Image
           style={miniRecipeCardStyle.image}
-          source={{uri: props.recipe.imageUrl}}
+          source={{uri: props.miniRecipe  .imageUrl}}
         />
-        <Text style={Typography.Typography.subheader}>{props.recipe.name}</Text>
+        <Text style={Typography.Typography.subheader}>{props.miniRecipe.name}</Text>
         <View
           style={{
             flexDirection: 'row',
@@ -29,10 +34,10 @@ const MiniRecipeCard = (props: MiniRecipeCardProps) => {
           <Text
             style={
               Typography.Typography.bodyflat
-            }>{`${props.recipe.reviewCount} reviews`}</Text>
+            }>{`${props.miniRecipe.reviewCount} reviews`}</Text>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text style={Typography.Typography.bodyflat}>
-              {props.recipe.reviewRating}
+              {props.miniRecipe.reviewRating}
             </Text>
             <Icon
               name="star"

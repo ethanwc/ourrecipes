@@ -21,12 +21,6 @@ const Profile = (props: any) => {
     (state: RootState) => state.UserReducer.user,
   );
 
-  useEffect(() => {
-    
-    
-    
-  }, [])
-
   const toggleMenu = () => {
     console.log(componentRef.current?.state);
     componentRef.current?.openDrawer();

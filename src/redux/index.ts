@@ -82,7 +82,7 @@ const initialRecipeState: RecipeState = {
         {
           id: 'asdasdf',
           instruction: 'Heat a fryer to 400 degrees',
-          step: 1,
+          step: "1",
           imageUrl:
             'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
         },

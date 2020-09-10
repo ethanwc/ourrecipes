@@ -1,14 +1,15 @@
 import Axios from 'axios';
-import {addDirection} from '../createrecipe/actions';
 import {
-  SET_SESSION,
-  UserActionTypes,
-  User,
-  SET_USER,
   ADD_BOOKMARK,
   REMOVE_BOOKMARK,
+  SET_RECIPES,
+  SET_SESSION,
+  SET_USER,
+  User,
+  UserActionTypes,
 } from './types';
-import {Bookmark} from '../recipe/types';
+import {Bookmark, Recipe} from '../recipe/types';
+import {MiniRecipe} from 'src/containers/Recipe/MiniRecipeCard';
 
 export const setSession = (session: any): UserActionTypes => {
   return {
@@ -38,38 +39,46 @@ export const removeBookmark = (bookmark: Bookmark): UserActionTypes => {
   };
 };
 
+export const setRecipes = (recipes: MiniRecipe[]): UserActionTypes => {
+  return {
+    type: SET_RECIPES,
+    payload: recipes,
+  };
+};
 export const getUserInfo = (id: string) => {
+  console.log('get user info called');
   return (dispatch: any) => {
     // Make a request for a user with a given ID
+    //todo: only grab needed data.
+    /*
+         ingredients {
+                  id
+                } */
     Axios.post(
       'https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/graphql',
       {
         query: `{
-          user (ids: [${id}]) {
-              name
+          user (ids: ["${id}"]) {
               id
+              name
               email
               bookmarks
+              recipes {
+                name
+                imageUrl
+                reviewCount
+                reviewDistribution
+              }
           }
       }`,
-        variables: {
-          id: 2,
-          city: 'Test',
-        },
       },
     )
       .then(function (response: any) {
         // handle success
-        console.log(JSON.stringify(response.data));
-        // dispatch(
-        //   add({
-        //     id: 'asdfd',
-        //     name: 'asddddf',
-        //     creatorid: 'asdddf',
-        //     creationDate: new Date(),
-        //     memberids: ['asdff'],
-        //   }),
-        // );
+
+        const parsed_recipes: MiniRecipe[] = response.data.data.user[0].recipes;
+        console.log("parsed: ", parsed_recipes);
+        dispatch(setRecipes(parsed_recipes));
       })
       .catch(function (error: any) {
         // handle error

@@ -28,6 +28,7 @@ import {
   setImage,
 } from '../../redux/createrecipe/actions';
 import {createNewRecipe} from '../../redux/createrecipe/reducers';
+import {jsonToGraphQLQuery} from 'json-to-graphql-query';
 
 const Create = ({navigation}: any) => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const Create = ({navigation}: any) => {
         ...{creationDate: new Date().toLocaleString()},
       }),
     );
+
     // if (
     //   !createRecipe.name ||
     //   !createRecipe.description ||
@@ -60,9 +62,10 @@ const Create = ({navigation}: any) => {
     // } else if (createRecipe.directions.length < 1) {
     //   console.log('Recipe must have atleast one direction');
     //   console.log(createRecipe.directions);
+    // } else if (!createRecipe.imageUrl) {
+    //   console.log('Recipe must have an image');
+    //   console.log(createRecipe.directions);
     // } else {
-    //   // console.log({...createRecipe, ...{"creationDate": new Date().toLocaleString()}});
-
     //   dispatch(
     //     createNewRecipe({
     //       ...createRecipe,
