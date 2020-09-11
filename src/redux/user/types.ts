@@ -3,6 +3,7 @@ import {MiniRecipe} from 'src/containers/Recipe/MiniRecipeCard';
 
 export const SET_USER = 'SET_USER';
 export const SET_SESSION = 'SET_SESSION';
+export const SET_PHOTO = 'SET_PHOTO';
 export const ADD_BOOKMARK = 'ADD_BOOKMARK';
 export const REMOVE_BOOKMARK = 'REMOVE_BOOKMARK';
 export const SET_RECIPES = 'SET_RECIPES';
@@ -55,9 +56,15 @@ interface SetRecipesAction {
   payload: MiniRecipe[];
 }
 
+interface SetPhotoAction {
+  type: typeof SET_PHOTO;
+  payload: String;
+}
+
 export type UserActionTypes =
   | SetUserAction
   | SetSessionAction
   | SetBookmarkAction
   | RemoveBookmarkAction
-  | SetRecipesAction;
+  | SetRecipesAction
+  | SetPhotoAction;

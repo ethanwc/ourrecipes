@@ -16,7 +16,7 @@ const SettingsTab = (props: any) => {
       <View>
         <ListItem
           title={userSession.email}
-          titleStyle={settingsTabStyle.title}
+          titleStyle={settingsTabStyle.email}
           containerStyle={settingsTabStyle.wrapper}
         />
         <ListItem
@@ -101,6 +101,9 @@ const settingsTabStyle = StyleSheet.create({
   },
   title: {
     ...Typography.Typography.subheader,
+  },
+  email: {
+    ...Typography.Typography.body,
   },
 });
 

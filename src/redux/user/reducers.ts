@@ -6,6 +6,7 @@ import {
   SET_USER,
   ADD_BOOKMARK,
   SET_RECIPES,
+  SET_PHOTO,
 } from './types';
 
 export const UserReducer = (
@@ -14,6 +15,7 @@ export const UserReducer = (
     user: {
       name: 'Loading Name',
       email: 'loadingemail@ourrecipes.app',
+      photo: '',
       creationDate: new Date(),
       recipes: [],
       groups: [],
@@ -43,6 +45,7 @@ export const UserReducer = (
           email: state.user.email,
           creationDate: state.user.creationDate,
           recipes: [...action.payload],
+          photo: state.user.photo,
           groups: state.user.groups,
           bookmarks: state.user.bookmarks,
           shoppinglist: state.user.shoppinglist,
@@ -58,6 +61,25 @@ export const UserReducer = (
         user: state.user,
         session: action.payload,
       };
+    case SET_PHOTO:
+      return {
+        user: {
+          name: state.user.name,
+          email: state.user.email,
+          creationDate: state.user.creationDate,
+          photo: action.payload,
+          recipes: state.user.recipes,
+          groups: state.user.groups,
+          bookmarks: state.user.bookmarks,
+          shoppinglist: state.user.shoppinglist,
+          followers: state.user.followers,
+          following: state.user.following,
+          reviews: state.user.reviews,
+          pictures: state.user.pictures,
+        },
+        session: state.session,
+      };
+
     case ADD_BOOKMARK: {
       let updated_user = state.user;
       updated_user.bookmarks.push('asdf');

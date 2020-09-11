@@ -30,8 +30,13 @@ export interface ProfileBrowserProps {
 
 const ProfileBrowser = (props: ProfileBrowserProps) => {
   const dispatch = useDispatch();
+
+  const userSession: any = useSelector(
+    (state: RootState) => state.UserReducer.session,
+  );
+
   useEffect(() => {
-    dispatch(getUserInfo('google_105903723515146180187'));
+    dispatch(getUserInfo(userSession.username));
   }, []);
 
   const userInfo: User = useSelector(

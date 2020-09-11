@@ -7,6 +7,7 @@ import {
   SET_USER,
   User,
   UserActionTypes,
+  SET_PHOTO,
 } from './types';
 import {Bookmark, Recipe} from '../recipe/types';
 import {MiniRecipe} from 'src/containers/Recipe/MiniRecipeCard';
@@ -45,6 +46,47 @@ export const setRecipes = (recipes: MiniRecipe[]): UserActionTypes => {
     payload: recipes,
   };
 };
+
+export const setPhoto = (uri: String): UserActionTypes => {
+  return {
+    type: SET_PHOTO,
+    payload: uri,
+  };
+};
+
+export const setUserPhotoAsync = (uri: string) => {
+  return (dispatch: any) => {
+    // Make a request for a user with a given ID
+    //todo: only grab needed data.
+    /*
+         ingredients {
+                  id
+                } */
+    Axios.post(
+      'https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/graphql',
+      {
+        query: `mutation {
+          updatePicture (userId: "google_105903723515146180187", photoUri: "${uri}") {
+            id
+            photo
+          }
+        }`,
+      },
+    )
+      .then(function (response: any) {
+        if (response.status == 200) {
+          const newPhoto = response.data.data.updatePicture.photo;
+          dispatch(setPhoto(newPhoto));
+        } else {
+          console.log('Err non 200');
+        }
+      })
+      .catch(function (error: any) {
+        console.log(error);
+      });
+  };
+};
+
 export const getUserInfo = (id: string) => {
   console.log('get user info called');
   return (dispatch: any) => {
@@ -63,6 +105,14 @@ export const getUserInfo = (id: string) => {
               name
               email
               bookmarks
+              pictures
+              photo
+              followers {
+                id
+              }
+              following {
+                id
+              }
               recipes {
                 name
                 imageUrl
@@ -76,9 +126,14 @@ export const getUserInfo = (id: string) => {
       .then(function (response: any) {
         // handle success
 
-        const parsed_recipes: MiniRecipe[] = response.data.data.user[0].recipes;
-        console.log("parsed: ", parsed_recipes);
-        dispatch(setRecipes(parsed_recipes));
+        if (response.status == 200) {
+          const parsed_recipes: MiniRecipe[] =
+            response.data.data.user[0].recipes;
+          dispatch(setRecipes(parsed_recipes));
+          // todo: change to all user data parsed
+        } else {
+          console.log('Err non 200');
+        }
       })
       .catch(function (error: any) {
         // handle error
