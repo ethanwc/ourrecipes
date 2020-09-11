@@ -101,17 +101,30 @@ export const getUserInfo = (id: string) => {
       {
         query: `{
           user (ids: ["${id}"]) {
-              id
               name
               email
-              bookmarks
-              pictures
               photo
+              bio
+              creationDate
+              bookmarks
+              shoppinglist {
+                id
+                name
+                checked
+                creationDate
+              }
+              pictures
               followers {
                 id
               }
               following {
                 id
+              }
+              reviews {
+                id
+                recipeid
+                rating
+                review
               }
               recipes {
                 name
@@ -119,6 +132,7 @@ export const getUserInfo = (id: string) => {
                 reviewCount
                 reviewDistribution
               }
+              pictures
           }
       }`,
       },
@@ -127,9 +141,11 @@ export const getUserInfo = (id: string) => {
         // handle success
 
         if (response.status == 200) {
-          const parsed_recipes: MiniRecipe[] =
-            response.data.data.user[0].recipes;
-          dispatch(setRecipes(parsed_recipes));
+          const parsed_user: User = response.data.data.user[0];
+          console.log('d:', response.data.data.user[0]);
+          console.log('f:', parsed_user);
+          dispatch(setUser(parsed_user));
+          // dispatch(setRecipes(parsed_recipes));
           // todo: change to all user data parsed
         } else {
           console.log('Err non 200');

@@ -25,7 +25,7 @@ export interface User {
   bookmarks: string[];
   shoppinglist: string[];
   followers: string[];
-  following: [];
+  following: string[];
   recipes: MiniRecipe[];
   reviews: string[];
   pictures: string[];

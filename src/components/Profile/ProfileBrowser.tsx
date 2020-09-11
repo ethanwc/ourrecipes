@@ -43,7 +43,6 @@ const ProfileBrowser = (props: ProfileBrowserProps) => {
     (state: RootState) => state.UserReducer.user,
   );
 
-  console.log('asdf', userInfo);
   const RecipeBrowser = () => {
     return (
       <FlatList
