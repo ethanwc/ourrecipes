@@ -209,36 +209,16 @@ export const CreateRecipeReducer = (
   }
 };
 
-export const createNewRecipe = (newRecipe: CreateRecipeState) => {
+export const createNewRecipe = (jwt: string, newRecipe: CreateRecipeState) => {
   return (dispatch: any) => {
     // Make a request to create a recipe
     console.log(newRecipe);
-    console.log(newRecipe.directions);
-    console.log(JSON.stringify(newRecipe.directions[0]));
-    console.log(JSON.parse(JSON.stringify(newRecipe.directions[0])));
 
-    let asdf = {
-      id: 'd1ebd2d4-5814-4381-ae26-b022b3b4b13b',
-      imageUrl: '',
-      instruction: 'H',
-      step: '1',
-    };
-
-    console.log(
-      ` ${[
-        `{
-        id: ${newRecipe.directions[0].id},
-        instruction: ${newRecipe.directions[0].instruction},
-        imageUrl: ${newRecipe.directions[0].imageUrl},
-        step: ${newRecipe.directions[0].step},
-      }`,
-      ]}`,
-    );
     Axios.post(
       'https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/graphql',
       {
         query: `mutation {
-          createRecipe(userId: "google_105903723515146180187", recipe: {
+          createRecipe(jwt: "${jwt}", recipe: {
           category: "${newRecipe.category}",
           cookTime: "${newRecipe.cookTime}",
           name: "${newRecipe.name}",

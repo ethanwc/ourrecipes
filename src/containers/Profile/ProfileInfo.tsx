@@ -27,7 +27,7 @@ const ProfileInfo = () => {
     <View style={profileInfoStyle.container}>
       <ProfileImageSelector
         imageUrl={userInfo.photo}
-        onImageSelected={(uri: string) => dispatch(setUserPhotoAsync(uri))}
+        onImageSelected={(uri: string) => dispatch(setUserPhotoAsync(userSession.jwt, uri))}
       />
 
       <View style={profileInfoStyle.wrapper}>

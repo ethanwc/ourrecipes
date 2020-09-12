@@ -8,7 +8,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import {useDispatch} from 'react-redux';
-import {add, createGroupAsync} from '../../redux/group/actions';
+import {add} from '../../redux/group/actions';
 import {Group} from '../../redux/group/types';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
@@ -23,7 +23,7 @@ const CreateGroup = (props: createGroupProps) => {
   const dispatch = useDispatch();
 
   const createGroup = () => {
-    console.log('create');
+    console.log('create group not working ahh!');
     // if (groupName) {
     //   const payload: Group = {
     //     id: uuidv4(),
@@ -36,7 +36,7 @@ const CreateGroup = (props: createGroupProps) => {
     //   dispatch(add(payload));
     //   props.setVisible(false);
     // }
-    dispatch(createGroupAsync());
+    // dispatch(createGroupAsync());
   };
 
   return (

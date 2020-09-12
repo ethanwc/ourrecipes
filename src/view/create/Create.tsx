@@ -37,12 +37,16 @@ const Create = ({navigation}: any) => {
     (state: RootState) => state.CreateRecipeReducer,
   );
 
+  const userSession: any = useSelector(
+    (state: RootState) => state.UserReducer.session,
+  );
+
   /**
    * Checks the recipe input matches requirements
    */
   const handleCreateRecipe = () => {
     dispatch(
-      createNewRecipe({
+      createNewRecipe(userSession.jwt, {
         ...createRecipe,
         ...{creationDate: new Date().toLocaleString()},
       }),

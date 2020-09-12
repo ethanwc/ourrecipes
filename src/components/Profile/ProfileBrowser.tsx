@@ -39,6 +39,7 @@ const ProfileBrowser = (props: ProfileBrowserProps) => {
     dispatch(getUserInfo(userSession.username));
   }, []);
 
+
   const userInfo: User = useSelector(
     (state: RootState) => state.UserReducer.user,
   );

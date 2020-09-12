@@ -54,19 +54,13 @@ export const setPhoto = (uri: String): UserActionTypes => {
   };
 };
 
-export const setUserPhotoAsync = (uri: string) => {
+export const setUserPhotoAsync = (jwt: string, uri: string) => {
   return (dispatch: any) => {
-    // Make a request for a user with a given ID
-    //todo: only grab needed data.
-    /*
-         ingredients {
-                  id
-                } */
     Axios.post(
       'https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/graphql',
       {
         query: `mutation {
-          updatePicture (userId: "google_105903723515146180187", photoUri: "${uri}") {
+          updatePicture (jwt: "${jwt}", photoUri: "${uri}") {
             id
             photo
           }
