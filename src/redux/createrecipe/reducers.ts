@@ -214,9 +214,41 @@ export const CreateRecipeReducer = (
 
 export const createNewRecipe = (jwt: string, newRecipe: CreateRecipeState) => {
   return (dispatch: any) => {
-    // Make a request to create a recipe
-    console.log(newRecipe);
-    // todo: map directions and ingredients to strings
+    let directions = '';
+    newRecipe.directions.forEach((direction: Direction, index: number) => {
+      let addComma = index !== newRecipe.directions.length - 1;
+      directions =
+        directions +
+        `{
+        id: "${direction.id}",
+        instruction: "${direction.instruction}",
+        imageUrl: "${direction.imageUrl}",
+        step: "${direction.step}",
+      }`;
+      if (addComma) directions = directions + ', ';
+    });
+
+    directions = `[${directions}]`;
+
+
+    let ingredients = '';
+    newRecipe.ingredients.forEach((ingredient: Ingredient, index: number) => {
+      let addComma = index !== newRecipe.ingredients.length - 1;
+      ingredients =
+      ingredients +
+        `{
+        id: "${ingredient.id}",
+        name: "${ingredient.name}",
+        amount: ${ingredient.amount},
+        unit: "${ingredient.unit}",
+      }`;
+      if (addComma) ingredients = ingredients + ', ';
+    });
+
+    ingredients = `[${ingredients}]`;
+
+    console.log(ingredients);
+
     Axios.post(API, {
       query: `mutation {
           createRecipe(jwt: "${jwt}", recipe: {
@@ -227,15 +259,8 @@ export const createNewRecipe = (jwt: string, newRecipe: CreateRecipeState) => {
           imageUrl: "${newRecipe.imageUrl}",
           prepTime: "${newRecipe.prepTime}",
           servingSize: "${newRecipe.servingSize}",
-          directions: ${[
-            `{
-              id: "${newRecipe.directions[0].id}",
-              instruction: "${newRecipe.directions[0].instruction}",
-              imageUrl: "${newRecipe.directions[0].imageUrl}",
-              step: "${newRecipe.directions[0].step}",
-            }`,
-          ]},
-          ingredients: [],
+          directions: ${directions},
+          ingredients: ${ingredients},
           creationDate: "${new Date().toLocaleDateString()}"
         }) {
             name
@@ -249,7 +274,7 @@ export const createNewRecipe = (jwt: string, newRecipe: CreateRecipeState) => {
       .then(function (response: any) {
         if (response.status == 200) {
           const parsed_recipe: MiniRecipe = response.data.data.createRecipe;
-          dispatch(addRecipe(parsed_recipe))
+          dispatch(addRecipe(parsed_recipe));
         }
       })
       .catch(function (error: any) {
