@@ -17,6 +17,9 @@ import {
 } from './types';
 import {Ingredient, Direction, Recipe} from '../recipe/types';
 import Axios from 'axios';
+import {API} from '../../assets/endpoints/endpoints';
+import {addRecipe, setRecipes} from '../user/actions';
+import {MiniRecipe} from 'src/containers/Recipe/MiniRecipeCard';
 
 export const CreateRecipeReducer = (
   state: CreateRecipeState = {
@@ -213,11 +216,9 @@ export const createNewRecipe = (jwt: string, newRecipe: CreateRecipeState) => {
   return (dispatch: any) => {
     // Make a request to create a recipe
     console.log(newRecipe);
-
-    Axios.post(
-      'https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/graphql',
-      {
-        query: `mutation {
+    // todo: map directions and ingredients to strings
+    Axios.post(API, {
+      query: `mutation {
           createRecipe(jwt: "${jwt}", recipe: {
           category: "${newRecipe.category}",
           cookTime: "${newRecipe.cookTime}",
@@ -237,19 +238,19 @@ export const createNewRecipe = (jwt: string, newRecipe: CreateRecipeState) => {
           ingredients: [],
           creationDate: "${new Date().toLocaleDateString()}"
         }) {
-            id
-            name          
+            name
+            imageUrl
+            reviewCount
+            reviewDistribution
           }
         }
-        
         `,
-      },
-    )
-      // Axios.get('https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/')
+    })
       .then(function (response: any) {
-        // handle success
-        console.log('asdf');
-        console.log(JSON.stringify(response.data));
+        if (response.status == 200) {
+          const parsed_recipe: MiniRecipe = response.data.data.createRecipe;
+          dispatch(addRecipe(parsed_recipe))
+        }
       })
       .catch(function (error: any) {
         // handle error

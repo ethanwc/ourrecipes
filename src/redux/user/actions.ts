@@ -8,9 +8,11 @@ import {
   User,
   UserActionTypes,
   SET_PHOTO,
+  ADD_RECIPE,
 } from './types';
 import {Bookmark, Recipe} from '../recipe/types';
-import {MiniRecipe} from 'src/containers/Recipe/MiniRecipeCard';
+import {MiniRecipe} from '../../containers/Recipe/MiniRecipeCard';
+import {API} from '../../assets/endpoints/endpoints';
 
 export const setSession = (session: any): UserActionTypes => {
   return {
@@ -47,6 +49,13 @@ export const setRecipes = (recipes: MiniRecipe[]): UserActionTypes => {
   };
 };
 
+export const addRecipe = (recipes: MiniRecipe): UserActionTypes => {
+  return {
+    type: ADD_RECIPE,
+    payload: recipes,
+  };
+};
+
 export const setPhoto = (uri: String): UserActionTypes => {
   return {
     type: SET_PHOTO,
@@ -56,17 +65,14 @@ export const setPhoto = (uri: String): UserActionTypes => {
 
 export const setUserPhotoAsync = (jwt: string, uri: string) => {
   return (dispatch: any) => {
-    Axios.post(
-      'https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/graphql',
-      {
-        query: `mutation {
+    Axios.post(API, {
+      query: `mutation {
           updatePicture (jwt: "${jwt}", photoUri: "${uri}") {
             id
             photo
           }
         }`,
-      },
-    )
+    })
       .then(function (response: any) {
         if (response.status == 200) {
           const newPhoto = response.data.data.updatePicture.photo;
@@ -82,18 +88,9 @@ export const setUserPhotoAsync = (jwt: string, uri: string) => {
 };
 
 export const getUserInfo = (id: string) => {
-  console.log('get user info called');
   return (dispatch: any) => {
-    // Make a request for a user with a given ID
-    //todo: only grab needed data.
-    /*
-         ingredients {
-                  id
-                } */
-    Axios.post(
-      'https://fuxxebseq4.execute-api.us-west-2.amazonaws.com/Prod/graphql',
-      {
-        query: `{
+    Axios.post(API, {
+      query: `{
           user (ids: ["${id}"]) {
               name
               email
@@ -129,18 +126,12 @@ export const getUserInfo = (id: string) => {
               pictures
           }
       }`,
-      },
-    )
+    })
       .then(function (response: any) {
-        // handle success
-
         if (response.status == 200) {
           const parsed_user: User = response.data.data.user[0];
-          console.log('d:', response.data.data.user[0]);
           console.log('f:', parsed_user);
           dispatch(setUser(parsed_user));
-          // dispatch(setRecipes(parsed_recipes));
-          // todo: change to all user data parsed
         } else {
           console.log('Err non 200');
         }

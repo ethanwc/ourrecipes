@@ -7,6 +7,7 @@ export const SET_PHOTO = 'SET_PHOTO';
 export const ADD_BOOKMARK = 'ADD_BOOKMARK';
 export const REMOVE_BOOKMARK = 'REMOVE_BOOKMARK';
 export const SET_RECIPES = 'SET_RECIPES';
+export const ADD_RECIPE = 'ADD_RECIPE';
 
 export interface UserState {
   user: User;
@@ -56,6 +57,11 @@ interface SetRecipesAction {
   payload: MiniRecipe[];
 }
 
+interface AddRecipeAction {
+  type: typeof ADD_RECIPE;
+  payload: MiniRecipe;
+}
+
 interface SetPhotoAction {
   type: typeof SET_PHOTO;
   payload: String;
@@ -67,4 +73,5 @@ export type UserActionTypes =
   | SetBookmarkAction
   | RemoveBookmarkAction
   | SetRecipesAction
-  | SetPhotoAction;
+  | SetPhotoAction
+  | AddRecipeAction;
