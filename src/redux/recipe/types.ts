@@ -1,9 +1,12 @@
+import {User} from '../user/types';
+
 export const CREATE_RECIPE = 'CREATE_RECIPE';
 export const EDIT_RECIPE = 'EDIT_RECIPE';
 export const REMOVE_RECIPE = 'REMOVE_RECIPE';
+export const SET_RECIPE = 'SET_RECIPE';
 
 export interface RecipeState {
-  recipes: Recipe[];
+  recipe: Recipe;
 }
 
 /** Ingredient type */
@@ -44,8 +47,7 @@ export interface Recipe {
   imageUrl?: string;
   reviewCount: number;
   reviewRating: number;
-  creatorid: string;
-  creatorName: string;
+  creator: User;
   creationDate: string;
   prepTime: string;
   cookTime: string;
@@ -73,7 +75,13 @@ interface RemoveRecipeAction {
   recipeid: string;
 }
 
+interface SetRecipeAction {
+  type: typeof SET_RECIPE;
+  payload: Recipe;
+}
+
 export type RecipeActionTypes =
   | CreateRecipeAction
   | EditReicpeAction
-  | RemoveRecipeAction;
+  | RemoveRecipeAction
+  | SetRecipeAction;

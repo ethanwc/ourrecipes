@@ -3,11 +3,18 @@ import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Button} from 'react-native-elements';
 import {Theme, Typography} from '../../assets/styles';
 
-export interface followerCardProps {
+export interface RecipeAuthor {
+  id: String;
+  name: String;
+  photo: String;
+  recipeCount: number;
+}
+export interface FollowerCardProps {
   isFollowing: boolean;
+  author: RecipeAuthor;
 }
 
-const FollowerCard = (props: followerCardProps) => {
+const FollowerCard = (props: FollowerCardProps) => {
   return (
     <View style={follerCardStyleStyle.container}>
       <View
@@ -20,14 +27,15 @@ const FollowerCard = (props: followerCardProps) => {
           rounded
           size={'medium'}
           source={{
-            uri:
-              'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+            uri: props.author.photo.toString(),
           }}
         />
         <View style={{marginLeft: 15}}>
-          <Text style={Typography.Typography.subheader}>Deba Boyd</Text>
+          <Text style={Typography.Typography.subheader}>
+            {props.author.name}
+          </Text>
           <Text style={{...Typography.Typography.bodyflat, marginTop: 4}}>
-            20 recipes
+            {props.author.recipeCount} recipes
           </Text>
         </View>
       </View>

@@ -92,6 +92,7 @@ export const getUserInfo = (id: string) => {
     Axios.post(API, {
       query: `{
           user (ids: ["${id}"]) {
+              id
               name
               email
               photo
@@ -118,6 +119,7 @@ export const getUserInfo = (id: string) => {
                 review
               }
               recipes {
+                id
                 name
                 imageUrl
                 reviewCount

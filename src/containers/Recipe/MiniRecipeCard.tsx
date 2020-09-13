@@ -6,6 +6,7 @@ import {Theme, Typography} from '../../assets/styles';
 import {TouchableHighlight} from 'react-native-gesture-handler';
 
 export interface MiniRecipe {
+  id: string;
   name: string;
   imageUrl: string;
   reviewCount: string;
@@ -18,13 +19,24 @@ export interface MiniRecipeCardProps {
 
 const MiniRecipeCard = (props: MiniRecipeCardProps) => {
   return (
-    <TouchableHighlight onPress={() => console.log('nav to recipe')}>
+    <TouchableHighlight
+      onPress={() =>
+        //todo: nav to recipe with recipe id
+        props.navigation.navigate('Recipes', {
+          screen: 'Recipe',
+          params: {
+            recipe: props.miniRecipe.id,
+          },
+        })
+      }>
       <View style={miniRecipeCardStyle.container}>
         <Image
           style={miniRecipeCardStyle.image}
-          source={{uri: props.miniRecipe  .imageUrl}}
+          source={{uri: props.miniRecipe.imageUrl}}
         />
-        <Text style={Typography.Typography.subheader}>{props.miniRecipe.name}</Text>
+        <Text style={Typography.Typography.subheader}>
+          {props.miniRecipe.name}
+        </Text>
         <View
           style={{
             flexDirection: 'row',

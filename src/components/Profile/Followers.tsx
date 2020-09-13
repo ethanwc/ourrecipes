@@ -6,13 +6,13 @@ const Followers = () => {
   const DATA = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <SafeAreaView>
-      <FlatList
+      {/* <FlatList
         data={DATA}
         renderItem={({item, index}) => <FollowerCard isFollowing={true} />}
         keyExtractor={(item) => '1'}
         decelerationRate={0.798}
         showsHorizontalScrollIndicator={false}
-      />
+      /> */}
     </SafeAreaView>
   );
 };

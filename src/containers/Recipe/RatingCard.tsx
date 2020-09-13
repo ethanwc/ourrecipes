@@ -46,8 +46,6 @@ const RatingCard = (props: RatingCardProps) => {
     .sort()
     .reverse()
     .map((value) => {
-      console.log(value, value[1] / props.reviewCount);
-
       return (
         <RatingBar
           count={value[1]}

@@ -31,6 +31,7 @@ export interface ProfileBrowserProps {
 const ProfileBrowser = (props: ProfileBrowserProps) => {
   const dispatch = useDispatch();
 
+
   const userSession: any = useSelector(
     (state: RootState) => state.UserReducer.session,
   );

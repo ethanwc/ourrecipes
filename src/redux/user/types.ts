@@ -15,11 +15,12 @@ export interface UserState {
 }
 
 export interface User {
+  id: string;
   name: string;
   email: string;
-  photo?: string;
-  location?: string;
-  bio?: string;
+  photo: string;
+  // location?: string;
+  // bio?: string;
   creationDate: Date;
   /** String arrays represent mongodb direct ids */
   groups: string[];

@@ -8,12 +8,13 @@ import {
   Dimensions,
   Vibration,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import {Image, ListItem, Button} from 'react-native-elements';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme, Typography} from '../../assets/styles';
-import FollowerCard from '../Profile/FollowerCard';
+import FollowerCard, {RecipeAuthor} from '../Profile/FollowerCard';
 import IngredientCard from './IngredientCard';
 import DirectionCard from './DirectionCard';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
@@ -25,8 +26,12 @@ import CreateReview from '../../components/Review/CreateReview';
 import {nav} from 'aws-amplify';
 import {Recipe, Ingredient, Direction} from '../../redux/recipe/types';
 import {User} from 'src/redux/user/types';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from 'src/redux';
+import {getRecipeInfo} from '../../redux/recipe/actions';
+
+const RECIPEID = '40e46309-4b87-45bb-9971-8e38d1680308';
+//todo: make dynamic
 
 //custom tab bar
 const renderTabBar = (props: any) => (
@@ -47,6 +52,9 @@ const renderTabBar = (props: any) => (
   />
 );
 
+//todo: remove this badness :(@()#())
+console.warn = () => {};
+
 const shareSingleImage = async () => {
   const shareOptions = {
     title: 'Share file',
@@ -62,18 +70,29 @@ const shareSingleImage = async () => {
 };
 
 const DetailedRecipe = ({navigation, route}: any) => {
-  const recipeState: Recipe = route.params.recipe;
+  // const recipeState: Recipe = route.params.recipe;
   const userState: User = useSelector(
     (state: RootState) => state.UserReducer.user,
   );
 
+  const recipeState: Recipe = useSelector(
+    (state: RootState) => state.RecipeReducer.recipe,
+  );
+
+  const dispatch = useDispatch();
+
+  const userSession: any = useSelector(
+    (state: RootState) => state.UserReducer.session,
+  );
+
   useEffect(() => {
-    // Get author info here. Use with follow card
-    // Get reviews info here. Use with a lot of things!
+    dispatch(getRecipeInfo(RECIPEID));
   }, []);
 
-  console.log(userState);
-  console.log('asdf');
+  if (!recipeState.id && recipeState.id !== RECIPEID)
+    return <ActivityIndicator size="large" color={Theme.Light.caption} />;
+
+  console.log(recipeState);
 
   const HeaderIcons = () => {
     return (
@@ -103,15 +122,12 @@ const DetailedRecipe = ({navigation, route}: any) => {
     );
   };
 
-  //Fetch reviews from the recipe id
-  //Update nav title
+  // Update nav title
   navigation.setOptions({
     headerShown: true,
-    headerTitle: 'awkl jdwlkakawdjlkd jalkwjd lkajklwd wakl;jd ',
+    headerTitle: recipeState.name,
     headerRight: () => <HeaderIcons />,
   });
-
-  console.log(recipeState.ingredients);
 
   const Ingredients = () => {
     return (
@@ -159,6 +175,11 @@ const DetailedRecipe = ({navigation, route}: any) => {
 
   const initialLayout = {width: Dimensions.get('window').width};
 
+  const author: RecipeAuthor = {
+    ...recipeState.creator,
+    recipeCount: recipeState.creator.recipes.length,
+  };
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -193,7 +214,7 @@ const DetailedRecipe = ({navigation, route}: any) => {
                   color: Theme.Light.caption,
                   marginTop: 5,
                 }}>
-                30 mins
+                {recipeState.cookTime} mins
               </Text>
             </View>
             <View
@@ -251,7 +272,8 @@ const DetailedRecipe = ({navigation, route}: any) => {
         <View style={{flex: 1}}>
           {/* Follow user card */}
           <FollowerCard
-            isFollowing={userState.following.includes(recipeState.creatorid)}
+            isFollowing={userState.following.includes(recipeState.creator.id)}
+            author={author}
           />
           {/* Nutrition Card */}
           {/* <Text

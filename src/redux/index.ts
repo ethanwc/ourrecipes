@@ -32,6 +32,10 @@ const initialGroupsState: GroupsState = {
 const initialUserState: UserState = {
   session: null,
   user: {
+    id: 'asdf',
+    // bio: 'asdf',
+    // location: 'asdf',
+    photo: 'asdf',
     email: 'failedtoload@ourrecipes.app',
     name: 'Failed to load',
     creationDate: new Date(),
@@ -47,56 +51,69 @@ const initialUserState: UserState = {
 };
 
 const initialRecipeState: RecipeState = {
-  recipes: [
-    {
+  recipe: {
+    id: 'asdf',
+    category: 'Dinner',
+    name: 'Breaded Porkchops',
+    servingSize: 2,
+    cookTime: '00:30',
+    prepTime: '00:05',
+    creationDate: new Date().toLocaleDateString(),
+    creator: {
       id: 'asdf',
-      category: 'Dinner',
-      name: 'Breaded Porkchops',
-      servingSize: 2,
-      cookTime: '00:30',
-      prepTime: '00:05',
-      creationDate: new Date().toLocaleDateString(),
-      creatorid: 'asdf',
-      creatorName: 'Steve Jobs',
-      reviewCount: 23,
-      reviewRating: 4.4,
-      reviewDistribution: new Map<number, number>([
-        [1, 2],
-        [2, 3],
-        [3, 2],
-        [4, 4],
-        [5, 12],
-      ]),
-      imageUrl:
-        'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
-      reviews: [
-        {
-          id: 'dawdawdwa',
-          creatorid: 'dawdwadw',
-          rating: 4,
-          review: 'Wow this recipe sucks',
-        },
-      ],
+      // bio: 'asdf',
+      // location: 'asdf',
+      photo: 'asdf',
+      email: 'failedtoload@ourrecipes.app',
+      name: 'Failed to load',
+      creationDate: new Date(),
+      recipes: [],
+      groups: [],
       bookmarks: [],
-      directions: [
-        {
-          id: 'asdasdf',
-          instruction: 'Heat a fryer to 400 degrees',
-          step: "1",
-          imageUrl:
-            'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
-        },
-      ],
-      ingredients: [
-        {
-          amount: 2,
-          id: 'fsfe',
-          name: 'Porkchops',
-          unit: 'pieces',
-        },
-      ],
+      shoppinglist: [],
+      followers: [],
+      following: [],
+      reviews: [],
+      pictures: [],
     },
-  ],
+    reviewCount: 23,
+    reviewRating: 4.4,
+    reviewDistribution: new Map<number, number>([
+      [1, 2],
+      [2, 3],
+      [3, 2],
+      [4, 4],
+      [5, 12],
+    ]),
+    imageUrl:
+      'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
+    reviews: [
+      {
+        id: 'dawdawdwa',
+        creatorid: 'dawdwadw',
+        rating: 4,
+        review: 'Wow this recipe sucks',
+      },
+    ],
+    bookmarks: [],
+    directions: [
+      {
+        id: 'asdasdf',
+        instruction: 'Heat a fryer to 400 degrees',
+        step: '1',
+        imageUrl:
+          'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
+      },
+    ],
+    ingredients: [
+      {
+        amount: 2,
+        id: 'fsfe',
+        name: 'Porkchops',
+        unit: 'pieces',
+      },
+    ],
+  },
 };
 
 const initialCreateRecipeState: CreateRecipeState = {
@@ -135,4 +152,10 @@ const initialState: RootState = {
   CreateRecipeReducer: initialCreateRecipeState,
 };
 
-export const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
+// export const store = createStore(
+//   rootReducer,
+//   initialState,
+//   applyMiddleware(thunk),
+// );
+
+export const store = createStore(rootReducer, applyMiddleware(thunk));

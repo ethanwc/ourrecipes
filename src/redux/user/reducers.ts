@@ -14,6 +14,7 @@ export const UserReducer = (
   state: UserState = {
     session: null,
     user: {
+      id: "loading",
       name: 'Loading Name',
       email: 'loadingemail@ourrecipes.app',
       photo: '',
