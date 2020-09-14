@@ -36,8 +36,10 @@ export interface Review {
 /** Bookmark type */
 export interface Bookmark {
   id: string;
-  recipeid: string;
-  creationDate: string;
+  name: String;
+  cookTime: String;
+  imageUrl: String;
+  reviewRating: number;
 }
 
 /** Recipe type */
@@ -55,7 +57,6 @@ export interface Recipe {
   category: string;
   ingredients: Ingredient[];
   directions: Direction[];
-  bookmarks: Bookmark[];
   reviews: Review[];
   reviewDistribution: number[];
 }

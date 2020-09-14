@@ -6,9 +6,11 @@ import {Theme} from '../../assets/styles';
 import {View, StyleSheet, ActivityIndicator, Image} from 'react-native';
 import Axios from 'axios';
 import {Avatar} from 'react-native-elements';
+import {setPhoto} from '../../redux/user/actions';
+import {useDispatch} from 'react-redux';
 
 export interface ImagePickerProps {
-  imageUrl: string | undefined;
+  imageUrl: string;
   onImageSelected: Function;
 }
 
@@ -17,7 +19,7 @@ export interface ImagePickerProps {
  */
 const ProfileImageSelector = (props: ImagePickerProps) => {
   const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState(props.imageUrl);
+  const dispatch = useDispatch();
 
   const pickGallery = () => {
     ImagePicker.openPicker({
@@ -41,7 +43,7 @@ const ProfileImageSelector = (props: ImagePickerProps) => {
         )
           .then((res: any) => {
             setLoading(false);
-            setImage(res.data.url);
+            dispatch(setPhoto(res.data.url));
             props.onImageSelected(res.data.url);
           })
           .catch((error: any) => {
@@ -63,8 +65,7 @@ const ProfileImageSelector = (props: ImagePickerProps) => {
           rounded
           size={'large'}
           onPress={() => pickGallery()}
-          source={{uri: image}}
-          showAccessory
+          source={{uri: props.imageUrl}}
         />
       )}
     </View>

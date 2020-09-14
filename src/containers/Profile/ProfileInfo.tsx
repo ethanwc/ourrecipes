@@ -7,11 +7,6 @@ import {useSelector, useDispatch} from 'react-redux';
 import ProfileImageSelector from '../../utils/ImageSelector/ProfileImageSelector';
 import {setUserPhotoAsync} from '../../redux/user/actions';
 
-export interface prifleInfoProps {
-  name: string;
-  location: string;
-}
-
 const ProfileInfo = () => {
   const userSession: any = useSelector(
     (state: RootState) => state.UserReducer.session,
@@ -23,11 +18,14 @@ const ProfileInfo = () => {
 
   const dispatch = useDispatch();
 
+
   return (
     <View style={profileInfoStyle.container}>
       <ProfileImageSelector
         imageUrl={userInfo.photo}
-        onImageSelected={(uri: string) => dispatch(setUserPhotoAsync(userSession.jwt, uri))}
+        onImageSelected={(uri: string) =>
+          dispatch(setUserPhotoAsync(userSession.jwt, uri))
+        }
       />
 
       <View style={profileInfoStyle.wrapper}>

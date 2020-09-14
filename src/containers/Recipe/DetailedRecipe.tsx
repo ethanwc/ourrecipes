@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   SafeAreaView,
@@ -24,11 +24,21 @@ import RatingCard from './RatingCard';
 import Share from 'react-native-share';
 import CreateReview from '../../components/Review/CreateReview';
 import {nav} from 'aws-amplify';
-import {Recipe, Ingredient, Direction} from '../../redux/recipe/types';
+import {
+  Recipe,
+  Ingredient,
+  Direction,
+  Bookmark,
+} from '../../redux/recipe/types';
 import {User} from 'src/redux/user/types';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from 'src/redux';
 import {getRecipeInfo} from '../../redux/recipe/actions';
+import {
+  addBookmark,
+  addBookmarkAsync,
+  removeBookmarkAsync,
+} from '../../redux/user/actions';
 
 const RECIPEID = '3d7ed8e8-6720-4192-a5f5-1ab05949415f';
 //todo: make dynamic
@@ -92,6 +102,25 @@ const DetailedRecipe = ({navigation, route}: any) => {
   if (!recipeState.id && recipeState.id !== RECIPEID)
     return <ActivityIndicator size="large" color={Theme.Light.caption} />;
 
+  let bookmarkedRecipes: String[] = [];
+
+  userState.bookmarks.forEach((bookmark: Bookmark) => {
+    bookmarkedRecipes.push(bookmark.id);
+  });
+
+  console.log(bookmarkedRecipes);
+
+  const isBookmarked = bookmarkedRecipes.includes(recipeState.id);
+
+  const handleBookmark = () => {
+    () => Vibration.vibrate(25);
+
+    if (isBookmarked) {
+      dispatch(removeBookmarkAsync(userSession.jwt, recipeState.id));
+    } else {
+      dispatch(addBookmarkAsync(userSession.jwt, recipeState.id));
+    }
+  };
 
   const HeaderIcons = () => {
     return (
@@ -109,13 +138,9 @@ const DetailedRecipe = ({navigation, route}: any) => {
         <Icon
           name={'bookmark'}
           size={30}
-          color={
-            userState.bookmarks.includes(recipeState.id)
-              ? Theme.Light.caption
-              : Theme.Light.headline
-          }
+          color={isBookmarked ? Theme.Light.caption : Theme.Light.headline}
           style={{marginHorizontal: 5}}
-          onPress={() => Vibration.vibrate(25)}
+          onPress={() => handleBookmark()}
         />
       </View>
     );

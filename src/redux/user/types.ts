@@ -24,7 +24,7 @@ export interface User {
   creationDate: Date;
   /** String arrays represent mongodb direct ids */
   groups: string[];
-  bookmarks: string[];
+  bookmarks: Bookmark[];
   shoppinglist: string[];
   followers: string[];
   following: string[];
@@ -50,7 +50,7 @@ interface SetBookmarkAction {
 
 interface RemoveBookmarkAction {
   type: typeof REMOVE_BOOKMARK;
-  payload: Bookmark;
+  payload: String;
 }
 
 interface SetRecipesAction {

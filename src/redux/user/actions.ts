@@ -35,10 +35,10 @@ export const addBookmark = (bookmark: Bookmark): UserActionTypes => {
   };
 };
 
-export const removeBookmark = (bookmark: Bookmark): UserActionTypes => {
+export const removeBookmark = (recipeid: String): UserActionTypes => {
   return {
     type: REMOVE_BOOKMARK,
-    payload: bookmark,
+    payload: recipeid,
   };
 };
 
@@ -63,6 +63,66 @@ export const setPhoto = (uri: String): UserActionTypes => {
   };
 };
 
+/**
+ * Adds a bookmark to a user
+ */
+export const addBookmarkAsync = (jwt: string, recipeid: string) => {
+  return (dispatch: any) => {
+    Axios.post(API, {
+      query: `mutation {
+        createBookmark (jwt: "${jwt}", recipeId: "${recipeid}") {
+          id
+          name
+          cookTime
+          imageUrl
+          reviewRating 
+          }
+        }`,
+    })
+      .then(function (response: any) {
+        if (response.status == 200) {
+          console.log('add bookmark');
+          const parsed_bookmark = response.data.data.createBookmark;
+          dispatch(addBookmark(parsed_bookmark));
+        } else {
+          console.log('Err non 200');
+        }
+      })
+      .catch(function (error: any) {
+        console.log(error);
+      });
+  };
+};
+
+/**
+ * Removes a bookmark from a user
+ */
+export const removeBookmarkAsync = (jwt: string, recipeid: string) => {
+  return (dispatch: any) => {
+    Axios.post(API, {
+      query: `mutation {
+          deleteBookmark (jwt: "${jwt}", recipeId: "${recipeid}") {
+            id
+          }
+        }`,
+    })
+      .then(function (response: any) {
+        if (response.status == 200) {
+          console.log('Removing bookmark');
+          dispatch(removeBookmark(recipeid));
+        } else {
+          console.log('Err non 200');
+        }
+      })
+      .catch(function (error: any) {
+        console.log(error);
+      });
+  };
+};
+
+/**
+ * Sets a new photo for a user
+ */
 export const setUserPhotoAsync = (jwt: string, uri: string) => {
   return (dispatch: any) => {
     Axios.post(API, {
@@ -87,6 +147,9 @@ export const setUserPhotoAsync = (jwt: string, uri: string) => {
   };
 };
 
+/**
+ * Gets all info needed for a user profile
+ */
 export const getUserInfo = (id: string) => {
   return (dispatch: any) => {
     Axios.post(API, {
@@ -98,7 +161,13 @@ export const getUserInfo = (id: string) => {
               photo
               bio
               creationDate
-              bookmarks
+              bookmarks {
+                id
+                name
+                cookTime
+                imageUrl
+                reviewRating              
+              }
               shoppinglist {
                 id
                 name

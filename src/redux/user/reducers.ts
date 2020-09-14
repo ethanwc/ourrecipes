@@ -1,3 +1,4 @@
+import {Bookmark} from '../recipe/types';
 import {
   SET_SESSION,
   User,
@@ -8,13 +9,14 @@ import {
   SET_RECIPES,
   SET_PHOTO,
   ADD_RECIPE,
+  REMOVE_BOOKMARK,
 } from './types';
 
 export const UserReducer = (
   state: UserState = {
     session: null,
     user: {
-      id: "loading",
+      id: 'loading',
       name: 'Loading Name',
       email: 'loadingemail@ourrecipes.app',
       photo: '',
@@ -99,15 +101,45 @@ export const UserReducer = (
         session: state.session,
       };
 
-    case ADD_BOOKMARK: {
-      let updated_user = state.user;
-      updated_user.bookmarks.push('asdf');
-
+    case ADD_BOOKMARK:
       return {
-        user: updated_user,
+        user: {
+          name: state.user.name,
+          email: state.user.email,
+          creationDate: state.user.creationDate,
+          recipes: state.user.recipes,
+          photo: state.user.photo,
+          groups: state.user.groups,
+          bookmarks: [action.payload, ...state.user.bookmarks],
+          shoppinglist: state.user.shoppinglist,
+          followers: state.user.followers,
+          following: state.user.following,
+          reviews: state.user.reviews,
+          pictures: state.user.pictures,
+        },
         session: state.session,
       };
-    }
+    case REMOVE_BOOKMARK:
+      return {
+        user: {
+          name: state.user.name,
+          email: state.user.email,
+          creationDate: state.user.creationDate,
+          recipes: state.user.recipes,
+          photo: state.user.photo,
+          groups: state.user.groups,
+          bookmarks: state.user.bookmarks.filter(
+            (bookmark: Bookmark) => bookmark.id !== action.payload,
+          ),
+          shoppinglist: state.user.shoppinglist,
+          followers: state.user.followers,
+          following: state.user.following,
+          reviews: state.user.reviews,
+          pictures: state.user.pictures,
+        },
+        session: state.session,
+      };
+
     default:
       return state;
   }

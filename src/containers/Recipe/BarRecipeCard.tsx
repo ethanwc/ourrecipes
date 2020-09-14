@@ -1,18 +1,37 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableHighlight} from 'react-native';
 import {Theme, Typography} from '../../assets/styles';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
-import {Recipe} from 'src/redux/recipe/types';
+import {Bookmark, Recipe} from 'src/redux/recipe/types';
+import {removeBookmarkAsync} from '../../redux/user/actions';
+import {User} from '../../redux/user/types';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from 'src/redux';
 
 export interface BarRecipeCardProps {
-  recipe: Recipe;
-  isBookmarked: boolean;
+  recipe: Bookmark;
+  navigation: any;
 }
 
+//todo: fix uri here
 const BarRecipeCard = (props: BarRecipeCardProps) => {
+  const dispatch = useDispatch();
+  const userSession: any = useSelector(
+    (state: RootState) => state.UserReducer.session,
+  );
   return (
-    <View style={barRecipeCardProps.container}>
+    <TouchableHighlight
+      style={barRecipeCardProps.container}
+      underlayColor={'transparent'}
+      onPress={() =>
+        props.navigation.navigate('Recipes', {
+          screen: 'Recipe',
+          params: {
+            recipe: props.recipe.id,
+          },
+        })
+      }>
       <View
         style={{
           flexDirection: 'row',
@@ -24,7 +43,7 @@ const BarRecipeCard = (props: BarRecipeCardProps) => {
             height: responsiveWidth(20),
             alignSelf: 'flex-start',
           }}
-          source={require('../../assets/images/food.jpg')}
+          source={{uri: props.recipe.imageUrl.toString()}}
         />
         <View
           style={{
@@ -45,7 +64,9 @@ const BarRecipeCard = (props: BarRecipeCardProps) => {
               size={24}
               color={Theme.Light.caption}
               style={{position: 'absolute', right: 10, top: 10}}
-              onPress={() => console.log('icon pressed')}
+              onPress={() =>
+                dispatch(removeBookmarkAsync(userSession.jwt, props.recipe.id))
+              }
             />
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -65,12 +86,12 @@ const BarRecipeCard = (props: BarRecipeCardProps) => {
               size={16}
             />
             <Text style={{...Typography.Typography.body, marginLeft: 5}}>
-              4.9
+              {props.recipe.reviewRating}
             </Text>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableHighlight>
   );
 };
 
