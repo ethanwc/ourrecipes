@@ -25,7 +25,7 @@ const MiniRecipeCard = (props: MiniRecipeCardProps) => {
         props.navigation.navigate('Recipes', {
           screen: 'Recipe',
           params: {
-            recipe: props.miniRecipe.id,
+            id: props.miniRecipe.id,
           },
         })
       }>

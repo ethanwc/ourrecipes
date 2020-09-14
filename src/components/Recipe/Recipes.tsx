@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, FlatList} from 'react-native';
 import RecipeCard from '../../containers/Recipe/RecipeCard';
-import { Recipe } from 'src/redux/recipe/types';
+import {Recipe} from 'src/redux/recipe/types';
 
 const DATA = [
   {title: 'steve'},
@@ -22,7 +22,11 @@ const Recipes = (props: recipesProps) => {
         horizontal
         data={props.recipes}
         renderItem={({item, index}) => (
-          <RecipeCard recipe={item} isFirst={index === 0} navigation={props.navigation} />
+          <RecipeCard
+            recipe={item}
+            isFirst={index === 0}
+            navigation={props.navigation}
+          />
         )}
         keyExtractor={(item) => item.id}
         decelerationRate={0.798}

@@ -14,7 +14,6 @@ export interface BarRecipeCardProps {
   navigation: any;
 }
 
-//todo: fix uri here
 const BarRecipeCard = (props: BarRecipeCardProps) => {
   const dispatch = useDispatch();
   const userSession: any = useSelector(
@@ -28,7 +27,7 @@ const BarRecipeCard = (props: BarRecipeCardProps) => {
         props.navigation.navigate('Recipes', {
           screen: 'Recipe',
           params: {
-            recipe: props.recipe.id,
+            id: props.recipe.id,
           },
         })
       }>

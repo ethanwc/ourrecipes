@@ -1,9 +1,20 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableHighlight,
+  Vibration,
+} from 'react-native';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from 'src/redux';
+import {addBookmarkAsync, removeBookmarkAsync} from '../../redux/user/actions';
+import {User} from 'src/redux/user/types';
 import {Typography, Theme} from '../../assets/styles';
-import {Recipe} from 'src/redux/recipe/types';
+import {Bookmark, Recipe} from '../../redux/recipe/types';
 
 export interface recipeCardProps {
   isFirst: boolean;
@@ -11,37 +22,40 @@ export interface recipeCardProps {
   recipe: Recipe;
 }
 
-const favoriteIconEmpty = (
-  <Icon
-    name="bookmark"
-    color={Theme.Light.shadow}
-    size={24}
-    style={{position: 'absolute', right: 10, top: 10}}
-  />
-);
-
-const favoriteIconFilled = (
-  <Icon
-    name="bookmark"
-    size={24}
-    color={Theme.Light.caption}
-    style={{position: 'absolute', right: 10, top: 10}}
-    onPress={() => console.log('icon pressed')}
-  />
-);
-
-const favoriteIcon = favoriteIconFilled;
-
 const RecipeCard = (props: recipeCardProps) => {
-  // console.log(props.recipe);
+  const userState: User = useSelector(
+    (state: RootState) => state.UserReducer.user,
+  );
+
+  const userSession: any = useSelector(
+    (state: RootState) => state.UserReducer.session,
+  );
+
+  const dispatch = useDispatch();
+
+  let bookmarkedRecipes: String[] = [];
+  userState.bookmarks.forEach((bookmark: Bookmark) => {
+    bookmarkedRecipes.push(bookmark.id);
+  });
+  const isBookmarked = bookmarkedRecipes.includes(props.recipe.id);
+
+  const handleBookmark = () => {
+    () => Vibration.vibrate(25);
+
+    if (isBookmarked) {
+      dispatch(removeBookmarkAsync(userSession.jwt, props.recipe.id));
+    } else {
+      dispatch(addBookmarkAsync(userSession.jwt, props.recipe.id));
+    }
+  };
+
   return (
     <TouchableHighlight
       onPress={() =>
-        //todo: nav to recipe with recipe id
         props.navigation.navigate('Recipes', {
           screen: 'Recipe',
           params: {
-            recipe: props.recipe,
+            id: props.recipe.id,
           },
         })
       }
@@ -56,7 +70,13 @@ const RecipeCard = (props: recipeCardProps) => {
           style={recipeCardStyle.images}
           source={{uri: props.recipe.imageUrl}}
         />
-        {favoriteIcon}
+        <Icon
+          name="bookmark"
+          onPress={() => handleBookmark()}
+          color={isBookmarked ? Theme.Light.caption : Theme.Light.shadow}
+          size={24}
+          style={{position: 'absolute', right: 10, top: 10}}
+        />
         <View style={recipeCardStyle.textContainer}>
           {/* Recipe Name */}
           <Text style={Typography.Typography.subheader}>
@@ -107,7 +127,7 @@ const RecipeCard = (props: recipeCardProps) => {
               justifyContent: 'space-between',
             }}>
             <Text style={Typography.Typography.subheadline}>
-              {props.recipe.creatorName}
+              {props.recipe.creator.name}
             </Text>
 
             <Text

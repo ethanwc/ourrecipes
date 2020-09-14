@@ -1,16 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   Dimensions,
   Vibration,
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import {Image, ListItem, Button} from 'react-native-elements';
+import {Image, Button} from 'react-native-elements';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import {Theme, Typography} from '../../assets/styles';
@@ -23,7 +22,6 @@ import ReviewCard from './ReviewCard';
 import RatingCard from './RatingCard';
 import Share from 'react-native-share';
 import CreateReview from '../../components/Review/CreateReview';
-import {nav} from 'aws-amplify';
 import {
   Recipe,
   Ingredient,
@@ -34,14 +32,7 @@ import {User} from 'src/redux/user/types';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from 'src/redux';
 import {getRecipeInfo} from '../../redux/recipe/actions';
-import {
-  addBookmark,
-  addBookmarkAsync,
-  removeBookmarkAsync,
-} from '../../redux/user/actions';
-
-const RECIPEID = '3d7ed8e8-6720-4192-a5f5-1ab05949415f';
-//todo: make dynamic
+import {addBookmarkAsync, removeBookmarkAsync} from '../../redux/user/actions';
 
 //custom tab bar
 const renderTabBar = (props: any) => (
@@ -80,7 +71,7 @@ const shareSingleImage = async () => {
 };
 
 const DetailedRecipe = ({navigation, route}: any) => {
-  // const recipeState: Recipe = route.params.recipe;
+  const RECIPEID = route.params.id;
   const userState: User = useSelector(
     (state: RootState) => state.UserReducer.user,
   );
@@ -107,8 +98,6 @@ const DetailedRecipe = ({navigation, route}: any) => {
   userState.bookmarks.forEach((bookmark: Bookmark) => {
     bookmarkedRecipes.push(bookmark.id);
   });
-
-  console.log(bookmarkedRecipes);
 
   const isBookmarked = bookmarkedRecipes.includes(recipeState.id);
 

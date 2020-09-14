@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   SafeAreaView,
@@ -8,6 +8,7 @@ import {
   Button,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Searchbar from '../../utils/Searchbar/SearchBar';
 import Categories from '../../components/Category/Categories';
@@ -15,18 +16,28 @@ import {Typography, Theme} from '../../assets/styles';
 import Recipes from '../../components/Recipe/Recipes';
 import Icon from 'react-native-vector-icons/Feather';
 import {RecipeState} from 'src/redux/recipe/types';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from 'src/redux';
+import {RecipesState} from '../../redux/recipes/types';
+import {getRecipesInfo} from '../../redux/recipes/actions';
 
 /**
  * Explore page of app
  */
 const Explore = ({navigation}: any) => {
-  const recipeState: RecipeState = useSelector(
-    (state: RootState) => state.RecipeReducer,
+  const dispatch = useDispatch();
+  const recipesState: RecipesState = useSelector(
+    (state: RootState) => state.RecipesReducer,
   );
 
+  useEffect(() => {
+    dispatch(getRecipesInfo());
+  }, []);
+
   // console.log(recipeState);
+
+  if (!recipesState.recipes)
+    return <ActivityIndicator size="large" color={Theme.Light.caption} />;
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -42,21 +53,21 @@ const Explore = ({navigation}: any) => {
         />
         {/* Breakfast */}
         <View style={exploreStyle.header}>
-          <Text style={Typography.Typography.header}>Breakfast</Text>
+          <Text style={Typography.Typography.header}>Recipes</Text>
         </View>
 
-        <Recipes recipes={recipeState.recipes} navigation={navigation} />
+        <Recipes recipes={recipesState.recipes} navigation={navigation} />
 
         {/* Lunch */}
-        <View style={exploreStyle.header}>
+        {/* <View style={exploreStyle.header}>
           <Text style={Typography.Typography.header}>Lunch</Text>
-        </View>
-        <Recipes navigation={navigation} />
+        </View> */}
+        {/* <Recipes navigation={navigation} /> */}
         {/* Dinner */}
-        <View style={exploreStyle.header}>
+        {/* <View style={exploreStyle.header}>
           <Text style={Typography.Typography.header}>Dinner</Text>
         </View>
-        <Recipes navigation={navigation} />
+        <Recipes navigation={navigation} /> */}
       </ScrollView>
       <TouchableOpacity
         style={exploreStyle.createButton}

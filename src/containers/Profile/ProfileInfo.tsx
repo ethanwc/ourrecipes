@@ -18,7 +18,6 @@ const ProfileInfo = () => {
 
   const dispatch = useDispatch();
 
-
   return (
     <View style={profileInfoStyle.container}>
       <ProfileImageSelector
@@ -40,6 +39,7 @@ const ProfileInfo = () => {
 const profileInfoStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 15,
     marginTop: 15,
   },

@@ -10,117 +10,8 @@ import {RecipeState} from './recipe/types';
 import {CreateRecipeReducer} from './createrecipe/reducers';
 import {CreateRecipeState} from './createrecipe/types';
 import thunk from 'redux-thunk';
-
-const initialShoppingListState: ShoppinglistState = {
-  items: [
-    {id: 'wtf', name: 'Pizza Dough', checked: true, creationDate: new Date()},
-  ],
-};
-
-const initialGroupsState: GroupsState = {
-  groups: [
-    {
-      id: '123123',
-      name: 'Failed to load groups',
-      creatorid: '123',
-      creationDate: new Date(),
-      memberids: [],
-    },
-  ],
-};
-
-const initialUserState: UserState = {
-  session: null,
-  user: {
-    id: 'asdf',
-    // bio: 'asdf',
-    // location: 'asdf',
-    photo: 'asdf',
-    email: 'failedtoload@ourrecipes.app',
-    name: 'Failed to load',
-    creationDate: new Date(),
-    recipes: [],
-    groups: [],
-    bookmarks: [],
-    shoppinglist: [],
-    followers: [],
-    following: [],
-    reviews: [],
-    pictures: [],
-  },
-};
-
-const initialRecipeState: RecipeState = {
-  recipe: {
-    id: 'asdf',
-    category: 'Dinner',
-    name: 'Breaded Porkchops',
-    servingSize: 2,
-    cookTime: '00:30',
-    prepTime: '00:05',
-    creationDate: new Date().toLocaleDateString(),
-    creator: {
-      id: 'asdf',
-      // bio: 'asdf',
-      // location: 'asdf',
-      photo: 'asdf',
-      email: 'failedtoload@ourrecipes.app',
-      name: 'Failed to load',
-      creationDate: new Date(),
-      recipes: [],
-      groups: [],
-      bookmarks: [],
-      shoppinglist: [],
-      followers: [],
-      following: [],
-      reviews: [],
-      pictures: [],
-    },
-    reviewCount: 23,
-    reviewRating: 4.4,
-    reviewDistribution: [],
-    imageUrl:
-      'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
-    reviews: [
-      {
-        id: 'dawdawdwa',
-        creatorid: 'dawdwadw',
-        rating: 4,
-        review: 'Wow this recipe sucks',
-      },
-    ],
-    bookmarks: [],
-    directions: [
-      {
-        id: 'asdasdf',
-        instruction: 'Heat a fryer to 400 degrees',
-        step: '1',
-        imageUrl:
-          'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
-      },
-    ],
-    ingredients: [
-      {
-        amount: 2,
-        id: 'fsfe',
-        name: 'Porkchops',
-        unit: 'pieces',
-      },
-    ],
-  },
-};
-
-const initialCreateRecipeState: CreateRecipeState = {
-  category: '',
-  cookTime: '',
-  name: '',
-  description: '',
-  imageUrl: '',
-  prepTime: '',
-  servingSize: '',
-  directions: [],
-  ingredients: [],
-};
+import {RecipesState} from './recipes/types';
+import {RecipesReducer} from './recipes/reducers';
 
 // Root application state types
 export interface RootState {
@@ -128,6 +19,7 @@ export interface RootState {
   Groups: GroupsState;
   UserReducer: UserState;
   RecipeReducer: RecipeState;
+  RecipesReducer: RecipesState;
   CreateRecipeReducer: CreateRecipeState;
 }
 const rootReducer = combineReducers({
@@ -135,21 +27,8 @@ const rootReducer = combineReducers({
   Groups,
   UserReducer,
   RecipeReducer,
+  RecipesReducer,
   CreateRecipeReducer,
 });
-
-const initialState: RootState = {
-  ShoppingList: initialShoppingListState,
-  Groups: initialGroupsState,
-  UserReducer: initialUserState,
-  RecipeReducer: initialRecipeState,
-  CreateRecipeReducer: initialCreateRecipeState,
-};
-
-// export const store = createStore(
-//   rootReducer,
-//   initialState,
-//   applyMiddleware(thunk),
-// );
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));

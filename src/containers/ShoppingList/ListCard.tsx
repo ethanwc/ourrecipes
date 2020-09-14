@@ -11,8 +11,6 @@ export interface ListCardProps {
     item: ShoppingListItem;
     editItem: Function;
 }
-//todo: animate????????
-//todo: sort
 //swipe to delete
 const ListCard = (props: ListCardProps) => {
     const dispatch = useDispatch();

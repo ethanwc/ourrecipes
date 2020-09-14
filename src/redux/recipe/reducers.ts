@@ -35,7 +35,6 @@ export const RecipeReducer = (
       },
       ingredients: [],
       directions: [],
-      bookmarks: [],
       reviews: [],
       reviewCount: 23,
       reviewRating: 4.4,
