@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   SafeAreaView,
@@ -19,7 +19,7 @@ import {RecipeState} from 'src/redux/recipe/types';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from 'src/redux';
 import {RecipesState} from '../../redux/recipes/types';
-import {getRecipesInfo} from '../../redux/recipes/actions';
+import {getRecipesInfo, searchRecipesInfo} from '../../redux/recipes/actions';
 
 /**
  * Explore page of app
@@ -39,17 +39,18 @@ const Explore = ({navigation}: any) => {
   if (!recipesState.recipes)
     return <ActivityIndicator size="large" color={Theme.Light.caption} />;
 
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
         {/* Searchbar */}
-        <Searchbar />
+        <Searchbar onSearchSubmit={(search: string) => dispatch(searchRecipesInfo(search))}/>
         {/* Categories Component */}
         <View style={exploreStyle.header}>
           <Text style={Typography.Typography.header}>Categories</Text>
         </View>
         <Categories
-          onCategoryPressed={(category: string) => console.log(category)}
+          onCategoryPressed={(category: string) => dispatch(searchRecipesInfo(category))}
         />
         {/* Breakfast */}
         <View style={exploreStyle.header}>

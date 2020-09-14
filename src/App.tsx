@@ -3,9 +3,10 @@ import {Button, View} from 'react-native';
 import Amplify, {Auth, Hub} from 'aws-amplify';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
 import {awsconfig} from './assets/constants/awsconfig';
-import {setSession, setUser as SetUserData} from './redux/user/actions';
+import {setRecipes, setSession, setUser as SetUserData} from './redux/user/actions';
 import {useDispatch} from 'react-redux';
 import {Navigator} from './navigation/Navigator';
+import { setRecipe } from './redux/recipe/actions';
 
 console.disableYellowBox = true;
 
@@ -56,6 +57,9 @@ export default function App() {
           break;
         case 'signOut':
           setUser(null);
+          setSession(null);
+          setRecipe(null);
+          setRecipes([]);
           break;
         case 'signIn_failure':
         case 'cognitoHostedUI_failure':

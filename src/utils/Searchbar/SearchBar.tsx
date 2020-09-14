@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, TextInput, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Theme } from '../../assets/styles';
+import {Theme} from '../../assets/styles';
 import VoiceWrapper from '../VoiceWrapper/VoiceWrapper';
 
-const SearchBar = () => {
+export interface SearchBarProps {
+  onSearchSubmit: Function;
+}
+const SearchBar = (props: SearchBarProps) => {
   const [search, setSearch] = useState('');
 
-  //Show clear button if there is text
+  // Show clear button if there is text
   const clearButton = search ? (
     <Icon
       name={'times'}
       size={16}
-      style={{ marginHorizontal: 10 }}
+      style={{marginHorizontal: 10}}
       onPress={() => setSearch('')}
     />
   ) : null;
@@ -20,19 +23,23 @@ const SearchBar = () => {
   return (
     <View style={searchBarStyle.container}>
       <View style={searchBarStyle.innerContainer}>
-        <VoiceWrapper size={16} onVoicePartialResult={(text: string) => setSearch(text)} onVoiceCompleteResult={(text: string) => setSearch(text)} />
+        <VoiceWrapper
+          size={16}
+          onVoicePartialResult={(text: string) => setSearch(text)}
+          onVoiceCompleteResult={(text: string) => setSearch(text)}
+        />
         <Icon
           name={'search'}
           size={14}
-          style={{ marginRight: 10 }}
-        // onPress={() => console.log(parser.parse(search))}
+          style={{marginRight: 10}}
+          onPress={() => props.onSearchSubmit(search)}
         />
         <TextInput
           placeholder={'Search for a recipe'}
           value={search}
           onChangeText={(text: string) => setSearch(text)}
           style={searchBarStyle.textInput}
-          onSubmitEditing={() => console.log('submitted: ', search)}
+          onSubmitEditing={() => props.onSearchSubmit(search)}
         />
         {clearButton}
       </View>

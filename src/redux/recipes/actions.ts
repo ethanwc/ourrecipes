@@ -11,6 +11,50 @@ export const setRecipes = (recipes: Recipe[]): RecipeActionTypes => {
   };
 };
 
+export const searchRecipesInfo = (search: string) => {
+  return (dispatch: any) => {
+    Axios.post(API, {
+      query: `{
+        searchRecipe(search: "${search}") {
+          id
+          prepTime
+          cookTime
+          category
+          name
+          reviewCount
+          reviewRating
+          imageUrl
+          creator {
+            id
+            name
+          }
+        }
+      }`,
+    })
+      .then(function (response: any) {
+        if (response.status == 200) {
+          console.log('called');
+          console.log(response.data.data);
+          const parsed_recipes: Recipe[] = response.data.data.searchRecipe;
+
+          console.log("parsed", parsed_recipes)
+
+          dispatch(setRecipes(parsed_recipes));
+        } else {
+          console.log('Err non 200');
+        }
+      })
+      .catch(function (error: any) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        //todo stop animation
+      });
+  };
+};
+
+
 export const getRecipesInfo = () => {
   return (dispatch: any) => {
     Axios.post(API, {
