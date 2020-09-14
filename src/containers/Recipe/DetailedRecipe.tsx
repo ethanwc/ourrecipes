@@ -30,7 +30,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from 'src/redux';
 import {getRecipeInfo} from '../../redux/recipe/actions';
 
-const RECIPEID = '40e46309-4b87-45bb-9971-8e38d1680308';
+const RECIPEID = '3d7ed8e8-6720-4192-a5f5-1ab05949415f';
 //todo: make dynamic
 
 //custom tab bar
@@ -92,7 +92,6 @@ const DetailedRecipe = ({navigation, route}: any) => {
   if (!recipeState.id && recipeState.id !== RECIPEID)
     return <ActivityIndicator size="large" color={Theme.Light.caption} />;
 
-  console.log(recipeState);
 
   const HeaderIcons = () => {
     return (

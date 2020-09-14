@@ -6,7 +6,7 @@ import {Theme, Typography} from '../../assets/styles';
 export interface RatingCardProps {
   reviewCount: number;
   reviewRating: number;
-  reviewDistribution: Map<number, number>;
+  reviewDistribution: number[];
 }
 
 export interface RatingBarProps {
@@ -42,7 +42,7 @@ const RatingBar = (props: RatingBarProps) => {
 };
 
 const RatingCard = (props: RatingCardProps) => {
-  const asdf = [...props.reviewDistribution.entries()]
+  const entryMap = [...props.reviewDistribution.entries()]
     .sort()
     .reverse()
     .map((value) => {
@@ -70,7 +70,7 @@ const RatingCard = (props: RatingCardProps) => {
         <Text style={Typography.Typography.subheader}>5</Text>
       </View>
       {/* Star ratings */}
-      <View style={{flex: 3}}>{asdf}</View>
+      <View style={{flex: 3}}>{entryMap}</View>
     </View>
   );
 };

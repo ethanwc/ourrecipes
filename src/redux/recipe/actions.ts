@@ -52,6 +52,8 @@ export const getRecipeInfo = (id: string) => {
       .then(function (response: any) {
         if (response.status == 200) {
           const parsed_recipe: Recipe = response.data.data.recipe[0];
+          console.log(response.data);
+          // console.log(response.data.data.recipe[0]);
           dispatch(setRecipe(parsed_recipe));
         } else {
           console.log('Err non 200');

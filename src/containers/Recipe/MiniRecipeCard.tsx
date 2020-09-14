@@ -20,8 +20,8 @@ export interface MiniRecipeCardProps {
 const MiniRecipeCard = (props: MiniRecipeCardProps) => {
   return (
     <TouchableHighlight
+      underlayColor={'transparent'}
       onPress={() =>
-        //todo: nav to recipe with recipe id
         props.navigation.navigate('Recipes', {
           screen: 'Recipe',
           params: {

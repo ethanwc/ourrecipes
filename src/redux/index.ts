@@ -78,13 +78,7 @@ const initialRecipeState: RecipeState = {
     },
     reviewCount: 23,
     reviewRating: 4.4,
-    reviewDistribution: new Map<number, number>([
-      [1, 2],
-      [2, 3],
-      [3, 2],
-      [4, 4],
-      [5, 12],
-    ]),
+    reviewDistribution: [],
     imageUrl:
       'http://res.cloudinary.com/dk4gnl6ww/image/upload/v1596919037/nmkttrup9beqvmd2ypps.jpg',
     reviews: [

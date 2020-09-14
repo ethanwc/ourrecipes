@@ -57,7 +57,7 @@ export interface Recipe {
   directions: Direction[];
   bookmarks: Bookmark[];
   reviews: Review[];
-  reviewDistribution: Map<number, number>;
+  reviewDistribution: number[];
 }
 
 interface CreateRecipeAction {
