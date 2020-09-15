@@ -1,6 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Button} from 'react-native-elements';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from 'src/redux';
+import {followUserAsync, unfollowUserAsync} from '../../redux/user/actions';
+import {User} from '../../redux/user/types';
 import {Theme, Typography} from '../../assets/styles';
 
 export interface RecipeAuthor {
@@ -15,6 +19,28 @@ export interface FollowerCardProps {
 }
 
 const FollowerCard = (props: FollowerCardProps) => {
+  const dispatch = useDispatch();
+
+  const userSession: any = useSelector(
+    (state: RootState) => state.UserReducer.session,
+  );
+
+  const userState: User = useSelector(
+    (state: RootState) => state.UserReducer.user,
+  );
+
+  const handleFollow = () => {
+    if (props.isFollowing) {
+      dispatch(unfollowUserAsync(userSession.jwt, props.author.id.toString()));
+    } else {
+      dispatch(followUserAsync(userSession.jwt, props.author.id.toString()));
+    }
+  };
+
+  console.log('asdf', userState.id, props.author.id);
+  // Dont show for yourself
+  if (userState.id === props.author.id) return null;
+
   return (
     <View style={follerCardStyleStyle.container}>
       <View
@@ -42,6 +68,7 @@ const FollowerCard = (props: FollowerCardProps) => {
 
       <Button
         title={props.isFollowing ? 'Following' : 'Follow'}
+        onPress={() => handleFollow()}
         titleStyle={{
           ...Typography.Typography.subheader,
           color: Theme.Light.shadow,

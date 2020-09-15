@@ -9,6 +9,8 @@ import {
   UserActionTypes,
   SET_PHOTO,
   ADD_RECIPE,
+  FOLLOW_USER,
+  UNFOLLOW_USER,
 } from './types';
 import {Bookmark, Recipe} from '../recipe/types';
 import {MiniRecipe} from '../../containers/Recipe/MiniRecipeCard';
@@ -60,6 +62,84 @@ export const setPhoto = (uri: String): UserActionTypes => {
   return {
     type: SET_PHOTO,
     payload: uri,
+  };
+};
+
+export const followUser = (user: User): UserActionTypes => {
+  return {
+    type: FOLLOW_USER,
+    payload: user,
+  };
+};
+
+export const unfollowUser = (userid: string): UserActionTypes => {
+  return {
+    type: UNFOLLOW_USER,
+    payload: userid,
+  };
+};
+
+/**
+ * Follow a user
+ */
+export const followUserAsync = (jwt: String, userid: string) => {
+  return (dispatch: any) => {
+    Axios.post(API, {
+      query: `mutation {
+        followUser (jwt: "${jwt}", followId: "${userid}") {
+          id
+          name
+          recipes {
+            id
+          }
+          photo
+          }
+        }`,
+    })
+      .then(function (response: any) {
+        if (response.status == 200) {
+          const parsed_following = response.data.data.followUser;
+          console.log('parse follow', parsed_following);
+          dispatch(followUser(parsed_following));
+        } else {
+          console.log('Err non 200');
+        }
+      })
+      .catch(function (error: any) {
+        console.log(error);
+      });
+  };
+};
+
+/**
+ * Unfollow a user
+ */
+export const unfollowUserAsync = (jwt: String, userid: string) => {
+  return (dispatch: any) => {
+    Axios.post(API, {
+      query: `mutation {
+        unfollowUser (jwt: "${jwt}", followId: "${userid}") {
+          id
+          name
+          recipes {
+            id
+          }
+          photo
+          }
+        }`,
+    })
+      .then(function (response: any) {
+        if (response.status == 200) {
+          const parsed_unfollowing = response.data.data.unfollowUser;
+          console.log(parsed_unfollowing);
+          dispatch(unfollowUser(parsed_unfollowing.id));
+        } else {
+          console.log('Err non 200');
+        }
+      })
+      .catch(function (error: any) {
+        console.log(error);
+      });
   };
 };
 
@@ -201,7 +281,7 @@ export const getUserInfo = (id: string) => {
       .then(function (response: any) {
         if (response.status == 200) {
           const parsed_user: User = response.data.data.user[0];
-          console.log('f:', parsed_user);
+          console.log('ffff:', parsed_user);
           dispatch(setUser(parsed_user));
         } else {
           console.log('Err non 200');

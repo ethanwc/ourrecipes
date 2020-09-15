@@ -20,6 +20,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from 'src/redux';
 import {RecipesState} from '../../redux/recipes/types';
 import {getRecipesInfo, searchRecipesInfo} from '../../redux/recipes/actions';
+import { getUserInfo } from '../../redux/user/actions';
 
 /**
  * Explore page of app
@@ -29,9 +30,14 @@ const Explore = ({navigation}: any) => {
   const recipesState: RecipesState = useSelector(
     (state: RootState) => state.RecipesReducer,
   );
+  const userSession: any = useSelector(
+    (state: RootState) => state.UserReducer.session,
+  );
+
 
   useEffect(() => {
     dispatch(getRecipesInfo());
+    dispatch(getUserInfo(userSession.username));
   }, []);
 
   // console.log(recipeState);

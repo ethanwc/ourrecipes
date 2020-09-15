@@ -72,9 +72,6 @@ const shareSingleImage = async () => {
 
 const DetailedRecipe = ({navigation, route}: any) => {
   const RECIPEID = route.params.id;
-  const userState: User = useSelector(
-    (state: RootState) => state.UserReducer.user,
-  );
 
   const recipeState: Recipe = useSelector(
     (state: RootState) => state.RecipeReducer.recipe,
@@ -82,17 +79,19 @@ const DetailedRecipe = ({navigation, route}: any) => {
 
   const dispatch = useDispatch();
 
-  const userSession: any = useSelector(
-    (state: RootState) => state.UserReducer.session,
-  );
-
   useEffect(() => {
     dispatch(getRecipeInfo(RECIPEID));
   }, []);
 
-  if (!recipeState.id && recipeState.id !== RECIPEID)
-    return <ActivityIndicator size="large" color={Theme.Light.caption} />;
+  console.log(recipeState.id, RECIPEID);
 
+  const userSession: any = useSelector(
+    (state: RootState) => state.UserReducer.session,
+  );
+
+  const userState: User = useSelector(
+    (state: RootState) => state.UserReducer.user,
+  );
   let bookmarkedRecipes: String[] = [];
 
   userState.bookmarks.forEach((bookmark: Bookmark) => {
@@ -100,6 +99,15 @@ const DetailedRecipe = ({navigation, route}: any) => {
   });
 
   const isBookmarked = bookmarkedRecipes.includes(recipeState.id);
+
+  let followingUsers: String[] = [];
+
+  console.log("ui rerendering")
+  userState.following.forEach((user: User) => {
+    followingUsers.push(user.id);
+  });
+
+  const isFollowing = followingUsers.includes(recipeState.creator.id);
 
   const handleBookmark = () => {
     () => Vibration.vibrate(25);
@@ -193,6 +201,9 @@ const DetailedRecipe = ({navigation, route}: any) => {
     recipeCount: recipeState.creator.recipes.length,
   };
 
+  if (recipeState.id !== RECIPEID)
+    return <ActivityIndicator size="large" color={Theme.Light.caption} />;
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -284,10 +295,7 @@ const DetailedRecipe = ({navigation, route}: any) => {
         {/* Everything else */}
         <View style={{flex: 1}}>
           {/* Follow user card */}
-          <FollowerCard
-            isFollowing={userState.following.includes(recipeState.creator.id)}
-            author={author}
-          />
+          <FollowerCard isFollowing={isFollowing} author={author} />
           {/* Nutrition Card */}
           {/* <Text
             style={{

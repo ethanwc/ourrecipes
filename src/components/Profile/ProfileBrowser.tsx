@@ -11,13 +11,10 @@ import {
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {Theme, Typography} from '../../assets/styles';
 import MiniRecipeCard, {
-  MiniRecipeCardProps,
   MiniRecipe,
 } from '../../containers/Recipe/MiniRecipeCard';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import ReviewCard from '../../containers/Review/ReviewCard';
-import {Recipe} from 'src/redux/recipe/types';
-import {getUserInfo} from '../../redux/user/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import {User} from 'src/redux/user/types';
 import {RootState} from 'src/redux';
@@ -29,18 +26,6 @@ export interface ProfileBrowserProps {
 // same useEffect approach as reviews here
 
 const ProfileBrowser = (props: ProfileBrowserProps) => {
-  const dispatch = useDispatch();
-
-
-  const userSession: any = useSelector(
-    (state: RootState) => state.UserReducer.session,
-  );
-
-  useEffect(() => {
-    dispatch(getUserInfo(userSession.username));
-  }, []);
-
-
   const userInfo: User = useSelector(
     (state: RootState) => state.UserReducer.user,
   );

@@ -10,13 +10,15 @@ import {
   SET_PHOTO,
   ADD_RECIPE,
   REMOVE_BOOKMARK,
+  FOLLOW_USER,
+  UNFOLLOW_USER,
 } from './types';
 
 export const UserReducer = (
   state: UserState = {
     session: null,
     user: {
-      id: 'loading',
+      id: 'nullbody',
       name: 'Loading Name',
       email: 'loadingemail@ourrecipes.app',
       photo: '',
@@ -44,6 +46,7 @@ export const UserReducer = (
       updated_user.recipes = [...action.payload];
       return {
         user: {
+          id: state.user.id,
           name: state.user.name,
           email: state.user.email,
           creationDate: state.user.creationDate,
@@ -62,6 +65,7 @@ export const UserReducer = (
     case ADD_RECIPE:
       return {
         user: {
+          id: state.user.id,
           name: state.user.name,
           email: state.user.email,
           creationDate: state.user.creationDate,
@@ -85,6 +89,7 @@ export const UserReducer = (
     case SET_PHOTO:
       return {
         user: {
+          id: state.user.id,
           name: state.user.name,
           email: state.user.email,
           creationDate: state.user.creationDate,
@@ -104,6 +109,7 @@ export const UserReducer = (
     case ADD_BOOKMARK:
       return {
         user: {
+          id: state.user.id,
           name: state.user.name,
           email: state.user.email,
           creationDate: state.user.creationDate,
@@ -122,6 +128,7 @@ export const UserReducer = (
     case REMOVE_BOOKMARK:
       return {
         user: {
+          id: state.user.id,
           name: state.user.name,
           email: state.user.email,
           creationDate: state.user.creationDate,
@@ -139,7 +146,47 @@ export const UserReducer = (
         },
         session: state.session,
       };
-
+    case FOLLOW_USER:
+      return {
+        user: {
+          id: state.user.id,
+          name: state.user.name,
+          email: state.user.email,
+          creationDate: state.user.creationDate,
+          recipes: state.user.recipes,
+          photo: state.user.photo,
+          groups: state.user.groups,
+          bookmarks: state.user.bookmarks,
+          shoppinglist: state.user.shoppinglist,
+          followers: state.user.followers,
+          following: [action.payload, ...state.user.following],
+          reviews: state.user.reviews,
+          pictures: state.user.pictures,
+        },
+        session: state.session,
+      };
+    case UNFOLLOW_USER:
+      console.log(state.user.following, action.payload);
+      return {
+        user: {
+          id: state.user.id,
+          name: state.user.name,
+          email: state.user.email,
+          creationDate: state.user.creationDate,
+          recipes: state.user.recipes,
+          photo: state.user.photo,
+          groups: state.user.groups,
+          bookmarks: state.user.bookmarks,
+          shoppinglist: state.user.shoppinglist,
+          followers: state.user.followers,
+          following: state.user.following.filter(
+            (user: User) => user.id !== action.payload,
+          ),
+          reviews: state.user.reviews,
+          pictures: state.user.pictures,
+        },
+        session: state.session,
+      };
     default:
       return state;
   }

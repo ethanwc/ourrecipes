@@ -2,6 +2,9 @@ import {Bookmark, Recipe} from '../recipe/types';
 import {MiniRecipe} from 'src/containers/Recipe/MiniRecipeCard';
 
 export const SET_USER = 'SET_USER';
+export const FOLLOW_USER = 'FOLLOW_USER';
+export const UNFOLLOW_USER = 'UNFOLLOW_USER';
+
 export const SET_SESSION = 'SET_SESSION';
 export const SET_PHOTO = 'SET_PHOTO';
 export const ADD_BOOKMARK = 'ADD_BOOKMARK';
@@ -26,8 +29,8 @@ export interface User {
   groups: string[];
   bookmarks: Bookmark[];
   shoppinglist: string[];
-  followers: string[];
-  following: string[];
+  followers: User[];
+  following: User[];
   recipes: MiniRecipe[];
   reviews: string[];
   pictures: string[];
@@ -68,6 +71,16 @@ interface SetPhotoAction {
   payload: String;
 }
 
+interface SetFollowUserAction {
+  type: typeof FOLLOW_USER;
+  payload: User;
+}
+
+interface SetUnfollowUserAction {
+  type: typeof UNFOLLOW_USER;
+  payload: String;
+}
+
 export type UserActionTypes =
   | SetUserAction
   | SetSessionAction
@@ -75,4 +88,6 @@ export type UserActionTypes =
   | RemoveBookmarkAction
   | SetRecipesAction
   | SetPhotoAction
-  | AddRecipeAction;
+  | AddRecipeAction
+  | SetFollowUserAction
+  | SetUnfollowUserAction;
