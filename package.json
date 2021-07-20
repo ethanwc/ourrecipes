@@ -33,7 +33,7 @@
     "ingredients-parser": "^1.4.0",
     "json-to-graphql-query": "^2.0.0",
     "react": "16.11.0",
-    "react-native": "0.62.2",
+    "react-native": "0.62.3",
     "react-native-autocomplete-input": "^4.2.0",
     "react-native-calendars": "^1.265.0",
     "react-native-chart-kit": "^5.5.0",
